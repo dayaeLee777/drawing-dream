@@ -2,11 +2,10 @@
 
 ![Component_26__1_](/uploads/bdb07297d9f236ec7c3e45a321e4b95b/Component_26__1_.png)
 
-**세상에서 가장 편한 학교, Drawing Dream**
+#### **세상에서 가장 편한 학교, Drawing Dream**
 
 
-> 비대면 교육으로 인한 집중 저하
-> 여러 프로그램 사용으로 인한 혼동
+> 비대면 교육으로 인한 집중 저하, 여러 프로그램 사용으로 인한 혼동
 >
 > Drawing Dream이 해결해 드립니다.
 > 
