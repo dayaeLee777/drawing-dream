@@ -1,6 +1,6 @@
 # Drawing Dream 
 
-<이미지>
+![Component_26__1_](/uploads/bdb07297d9f236ec7c3e45a321e4b95b/Component_26__1_.png)
 
 **세상에서 가장 편한 학교, Drawing Dream**
 
