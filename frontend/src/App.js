@@ -1,8 +1,14 @@
-import logo from "./logo.svg";
-import "./App.css";
+import AppRouter from "components/Router";
+import GlobalStyle from "GlobalStyle";
+import React from "react";
 
-function App() {
-  return <div className="App">init</div>;
-}
+const App = () => {
+  return (
+    <>
+      <GlobalStyle />
+      <AppRouter />
+    </>
+  );
+};
 
 export default App;
