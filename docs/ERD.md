@@ -3,7 +3,7 @@
 - [Categorizing](#categorizing)
 
 ## ERD
-![ㄷㄷ_ERD](/uploads/e1c119f0155abe2e0586a784bd3092ae/ㄷㄷ_ERD.png)
+![DD](/uploads/aa752f7aa51f827d61d86b18aaaca047/DD.png)
 
 ## Categorizing
 추후 업데이트 예정
