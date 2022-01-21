@@ -8,12 +8,13 @@ import styled from "styled-components";
 const Container = styled.div`
   margin: 0 10vw;
   display: grid;
+  grid-gap: 2rem;
   grid-template-columns: 1fr 3fr;
 `;
 const SideWrapper = styled.div`
   display: grid;
-  width: fit-content;
   grid-template-rows: 1fr 2fr;
+  grid-gap: 2rem;
 `;
 
 const Home = () => {

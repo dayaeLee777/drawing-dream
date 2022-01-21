@@ -4,7 +4,7 @@ import linkImg from "assets/link.png";
 const Container = styled.div`
   background-color: #f1f1f1;
   height: 4rem;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   border-radius: 5px;

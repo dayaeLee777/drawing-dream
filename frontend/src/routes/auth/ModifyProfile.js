@@ -3,12 +3,28 @@ import Input from "components/commons/input";
 import React from "react";
 import styled from "styled-components";
 import blankProfile from "assets/blank-profile.png";
+import Nav from "components/layout/Nav";
+import Profile from "components/layout/Profile";
+import SideMenu from "components/layout/SideMenu";
 
 const Container = styled.div`
-  width: 50rem;
-  height: 40rem;
+  margin: 0 10vw;
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: 1fr 3fr;
+`;
+
+const SideWrapper = styled.div`
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-rows: 1fr 2fr;
+`;
+
+const FormContainer = styled.div`
+  /* width: 50rem;
+  height: 40rem; */
   box-sizing: border-box;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -34,8 +50,8 @@ const ProfileImageContainer = styled.div`
   }
 `;
 const Desc = styled.div`
-  font-size: 1.3rem;
-  margin: 2rem 0;
+  font-size: 1.8rem;
+  margin: 3rem 0;
   font-weight: 600;
 `;
 
@@ -49,61 +65,77 @@ const ModifyContainer = styled.div`
 
 const InputContainer = styled.div`
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 const Type = styled.div`
   text-align: right;
   width: 7rem;
-  padding-right: 1rem;
+  padding-right: 2rem;
 `;
 
 const ModifyProfile = () => {
   return (
-    <Container>
-      <Desc>프로필 수정</Desc>
+    <>
+      <Nav />
+      <Container>
+        <SideWrapper>
+          <Profile />
+          <SideMenu />
+        </SideWrapper>
+        <FormContainer>
+          <Desc>프로필 수정</Desc>
 
-      <InnerContainer>
-        <ProfileImageContainer>
-          <img src={blankProfile} alt="blank-profile"></img>
-          <Button name="파일찾기" />
-        </ProfileImageContainer>
-        <ModifyContainer>
+          <InnerContainer>
+            <ProfileImageContainer>
+              <img src={blankProfile} alt="blank-profile"></img>
+              <Button width="6rem" name="파일 찾기" />
+            </ProfileImageContainer>
+            <ModifyContainer>
+              <InputContainer>
+                <Type>이름</Type>
+                김하나
+              </InputContainer>
+              <InputContainer>
+                <Type>학번</Type>
+                A111122001
+              </InputContainer>
+              <InputContainer>
+                <Type>이메일</Type>
+                <Input border="1px solid #C4C4C4" />
+              </InputContainer>
+              <InputContainer>
+                <Type>현재 비밀번호</Type> <Input border="1px solid #C4C4C4" />
+              </InputContainer>
+              <InputContainer>
+                <Type>새 비밀번호</Type> <Input border="1px solid #C4C4C4" />
+              </InputContainer>
+              <InputContainer>
+                <Type>새 비밀번호 확인</Type>{" "}
+                <Input border="1px solid #C4C4C4" />
+              </InputContainer>
+              <InputContainer>
+                <Type>전화번호</Type>{" "}
+                <Input width="15rem" border="1px solid #C4C4C4" />
+              </InputContainer>
+              <InputContainer>
+                <Type>주소</Type>{" "}
+                <Input width="20rem" border="1px solid #C4C4C4" />{" "}
+                <Button ml="1rem" width="6rem" name="주소 찾기" />
+              </InputContainer>
+              <InputContainer>
+                <Type>상세 주소</Type>{" "}
+                <Input width="20rem" border="1px solid #C4C4C4" />
+              </InputContainer>
+            </ModifyContainer>
+          </InnerContainer>
           <InputContainer>
-            <Type>이름</Type>
+            <Button name="수정하기" mr="1rem" width="7rem" />
+            <Button name="취소" color="#c4c4c4" width="7rem" />
           </InputContainer>
-          <InputContainer>
-            <Type>학번</Type>
-          </InputContainer>
-          <InputContainer>
-            <Type>이메일</Type>
-            <Input />
-          </InputContainer>
-          <InputContainer>
-            <Type>현재 비밀번호</Type> <Input />
-          </InputContainer>
-          <InputContainer>
-            <Type>새 비밀번호</Type> <Input />
-          </InputContainer>
-          <InputContainer>
-            <Type>새 비밀번호 확인</Type> <Input />
-          </InputContainer>
-          <InputContainer>
-            <Type>전화번호</Type> <Input />
-          </InputContainer>
-          <InputContainer>
-            <Type>주소</Type> <Input /> <Button name="주소찾기" />
-          </InputContainer>
-          <InputContainer>
-            <Type>상세 주소</Type> <Input />
-          </InputContainer>
-        </ModifyContainer>
-      </InnerContainer>
-      <InputContainer>
-        <Button name="수정하기" mr="1rem" />
-        <Button name="취소" color="#c4c4c4" />
-      </InputContainer>
-    </Container>
+        </FormContainer>
+      </Container>
+    </>
   );
 };
 

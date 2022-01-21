@@ -8,6 +8,8 @@ const StyledButton = styled.button`
   font-weight: 600;
   border-radius: 5px;
   font-family: "Noto Sans KR", sans-serif;
+  transition: 0.2s;
+  font-size: 1rem;
 
   &:hover {
     background-color: #dca03a;
@@ -21,7 +23,13 @@ const StyledButton = styled.button`
   ${(props) =>
     props.height &&
     css`
-      width: ${props.height};
+      height: ${props.height};
+    `}
+
+${(props) =>
+    props.fontSize &&
+    css`
+      font-size: ${props.fontSize};
     `}
 
   ${(props) =>

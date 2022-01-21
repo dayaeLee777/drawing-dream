@@ -1,6 +1,7 @@
 import Button from "components/commons/button";
 import styled from "styled-components";
 import profileImg from "assets/profile.png";
+import hand from "assets/waving-hand.png";
 
 const Container = styled.div`
   display: flex;
@@ -51,7 +52,7 @@ const Profile = () => {
         </TextContainer>
       </Wrapper>
       <Wrapper>
-        <Button name="등교하기">프로필 수정</Button>
+        <Button width="17rem" height="2.5rem" name="등교하기"></Button>
       </Wrapper>
     </Container>
   );

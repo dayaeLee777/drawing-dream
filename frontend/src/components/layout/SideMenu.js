@@ -7,9 +7,7 @@ import star from "assets/star.png";
 import teacher from "assets/teacher.png";
 import school from "assets/school.png";
 
-const Container = styled.div`
-  margin-top: 1rem;
-`;
+const Container = styled.div``;
 
 const SideMenu = () => {
   return (
