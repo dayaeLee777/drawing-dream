@@ -12,6 +12,12 @@ const StyledInput = styled.input`
       width: ${props.width};
     `}
   ${(props) =>
+    props.border &&
+    css`
+      border: ${props.border};
+    `}
+
+  ${(props) =>
     props.mt &&
     css`
       margin-top: ${props.mt};

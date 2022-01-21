@@ -9,19 +9,23 @@ const StyledButton = styled.button`
   border-radius: 5px;
   font-family: "Noto Sans KR", sans-serif;
 
+  &:hover {
+    background-color: #dca03a;
+  }
+
   ${(props) =>
     props.color &&
     css`
       background-color: ${props.color};
     `}
-  ${(props) => {
+
+  ${(props) =>
     props.hoverColor &&
-      css`
-        &:hover {
-          background-color: ${props.hoverColor};
-        }
-      `;
-  }}
+    css`
+      &:hover {
+        background-color: ${props.hoverColor};
+      }
+    `}
   
   ${(props) =>
     props.mt &&
