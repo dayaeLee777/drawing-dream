@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.dd.db.entity.BaseEntity;
 import com.dd.db.enums.Code;
@@ -30,7 +31,7 @@ public class UserDepartment extends BaseEntity{
 	
 	private boolean delYn;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private User user;
 

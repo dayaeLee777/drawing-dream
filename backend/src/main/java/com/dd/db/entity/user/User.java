@@ -12,38 +12,32 @@ import com.dd.db.entity.BaseEntity;
 @Entity
 public class User extends BaseEntity {
 	
-	private String user_name;
+	private String userName;
 	
-	private String user_email;
+	private String userEmail;
 	
 	private String address;
 	
 	private String phone;
 	
-	private String parents_phone;
+	private String parentsPhone;
 	
 	private boolean delYn;
 	
-	@OneToMany(mappedBy = "user",  cascade = CascadeType.ALL)
-    List<Auth> auths = new ArrayList<Auth>();
-    
-	@OneToMany(mappedBy = "user",  cascade = CascadeType.ALL)
-    List<UserDepartment> userDepartments = new ArrayList<UserDepartment>();
-	
-	public String getUser_name() {
-		return user_name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUser_name(String userName) {
+		this.userName = userName;
 	}
 
-	public String getUser_email() {
-		return user_email;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+	public void setUser_email(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	public String getAddress() {
@@ -63,11 +57,11 @@ public class User extends BaseEntity {
 	}
 
 	public String getParents_phone() {
-		return parents_phone;
+		return parentsPhone;
 	}
 
 	public void setParents_phone(String parents_phone) {
-		this.parents_phone = parents_phone;
+		this.parentsPhone = parents_phone;
 	}
 
 	public boolean isDelYn() {
