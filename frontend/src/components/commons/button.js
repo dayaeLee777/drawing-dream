@@ -14,6 +14,17 @@ const StyledButton = styled.button`
   }
 
   ${(props) =>
+    props.width &&
+    css`
+      width: ${props.width};
+    `}
+  ${(props) =>
+    props.height &&
+    css`
+      width: ${props.height};
+    `}
+
+  ${(props) =>
     props.color &&
     css`
       background-color: ${props.color};

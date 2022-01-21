@@ -12,6 +12,12 @@ const StyledInput = styled.input`
       width: ${props.width};
     `}
   ${(props) =>
+    props.height &&
+    css`
+      height: ${props.height};
+    `}
+  
+  ${(props) =>
     props.border &&
     css`
       border: ${props.border};
