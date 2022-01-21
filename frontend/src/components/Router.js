@@ -5,6 +5,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import ModifyProfile from "routes/auth/ModifyProfile";
 import SignIn from "routes/auth/SignIn";
 import SignUp from "routes/auth/SignUp";
 
@@ -15,6 +16,7 @@ const AppRouter = () => {
         <Route path="/" element={<Navigate replace to="/signin" />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/modifyprofile" element={<ModifyProfile />} />
       </Routes>
     </Router>
   );
