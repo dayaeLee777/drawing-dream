@@ -7,11 +7,36 @@ const StyledButton = styled.button`
   border: none;
   font-weight: 600;
   border-radius: 5px;
+  font-family: "Noto Sans KR", sans-serif;
 
   ${(props) =>
     props.color &&
     css`
       background-color: ${props.color};
+    `}
+  ${(props) => {
+    props.hoverColor &&
+      css`
+        &:hover {
+          background-color: ${props.hoverColor};
+        }
+      `;
+  }}
+  
+  ${(props) =>
+    props.mt &&
+    css`
+      margin-top: ${props.mt};
+    `}
+  ${(props) =>
+    props.mb &&
+    css`
+      margin-bottom: ${props.mb};
+    `}
+  ${(props) =>
+    props.ml &&
+    css`
+      margin-left: ${props.ml};
     `}
   ${(props) =>
     props.mr &&
