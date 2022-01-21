@@ -65,7 +65,7 @@ const ModifyProfile = () => {
 
       <InnerContainer>
         <ProfileImageContainer>
-          <img src={blankProfile}></img>
+          <img src={blankProfile} alt="blank-profile"></img>
           <Button name="파일찾기" />
         </ProfileImageContainer>
         <ModifyContainer>
