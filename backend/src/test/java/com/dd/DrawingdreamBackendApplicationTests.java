@@ -1,5 +1,7 @@
 package com.dd;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +14,7 @@ import com.dd.db.repository.AuthRepository;
 import com.dd.db.repository.UserDepartmentRepository;
 import com.dd.db.repository.UserRepository;
 
+@Transactional
 @SpringBootTest
 class DrawingdreamBackendApplicationTests {
 	
@@ -26,20 +29,23 @@ class DrawingdreamBackendApplicationTests {
 	
 	@Test
 	void contextLoads() {
-		User user = new User();
-		user.setUser_name("싸피");
-		userRepository.save(user);
+//		User user = new User();
+//		user.setUser_name("싸피");
+//		userRepository.save(user);
+//		
+//		Auth auth = new Auth();
+//		auth.setUser(user);
+//		auth.setLoginId("ssafy");
+//		authRepository.save(auth);
 		
-		Auth auth = new Auth();
-		auth.setUser(user);
-		auth.setLoginId("ssafy");
-		authRepository.save(auth);
+		Auth authTest = authRepository.findByLoginId("ssafy").get();
+		System.out.println(authTest);
 		
-		UserDepartment userDepartment = new UserDepartment();
-//		Code.B01.getName();	// 코드 설명 받아오기
-		userDepartment.setStateCode(Code.B01);
-		userDepartment.setUser(user);
-		userDepartmentRepository.save(userDepartment);
+//		UserDepartment userDepartment = new UserDepartment();
+////		Code.B01.getName();	// 코드 설명 받아오기
+//		userDepartment.setStateCode(Code.B01);
+//		userDepartment.setUser(user);
+//		userDepartmentRepository.save(userDepartment);
 		
 		// 트랜잭션 적용해서 테스트해야함
 //		Auth authTest = ar.findByLoginId("ssafy").get();
