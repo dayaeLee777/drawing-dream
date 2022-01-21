@@ -1,12 +1,16 @@
 import AppRouter from "components/Router";
-import GlobalStyle from "GlobalStyle";
+import GlobalStyle from "theme/GlobalStyle";
 import React from "react";
+import { theme } from "theme/theme";
+import { ThemeProvider } from "styled-components";
 
 const App = () => {
   return (
     <>
-      <GlobalStyle />
-      <AppRouter />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <AppRouter />
+      </ThemeProvider>
     </>
   );
 };

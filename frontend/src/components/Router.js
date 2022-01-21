@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import SignIn from "routes/auth/SignIn";
 import SignUp from "routes/auth/SignUp";
+import Home from "routes/Home";
 
 const AppRouter = () => {
   return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
         <Route path="/" element={<Navigate replace to="/signin" />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
   );
