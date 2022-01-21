@@ -105,33 +105,40 @@ const ModifyProfile = () => {
                 <Input border="1px solid #C4C4C4" />
               </InputContainer>
               <InputContainer>
-                <Type>현재 비밀번호</Type> <Input border="1px solid #C4C4C4" />
+                <Type>현재 비밀번호</Type>
+                <Input border="1px solid #C4C4C4" type="password" />
               </InputContainer>
               <InputContainer>
-                <Type>새 비밀번호</Type> <Input border="1px solid #C4C4C4" />
+                <Type>새 비밀번호</Type>
+                <Input border="1px solid #C4C4C4" type="password" />
               </InputContainer>
               <InputContainer>
-                <Type>새 비밀번호 확인</Type>{" "}
-                <Input border="1px solid #C4C4C4" />
+                <Type>새 비밀번호 확인</Type>
+                <Input border="1px solid #C4C4C4" type="password" />
               </InputContainer>
               <InputContainer>
-                <Type>전화번호</Type>{" "}
+                <Type>전화번호</Type>
                 <Input width="15rem" border="1px solid #C4C4C4" />
               </InputContainer>
               <InputContainer>
-                <Type>주소</Type>{" "}
+                <Type>주소</Type>
                 <Input width="20rem" border="1px solid #C4C4C4" />{" "}
                 <Button ml="1rem" width="6rem" name="주소 찾기" />
               </InputContainer>
               <InputContainer>
-                <Type>상세 주소</Type>{" "}
+                <Type>상세 주소</Type>
                 <Input width="20rem" border="1px solid #C4C4C4" />
               </InputContainer>
             </ModifyContainer>
           </InnerContainer>
           <InputContainer>
             <Button name="수정하기" mr="1rem" width="7rem" />
-            <Button name="취소" color="#c4c4c4" width="7rem" />
+            <Button
+              name="취소"
+              color="#c4c4c4"
+              width="7rem"
+              hoverColor="#a2a2a2"
+            />
           </InputContainer>
         </FormContainer>
       </Container>
