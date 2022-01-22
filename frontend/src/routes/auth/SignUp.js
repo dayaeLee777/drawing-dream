@@ -1,8 +1,10 @@
 import Button from "components/commons/button";
 import Input from "components/commons/input";
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import logo from "assets/logo.png";
+import NewWindow from "react-new-window";
+import PostCode from "./FindPostCode";
 
 const Container = styled.div`
   display: flex;
@@ -84,8 +86,29 @@ const LongWrapper = styled.div`
 `;
 
 const SignUp = () => {
+  const [isPostCodeOpen, setIsPostCodeOpen] = useState(false);
+  const [fullAddress, setFullAddress] = useState("주소를 입력해주세요");
+  const [zoneCode, setZoneCode] = useState("");
+
+  const openPostCode = () => {
+    setIsPostCodeOpen(true);
+  };
+
+  const closePostCode = () => {
+    setIsPostCodeOpen(false);
+  };
+
   return (
     <Container>
+      {isPostCodeOpen && (
+        <NewWindow title="주소찾기" onUnload={closePostCode}>
+          <PostCode
+            setFullAddress={setFullAddress}
+            setZoneCode={setZoneCode}
+            onClose={closePostCode}
+          />
+        </NewWindow>
+      )}
       <MainContainer>
         <FormContainer>
           <Logo src={logo} alt="logo" />
@@ -139,8 +162,13 @@ const SignUp = () => {
           <InputContainer>
             <NoneStar></NoneStar>
             <Type>주소</Type>
-            <Input width="20rem"></Input>
-            <Button width="8rem" name="도로명 주소 찾기" height="1.8rem" />
+            <Input width="20rem" value={fullAddress}></Input>
+            <Button
+              width="8rem"
+              name="도로명 주소 찾기"
+              height="1.8rem"
+              onClick={openPostCode}
+            />
           </InputContainer>
 
           <InputContainer>
