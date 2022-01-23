@@ -2,7 +2,7 @@ import Button from "components/commons/button";
 import Input from "components/commons/input";
 import React from "react";
 import styled from "styled-components";
-import blankProfile from "assets/blank-profile.png";
+import blankProfile from "assets/img/blank-profile.png";
 import Nav from "components/layout/Nav";
 import Profile from "components/layout/Profile";
 import SideMenu from "components/layout/SideMenu";

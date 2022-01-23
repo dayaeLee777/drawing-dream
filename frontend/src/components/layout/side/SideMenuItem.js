@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import linkImg from "assets/link.png";
+import linkImg from "assets/img/link.png";
 
 const Container = styled.div`
   background-color: #f1f1f1;
