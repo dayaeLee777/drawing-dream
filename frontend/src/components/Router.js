@@ -9,6 +9,8 @@ import ModifyProfile from "routes/auth/ModifyProfile";
 import SignIn from "routes/auth/SignIn";
 import SignUp from "routes/auth/SignUp";
 import Home from "routes/Home";
+import Notice from "routes/Notice";
+import School from "routes/School";
 
 const AppRouter = () => {
   return (
@@ -18,7 +20,9 @@ const AppRouter = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
-        <Route path="modifyprofile" element={<ModifyProfile />} />
+        <Route path="/modifyprofile" element={<ModifyProfile />} />
+        <Route path="/notice" element={<Notice />} />
+        <Route path="/school" element={<School />} />
       </Routes>
     </Router>
   );
