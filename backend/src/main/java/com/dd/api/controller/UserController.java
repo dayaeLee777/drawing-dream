@@ -39,10 +39,8 @@ public class UserController {
 		@ApiResponse(code=409, message="회원가입에 실패했습니다.")
 	})
 	public ResponseEntity<? extends BaseResponse> signUp(
-			@ApiIgnore @RequestHeader("Auth") String accessToken,
-			@RequestBody @ApiParam(value="회원 가입 - 유저 정보", required=true) UserRegistPostReq userRegistPostReq,
-			HttpServletResponse response) {
-		userService.signUp(accessToken, userRegistPostReq, response);
+			@RequestBody @ApiParam(value="회원 가입 - 유저 정보", required=true) UserRegistPostReq userRegistPostReq) {
+		userService.signUp(userRegistPostReq);
 		return ResponseEntity.status(201).body(BaseResponse.of(201, "회원가입이 정상적으로 완료되었습니다."));
 	}
 	

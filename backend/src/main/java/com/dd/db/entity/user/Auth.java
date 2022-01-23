@@ -21,10 +21,10 @@ public class Auth extends BaseEntity{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	
-	
 	@Column(unique = true, name = "login_id", nullable = false)
 	private String loginId;
 
+	@Column(name="del_yn")
 	private boolean delYn;
 
 	public User getUser() {

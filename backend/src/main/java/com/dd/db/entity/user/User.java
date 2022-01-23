@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -12,16 +13,20 @@ import com.dd.db.entity.BaseEntity;
 @Entity
 public class User extends BaseEntity {
 	
+	@Column(name="user_name")
 	private String userName;
 	
+	@Column(name="user_email")
 	private String userEmail;
 	
 	private String address;
 	
 	private String phone;
 	
-	private String parentsPhone;
+	@Column(name="parent_phone")
+	private String parentPhone;
 	
+	@Column(name="del_yn")
 	private boolean delYn;
 	
 	public String getUserName() {
@@ -57,11 +62,11 @@ public class User extends BaseEntity {
 	}
 
 	public String getParents_phone() {
-		return parentsPhone;
+		return parentPhone;
 	}
 
 	public void setParents_phone(String parents_phone) {
-		this.parentsPhone = parents_phone;
+		this.parentPhone = parents_phone;
 	}
 
 	public boolean isDelYn() {

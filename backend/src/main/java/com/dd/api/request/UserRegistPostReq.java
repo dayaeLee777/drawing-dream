@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("UserRegustPostReq")
 public class UserRegistPostReq {
 
-	@ApiModelProperty(name="회원 아이디", example="ssafy1234")
+	@ApiModelProperty(name="회원 아이디", example="user1234")
 	private String userId;
 	
 	@ApiModelProperty(name="회원 비밀번호")

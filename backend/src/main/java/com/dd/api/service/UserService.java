@@ -6,5 +6,5 @@ import com.dd.api.request.UserRegistPostReq;
 
 public interface UserService {
 	
-	void signUp(String accessToken, UserRegistPostReq userRegistPostReq, HttpServletResponse response);
+	void signUp(UserRegistPostReq userRegistPostReq);
 }

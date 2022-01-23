@@ -13,8 +13,7 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 	
 	@Override
-	public void signUp(String accessToken, UserRegistPostReq userRegistPostReq, HttpServletResponse response) {
-		
+	public void signUp(UserRegistPostReq userRegistPostReq) {
 		
 	}
 
