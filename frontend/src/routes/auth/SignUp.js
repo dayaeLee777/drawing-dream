@@ -2,7 +2,8 @@ import Button from "components/commons/button";
 import Input from "components/commons/input";
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import logo from "assets/logo.png";
+
+import logo from "assets/img/logo.png";
 import NewWindow from "react-new-window";
 import PostCode from "./FindPostCode";
 

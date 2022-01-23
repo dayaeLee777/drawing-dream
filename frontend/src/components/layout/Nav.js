@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "assets/logo.png";
-import signOut from "assets/sign-out.png";
-import cog from "assets/cog.png";
+import logo from "assets/img/logo.png";
+import signOut from "assets/img/sign-out.png";
+import cog from "assets/img/cog.png";
 import styled from "styled-components";
 
 const Container = styled.div`

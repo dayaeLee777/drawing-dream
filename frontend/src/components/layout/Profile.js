@@ -1,7 +1,7 @@
 import Button from "components/commons/button";
 import styled from "styled-components";
-import profileImg from "assets/profile.png";
-import hand from "assets/waving-hand.png";
+import profileImg from "assets/img/profile.png";
+import hand from "assets/img/waving-hand.png";
 
 const Container = styled.div`
   display: flex;

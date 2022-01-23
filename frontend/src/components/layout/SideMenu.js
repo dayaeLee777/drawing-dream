@@ -1,11 +1,11 @@
 import React from "react";
 import SideMenuItem from "./side/SideMenuItem";
 import styled from "styled-components";
-import house from "assets/house.png";
-import book from "assets/green-book.png";
-import star from "assets/star.png";
-import teacher from "assets/teacher.png";
-import school from "assets/school.png";
+import house from "assets/img/house.png";
+import book from "assets/img/green-book.png";
+import star from "assets/img/star.png";
+import teacher from "assets/img/teacher.png";
+import school from "assets/img/school.png";
 
 const Container = styled.div``;
 
