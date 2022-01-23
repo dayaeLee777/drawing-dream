@@ -1,11 +1,13 @@
 import Button from "components/commons/button";
 import Input from "components/commons/input";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import blankProfile from "assets/blank-profile.png";
+import blankProfile from "assets/img/blank-profile.png";
 import Nav from "components/layout/Nav";
 import Profile from "components/layout/Profile";
 import SideMenu from "components/layout/SideMenu";
+import NewWindow from "react-new-window";
+import PostCode from "./FindPostCode";
 
 const Container = styled.div`
   margin: 0 10vw;
@@ -75,10 +77,31 @@ const Type = styled.div`
 `;
 
 const ModifyProfile = () => {
+  const [isPostCodeOpen, setIsPostCodeOpen] = useState(false);
+  const [fullAddress, setFullAddress] = useState("주소를 입력해주세요");
+  const [zoneCode, setZoneCode] = useState("");
+
+  const openPostCode = () => {
+    setIsPostCodeOpen(true);
+  };
+
+  const closePostCode = () => {
+    setIsPostCodeOpen(false);
+  };
+
   return (
     <>
       <Nav />
       <Container>
+        {isPostCodeOpen && (
+          <NewWindow title="주소찾기" onUnload={closePostCode}>
+            <PostCode
+              setFullAddress={setFullAddress}
+              setZoneCode={setZoneCode}
+              onClose={closePostCode}
+            />
+          </NewWindow>
+        )}
         <SideWrapper>
           <Profile />
           <SideMenu />
@@ -122,8 +145,13 @@ const ModifyProfile = () => {
               </InputContainer>
               <InputContainer>
                 <Type>주소</Type>
-                <Input width="20rem" border="1px solid #C4C4C4" />{" "}
-                <Button ml="1rem" width="6rem" name="주소 찾기" />
+                <Input width="20rem" border="1px solid #C4C4C4" value={fullAddress} />
+                <Button
+                  ml="1rem"
+                  width="6rem"
+                  name="주소 찾기"
+                  onClick={openPostCode}
+                />
               </InputContainer>
               <InputContainer>
                 <Type>상세 주소</Type>

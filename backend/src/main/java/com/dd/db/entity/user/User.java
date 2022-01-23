@@ -1,37 +1,36 @@
 package com.dd.db.entity.user;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 import com.dd.db.entity.BaseEntity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class User extends BaseEntity {
+
 	
 	@Column(name="user_name")
 	private String userName;
 	
 	@Column(name="user_email")
 	private String userEmail;
-	
+
 	private String address;
-	
+
 	private String phone;
+
 	
 	@Column(name="parent_phone")
 	private String parentPhone;
 	
 	@Column(name="del_yn")
 	private boolean delYn;
-	
-	public String getUserName() {
-		return userName;
-	}
 
 	public void setUser_name(String userName) {
 		this.userName = userName;
@@ -78,3 +77,5 @@ public class User extends BaseEntity {
 	}
 
 }
+
+
