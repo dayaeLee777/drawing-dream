@@ -104,7 +104,7 @@ const School = () => {
           <SideMenu />
         </SideWrapper>
         <FormContainer>
-          <Desc>알림장</Desc>
+          <Desc>우리 학교 커뮤니티</Desc>
           <InnerContainer>
             <Line />
             <NoticeContainer>
