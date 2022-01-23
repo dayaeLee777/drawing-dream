@@ -1,5 +1,3 @@
-import Button from "components/commons/button";
-import Input from "components/commons/input";
 import React from "react";
 import styled from "styled-components";
 import Nav from "components/layout/Nav";
