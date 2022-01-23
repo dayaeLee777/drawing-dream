@@ -2,6 +2,7 @@ package com.dd.db.entity.addon;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -30,6 +31,7 @@ public class StudyRecord {
 	@Temporal(TemporalType.TIME)
 	private Date endTime;
 
+	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

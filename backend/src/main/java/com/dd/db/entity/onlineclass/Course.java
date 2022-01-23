@@ -1,5 +1,6 @@
 package com.dd.db.entity.onlineclass;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,6 +22,7 @@ public class Course {
 	@Enumerated(EnumType.STRING)
 	private Code subjectCode;
 
+	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
 
 	@ManyToOne(fetch = FetchType.LAZY)

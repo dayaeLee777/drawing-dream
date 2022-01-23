@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dd.api.request.UserRegistPostReq;
+import com.dd.api.dto.request.UserRegistPostReq;
 import com.dd.api.service.UserService;
 import com.dd.common.model.BaseResponse;
 

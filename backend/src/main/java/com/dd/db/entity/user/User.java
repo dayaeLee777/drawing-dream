@@ -5,15 +5,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import com.dd.db.entity.BaseEntity;
+import com.dd.db.entity.school.School;
+import com.dd.db.enums.Code;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class User extends BaseEntity {
-
+	
+	public User(String userName, String userEmail, String address, String phone, String parentPhone) {
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.address = address;
+		this.phone = phone;
+		this.parentPhone = parentPhone;
+	}
 	
 	@Column(name="user_name")
 	private String userName;
@@ -24,12 +37,11 @@ public class User extends BaseEntity {
 	private String address;
 
 	private String phone;
-
 	
 	@Column(name="parent_phone")
 	private String parentPhone;
 	
-	@Column(name="del_yn")
+	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
 
 	public void setUser_name(String userName) {

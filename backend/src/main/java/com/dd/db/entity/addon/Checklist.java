@@ -1,5 +1,6 @@
 package com.dd.db.entity.addon;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -19,6 +20,7 @@ public class Checklist {
 
 	private boolean isChecked;
 	
+	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
