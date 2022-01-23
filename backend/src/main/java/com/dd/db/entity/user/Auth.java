@@ -10,6 +10,11 @@ import com.dd.db.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class Auth extends BaseEntity{
 	
@@ -26,43 +31,5 @@ public class Auth extends BaseEntity{
 	private String loginId;
 
 	private boolean delYn;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public boolean isDelYn() {
-		return delYn;
-	}
-
-	public void setDelYn(boolean delYn) {
-		this.delYn = delYn;
-	}
-
-	public String getLoginId() {
-		return loginId;
-	}
-
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
-	}
-
-	@Override
-	public String toString() {
-		return "Auth [user=" + user + ", password=" + password + ", loginId=" + loginId + ", delYn=" + delYn + "]";
-	}
-	
-	
+		
 }
