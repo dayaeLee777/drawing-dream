@@ -7,7 +7,7 @@ import Nav from "components/layout/Nav";
 import Profile from "components/layout/Profile";
 import SideMenu from "components/layout/SideMenu";
 import NewWindow from "react-new-window";
-import PostCode from "../../components/postcode/FindPostCode";
+import PostCode from "components/signup/postcode/FindPostCode";
 
 const Container = styled.div`
   margin: 0 10vw;
