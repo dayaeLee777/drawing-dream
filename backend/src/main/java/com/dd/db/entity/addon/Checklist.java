@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.user.User;
 
 import lombok.Getter;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Checklist {
+public class Checklist extends BaseEntity {
 	
 	private String content;
 

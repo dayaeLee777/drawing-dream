@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.onlineclass.Course;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class TimeTable {
+public class TimeTable extends BaseEntity {
 	
 	@Enumerated(EnumType.STRING)
 	private Code dayCode;
