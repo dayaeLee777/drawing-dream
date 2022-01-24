@@ -7,7 +7,7 @@ import Nav from "components/layout/Nav";
 import Profile from "components/layout/Profile";
 import SideMenu from "components/layout/SideMenu";
 import NewWindow from "react-new-window";
-import PostCode from "./FindPostCode";
+import PostCode from "../../components/postcode/FindPostCode";
 
 const Container = styled.div`
   margin: 0 10vw;
@@ -145,7 +145,11 @@ const ModifyProfile = () => {
               </InputContainer>
               <InputContainer>
                 <Type>주소</Type>
-                <Input width="20rem" border="1px solid #C4C4C4" value={fullAddress} />
+                <Input
+                  width="20rem"
+                  border="1px solid #C4C4C4"
+                  value={fullAddress}
+                />
                 <Button
                   ml="1rem"
                   width="6rem"

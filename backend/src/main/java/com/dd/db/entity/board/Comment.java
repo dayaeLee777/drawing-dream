@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.user.User;
 
 import lombok.Getter;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Comment {
+public class Comment extends BaseEntity {
 
 	@Lob
 	private String content;

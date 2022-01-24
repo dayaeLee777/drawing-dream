@@ -14,6 +14,8 @@ import com.dd.db.entity.user.Auth;
 public interface AuthRepository extends JpaRepository<Auth, UUID> {
 
 	@Transactional
-	Optional<Auth> findByLoginId(String loginId); 
+	Optional<Auth> findByLoginId(String loginId);
+	
+	Boolean existsByLoginId(String loginId);
 
 }
