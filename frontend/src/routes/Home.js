@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 const SideWrapper = styled.div`
   display: grid;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 0fr 2fr;
   grid-gap: 2rem;
 `;
 

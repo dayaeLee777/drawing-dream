@@ -15,7 +15,7 @@ const Container = styled.div`
 const SideWrapper = styled.div`
   display: grid;
   grid-gap: 2rem;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 0fr 2fr;
 `;
 
 const FormContainer = styled.div`
@@ -25,9 +25,11 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 5rem;
 
   button{
     margin-left: auto;
+    border-radius: 10px;
   }
 `;
 
@@ -39,7 +41,7 @@ const Desc = styled.div`
 
 const InnerContainer = styled.div`
   width: 100%;
-  margin-bottom: 3rem;
+  margin: 3rem;
 `;
 
 const Line = styled.div`
@@ -157,7 +159,7 @@ const School = () => {
               </InputContainer>
             </NoticeContainer>
           </InnerContainer>
-          <Button name="글쓰기" width="7rem" height="3rem" mr="10rem" mb="5rem"/>
+            <Button name="글쓰기" mr="5rem" mb="5rem" width="17rem" height="3rem" />
         </FormContainer>
       </Container>
     </>

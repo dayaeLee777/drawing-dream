@@ -14,7 +14,7 @@ const Container = styled.div`
 const SideWrapper = styled.div`
   display: grid;
   grid-gap: 2rem;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 0fr 2fr;
 `;
 
 const FormContainer = styled.div`
@@ -24,6 +24,7 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 5rem;
 `;
 
 const Desc = styled.div`
@@ -150,6 +151,30 @@ const Notice = () => {
                 <Type>손창현</Type>
                 <Type>2021.09.17</Type>
               </InputContainer>
+
+              <InputContainer>
+                <Type>3</Type>
+                <Type>전체</Type>
+                <TitleType>급식실 보수 공사</TitleType>
+                <Type>손창현</Type>
+                <Type>2021.09.17</Type>
+              </InputContainer>
+
+<InputContainer>
+  <Type>3</Type>
+  <Type>전체</Type>
+  <TitleType>급식실 보수 공사</TitleType>
+  <Type>손창현</Type>
+  <Type>2021.09.17</Type>
+</InputContainer>
+
+<InputContainer>
+  <Type>3</Type>
+  <Type>전체</Type>
+  <TitleType>급식실 보수 공사</TitleType>
+  <Type>손창현</Type>
+  <Type>2021.09.17</Type>
+</InputContainer>
 
             </NoticeContainer>
           </InnerContainer>

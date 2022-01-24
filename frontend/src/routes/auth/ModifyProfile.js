@@ -19,7 +19,7 @@ const Container = styled.div`
 const SideWrapper = styled.div`
   display: grid;
   grid-gap: 2rem;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 0fr 2fr;
 `;
 
 const FormContainer = styled.div`
