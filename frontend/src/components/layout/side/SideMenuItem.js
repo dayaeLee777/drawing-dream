@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import linkImg from "assets/img/link.png";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   background-color: #f1f1f1;
@@ -28,9 +29,11 @@ const Icon = styled.img`
   margin-right: 1rem;
 `;
 
-const SideMenuItem = ({ path, name }) => {
+const SideMenuItem = ({ url, path, name }) => {
+  const navigate = useNavigate();
+
   return (
-    <Container>
+    <Container onClick={() => navigate(url)}>
       <Content>
         <Title>
           <Icon src={path} />
