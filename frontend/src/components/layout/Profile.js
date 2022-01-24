@@ -10,6 +10,8 @@ const Container = styled.div`
   align-items: center;
   border-radius: 10px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: ${({ theme }) => theme.widgetColor};
+  padding: 0.5rem 0;
 `;
 
 const Wrapper = styled.div`
@@ -17,18 +19,16 @@ const Wrapper = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
 `;
 
 const Image = styled.img`
   width: 8rem;
   padding-left: 2rem;
-  /* height: fit-content; */
 `;
 
 const TextContainer = styled.div`
   width: 100%;
-  margin: 2.5rem 1rem;
+  margin: 2rem 1rem;
 `;
 
 const Name = styled.div`
@@ -52,7 +52,12 @@ const Profile = () => {
         </TextContainer>
       </Wrapper>
       <Wrapper>
-        <Button width="17rem" height="2.5rem" name="등교하기"></Button>
+        <Button
+          mb="2rem"
+          width="17rem"
+          height="2.5rem"
+          name="등교하기"
+        ></Button>
       </Wrapper>
     </Container>
   );
