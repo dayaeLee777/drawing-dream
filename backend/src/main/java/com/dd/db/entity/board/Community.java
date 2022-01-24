@@ -1,6 +1,6 @@
 package com.dd.db.entity.board;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.school.School;
@@ -30,10 +28,10 @@ public class Community extends BaseEntity {
 	@Lob
 	private String content;
 	
+	@Column(name="hit", columnDefinition="INT DEFAULT 0")
 	private int hit;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date regTime;
+	private LocalDateTime regTime;
 	
 	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
