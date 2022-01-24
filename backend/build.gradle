@@ -130,10 +130,15 @@ configurations {
 //
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'mysql:mysql-connector-java'
+	
+    
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.plugin:spring-plugin-core:2.0.0.RELEASE")
 	compileOnly 'org.projectlombok:lombok'
@@ -182,8 +187,6 @@ dependencies {
     annotationProcessor("com.google.guava:guava:29.0-jre")
     
     testImplementation("com.jayway.jsonpath:json-path:2.4.0")
-
-    implementation("com.auth0:java-jwt:3.10.3")
     
     implementation("io.springfox:springfox-swagger2:3.0.0")
     implementation("io.springfox:springfox-swagger-ui:3.0.0")

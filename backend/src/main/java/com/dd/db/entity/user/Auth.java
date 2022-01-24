@@ -22,7 +22,7 @@ public class Auth extends BaseEntity{
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@JsonIgnore
+//	@JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	
