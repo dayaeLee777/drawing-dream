@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
 
@@ -16,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Score {
+public class Score extends BaseEntity {
 
 	@Enumerated(EnumType.STRING)
 	private Code gradeCode;

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
 
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Attendance {
+public class Attendance extends BaseEntity {
 	
 	@Temporal(TemporalType.DATE)
 	private Date date;

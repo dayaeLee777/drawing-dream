@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.user.User;
 
 import lombok.Getter;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Memo {
+public class Memo extends BaseEntity {
 	
 	@Lob
 	private String content;
