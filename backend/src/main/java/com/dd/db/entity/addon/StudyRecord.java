@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.user.User;
 
 import lombok.Getter;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class StudyRecord {
+public class StudyRecord extends BaseEntity {
 
 	@Temporal(TemporalType.DATE)
 	private Date studyDate;

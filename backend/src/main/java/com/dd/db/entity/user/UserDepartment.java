@@ -6,11 +6,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.dd.db.entity.BaseEntity;
-import com.dd.db.entity.school.School;
 import com.dd.db.enums.Code;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +24,6 @@ import lombok.Setter;
 public class UserDepartment extends BaseEntity{
 	
 	public UserDepartment(String schoolName, Code gradeCode, Code classCode, Integer studentNo) {
-		
 		this.gradeCode = gradeCode;
 		this.classCode = classCode;
 		this.studentNo = studentNo;
@@ -60,6 +57,4 @@ public class UserDepartment extends BaseEntity{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="school_id")
 	private School school;
-	
-	
-}
+

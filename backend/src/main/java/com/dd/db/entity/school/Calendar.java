@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.dd.db.entity.BaseEntity;
 import com.dd.db.enums.Code;
 
 import lombok.Getter;
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Calendar {
+public class Calendar extends BaseEntity {
 	
 	@Enumerated(EnumType.STRING)
 	private Code calendarCode;
