@@ -26,10 +26,8 @@ const PostCode = (props) => {
   };
 
   const postCodeStyle = {
-    display: "block",
-    position: "absolute",
-    width: "600px",
-    height: "600px",
+    width: "100vw",
+    height: "100vh",
   };
 
   return (

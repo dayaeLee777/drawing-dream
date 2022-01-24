@@ -12,11 +12,11 @@ const Container = styled.div``;
 const SideMenu = () => {
   return (
     <Container>
-      <SideMenuItem path={house} name="홈" />
-      <SideMenuItem path={book} name="알림장" />
+      <SideMenuItem url="/home" path={house} name="홈" />
+      <SideMenuItem url="/notice" path={book} name="알림장" />
       <SideMenuItem path={star} name="모아보기" />
       <SideMenuItem path={teacher} name="우리 반 보기" />
-      <SideMenuItem path={school} name="우리 학교 보기" />
+      <SideMenuItem url="/school" path={school} name="우리 학교 보기" />
     </Container>
   );
 };

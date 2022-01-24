@@ -7,7 +7,7 @@ import Nav from "components/layout/Nav";
 import Profile from "components/layout/Profile";
 import SideMenu from "components/layout/SideMenu";
 import NewWindow from "react-new-window";
-import PostCode from "../../components/postcode/FindPostCode";
+import PostCode from "components/signup/postcode/FindPostCode";
 
 const Container = styled.div`
   margin: 0 10vw;
@@ -19,7 +19,7 @@ const Container = styled.div`
 const SideWrapper = styled.div`
   display: grid;
   grid-gap: 2rem;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 0fr 2fr;
 `;
 
 const FormContainer = styled.div`

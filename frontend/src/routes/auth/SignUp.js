@@ -5,7 +5,8 @@ import styled, { css } from "styled-components";
 
 import logo from "assets/img/logo.png";
 import NewWindow from "react-new-window";
-import PostCode from "../../components/postcode/FindPostCode";
+import PostCode from "components/signup/postcode/FindPostCode";
+import SchoolCode from "components/signup/school/SchoolCode";
 
 const Container = styled.div`
   display: flex;
@@ -90,6 +91,9 @@ const SignUp = () => {
   const [isPostCodeOpen, setIsPostCodeOpen] = useState(false);
   const [fullAddress, setFullAddress] = useState("주소를 입력해주세요");
   const [zoneCode, setZoneCode] = useState("");
+  const [isSchoolCodeOpen, setIsSchoolCodeOpen] = useState(false);
+  const [schoolName, setSchoolName] = useState("");
+  const [schoolCode, setSchoolCode] = useState("");
 
   const openPostCode = () => {
     setIsPostCodeOpen(true);
@@ -97,6 +101,14 @@ const SignUp = () => {
 
   const closePostCode = () => {
     setIsPostCodeOpen(false);
+  };
+
+  const openSchoolCode = () => {
+    setIsSchoolCodeOpen(true);
+  };
+
+  const closeSchoolCode = () => {
+    setIsSchoolCodeOpen(false);
   };
 
   return (
@@ -107,6 +119,15 @@ const SignUp = () => {
             setFullAddress={setFullAddress}
             setZoneCode={setZoneCode}
             onClose={closePostCode}
+          />
+        </NewWindow>
+      )}
+      {isSchoolCodeOpen && (
+        <NewWindow title="학교찾기" onUnload={closeSchoolCode}>
+          <SchoolCode
+            setSchoolName={setSchoolName}
+            setSchoolCode={setSchoolCode}
+            onClose={closeSchoolCode}
           />
         </NewWindow>
       )}
@@ -163,7 +184,7 @@ const SignUp = () => {
           <InputContainer>
             <NoneStar></NoneStar>
             <Type>주소</Type>
-            <Input width="20rem" value={fullAddress}></Input>
+            <Input width="20rem" value={fullAddress} readOnly></Input>
             <Button
               width="8rem"
               name="도로명 주소 찾기"
@@ -184,8 +205,15 @@ const SignUp = () => {
             <Input
               placeholder="학교 찾기 버튼을 이용해서 입력해 주세요."
               width="16rem"
+              value={schoolName}
+              readOnly
             />
-            <Button width="5rem" name="학교 찾기" height="1.8rem" />
+            <Button
+              width="5rem"
+              name="학교 찾기"
+              height="1.8rem"
+              onClick={openSchoolCode}
+            />
           </InputContainer>
 
           <InputContainer>

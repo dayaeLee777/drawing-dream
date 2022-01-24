@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import linkImg from "assets/img/link.png";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   background-color: #f1f1f1;
@@ -10,6 +11,7 @@ const Container = styled.div`
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  color: ${({ theme }) => theme.menuColor};
 `;
 
 const Content = styled.div`
@@ -28,9 +30,11 @@ const Icon = styled.img`
   margin-right: 1rem;
 `;
 
-const SideMenuItem = ({ path, name }) => {
+const SideMenuItem = ({ url, path, name }) => {
+  const navigate = useNavigate();
+
   return (
-    <Container>
+    <Container onClick={() => navigate(url)}>
       <Content>
         <Title>
           <Icon src={path} />
