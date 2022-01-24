@@ -1,11 +1,11 @@
 import Button from "components/commons/button";
-import Input from "components/commons/input";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Nav from "components/layout/Nav";
 import Profile from "components/layout/Profile";
 import SideMenu from "components/layout/SideMenu";
 import board from "assets/img/board.png";
+import Modal from '../components/modal/Modal'
 
 const Container = styled.div`
   margin: 0 10vw;
@@ -75,7 +75,12 @@ const Main = styled.article`
   }
 `;
 
-const Notice = () => {
+const LookUp = () => {
+  const [modalOpen, setModalOpen] = useState(false)
+  const modalClose = () => {
+      setModalOpen(!modalOpen)
+  }
+
   return (
     <>
       <Nav />
@@ -96,12 +101,14 @@ const Notice = () => {
               종례시간에 선생님 온라인 교실에서 만나요~
             </Main>
             <Main>
-              <Button name="출석하기"/>
+              <Button name="출석하기" 
+               onClick={modalClose} />
             </Main>
+            { modalOpen && <Modal modalClose={modalClose}></Modal>}
           </Board>
       </Container>
     </>
   );
 };
 
-export default Notice;
+export default LookUp;
