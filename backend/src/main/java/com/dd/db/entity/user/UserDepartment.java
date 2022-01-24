@@ -26,6 +26,7 @@ import lombok.Setter;
 public class UserDepartment extends BaseEntity{
 	
 	public UserDepartment(String schoolName, Code gradeCode, Code classCode, Integer studentNo) {
+		
 		this.gradeCode = gradeCode;
 		this.classCode = classCode;
 		this.studentNo = studentNo;
