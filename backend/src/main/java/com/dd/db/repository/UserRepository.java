@@ -13,7 +13,6 @@ import com.dd.db.entity.user.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID>{
 	
-	@Transactional
 	Optional<User> findById(UUID id);
 
 }
