@@ -1,5 +1,6 @@
 package com.dd.db.entity.schoollife;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,6 +34,7 @@ public class Score extends BaseEntity {
 	
 	private float score;
 	
+	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
