@@ -6,6 +6,7 @@ import Nav from "components/layout/Nav";
 import Profile from "components/layout/Profile";
 import SideMenu from "components/layout/SideMenu";
 import board from "assets/img/board.png";
+import ModalContainer from "components/modal/ModalContainer";
 
 const Container = styled.div`
   margin: 0 10vw;
@@ -75,7 +76,7 @@ const Main = styled.article`
   }
 `;
 
-const Notice = () => {
+const LookUp = () => {
   return (
     <>
       <Nav />
@@ -104,4 +105,4 @@ const Notice = () => {
   );
 };
 
-export default Notice;
+export default LookUp;
