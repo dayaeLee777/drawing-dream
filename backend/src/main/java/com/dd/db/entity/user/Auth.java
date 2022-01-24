@@ -24,10 +24,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Auth extends BaseEntity{
 	
-	public Auth(String loginId, String password) {
-		this.loginId = loginId;
-		this.password = password;
-	}
+//	public Auth(String loginId, String password) {
+//		this.loginId = loginId;
+//		this.password = password;
+//	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")

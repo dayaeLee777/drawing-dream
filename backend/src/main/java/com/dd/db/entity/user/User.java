@@ -20,13 +20,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class User extends BaseEntity {
 	
-	public User(String userName, String userEmail, String address, String phone, String parentPhone) {
-		this.userName = userName;
-		this.userEmail = userEmail;
-		this.address = address;
-		this.phone = phone;
-		this.parentPhone = parentPhone;
-	}
+//	public User(String userName, String userEmail, String address, String phone, String parentPhone) {
+//		this.userName = userName;
+//		this.userEmail = userEmail;
+//		this.address = address;
+//		this.phone = phone;
+//		this.parentPhone = parentPhone;
+//	}
 	
 	@Column(name="user_name")
 	private String userName;

@@ -6,15 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.dd.db.entity.user.Auth;
-import com.dd.db.entity.user.User;
-import com.dd.db.entity.user.UserDepartment;
+import com.dd.db.entity.school.School;
 import com.dd.db.enums.Code;
 import com.dd.db.repository.AuthRepository;
+import com.dd.db.repository.SchoolRepository;
 import com.dd.db.repository.UserDepartmentRepository;
 import com.dd.db.repository.UserRepository;
 
-@Transactional
+
 @SpringBootTest
 class DrawingdreamBackendApplicationTests {
 	
@@ -23,6 +22,9 @@ class DrawingdreamBackendApplicationTests {
 	
 	@Autowired
 	AuthRepository authRepository;
+	
+	@Autowired
+	SchoolRepository schoolRepository;
 	
 	@Autowired
 	UserDepartmentRepository userDepartmentRepository;
@@ -38,8 +40,8 @@ class DrawingdreamBackendApplicationTests {
 //		auth.setLoginId("ssafy");
 //		authRepository.save(auth);
 		
-		Auth authTest = authRepository.findByLoginId("ssafy").get();
-		System.out.println(authTest);
+//		Auth authTest = authRepository.findByLoginId("ssafy").get();
+//		System.out.println(authTest);
 		
 //		UserDepartment userDepartment = new UserDepartment();
 ////		Code.B01.getName();	// 코드 설명 받아오기
@@ -49,6 +51,9 @@ class DrawingdreamBackendApplicationTests {
 		
 		// 트랜잭션 적용해서 테스트해야함
 //		Auth authTest = ar.findByLoginId("ssafy").get();
+		
+		
+		
 	}
 
 }
