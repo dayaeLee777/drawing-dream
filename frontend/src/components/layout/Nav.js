@@ -4,6 +4,8 @@ import signOut from "assets/img/sign-out.png";
 import cog from "assets/img/cog.png";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { darkTheme, ligthTheme } from "modules/theme";
 
 const Container = styled.div`
   display: flex;
@@ -12,7 +14,7 @@ const Container = styled.div`
 `;
 const Item = styled.div`
   width: 7rem;
-  color: #828282;
+  color: ${({ theme }) => theme.menuColor};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +39,7 @@ const Icon = styled.img`
 const DropDownContent = styled.div`
   display: none;
   position: absolute;
-  background-color: white;
+  background-color: ${({ theme }) => theme.bgColor};
   min-width: 10rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 10px;
@@ -58,8 +60,10 @@ const DropDownItem = styled.div`
 `;
 
 const Nav = () => {
+  const { isDarkMode } = useSelector((state) => state.theme);
+  console.log(isDarkMode);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   return (
     <Container>
       <Item onClick={() => navigate("/home")}>
@@ -76,7 +80,15 @@ const Nav = () => {
             <DropDownItem onClick={() => navigate("/modifyprofile")}>
               프로필 수정
             </DropDownItem>
-            <DropDownItem>다크모드 off</DropDownItem>
+            {isDarkMode ? (
+              <DropDownItem onClick={() => dispatch(ligthTheme())}>
+                다크모드 off
+              </DropDownItem>
+            ) : (
+              <DropDownItem onClick={() => dispatch(darkTheme())}>
+                다크모드 on
+              </DropDownItem>
+            )}
           </DropDownContent>
         </DropDown>
 
