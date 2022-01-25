@@ -18,7 +18,9 @@ import com.dd.db.enums.Code;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @Getter
 @Setter
 @Entity

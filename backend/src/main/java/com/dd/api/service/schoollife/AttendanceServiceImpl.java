@@ -1,12 +1,14 @@
 package com.dd.api.service.schoollife;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dd.api.request.schoollife.attendance.AttendanceDelPutReq;
 import com.dd.db.entity.schoollife.Attendance;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
@@ -34,7 +36,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 		User user = authRepository.findByLoginId(loginId).get().getUser();
 		Date today = new Date();
 		
-		if(attendanceRepository.findByDateAndUserId(today, user.getId()).orElse(null) != null)
+		if(attendanceRepository.findByDateAndUser(today, user).orElse(null) == null)
 			return null;
 		
 		Attendance attendance = new Attendance();
@@ -42,6 +44,21 @@ public class AttendanceServiceImpl implements AttendanceService {
 		attendance.setAttendanceCode(Code.C02);
 		attendance.setDate(today);
 		attendance.setUser(user);
+		
+		return attendanceRepository.save(attendance);
+	}
+	
+	@Transactional
+	@Override
+	public Attendance deleteAttendance(AttendanceDelPutReq attendanceDelPutReq) {		
+		Date date = attendanceDelPutReq.getDate();
+		UUID userId = attendanceDelPutReq.getUserId();
+		Attendance attendance = attendanceRepository.findByDateAndUserId(date, userId).orElse(null);
+		
+		if(attendance==null)
+			return null;
+		
+		attendance.setDelYn(true);
 		
 		return attendanceRepository.save(attendance);
 	}
