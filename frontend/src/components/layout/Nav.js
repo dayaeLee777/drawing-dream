@@ -9,7 +9,7 @@ import { darkTheme, ligthTheme } from "modules/theme";
 
 const Container = styled.div`
   display: flex;
-  margin: 2rem 0;
+  margin: 2rem 10vw;
   justify-content: space-between;
   width: 80vw;
 `;
@@ -63,7 +63,6 @@ const DropDownItem = styled.div`
 
 const Nav = () => {
   const { isDarkMode } = useSelector((state) => state.theme);
-  console.log(isDarkMode);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (

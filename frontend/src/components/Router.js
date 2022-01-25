@@ -21,6 +21,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 0fr 2fr;
   grid-gap: 2rem;
+  margin: 0 10vw;
 `;
 
 const AppRouter = () => {
@@ -51,6 +52,14 @@ const AppRouter = () => {
             <Route path="/" element={<Navigate replace to="/signin" />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/home" element={<Navigate replace to="/signin" />} />
+            <Route
+              path="/modifyprofile"
+              element={<Navigate replace to="/signin" />}
+            />
+            <Route path="/notice" element={<Navigate replace to="/signin" />} />
+            <Route path="/school" element={<Navigate replace to="/signin" />} />
+            <Route path="/lookup" element={<Navigate replace to="/signin" />} />
           </Routes>
         </>
       )}

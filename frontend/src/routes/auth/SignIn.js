@@ -79,8 +79,10 @@ const SignIn = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      dispatch(login({ loginId: id, password }));
-    } catch {}
+      dispatch(login({ loginId: id, password })).then(() => navigate("/home"));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
