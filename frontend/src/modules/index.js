@@ -7,8 +7,8 @@ import storageSession from "redux-persist/lib/storage/session";
 const persistConfig = {
   key: "root",
   storage: storageSession,
-  //whitelist: ["theme", "user"],
-  blacklist: ["theme", "user"],
+  whitelist: ["theme", "user"],
+  //blacklist: ["theme", "user"],
 };
 const rootReducer = combineReducers({
   theme,
