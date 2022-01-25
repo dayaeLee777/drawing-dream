@@ -6,13 +6,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.dd.db.entity.BaseEntity;
+import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class OnlineClassParticipant extends BaseEntity {
 	

@@ -9,14 +9,20 @@ import javax.persistence.ManyToOne;
 
 import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.onlineclass.Course;
+import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class TimeTable extends BaseEntity {
 	

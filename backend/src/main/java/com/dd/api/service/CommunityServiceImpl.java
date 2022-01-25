@@ -15,20 +15,19 @@ import com.dd.db.repository.CommunityRepository;
 import com.dd.db.repository.UserDepartmentRepository;
 import com.dd.security.util.JwtAuthenticationProvider;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class CommunityServiceImpl implements CommunityService {
 
-	@Autowired
-	AuthRepository authRepository;
+	private final AuthRepository authRepository;
 	
-	@Autowired
-	UserDepartmentRepository userDepartmentRepository;
+	private final UserDepartmentRepository userDepartmentRepository;
 	
-	@Autowired
-	CommunityRepository communityRepository;
+	private final CommunityRepository communityRepository;
 	
-	@Autowired
-	JwtAuthenticationProvider jwtAuthenticationProvider;
+	private final JwtAuthenticationProvider jwtAuthenticationProvider;
 	
 	@Override
 	public void writeArticle(String accessToken, CommunityRegistPostReq communityRegistPostReq) {
@@ -38,23 +37,18 @@ public class CommunityServiceImpl implements CommunityService {
 		User user = authRepository.findByLoginId(loginId).get().getUser();
 		// 유저 소속 정보 가져오기
 		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
-		// 학교가져오기
+		// 학교 가져오기
 		School school = userDepartment.getSchool();
-		
-		Community community = new Community();
-		// communityNo ? 상의 필요
-		
-		// title
-		community.setTitle(communityRegistPostReq.getTitle());
-		// content
-		community.setContent(communityRegistPostReq.getContent());
-		// regTime
+		// 현재 시간 가져오기
 		LocalDateTime currentDateTime = LocalDateTime.now();
-		community.setRegTime(currentDateTime);
-		// school
-		community.setSchool(school);
-		// user
-		community.setUser(user);
+		
+		Community community = Community.builder()
+				.title(communityRegistPostReq.getTitle())
+				.content(communityRegistPostReq.getContent())
+				.regTime(currentDateTime)
+				.school(school)
+				.user(user)
+				.build();
 		
 		communityRepository.save(community);
 	}

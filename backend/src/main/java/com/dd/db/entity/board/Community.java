@@ -13,15 +13,17 @@ import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.school.School;
 import com.dd.db.entity.user.User;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Setter
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Community extends BaseEntity {
-
-	private int communityNo;
 	
 	private String title;
 	
