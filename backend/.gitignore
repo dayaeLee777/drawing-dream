@@ -16,7 +16,8 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-drawingdream.log
+*.log
+*.gz
 
 ### IntelliJ IDEA ###
 .idea
