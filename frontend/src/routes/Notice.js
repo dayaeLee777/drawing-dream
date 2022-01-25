@@ -25,6 +25,7 @@ const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 5rem;
+  background-color: ${({ theme }) => theme.widgetColor};
 `;
 
 const Desc = styled.div`
@@ -111,7 +112,7 @@ const Notice = () => {
                 <Subject>작성자</Subject>
                 <Subject>등록일자</Subject>
               </InputContainer>
-              
+
               <InputContainer>
                 <Type>7</Type>
                 <Type>2학년</Type>
@@ -119,7 +120,7 @@ const Notice = () => {
                 <Type>이다예</Type>
                 <Type>2021.09.22</Type>
               </InputContainer>
-              
+
               <InputContainer>
                 <Type>6</Type>
                 <Type>2학년 6반</Type>
@@ -127,7 +128,7 @@ const Notice = () => {
                 <Type>이지은</Type>
                 <Type>2021.09.21</Type>
               </InputContainer>
-              
+
               <InputContainer>
                 <Type>5</Type>
                 <Type>2학년 6반</Type>
@@ -135,7 +136,7 @@ const Notice = () => {
                 <Type>이지은</Type>
                 <Type>2021.09.21</Type>
               </InputContainer>
-              
+
               <InputContainer>
                 <Type>4</Type>
                 <Type>전체</Type>
@@ -160,22 +161,21 @@ const Notice = () => {
                 <Type>2021.09.17</Type>
               </InputContainer>
 
-<InputContainer>
-  <Type>3</Type>
-  <Type>전체</Type>
-  <TitleType>급식실 보수 공사</TitleType>
-  <Type>손창현</Type>
-  <Type>2021.09.17</Type>
-</InputContainer>
+              <InputContainer>
+                <Type>3</Type>
+                <Type>전체</Type>
+                <TitleType>급식실 보수 공사</TitleType>
+                <Type>손창현</Type>
+                <Type>2021.09.17</Type>
+              </InputContainer>
 
-<InputContainer>
-  <Type>3</Type>
-  <Type>전체</Type>
-  <TitleType>급식실 보수 공사</TitleType>
-  <Type>손창현</Type>
-  <Type>2021.09.17</Type>
-</InputContainer>
-
+              <InputContainer>
+                <Type>3</Type>
+                <Type>전체</Type>
+                <TitleType>급식실 보수 공사</TitleType>
+                <Type>손창현</Type>
+                <Type>2021.09.17</Type>
+              </InputContainer>
             </NoticeContainer>
           </InnerContainer>
         </FormContainer>
