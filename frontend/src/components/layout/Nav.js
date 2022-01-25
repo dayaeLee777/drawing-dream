@@ -9,9 +9,11 @@ import { darkTheme, ligthTheme } from "modules/theme";
 
 const Container = styled.div`
   display: flex;
-  margin: 2rem 10vw;
+  margin: 2rem 0;
   justify-content: space-between;
+  width: 80vw;
 `;
+
 const Item = styled.div`
   width: 7rem;
   color: ${({ theme }) => theme.menuColor};
