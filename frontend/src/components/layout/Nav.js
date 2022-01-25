@@ -11,7 +11,9 @@ const Container = styled.div`
   display: flex;
   margin: 2rem 10vw;
   justify-content: space-between;
+  width: 80vw;
 `;
+
 const Item = styled.div`
   width: 7rem;
   color: ${({ theme }) => theme.menuColor};
@@ -61,7 +63,6 @@ const DropDownItem = styled.div`
 
 const Nav = () => {
   const { isDarkMode } = useSelector((state) => state.theme);
-  console.log(isDarkMode);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
