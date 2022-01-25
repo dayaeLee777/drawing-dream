@@ -14,22 +14,16 @@ import com.dd.db.entity.school.School;
 import com.dd.db.enums.Code;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
+@Builder
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDepartment extends BaseEntity {
-	
-//	public UserDepartment(String schoolName, Code gradeCode, Code classCode, Integer studentNo) {
-//		this.gradeCode = gradeCode;
-//		this.classCode = classCode;
-//		this.studentNo = studentNo;
-//	}
 	
 	@Enumerated(EnumType.STRING)
 	private Code gradeCode;
