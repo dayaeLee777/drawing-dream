@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.request.schoollife.attendance.AttendanceDelPutReq;
+import com.dd.api.request.schoollife.attendance.AttendanceUpdatePutReq;
 import com.dd.api.service.schoollife.AttendanceService;
 import com.dd.common.model.BaseResponse;
 
@@ -42,6 +43,20 @@ public class AttendanceController {
 		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
 	}
 	
+	@PutMapping
+	@ApiOperation(value = "출석 수정하기", notes="<strong>회원의 UUID, 출석일, 출결상태코드를 이용하여 출석을 수정한다.</strong><br/> 만약 지정한 출석일에 출석이 존재하지 않으면 409 상태코드를 반환한다.")
+	@ApiResponses({
+		@ApiResponse(code=201, message="출석이 정상적으로 수정되었습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
+	})
+	public ResponseEntity<? extends BaseResponse> update(
+			@RequestBody @ApiParam(value = "출석 수정", required = true) AttendanceUpdatePutReq updateInfo){
+		if(attendanceService.updateAttendance(updateInfo) != null)
+			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
+	}
+	
 	@PutMapping("/delete")
 	@ApiOperation(value = "출석 삭제하기", notes="<strong>회원의 UUID, 출석일을 이용하여 출석을 삭제한다.</strong><br/> 만약 지정한 출석일에 출석이 존재하지 않으면 409 상태코드를 반환한다.")
 	@ApiResponses({
@@ -50,7 +65,7 @@ public class AttendanceController {
 		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
 	})
 	public ResponseEntity<? extends BaseResponse> delete(
-			@RequestBody @ApiParam(value = "회원정보 수정", required = true) AttendanceDelPutReq deleteInfo){
+			@RequestBody @ApiParam(value = "출석 삭제", required = true) AttendanceDelPutReq deleteInfo){
 		if(attendanceService.deleteAttendance(deleteInfo) != null)
 			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
 		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));

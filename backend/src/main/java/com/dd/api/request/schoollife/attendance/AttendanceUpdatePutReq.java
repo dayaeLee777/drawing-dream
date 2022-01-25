@@ -16,7 +16,8 @@ import lombok.Setter;
 @Setter
 @ApiModel("AttendanceUpdatePutReq")
 public class AttendanceUpdatePutReq {
-	@ApiModelProperty(name="변경할 유저 uuid", example="00000000-0000-0000-0000")
+	
+	@ApiModelProperty(name="변경할 유저 uuid", example="00000000-0000-0000-0000-00000000")
 	UUID userId;
 	
 	@ApiModelProperty(name="변경할 출석일", example="2022-01-01")

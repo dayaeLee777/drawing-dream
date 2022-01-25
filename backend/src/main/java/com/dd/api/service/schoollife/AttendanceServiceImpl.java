@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.request.schoollife.attendance.AttendanceDelPutReq;
+import com.dd.api.request.schoollife.attendance.AttendanceUpdatePutReq;
 import com.dd.db.entity.schoollife.Attendance;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
@@ -59,6 +60,21 @@ public class AttendanceServiceImpl implements AttendanceService {
 			return null;
 		
 		attendance.setDelYn(true);
+		
+		return attendanceRepository.save(attendance);
+	}
+
+	@Override
+	public Attendance updateAttendance(AttendanceUpdatePutReq attendanceUpdatePutReq) {
+		Date date = attendanceUpdatePutReq.getDate();
+		UUID userId = attendanceUpdatePutReq.getUserId();
+		Attendance attendance = attendanceRepository.findByDateAndUserId(date, userId).orElse(null);
+		
+		if(attendance==null)
+			return null;
+		
+		attendance.setDate(date);
+		attendance.setAttendanceCode(attendanceUpdatePutReq.getAttendanceCode());
 		
 		return attendanceRepository.save(attendance);
 	}

@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @ApiModel("AttendanceDelPutReq")
 public class AttendanceDelPutReq {
-	@ApiModelProperty(name="출석을 삭제할 유저의 uuid", example="00000000-0000-0000-0000")
+	@ApiModelProperty(name="출석을 삭제할 유저의 uuid", example="00000000-0000-0000-0000-00000000")
 	UUID userId;
 	
 	@ApiModelProperty(name="삭제할 출석일", example="2022-01-01")
