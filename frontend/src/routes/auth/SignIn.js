@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { login } from "modules/user";
+import axios from "axios";
 
 const Container = styled.div`
   display: grid;
@@ -64,7 +65,12 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  // const { isLoggedIn } = useSelector((state) => state.user);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     navigate("/home");
+  //   }
+  // }, [isLoggedIn]);
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -79,7 +85,7 @@ const SignIn = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      dispatch(login({ loginId: id, password })).then(() => navigate("/home"));
+      dispatch(login({ loginId: id, password }));
     } catch (error) {
       console.log(error);
     }
