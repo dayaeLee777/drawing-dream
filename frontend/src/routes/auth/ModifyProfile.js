@@ -1,10 +1,12 @@
 import Button from "components/commons/button";
 import Input from "components/commons/input";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import blankProfile from "assets/img/blank-profile.png";
 import NewWindow from "react-new-window";
 import PostCode from "components/signup/postcode/FindPostCode";
+import { getUser } from "api/user";
+import { useSelector } from "react-redux";
 
 const FormContainer = styled.div`
   /* width: 50rem;
@@ -64,7 +66,19 @@ const ModifyProfile = () => {
   const [isPostCodeOpen, setIsPostCodeOpen] = useState(false);
   const [fullAddress, setFullAddress] = useState("주소를 입력해주세요");
   const [zoneCode, setZoneCode] = useState("");
+  const { userId, userName } = useSelector((state) => state.user);
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
+  useEffect(() => {
+    getUser(userId).then((response) => {
+      const data = response.data;
+      console.log(data);
+      setFullAddress(data.address);
+      setEmail(data.userEmail);
+      setPhone(data.phone);
+    });
+  }, []);
   const openPostCode = () => {
     setIsPostCodeOpen(true);
   };
@@ -96,7 +110,7 @@ const ModifyProfile = () => {
           <ModifyContainer>
             <InputContainer>
               <Type>이름</Type>
-              김하나
+              {userName}
             </InputContainer>
             <InputContainer>
               <Type>학번</Type>
@@ -104,7 +118,11 @@ const ModifyProfile = () => {
             </InputContainer>
             <InputContainer>
               <Type>이메일</Type>
-              <Input border="1px solid #C4C4C4" />
+              <Input
+                width="13rem"
+                border="1px solid #C4C4C4"
+                defaultValue={email}
+              />
             </InputContainer>
             <InputContainer>
               <Type>현재 비밀번호</Type>
@@ -120,7 +138,11 @@ const ModifyProfile = () => {
             </InputContainer>
             <InputContainer>
               <Type>전화번호</Type>
-              <Input width="15rem" border="1px solid #C4C4C4" />
+              <Input
+                width="9rem"
+                border="1px solid #C4C4C4"
+                defaultValue={phone}
+              />
             </InputContainer>
             <InputContainer>
               <Type>주소</Type>
@@ -128,6 +150,7 @@ const ModifyProfile = () => {
                 width="20rem"
                 border="1px solid #C4C4C4"
                 value={fullAddress}
+                readOnly
               />
               <Button
                 ml="1rem"
