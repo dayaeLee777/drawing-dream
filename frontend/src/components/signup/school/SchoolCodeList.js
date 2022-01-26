@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SchoolCodeDetail from "components/signup/school/SchoolCodeDetail";
+import { getSchool } from "api/user";
 
 const SchoolCodeListContainer = styled.div`
   max-height: 70vh;
@@ -17,10 +18,17 @@ const SchoolCodeList = ({ schoolName, onComplate }) => {
       setData(null);
       setLoading(true);
       try {
-        const response = await axios.get(
-          `https://open.neis.go.kr/hub/schoolInfo?Type=json&pIndex=1&pSize=100&SCHUL_NM=${schoolName}&key=2d2bd92546704cdaab894c198821d72b`
-        );
-        setData(response.data.schoolInfo[1].row);
+        // const response = await axios.get(
+        //   `https://open.neis.go.kr/hub/schoolInfo?Type=json&pIndex=1&pSize=100`
+        // );
+
+        getSchool({
+          Type: "JSON",
+          pIndex: 1,
+          pSize: 100,
+          SCHUL_NM: schoolName,
+          KEY: "2d2bd92546704cdaab894c198821d72b",
+        }).then((response) => setData(response.data.schoolInfo[1].row));
       } catch (e) {
         console.log(e);
       }
