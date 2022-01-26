@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dd.api.dto.request.CommunityRegistPostReq;
+import com.dd.api.dto.request.CommunityRegisterRequestDto;
 import com.dd.api.service.CommunityService;
 import com.dd.common.model.BaseResponse;
 
@@ -36,8 +36,8 @@ public class CommunityController {
 	})
 	public ResponseEntity<? extends BaseResponse> signUp(
 			@ApiIgnore @RequestHeader("Authorization") String accessToken,
-			@RequestBody @ApiParam(value="커뮤니티 게시글 등록 - 게시글 정보", required=true) CommunityRegistPostReq communityRegistPostReq) {
-		communityService.writeArticle(accessToken, communityRegistPostReq);
+			@RequestBody @ApiParam(value="커뮤니티 게시글 등록 - 게시글 정보", required=true) CommunityRegisterRequestDto communityRegisterRequestDto) {
+		communityService.writeArticle(accessToken, communityRegisterRequestDto);
 		return ResponseEntity.status(201).body(BaseResponse.of(201, "게시글이 정상적으로 등록되었습니다."));
 	}
 }

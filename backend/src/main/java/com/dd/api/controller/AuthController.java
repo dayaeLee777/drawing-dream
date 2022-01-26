@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dd.api.dto.request.AuthLoginPostReq;
+import com.dd.api.dto.request.AuthLoginRequestDto;
 import com.dd.api.service.UserService;
 import com.dd.security.util.JwtAuthenticationProvider;
 
@@ -38,7 +38,7 @@ public class AuthController {
 	UserService userService;
 
 	@PostMapping("/login")
-	public ResponseEntity<UUID> login(HttpServletResponse response, @RequestBody @ApiParam(value="인증 정보") AuthLoginPostReq authLoginPostReq) {
+	public ResponseEntity<UUID> login(HttpServletResponse response, @RequestBody @ApiParam(value="인증 정보") AuthLoginRequestDto authLoginPostReq) {
 		String loginId = authLoginPostReq.getLoginId();
 		String password = authLoginPostReq.getPassword();
 		System.out.println("@@ Login 요청  :  " + authLoginPostReq.getLoginId());

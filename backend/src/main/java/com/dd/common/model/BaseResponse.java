@@ -2,10 +2,16 @@ package com.dd.common.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 /*
   기본 Response 정의
 */
+@Getter
+@Setter
+@AllArgsConstructor
 @ApiModel("BaseResponse")
 public class BaseResponse {
 	

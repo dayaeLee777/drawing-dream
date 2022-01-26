@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.dd.api.dto.request.UserRegistPostReq;
-import com.dd.api.dto.request.UserUpdatePutReq;
+import com.dd.api.dto.request.UserRegisterRequestDto;
+import com.dd.api.dto.request.UserUpdateRequestDto;
+import com.dd.api.dto.response.UserInfoResponseDto;
 import com.dd.db.entity.school.School;
 import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Transactional
 	@Override
-	public void signUp(UserRegistPostReq userRegistPostReq) {
+	public void signUp(UserRegisterRequestDto userRegistPostReq) {
 		
 		// User 빌더 생성 - immutable (불변)
 		User user = User.builder()
@@ -74,14 +75,14 @@ public class UserServiceImpl implements UserService {
 				.school(school)
 				.user(user)
 				.build();
-
+		
 		userDepartmentRepository.save(userDepartment);
 		
 	}
 
 	@Transactional
 	@Override
-	public void updateUser(String accessToken, UserUpdatePutReq userUpdatePutReq) {
+	public void updateUser(String accessToken, UserUpdateRequestDto userUpdatePutReq) {
 		String token = accessToken.split(" ")[1]; // Bearer 있을 기준
 		String loginId = jwtAuthenticationProvider.getUsername(token);
 		
@@ -95,6 +96,7 @@ public class UserServiceImpl implements UserService {
 				.address(user.getAddress())
 				.delYn(user.isDelYn())
 				.build();
+//		user.update(UserUpdatePutReq.getUserEamil(), UserUpdatePutReq.getAddress());
 
 		userRepository.save(userAfterUpdate);
 		
@@ -170,6 +172,14 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(userAfterDelete);
 		authRepository.save(authAfterDelete);
 		userDepartmentRepository.save(userDepartmentAfterDelete);
+	}
+	
+	@Override
+	public UserInfoResponseDto getUserInfo(UUID userId) {
+		User user = userRepository.findById(userId).orElseThrow(() 
+				-> new IllegalArgumentException("해당 유저가 없습니다. id = " + userId));
+		
+		return new UserInfoResponseDto(user);
 	}
 	
 	@Override

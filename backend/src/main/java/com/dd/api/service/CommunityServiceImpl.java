@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dd.api.dto.request.CommunityRegistPostReq;
+import com.dd.api.dto.request.CommunityRegisterRequestDto;
 import com.dd.db.entity.board.Community;
 import com.dd.db.entity.school.School;
 import com.dd.db.entity.user.User;
@@ -30,7 +30,7 @@ public class CommunityServiceImpl implements CommunityService {
 	private final JwtAuthenticationProvider jwtAuthenticationProvider;
 	
 	@Override
-	public void writeArticle(String accessToken, CommunityRegistPostReq communityRegistPostReq) {
+	public void writeArticle(String accessToken, CommunityRegisterRequestDto communityRegistPostReq) {
 		String token = accessToken.split(" ")[1];
 		String loginId = jwtAuthenticationProvider.getUsername(token);
 		// 게시글 등록하는 유저 정보 가져오기

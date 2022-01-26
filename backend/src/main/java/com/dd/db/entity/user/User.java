@@ -32,5 +32,10 @@ public class User extends BaseEntity {
 	
 	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
+	
+	public void update(String userEmail, String address) {
+		this.userEmail = userEmail;
+		this.address = address;
+	}
 
 }
