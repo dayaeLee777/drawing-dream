@@ -5,7 +5,7 @@ const LOGIN_FAIL = "USER/LOGIN_FAIL";
 const LOGOUT_SUCCESS = "USER/LOGOUT_SUCCESS";
 
 export const login =
-  ({ loginId, password }) =>
+  ({ loginId, password, isChecked }) =>
   async (dispatch) => {
     const data = await axios
       .post(
@@ -17,10 +17,17 @@ export const login =
       )
       .then((response) => {
         if (response.headers.authorization && response.data) {
-          sessionStorage.setItem(
-            "access-token",
-            response.headers.authorization
-          );
+          if (isChecked) {
+            localStorage.setItem(
+              "access-token",
+              response.headers.authorization
+            );
+          } else {
+            sessionStorage.setItem(
+              "access-token",
+              response.headers.authorization
+            );
+          }
           return response;
         }
       })
@@ -35,12 +42,16 @@ export const login =
 
 export const logout = () => {
   sessionStorage.removeItem("access-token");
+  localStorage.removeItem("access-token");
   return {
     type: LOGOUT_SUCCESS,
   };
 };
 
-const token = sessionStorage.getItem("access-token");
+const token =
+  sessionStorage.getItem("access-token") ||
+  localStorage.getItem("access-token");
+
 const initialState = token ? { isLoggedIn: true } : { isLoggedIn: false };
 
 const user = (state = initialState, action) => {
