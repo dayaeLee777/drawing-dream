@@ -18,10 +18,6 @@ const PostCode = (props) => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     props.setFullAddress(fullAddress);
-    props.setZoneCode(data.zonecode);
-    console.log(data);
-    console.log(fullAddress);
-    console.log(data.zonecode);
     props.onClose();
   };
 

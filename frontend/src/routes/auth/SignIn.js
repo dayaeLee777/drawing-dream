@@ -1,8 +1,10 @@
+import { useState } from "react";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { login } from "modules/user";
 
 const Container = styled.div`
   display: grid;
@@ -13,9 +15,17 @@ const Container = styled.div`
 
 const SideContainer = styled.div`
   background-color: #fec25c;
+  display: flex;
+  align-items: center;
 `;
 
-const FormContainer = styled.div`
+const Desc = styled.div`
+  font-size: 1.5rem;
+  padding: 10rem;
+  margin-top: 30rem;
+`;
+
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,9 +43,10 @@ const Logo = styled.img`
   height: fit-content;
 `;
 
-const Desc = styled.div`
+const Welcome = styled.div`
   font-size: 2.5rem;
-  margin: 3rem 0;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
   font-weight: 600;
 `;
 
@@ -46,29 +57,86 @@ const InputContainer = styled.div`
 
 const Type = styled.div`
   width: 5.5rem;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+`;
+
+const Error = styled.div`
+  color: red;
 `;
 
 const SignIn = () => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const { error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const onChange = (event) => {
+    const {
+      target: { name, value },
+    } = event;
+    if (name === "id") {
+      setId(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+  };
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const user = {
+        loginId: id,
+        password,
+      };
+      dispatch(login(user, isChecked));
+    } catch (error) {}
+  };
+
   return (
     <Container>
-      <SideContainer>side</SideContainer>
-      <FormContainer>
+      <SideContainer>
+        <Desc>세상에서 가장 편한 학교, Drawing Dream</Desc>
+      </SideContainer>
+      <Form onSubmit={onSubmit}>
         <Logo src="././logo.png" />
-        <Desc>환영합니다</Desc>
+        <Welcome>환영합니다</Welcome>
         <InputContainer>
           <Type>아이디</Type>
-          <Input></Input>
+          <Input
+            name="id"
+            type="id"
+            value={id}
+            onChange={onChange}
+            require
+          ></Input>
         </InputContainer>
         <InputContainer>
           <Type>비밀번호</Type>
-          <Input type="password"></Input>
+          <Input
+            name="password"
+            type="password"
+            value={password}
+            onChange={onChange}
+            require
+          ></Input>
         </InputContainer>
         <InputContainer>
-          <input type="checkbox" /> 로그인 유지
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={() => setIsChecked(true)}
+          />
+          <Type>로그인 유지</Type>
         </InputContainer>
-        <Button name="로그인" />
+        <InputContainer>
+          {error && <Error>아이디, 비밀번호를 확인해 주세요</Error>}
+        </InputContainer>
+        <Button mt="1rem" name="로그인" />
         <Link to={"/signup"}>→ 아직 회원이 아니신가요?</Link>
-      </FormContainer>
+      </Form>
     </Container>
   );
 };

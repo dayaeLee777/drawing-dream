@@ -1,22 +1,6 @@
 import Button from "components/commons/button";
 import React from "react";
 import styled from "styled-components";
-import Nav from "components/layout/Nav";
-import Profile from "components/layout/Profile";
-import SideMenu from "components/layout/SideMenu";
-
-const Container = styled.div`
-  margin: 0 10vw;
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: 1fr 3fr;
-`;
-
-const SideWrapper = styled.div`
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-rows: 0fr 2fr;
-`;
 
 const FormContainer = styled.div`
   box-sizing: border-box;
@@ -27,7 +11,7 @@ const FormContainer = styled.div`
   align-items: center;
   margin-bottom: 5rem;
 
-  button{
+  button {
     margin-left: auto;
     border-radius: 10px;
   }
@@ -99,69 +83,62 @@ const TitleType = styled.div`
 const School = () => {
   return (
     <>
-      <Nav />
-      <Container>
-        <SideWrapper>
-          <Profile />
-          <SideMenu />
-        </SideWrapper>
-        <FormContainer>
-          <Desc>우리 학교 커뮤니티</Desc>
-          <InnerContainer>
-            <Line />
-            <NoticeContainer>
-              <InputContainer>
-                <Subject>번호</Subject>
-                <Subject>분류</Subject>
-                <TitleSubject>제목</TitleSubject>
-                <Subject>작성자</Subject>
-                <Subject>등록일자</Subject>
-              </InputContainer>
-              
-              <InputContainer>
-                <Type>7</Type>
-                <Type>유머</Type>
-                <TitleType>명란젓 코난</TitleType>
-                <Type>이다예</Type>
-                <Type>2021.09.22</Type>
-              </InputContainer>
-              
-              <InputContainer>
-                <Type>6</Type>
-                <Type>정보</Type>
-                <TitleType>이것만 보면 수학 100점</TitleType>
-                <Type>이지은</Type>
-                <Type>2021.09.21</Type>
-              </InputContainer>
-              
-              <InputContainer>
-                <Type>5</Type>
-                <Type>자유</Type>
-                <TitleType>이거 보고 안 들어오면 3대가 탈모</TitleType>
-                <Type>이지은</Type>
-                <Type>2021.09.21</Type>
-              </InputContainer>
-              
-              <InputContainer>
-                <Type>4</Type>
-                <Type>고민</Type>
-                <TitleType>오늘 학교를 못 갔는데 어떻게 처리를..</TitleType>
-                <Type>장준범</Type>
-                <Type>2021.09.20</Type>
-              </InputContainer>
+      <FormContainer>
+        <Desc>우리 학교 커뮤니티</Desc>
+        <InnerContainer>
+          <Line />
+          <NoticeContainer>
+            <InputContainer>
+              <Subject>번호</Subject>
+              <Subject>분류</Subject>
+              <TitleSubject>제목</TitleSubject>
+              <Subject>작성자</Subject>
+              <Subject>등록일자</Subject>
+            </InputContainer>
 
-              <InputContainer>
-                <Type>3</Type>
-                <Type>질문</Type>
-                <TitleType>이거 어떻게 푸나요?</TitleType>
-                <Type>손창현</Type>
-                <Type>2021.09.17</Type>
-              </InputContainer>
-            </NoticeContainer>
-          </InnerContainer>
-            <Button name="글쓰기" mr="5rem" mb="5rem" width="17rem" height="3rem" />
-        </FormContainer>
-      </Container>
+            <InputContainer>
+              <Type>7</Type>
+              <Type>유머</Type>
+              <TitleType>명란젓 코난</TitleType>
+              <Type>이다예</Type>
+              <Type>2021.09.22</Type>
+            </InputContainer>
+
+            <InputContainer>
+              <Type>6</Type>
+              <Type>정보</Type>
+              <TitleType>이것만 보면 수학 100점</TitleType>
+              <Type>이지은</Type>
+              <Type>2021.09.21</Type>
+            </InputContainer>
+
+            <InputContainer>
+              <Type>5</Type>
+              <Type>자유</Type>
+              <TitleType>이거 보고 안 들어오면 3대가 탈모</TitleType>
+              <Type>이지은</Type>
+              <Type>2021.09.21</Type>
+            </InputContainer>
+
+            <InputContainer>
+              <Type>4</Type>
+              <Type>고민</Type>
+              <TitleType>오늘 학교를 못 갔는데 어떻게 처리를..</TitleType>
+              <Type>장준범</Type>
+              <Type>2021.09.20</Type>
+            </InputContainer>
+
+            <InputContainer>
+              <Type>3</Type>
+              <Type>질문</Type>
+              <TitleType>이거 어떻게 푸나요?</TitleType>
+              <Type>손창현</Type>
+              <Type>2021.09.17</Type>
+            </InputContainer>
+          </NoticeContainer>
+        </InnerContainer>
+        <Button name="글쓰기" mr="5rem" mb="5rem" width="17rem" height="3rem" />
+      </FormContainer>
     </>
   );
 };

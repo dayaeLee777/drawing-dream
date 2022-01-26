@@ -24,17 +24,19 @@ const CloseButton = styled.div`
   align-items: center;
 `;
 
-const Dday = ({ setIsShow }) => {
+const Dday = ({ setWidgetId, setIsShow }) => {
   const close = () => {
     setIsShow("false");
-    console.log("hi");
   };
   return (
     <Container
       layout
-      layoutId={2}
+      layoutId="M02"
       whileHover={{
         scale: 1.01,
+      }}
+      onClick={() => {
+        setWidgetId("M02");
       }}
     >
       <Wrapper>

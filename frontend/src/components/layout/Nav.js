@@ -6,12 +6,15 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { darkTheme, ligthTheme } from "modules/theme";
+import { logout } from "modules/user";
 
 const Container = styled.div`
   display: flex;
   margin: 2rem 10vw;
   justify-content: space-between;
+  width: 80vw;
 `;
+
 const Item = styled.div`
   width: 7rem;
   color: ${({ theme }) => theme.menuColor};
@@ -61,9 +64,12 @@ const DropDownItem = styled.div`
 
 const Nav = () => {
   const { isDarkMode } = useSelector((state) => state.theme);
-  console.log(isDarkMode);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const logoutUser = () => {
+    dispatch(logout());
+  };
   return (
     <Container>
       <Item onClick={() => navigate("/home")}>
@@ -92,7 +98,7 @@ const Nav = () => {
           </DropDownContent>
         </DropDown>
 
-        <Item>
+        <Item onClick={logoutUser}>
           <Icon src={signOut} />
           로그아웃
         </Item>

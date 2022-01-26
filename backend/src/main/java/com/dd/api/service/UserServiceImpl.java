@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.dd.api.dto.request.UserRegistPostReq;
-import com.dd.api.dto.request.UserUpdatePutReq;
+import com.dd.api.dto.request.UserRegisterRequestDto;
+import com.dd.api.dto.request.UserUpdateRequestDto;
+import com.dd.api.dto.response.UserInfoResponseDto;
 import com.dd.db.entity.school.School;
 import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
@@ -20,82 +21,109 @@ import com.dd.db.repository.UserDepartmentRepository;
 import com.dd.db.repository.UserRepository;
 import com.dd.security.util.JwtAuthenticationProvider;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
 	
-	@Autowired
-	PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 	
-	@Autowired
-	AuthRepository authRepository;
+	private final AuthRepository authRepository;
 	
-	@Autowired
-	UserRepository userRepository;
+	private final UserRepository userRepository;
 	
-	@Autowired
-	UserDepartmentRepository userDepartmentRepository;
+	private final UserDepartmentRepository userDepartmentRepository;
 	
-	@Autowired
-	SchoolRepository schoolRepository;
+	private final SchoolRepository schoolRepository;
 	
-	@Autowired
-	JwtAuthenticationProvider jwtAuthenticationProvider;
+	private final JwtAuthenticationProvider jwtAuthenticationProvider;
 	
 	@Transactional
 	@Override
-	public void signUp(UserRegistPostReq userRegistPostReq) {
-		// User
-		User user = new User();
-		user.setUserName(userRegistPostReq.getUserName());
-		user.setUserEmail(userRegistPostReq.getUserEmail());
-		user.setPhone(userRegistPostReq.getPhone());
-		user.setParentPhone(userRegistPostReq.getParentPhone());
-		user.setAddress(userRegistPostReq.getAddress());
+	public void signUp(UserRegisterRequestDto userRegistPostReq) {
+		
+		// User 빌더 생성 - immutable (불변)
+		User user = User.builder()
+				.userName(userRegistPostReq.getUserName())
+				.userEmail(userRegistPostReq.getUserEmail())
+				.phone(userRegistPostReq.getPhone())
+				.parentPhone(userRegistPostReq.getParentPhone())
+				.address(userRegistPostReq.getAddress())
+				.build();
+		
 		userRepository.save(user);
 		
+		
 		// auth
-		Auth auth = new Auth();
-		auth.setLoginId(userRegistPostReq.getLoginId());
-		auth.setPassword(passwordEncoder.encode(userRegistPostReq.getPassword()));
-		auth.setUser(user);
+		Auth auth = Auth.builder()
+				.loginId(userRegistPostReq.getLoginId())
+				.password(passwordEncoder.encode(userRegistPostReq.getPassword()))
+				.user(user)
+				.build();
+		
 		authRepository.save(auth);
+		
 		
 		// UserDepartment
 		// UUID schoolId = schoolRepository.findIdBySchoolName(userRegistPostReq.getSchoolName()).get();
 		School school = schoolRepository.findBySchoolName(userRegistPostReq.getSchoolName()).get();
-		UserDepartment userDepartment = new UserDepartment();
-		userDepartment.setGradeCode(userRegistPostReq.getGradeCode());
-		userDepartment.setClassCode(userRegistPostReq.getClassCode());
-		userDepartment.setStudentNo(userRegistPostReq.getStudentNo());
-		userDepartment.setSchool(school);
-		userDepartment.setUser(user);
+		UserDepartment userDepartment = UserDepartment.builder()
+				.gradeCode(userRegistPostReq.getGradeCode())
+				.classCode(userRegistPostReq.getClassCode())
+				.studentNo(userRegistPostReq.getStudentNo())
+				.school(school)
+				.user(user)
+				.build();
+		
 		userDepartmentRepository.save(userDepartment);
 		
 	}
 
 	@Transactional
 	@Override
-	public void updateUser(String accessToken, UserUpdatePutReq userUpdatePutReq) {
+	public void updateUser(String accessToken, UserUpdateRequestDto userUpdatePutReq) {
 		String token = accessToken.split(" ")[1]; // Bearer 있을 기준
 		String loginId = jwtAuthenticationProvider.getUsername(token);
 		
 		// 유저 정보 update
 		User user = authRepository.findByLoginId(loginId).get().getUser();
-		user.setUserEmail(userUpdatePutReq.getUserEmail());
-		user.setPhone(userUpdatePutReq.getPhone());
-		user.setParentPhone(userUpdatePutReq.getParentPhone());
-		user.setAddress(userUpdatePutReq.getAddress());
-		userRepository.save(user);
+		User userAfterUpdate = User.builder()
+				.userName(user.getUserName())
+				.userEmail(user.getUserEmail())
+				.phone(user.getPhone())
+				.parentPhone(user.getParentPhone())
+				.address(user.getAddress())
+				.delYn(user.isDelYn())
+				.build();
+//		user.update(UserUpdatePutReq.getUserEamil(), UserUpdatePutReq.getAddress());
+
+		userRepository.save(userAfterUpdate);
 		
+		// Auth 정보 update
 		Auth auth = authRepository.findByLoginId(loginId).get();
-		auth.setPassword(passwordEncoder.encode(userUpdatePutReq.getPassword()));
-		authRepository.save(auth);
+		Auth authAfterUpdate = Auth.builder()
+				.loginId(loginId)
+				.user(userAfterUpdate)
+				.password(auth.getPassword())
+				.build();
 		
+		authRepository.save(authAfterUpdate);
+		
+		// UserDepartment 정보 update
 		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
-		userDepartment.setGradeCode(userUpdatePutReq.getGradeCode());
-		userDepartment.setClassCode(userUpdatePutReq.getClassCode());
-		userDepartment.setStudentNo(userUpdatePutReq.getStudentNo());
-		userDepartmentRepository.save(userDepartment);
+		UserDepartment userDepartmentAfterUpdate = UserDepartment.builder()
+				.gradeCode(userUpdatePutReq.getGradeCode())
+				.classCode(userUpdatePutReq.getClassCode())
+				.studentNo(userUpdatePutReq.getStudentNo())
+				.stateCode(userDepartment.getStateCode())
+				.approvalCode(userDepartment.getApprovalCode())
+				.userCode(userDepartment.getUserCode())
+				.user(userAfterUpdate)
+				.school(userDepartment.getSchool())
+				.build();
+		
+		userDepartmentRepository.save(userDepartmentAfterUpdate);
 		
 	}
 	
@@ -105,19 +133,53 @@ public class UserServiceImpl implements UserService {
 		String token = accessToken.split(" ")[1]; // Bearer 있을 기준
 		String loginId = jwtAuthenticationProvider.getUsername(token);
 		
+		// user 삭제여부 true 설정
 		User user = userRepository.findById(userId).get();
+		User userAfterDelete = User.builder()
+				.userName(user.getUserName())
+				.userEmail(user.getUserEmail())
+				.phone(user.getPhone())
+				.parentPhone(user.getParentPhone())
+				.address(user.getAddress())
+				.delYn(true)
+				.build();
 		
-		if(authRepository.findByLoginId(loginId).get().getUser() != user) return;
+//		if(authRepository.findByLoginId(loginId).get().getUser() != user) return;
 		
+		// auth 삭제여부 true 설정
 		Auth auth = authRepository.findByUser(user).get();
+		Auth authAfterDelete = Auth.builder()
+				.loginId(auth.getLoginId())
+				.user(auth.getUser())
+				.password(auth.getPassword())
+				.delYn(true)
+				.build();
+				
+		// userDepartment 삭제여부 true 설정
 		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
-		user.setDelYn(true);
-		auth.setDelYn(true);
-		userDepartment.setDelYn(true);
+		UserDepartment userDepartmentAfterDelete = UserDepartment.builder()
+				.gradeCode(userDepartment.getGradeCode())
+				.classCode(userDepartment.getClassCode())
+				.studentNo(userDepartment.getStudentNo())
+				.stateCode(userDepartment.getStateCode())
+				.approvalCode(userDepartment.getApprovalCode())
+				.userCode(userDepartment.getUserCode())
+				.user(userDepartment.getUser())
+				.school(userDepartment.getSchool())
+				.delYn(true)
+				.build();
 		
-		userRepository.save(user);
-		authRepository.save(auth);
-		userDepartmentRepository.save(userDepartment);
+		userRepository.save(userAfterDelete);
+		authRepository.save(authAfterDelete);
+		userDepartmentRepository.save(userDepartmentAfterDelete);
+	}
+	
+	@Override
+	public UserInfoResponseDto getUserInfo(UUID userId) {
+		User user = userRepository.findById(userId).orElseThrow(() 
+				-> new IllegalArgumentException("해당 유저가 없습니다. id = " + userId));
+		
+		return new UserInfoResponseDto(user);
 	}
 	
 	@Override

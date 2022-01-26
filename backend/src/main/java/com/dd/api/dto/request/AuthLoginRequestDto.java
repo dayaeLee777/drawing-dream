@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class AuthLoginPostReq {
+public class AuthLoginRequestDto {
 	
 	@ApiModelProperty(name="인증 정보 - 아이디", example="user1234")
 	private String loginId;

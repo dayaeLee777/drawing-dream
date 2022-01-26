@@ -1,21 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Nav from "components/layout/Nav";
-import Profile from "components/layout/Profile";
-import SideMenu from "components/layout/SideMenu";
-
-const Container = styled.div`
-  margin: 0 10vw;
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: 1fr 3fr;
-`;
-
-const SideWrapper = styled.div`
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-rows: 0fr 2fr;
-`;
 
 const FormContainer = styled.div`
   box-sizing: border-box;
@@ -25,6 +9,7 @@ const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 5rem;
+  background-color: ${({ theme }) => theme.widgetColor};
 `;
 
 const Desc = styled.div`
@@ -93,93 +78,85 @@ const TitleType = styled.div`
 const Notice = () => {
   return (
     <>
-      <Nav />
-      <Container>
-        <SideWrapper>
-          <Profile />
-          <SideMenu />
-        </SideWrapper>
-        <FormContainer>
-          <Desc>알림장</Desc>
-          <InnerContainer>
-            <Line />
-            <NoticeContainer>
-              <InputContainer>
-                <Subject>번호</Subject>
-                <Subject>분류</Subject>
-                <TitleSubject>제목</TitleSubject>
-                <Subject>작성자</Subject>
-                <Subject>등록일자</Subject>
-              </InputContainer>
-              
-              <InputContainer>
-                <Type>7</Type>
-                <Type>2학년</Type>
-                <TitleType>기말고사 일정 안내</TitleType>
-                <Type>이다예</Type>
-                <Type>2021.09.22</Type>
-              </InputContainer>
-              
-              <InputContainer>
-                <Type>6</Type>
-                <Type>2학년 6반</Type>
-                <TitleType>9월 21일 종례</TitleType>
-                <Type>이지은</Type>
-                <Type>2021.09.21</Type>
-              </InputContainer>
-              
-              <InputContainer>
-                <Type>5</Type>
-                <Type>2학년 6반</Type>
-                <TitleType>9월 21일 조례</TitleType>
-                <Type>이지은</Type>
-                <Type>2021.09.21</Type>
-              </InputContainer>
-              
-              <InputContainer>
-                <Type>4</Type>
-                <Type>전체</Type>
-                <TitleType>개교기념일 기념 행사</TitleType>
-                <Type>장준범</Type>
-                <Type>2021.09.20</Type>
-              </InputContainer>
+      <FormContainer>
+        <Desc>알림장</Desc>
+        <InnerContainer>
+          <Line />
+          <NoticeContainer>
+            <InputContainer>
+              <Subject>번호</Subject>
+              <Subject>분류</Subject>
+              <TitleSubject>제목</TitleSubject>
+              <Subject>작성자</Subject>
+              <Subject>등록일자</Subject>
+            </InputContainer>
 
-              <InputContainer>
-                <Type>3</Type>
-                <Type>전체</Type>
-                <TitleType>급식실 보수 공사</TitleType>
-                <Type>손창현</Type>
-                <Type>2021.09.17</Type>
-              </InputContainer>
+            <InputContainer>
+              <Type>7</Type>
+              <Type>2학년</Type>
+              <TitleType>기말고사 일정 안내</TitleType>
+              <Type>이다예</Type>
+              <Type>2021.09.22</Type>
+            </InputContainer>
 
-              <InputContainer>
-                <Type>3</Type>
-                <Type>전체</Type>
-                <TitleType>급식실 보수 공사</TitleType>
-                <Type>손창현</Type>
-                <Type>2021.09.17</Type>
-              </InputContainer>
+            <InputContainer>
+              <Type>6</Type>
+              <Type>2학년 6반</Type>
+              <TitleType>9월 21일 종례</TitleType>
+              <Type>이지은</Type>
+              <Type>2021.09.21</Type>
+            </InputContainer>
 
-<InputContainer>
-  <Type>3</Type>
-  <Type>전체</Type>
-  <TitleType>급식실 보수 공사</TitleType>
-  <Type>손창현</Type>
-  <Type>2021.09.17</Type>
-</InputContainer>
+            <InputContainer>
+              <Type>5</Type>
+              <Type>2학년 6반</Type>
+              <TitleType>9월 21일 조례</TitleType>
+              <Type>이지은</Type>
+              <Type>2021.09.21</Type>
+            </InputContainer>
 
-<InputContainer>
-  <Type>3</Type>
-  <Type>전체</Type>
-  <TitleType>급식실 보수 공사</TitleType>
-  <Type>손창현</Type>
-  <Type>2021.09.17</Type>
-</InputContainer>
+            <InputContainer>
+              <Type>4</Type>
+              <Type>전체</Type>
+              <TitleType>개교기념일 기념 행사</TitleType>
+              <Type>장준범</Type>
+              <Type>2021.09.20</Type>
+            </InputContainer>
 
-            </NoticeContainer>
-          </InnerContainer>
-        </FormContainer>
-      </Container>
+            <InputContainer>
+              <Type>3</Type>
+              <Type>전체</Type>
+              <TitleType>급식실 보수 공사</TitleType>
+              <Type>손창현</Type>
+              <Type>2021.09.17</Type>
+            </InputContainer>
+
+            <InputContainer>
+              <Type>3</Type>
+              <Type>전체</Type>
+              <TitleType>급식실 보수 공사</TitleType>
+              <Type>손창현</Type>
+              <Type>2021.09.17</Type>
+            </InputContainer>
+
+            <InputContainer>
+              <Type>3</Type>
+              <Type>전체</Type>
+              <TitleType>급식실 보수 공사</TitleType>
+              <Type>손창현</Type>
+              <Type>2021.09.17</Type>
+            </InputContainer>
+
+            <InputContainer>
+              <Type>3</Type>
+              <Type>전체</Type>
+              <TitleType>급식실 보수 공사</TitleType>
+              <Type>손창현</Type>
+              <Type>2021.09.17</Type>
+            </InputContainer>
+          </NoticeContainer>
+        </InnerContainer>
+      </FormContainer>
     </>
   );
 };
