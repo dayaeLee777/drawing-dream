@@ -6,6 +6,9 @@ import Dday from "components/widgets/Dday";
 import Memo from "components/widgets/Memo";
 import TodayClass from "components/widgets/TodayClass";
 import TodayClassModal from "components/widgets/modals/TodayClassModal";
+import MemoModal from "components/widgets/modals/MemoModal";
+import DdayModal from "components/widgets/modals/DdayModal";
+import CheckListModal from "components/widgets/modals/CheckListModal";
 
 const Container = styled.div`
   display: grid;
@@ -35,6 +38,8 @@ const overlay = {
 const Widgets = () => {
   const [isShowTC, setIsShowTC] = useState(true);
   const [isShowCL, setIsShowCL] = useState(true);
+  const [isShowDD, setIsShowDD] = useState(true);
+  const [isShowMM, setIsShowMM] = useState(true);
   const [widgetId, setWidgetId] = useState();
   return (
     <>
@@ -42,16 +47,18 @@ const Widgets = () => {
         {isShowTC && (
           <TodayClass setWidgetId={setWidgetId} setIsShow={setIsShowTC} />
         )}
-        <Dday></Dday>
-        {isShowCL && <CheckList setIsShow={setIsShowCL} />}
-        <Memo></Memo>
+        {isShowDD && (
+          <Dday setWidgetId={setWidgetId} setIsShow={setIsShowDD}></Dday>
+        )}
+        {isShowCL && (
+          <CheckList setWidgetId={setWidgetId} setIsShow={setIsShowCL} />
+        )}
+        {isShowMM && (
+          <Memo setWidgetId={setWidgetId} setIsShow={setIsShowMM}></Memo>
+        )}
       </Container>
-
-      {/* 위젯 모달창 띄우는 코드
-          widgetId 값으로 열립니다 일단은 1로 설정
-      */}
       <AnimatePresence>
-        {widgetId ? (
+        {widgetId && (
           <Overlay
             variants={overlay}
             initial="hidden"
@@ -59,9 +66,16 @@ const Widgets = () => {
             exit="exit"
             onClick={() => setWidgetId(null)}
           >
-            <TodayClassModal layoutId={widgetId}></TodayClassModal>
+            {widgetId === "M01" && (
+              <TodayClassModal layoutId={widgetId}></TodayClassModal>
+            )}
+            {widgetId === "M02" && <DdayModal layoutId={widgetId}></DdayModal>}
+            {widgetId === "M03" && (
+              <CheckListModal layoutId={widgetId}></CheckListModal>
+            )}
+            {widgetId === "M04" && <MemoModal layoutId={widgetId}></MemoModal>}
           </Overlay>
-        ) : null}
+        )}
       </AnimatePresence>
     </>
   );

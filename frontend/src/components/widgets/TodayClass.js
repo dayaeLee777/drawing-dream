@@ -27,17 +27,16 @@ const CloseButton = styled.div`
 const TodayClass = ({ setIsShow, setWidgetId }) => {
   const close = () => {
     setIsShow(false);
-    console.log("hi");
   };
   return (
     <Container
       layout
-      layoutId={1}
+      layoutId="M01"
       whileHover={{
         scale: 1.01,
       }}
       onClick={() => {
-        setWidgetId(1);
+        setWidgetId("M01");
       }}
     >
       <Wrapper>
