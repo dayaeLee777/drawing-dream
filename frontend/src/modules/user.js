@@ -1,46 +1,34 @@
-import axios from "axios";
+import { loginUser } from "api/user";
 
 const LOGIN_SUCCESS = "USER/LOGIN_SUCCESS";
 const LOGIN_FAIL = "USER/LOGIN_FAIL";
 const LOGOUT_SUCCESS = "USER/LOGOUT_SUCCESS";
 
-export const login =
-  ({ loginId, password, isChecked }) =>
-  async (dispatch) => {
-    await axios
-      .post(
-        "/api/auth/login",
-        { loginId, password },
-        {
-          headers: { "Content-Type": `application/json` },
+export const login = (user, isChecked) => async (dispatch) => {
+  loginUser(user)
+    .then((response) => {
+      if (response.headers.authorization && response.data) {
+        if (isChecked) {
+          localStorage.setItem("access-token", response.headers.authorization);
+        } else {
+          sessionStorage.setItem(
+            "access-token",
+            response.headers.authorization
+          );
         }
-      )
-      .then((response) => {
-        if (response.headers.authorization && response.data) {
-          if (isChecked) {
-            localStorage.setItem(
-              "access-token",
-              response.headers.authorization
-            );
-          } else {
-            sessionStorage.setItem(
-              "access-token",
-              response.headers.authorization
-            );
-          }
-          dispatch({
-            type: LOGIN_SUCCESS,
-            userId: response.data,
-          });
-        }
-      })
-      .catch(() => {
         dispatch({
-          type: LOGIN_FAIL,
-          error: true,
+          type: LOGIN_SUCCESS,
+          userId: response.data,
         });
+      }
+    })
+    .catch(() => {
+      dispatch({
+        type: LOGIN_FAIL,
+        error: true,
       });
-  };
+    });
+};
 
 export const logout = () => {
   sessionStorage.removeItem("access-token");

@@ -9,6 +9,7 @@ import PostCode from "components/signup/postcode/FindPostCode";
 import SchoolCode from "components/signup/school/SchoolCode";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { signUp } from "api/user";
 
 const Container = styled.div`
   display: flex;
@@ -379,32 +380,26 @@ const SignUp = () => {
       studentNo
     ) {
       try {
-        await axios
-          .post(
-            "/api/user/signup",
-            {
-              loginId: userId,
-              password: password,
-              address: fullAddress + " " + addressDetail,
-              phone: phoneNumber,
-              parentPhone: parentPhoneNumber,
-              schoolName: schoolName,
-              userEmail: email,
-              userName: userName,
-              gradeCode: gradeCode,
-              classCode: classCode,
-              studentNo: studentNo,
-            },
-            {
-              headers: { "Context-Type": `application/json` },
-            }
-          )
-          .then((res) => {
-            if (res.status === 201) {
-              alert("회원가입에 성공하였습니다.");
-              Navigate("/signin");
-            }
-          });
+        const user = {
+          loginId: userId,
+          password: password,
+          address: fullAddress + " " + addressDetail,
+          phone: phoneNumber,
+          parentPhone: parentPhoneNumber,
+          schoolName: schoolName,
+          userEmail: email,
+          userName: userName,
+          gradeCode: gradeCode,
+          classCode: classCode,
+          studentNo: studentNo,
+        };
+
+        signUp(user).then((res) => {
+          if (res.status === 201) {
+            alert("회원가입에 성공하였습니다.");
+            Navigate("/signin");
+          }
+        });
       } catch (e) {}
     } else {
       alert("필수 입력 항목을 확인해주세요.");

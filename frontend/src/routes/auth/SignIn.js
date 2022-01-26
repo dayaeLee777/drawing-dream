@@ -87,7 +87,11 @@ const SignIn = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      dispatch(login({ loginId: id, password, isChecked }));
+      const user = {
+        loginId: id,
+        password,
+      };
+      dispatch(login(user, isChecked));
     } catch (error) {}
   };
 
