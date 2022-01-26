@@ -1512,3 +1512,103 @@ Caused by: java.lang.ClassNotFoundException: UUID
 2022-01-27 00:26:43.729  INFO 9500 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
 2022-01-27 00:26:43.730 DEBUG 9500 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
 2022-01-27 00:26:43.731 DEBUG 9500 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2e291f9a
+2022-01-27 00:26:44.133  INFO 9500 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:26:44.164  INFO 9500 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 7 JPA repository interfaces.
+2022-01-27 00:26:44.206  INFO 9500 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@4dabd6b4' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:26:44.207  INFO 9500 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:26:44.232 DEBUG 9500 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:26:44.232 DEBUG 9500 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:26:44.232 DEBUG 9500 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:26:44.289  INFO 9500 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:26:44.289  INFO 9500 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:26:44.289  INFO 9500 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:26:44.311  INFO 9500 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:26:44.312 DEBUG 9500 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:26:44.312  INFO 9500 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 581 ms
+2022-01-27 00:26:44.342 DEBUG 9500 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:26:44.342 DEBUG 9500 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:26:44.342 DEBUG 9500 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:26:44.342 DEBUG 9500 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:26:44.342 DEBUG 9500 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:26:44.343 DEBUG 9500 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:26:44.343 DEBUG 9500 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:26:44.371  INFO 9500 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:26:44.374  INFO 9500 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Starting...
+2022-01-27 00:26:44.394  INFO 9500 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Start completed.
+2022-01-27 00:26:44.394  INFO 9500 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:26:44.510  INFO 9500 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:26:44.510  INFO 9500 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:26:44.524 DEBUG 9500 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:26:44.525  INFO 9500 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:26:44.756 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:26:44.756 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(HttpServletResponse,AuthLoginRequestDto)
+2022-01-27 00:26:44.756 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: signUp(String,CommunityRegisterRequestDto)
+2022-01-27 00:26:44.756 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.MemoController:
+	{PUT [/api/memo]}: update(MemoUpdateRequestDto)
+	{POST [/api/memo]}: regist(String,MemoRegistRequestDto)
+2022-01-27 00:26:44.756 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:26:44.756 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(UUID)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+	{PUT [/api/user]}: updateUser(UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+2022-01-27 00:26:44.757 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:26:44.757 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+2022-01-27 00:26:44.758 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:26:44.758 TRACE 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:26:44.760 DEBUG 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:26:44.793  INFO 9500 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:26:44.837 TRACE 9500 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:26:44.837 DEBUG 9500 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:26:44.841 DEBUG 9500 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:26:44.867 TRACE 9500 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:26:44.869 DEBUG 9500 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:26:44.870 TRACE 9500 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:26:44.870 DEBUG 9500 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:26:44.871 DEBUG 9500 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:26:44.871 DEBUG 9500 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:26:44.872  INFO 9500 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6f5d8f20, org.springframework.security.web.context.SecurityContextPersistenceFilter@642bbf0, org.springframework.security.web.header.HeaderWriterFilter@6bcbdfc7, org.springframework.web.filter.CorsFilter@5517cf9d, org.springframework.security.web.authentication.logout.LogoutFilter@5451608b, com.dd.security.util.JwtAuthenticationFilter@56fe2289, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@25f5a75f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4c17b856, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@799773f4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3e1a0897, org.springframework.security.web.session.SessionManagementFilter@6970c29, org.springframework.security.web.access.ExceptionTranslationFilter@2afc1c62, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@322b44ed]
+2022-01-27 00:26:44.883  INFO 9500 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:26:44.888 DEBUG 9500 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:26:44.897 DEBUG 9500 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:26:44.946  INFO 9500 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:26:45.001  INFO 9500 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.289 seconds (JVM running for 367.179)
+2022-01-27 00:26:45.003  INFO 9500 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:35:40.719 DEBUG 9500 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 00:35:40.720 DEBUG 9500 --- [Thread-60] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 00:35:40.720 DEBUG 9500 --- [Thread-60] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2e291f9a, started on Thu Jan 27 00:26:43 KST 2022
+2022-01-27 00:35:40.740  INFO 9500 --- [Thread-60] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:35:40.742  INFO 9500 --- [Thread-60] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:35:40.743  INFO 9500 --- [Thread-60] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Shutdown initiated...
+2022-01-27 00:35:40.747  INFO 9500 --- [Thread-60] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Shutdown completed.
+2022-01-27 00:35:40.969 DEBUG 9500 --- [Thread-60] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@130d5bd6
+2022-01-27 00:35:40.969 DEBUG 9500 --- [Thread-60] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/Users/SSAFY/daye/S06P12A607/backend/bin/main/, file:/C:/Users/SSAFY/daye/S06P12A607/backend/bin/querydsl/]
+2022-01-27 00:35:41.004  INFO 9500 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 9500 (C:\Users\SSAFY\daye\S06P12A607\backend\bin\main started by SSAFY in C:\Users\SSAFY\daye\S06P12A607\backend)
+2022-01-27 00:35:41.004 DEBUG 9500 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 00:35:41.004  INFO 9500 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 00:35:41.004 DEBUG 9500 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 00:35:41.006 DEBUG 9500 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5b585209

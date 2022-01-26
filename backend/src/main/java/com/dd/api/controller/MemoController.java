@@ -61,5 +61,17 @@ public class MemoController {
 		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
 	}
 	
-
+	@PutMapping("/delete/{memoId}")
+	@ApiOperation(value = "메모 삭제하기", notes="<strong>작성한 메모를 삭제한다.</strong>")
+	@ApiResponses({
+		@ApiResponse(code=201, message="메모가 정상적으로 삭제되었습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
+	})
+	public ResponseEntity<? extends BaseResponse> update(
+			@PathVariable("memoId") @RequestBody @ApiParam(value = "삭제할 메모ID ", required = true) UUID memoId){
+		if(memoService.deleteMemo(memoId) != null)
+			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
+	}
 }
