@@ -17,22 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dd.api.dto.request.AttendanceUpdateRequestDto;
 import com.dd.api.response.AttendanceListGetRes;
 import com.dd.api.service.AttendanceService;
-import com.dd.common.model.BaseResponse;
+import com.dd.api.service.ProfileService;
+import com.dd.common.model.BaseResponseDto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Api(value = "출석 API", tags = { "Attendance" })
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/attendance")
 public class AttendanceController {
 
-	@Autowired
-	AttendanceService attendanceService;
+	private final AttendanceService attendanceService;
 	
 	@PostMapping("/attend")
 	@ApiOperation(value = "출석하기", notes="<strong>로그인한 회원의 출석이 오늘 날짜로 등록된다.</strong><br/> 만약 오늘 출석한 이력이 있으면 출석이 되지 않는다(409).")
@@ -41,11 +43,11 @@ public class AttendanceController {
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
 		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
 	})
-	public ResponseEntity<? extends BaseResponse> attend(
+	public ResponseEntity<? extends BaseResponseDto> attend(
 		@ApiIgnore @RequestHeader("Authorization") String accessToken) {
 		if(attendanceService.createAttendance(accessToken) != null)
-			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
-		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
 	
 	@GetMapping("/{userId}")
@@ -69,12 +71,12 @@ public class AttendanceController {
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
 		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
 	})
-	public ResponseEntity<? extends BaseResponse> update(
+	public ResponseEntity<? extends BaseResponseDto> update(
 			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@RequestBody @ApiParam(value = "출석 수정", required = true) AttendanceUpdateRequestDto updateInfo){
 		if(attendanceService.updateAttendance(accessToken, updateInfo) != null)
-			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
-		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
 	
 	@PutMapping("/delete/{attendanceId}")
@@ -84,11 +86,11 @@ public class AttendanceController {
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
 		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
 	})
-	public ResponseEntity<? extends BaseResponse> delete(
+	public ResponseEntity<? extends BaseResponseDto> delete(
 			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@PathVariable("attendanceId") @RequestBody @ApiParam(value = "삭제할 출석ID ", required = true) UUID attendanceId){
 		if(attendanceService.deleteAttendance(accessToken, attendanceId) != null)
-			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
-		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
 }

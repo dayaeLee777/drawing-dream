@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@ApiModel("AuthLoginPostReq")
+@ApiModel("AuthLoginRequestDto")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

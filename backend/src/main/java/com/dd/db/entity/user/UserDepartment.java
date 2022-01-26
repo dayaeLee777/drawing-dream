@@ -54,4 +54,15 @@ public class UserDepartment extends BaseEntity {
 	@JoinColumn(name="school_id")
 	private School school;
 
+	// 프로필 수정 - [학년, 반, 번호] 수정
+	public void update(Code gradeCode, Code classCode, Integer studentNo) {
+		this.gradeCode = gradeCode;
+		this.classCode = classCode;
+		this.studentNo = studentNo;
+	}
+	
+	// 회원 탈퇴 - [회원 소속 정보 삭제 여부] 수정
+	public void update(boolean delYn) {
+		this.delYn = delYn;
+	}
 }
