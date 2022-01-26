@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
+import Chatting from './Chatting'
 
 
 
@@ -35,6 +36,10 @@ const Subject = styled.div`
   text-align: left;
   margin-left: 2rem;
   color: white;
+  /* ... 으로 만들어 주는 코드 */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const ChatBoxToggle = styled.span`
@@ -89,6 +94,7 @@ const ChatLogs = styled.div`
 `;
 
 const List = styled.div`
+  cursor: pointer;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
 `;
@@ -111,6 +117,11 @@ const Name = styled.div`
 const Content = styled.div`
   margin: 0.4rem 0;
   line-height: 1.5rem;
+  
+  /* ... 으로 만들어 주는 코드 */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const Date = styled.div`
@@ -147,9 +158,16 @@ const ChattingList = ({chatClose}) => {
         chatClose()
       }
     }
+
+  const [chatMove, setChatMove] = useState(false)
+  const chatMo = () => {
+      setChatMove(!chatMove);
+    };
+
   return (
     <>
-    <ChatBox>
+    {chatMove && <Chatting chatClose={chatClose}></Chatting>}
+    <ChatBox style={chatMove ? { display: 'none' } : { }}>
       <ChatBoxHeader>
         <Subject>채팅</Subject>
         <ChatBoxToggle
@@ -160,7 +178,7 @@ const ChattingList = ({chatClose}) => {
       <ChatBoxBody>
         <ChatBoxOverlay />   
         <ChatLogs>
-          <List>
+          <List onClick={chatMo}>
             <Image src={profileImg}></Image>
             <Middle>
               <Name>인주비</Name>
