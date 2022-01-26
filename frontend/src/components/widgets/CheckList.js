@@ -24,17 +24,19 @@ const CloseButton = styled.div`
   align-items: center;
 `;
 
-const CheckList = ({ setIsShow }) => {
+const CheckList = ({ setWidgetId, setIsShow }) => {
   const close = () => {
     setIsShow(false);
-    console.log("hi");
   };
   return (
     <Container
       layout
-      layoutId={3}
+      layoutId="M03"
       whileHover={{
         scale: 1.01,
+      }}
+      onClick={() => {
+        setWidgetId("M03");
       }}
     >
       <Wrapper>
