@@ -6061,3 +6061,499 @@ Caused by: com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot des
 2022-01-27 02:02:37.371  INFO 6068 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2022-01-27 02:02:37.372  INFO 6068 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-22 - Shutdown initiated...
 2022-01-27 02:02:37.377  INFO 6068 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-22 - Shutdown completed.
+2022-01-27 02:57:11.948  INFO 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 4952 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 02:57:11.951 DEBUG 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 02:57:11.951  INFO 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 02:57:11.951 DEBUG 4952 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 02:57:11.983 DEBUG 4952 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : Matching URLs for reloading : [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 02:57:11.984 DEBUG 4952 --- [restartedMain] o.s.b.d.settings.DevToolsSettings        : Included patterns for restart : []
+2022-01-27 02:57:11.984 DEBUG 4952 --- [restartedMain] o.s.b.d.settings.DevToolsSettings        : Excluded patterns for restart : [/spring-boot-actuator/(bin|build|out)/, /spring-boot-devtools/(bin|build|out)/, /spring-boot/(bin|build|out)/, /spring-boot-starter-[\w-]+/, /spring-boot-autoconfigure/(bin|build|out)/, /spring-boot-starter/(bin|build|out)/]
+2022-01-27 02:57:11.984  INFO 4952 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-01-27 02:57:11.984  INFO 4952 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-01-27 02:57:11.984 DEBUG 4952 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6152b20
+2022-01-27 02:57:12.823  INFO 4952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 02:57:12.887  INFO 4952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 58 ms. Found 6 JPA repository interfaces.
+2022-01-27 02:57:13.130  INFO 4952 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1cf34c5e' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 02:57:13.135  INFO 4952 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 02:57:13.321 DEBUG 4952 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 02:57:13.322 DEBUG 4952 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 02:57:13.322 DEBUG 4952 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 02:57:13.359  INFO 4952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 02:57:13.367  INFO 4952 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 02:57:13.367  INFO 4952 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 02:57:13.448  INFO 4952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-01-27 02:57:13.448 DEBUG 4952 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 02:57:13.448  INFO 4952 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1464 ms
+2022-01-27 02:57:13.539 DEBUG 4952 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 02:57:13.540 DEBUG 4952 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 02:57:13.561 DEBUG 4952 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 02:57:13.561 DEBUG 4952 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 02:57:13.562 DEBUG 4952 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 02:57:13.562 DEBUG 4952 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 02:57:13.562 DEBUG 4952 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 02:57:13.725  INFO 4952 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 02:57:13.763  INFO 4952 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.30.Final
+2022-01-27 02:57:13.874  INFO 4952 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-01-27 02:57:13.959  INFO 4952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-01-27 02:57:14.149  INFO 4952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-01-27 02:57:14.162  INFO 4952 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 02:57:14.885  INFO 4952 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 02:57:14.892  INFO 4952 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 02:57:14.916 DEBUG 4952 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 02:57:14.921 DEBUG 4952 --- [restartedMain] o.s.b.d.livereload.LiveReloadServer      : Starting live reload server on port 35729
+2022-01-27 02:57:14.922  INFO 4952 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 02:57:15.726 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 02:57:15.728 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 02:57:15.729 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/register]}: registerCommunity(CommunityRegisterRequestDto)
+	{GET [/api/community/{communityId}]}: getCommunity(UUID)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+	{GET [/api/community/list]}: getCommunityList()
+2022-01-27 02:57:15.729 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 02:57:15.731 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+2022-01-27 02:57:15.732 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 02:57:15.733 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 02:57:15.734 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 02:57:15.737 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 02:57:15.739 DEBUG 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 22 mappings in 'requestMappingHandlerMapping'
+2022-01-27 02:57:15.822  INFO 4952 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 02:57:15.976 TRACE 4952 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 02:57:15.976 DEBUG 4952 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 02:57:15.981 DEBUG 4952 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 02:57:16.026 TRACE 4952 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 02:57:16.031 DEBUG 4952 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 02:57:16.036 TRACE 4952 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 02:57:16.036 DEBUG 4952 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 02:57:16.040 DEBUG 4952 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 02:57:16.040 DEBUG 4952 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 02:57:16.046  INFO 4952 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@530bb450, org.springframework.security.web.context.SecurityContextPersistenceFilter@4318d5b7, org.springframework.security.web.header.HeaderWriterFilter@58105f0b, org.springframework.web.filter.CorsFilter@7d518ab4, org.springframework.security.web.authentication.logout.LogoutFilter@722896b0, com.dd.security.util.JwtAuthenticationFilter@5f4da076, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@956dffe, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@416e6fa5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7bc3027b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4393536, org.springframework.security.web.session.SessionManagementFilter@2a0e05c6, org.springframework.security.web.access.ExceptionTranslationFilter@10f987a2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@254b64ec]
+2022-01-27 02:57:16.084  INFO 4952 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 02:57:16.093 DEBUG 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 02:57:16.128 DEBUG 4952 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 02:57:16.278  INFO 4952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 02:57:16.483  INFO 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 4.824 seconds (JVM running for 6.021)
+2022-01-27 02:57:16.488 DEBUG 4952 --- [restartedMain] o.s.boot.devtools.restart.Restarter      : Creating new Restarter for thread Thread[main,5,main]
+2022-01-27 02:57:16.488 DEBUG 4952 --- [restartedMain] o.s.boot.devtools.restart.Restarter      : Immediately restarting application
+2022-01-27 02:57:16.488 DEBUG 4952 --- [restartedMain] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@30fbb5fa
+2022-01-27 02:57:16.488 DEBUG 4952 --- [restartedMain] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 02:57:34.530  INFO 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.531  INFO 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-01-27 02:57:34.531 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.multipart.support.StandardServletMultipartResolver@1a6717c6
+2022-01-27 02:57:34.531 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver@37f8c486
+2022-01-27 02:57:34.531 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.theme.FixedThemeResolver@5bcec3ab
+2022-01-27 02:57:34.534 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected DefaultRequestToViewNameTranslator
+2022-01-27 02:57:34.534 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected SessionFlashMapManager
+2022-01-27 02:57:34.534 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-01-27 02:57:34.534  INFO 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2022-01-27 02:57:34.542 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/
+2022-01-27 02:57:34.545 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.553 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ParameterizableViewController [view="forward:/swagger-ui/index.html"]] and 5 interceptors
+2022-01-27 02:57:34.554 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.565 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.569 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/] with attributes [permitAll]
+2022-01-27 02:57:34.569 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/
+2022-01-27 02:57:34.571 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.573 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ParameterizableViewController [view="forward:/swagger-ui/index.html"]] and 5 interceptors
+2022-01-27 02:57:34.576 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.ParameterizableViewController  : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.583 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.9, */*;q=0.8]
+2022-01-27 02:57:34.583 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Rendering view [org.springframework.web.servlet.view.InternalResourceView: name 'forward:'; URL [/swagger-ui/index.html]] 
+2022-01-27 02:57:34.584 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.servlet.view.InternalResourceView  : View name 'forward:', model {}
+2022-01-27 02:57:34.584 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.servlet.view.InternalResourceView  : Forwarding to [/swagger-ui/index.html]
+2022-01-27 02:57:34.586 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "FORWARD" dispatch for GET "/swagger-ui/index.html", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.587 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.588 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.598 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.598 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "FORWARD" dispatch, status 200, headers={masked}
+2022-01-27 02:57:34.599 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/
+2022-01-27 02:57:34.599 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.600 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.600 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.601 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ParameterizableViewController [view="forward:/swagger-ui/index.html"]] and 5 interceptors
+2022-01-27 02:57:34.602 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.602 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.602 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/] with attributes [permitAll]
+2022-01-27 02:57:34.602 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/
+2022-01-27 02:57:34.602 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.603 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ParameterizableViewController [view="forward:/swagger-ui/index.html"]] and 5 interceptors
+2022-01-27 02:57:34.603 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.m.ParameterizableViewController  : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.604 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.v.InternalResourceViewResolver   : View with key [forward:/swagger-ui/index.html] served from cache
+2022-01-27 02:57:34.604 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, application/signed-exchange;v=b3;q=0.9, */*;q=0.8]
+2022-01-27 02:57:34.604 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Rendering view [org.springframework.web.servlet.view.InternalResourceView: name 'forward:'; URL [/swagger-ui/index.html]] 
+2022-01-27 02:57:34.604 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.servlet.view.InternalResourceView  : View name 'forward:', model {}
+2022-01-27 02:57:34.604 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.servlet.view.InternalResourceView  : Forwarding to [/swagger-ui/index.html]
+2022-01-27 02:57:34.604 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : "FORWARD" dispatch for GET "/swagger-ui/index.html", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.605 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.606 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.608 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/springfox.css?v=3.0.0
+2022-01-27 02:57:34.608 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.609 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.609 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Exiting from "FORWARD" dispatch, status 200, headers={masked}
+2022-01-27 02:57:34.609 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.609 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.610 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.610 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.610 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui.css?v=3.0.0
+2022-01-27 02:57:34.611 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.611 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/springfox.css?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.611 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/springfox.css?v=3.0.0
+2022-01-27 02:57:34.611 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/springfox.css?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.611 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.612 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.612 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.612 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/swagger-ui.css?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.612 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui.css?v=3.0.0
+2022-01-27 02:57:34.612 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-ui.css?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.613 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.613 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.614 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.615 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.615 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.615 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.618 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-bundle.js?v=3.0.0
+2022-01-27 02:57:34.618 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.618 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.618 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.618 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/swagger-ui-bundle.js?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.618 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-bundle.js?v=3.0.0
+2022-01-27 02:57:34.619 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-ui-bundle.js?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.619 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.619 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.619 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.619 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.621 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.621 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-standalone-preset.js?v=3.0.0
+2022-01-27 02:57:34.622 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.622 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.622 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.624 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/swagger-ui-standalone-preset.js?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.624 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-standalone-preset.js?v=3.0.0
+2022-01-27 02:57:34.624 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-ui-standalone-preset.js?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.624 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.625 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.640 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.641 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.641 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.643 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/springfox.css?v=3.0.0
+2022-01-27 02:57:34.643 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.644 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.644 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.644 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/springfox.css?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.644 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/springfox.css?v=3.0.0
+2022-01-27 02:57:34.645 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/springfox.css?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.645 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.646 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.647 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.647 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.648 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.649 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui.css?v=3.0.0
+2022-01-27 02:57:34.649 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.649 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.650 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.650 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/swagger-ui.css?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.650 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui.css?v=3.0.0
+2022-01-27 02:57:34.650 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-ui.css?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.651 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.651 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.655 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.655 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.655 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.657 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-bundle.js?v=3.0.0
+2022-01-27 02:57:34.657 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.658 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.658 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.658 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/swagger-ui-bundle.js?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.658 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-bundle.js?v=3.0.0
+2022-01-27 02:57:34.658 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-ui-bundle.js?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.659 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.660 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.666 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.667 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.667 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.668 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-standalone-preset.js?v=3.0.0
+2022-01-27 02:57:34.668 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-9] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.669 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.669 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.669 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/swagger-ui-standalone-preset.js?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.669 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-standalone-preset.js?v=3.0.0
+2022-01-27 02:57:34.669 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/swagger-ui-standalone-preset.js?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.670 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.671 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.686 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.687 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.687 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-9] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.688 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/springfox.js?v=3.0.0
+2022-01-27 02:57:34.688 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-10] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.689 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.689 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.690 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/springfox.js?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.690 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/springfox.js?v=3.0.0
+2022-01-27 02:57:34.690 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/springfox.js?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.690 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.691 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.696 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.696 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.696 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-10] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.697 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/springfox.js?v=3.0.0
+2022-01-27 02:57:34.698 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.698 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.699 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.699 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-ui/springfox.js?v=3.0.0] with attributes [permitAll]
+2022-01-27 02:57:34.699 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/springfox.js?v=3.0.0
+2022-01-27 02:57:34.699 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/swagger-ui/springfox.js?v=3.0.0", parameters={masked}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.700 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to HandlerExecutionChain with [ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]] and 5 interceptors
+2022-01-27 02:57:34.701 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Applying default cacheSeconds=-1
+2022-01-27 02:57:34.708 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.708 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.708 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.708 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.708 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.708 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.795 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /swagger-resources/configuration/ui
+2022-01-27 02:57:34.795 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.795 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to springfox.documentation.swagger.web.ApiResourceController#uiConfiguration()
+2022-01-27 02:57:34.796 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.796 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-resources/configuration/ui] with attributes [permitAll]
+2022-01-27 02:57:34.796 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /swagger-resources/configuration/ui
+2022-01-27 02:57:34.796 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/swagger-resources/configuration/ui", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.796 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to springfox.documentation.swagger.web.ApiResourceController#uiConfiguration()
+2022-01-27 02:57:34.802 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.method.HandlerMethod             : Arguments: []
+2022-01-27 02:57:34.805 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2022-01-27 02:57:34.822 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [springfox.documentation.swagger.web.UiConfiguration@24f55256]
+2022-01-27 02:57:34.831 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.831 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.831 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.834 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /swagger-resources/configuration/security
+2022-01-27 02:57:34.834 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.834 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to springfox.documentation.swagger.web.ApiResourceController#securityConfiguration()
+2022-01-27 02:57:34.834 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.835 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-resources/configuration/security] with attributes [permitAll]
+2022-01-27 02:57:34.835 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /swagger-resources/configuration/security
+2022-01-27 02:57:34.835 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/swagger-resources/configuration/security", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.835 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to springfox.documentation.swagger.web.ApiResourceController#securityConfiguration()
+2022-01-27 02:57:34.835 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.method.HandlerMethod             : Arguments: []
+2022-01-27 02:57:34.835 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2022-01-27 02:57:34.837 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [springfox.documentation.swagger.web.SecurityConfiguration@6fa3b905]
+2022-01-27 02:57:34.838 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.838 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.838 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.840 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /swagger-resources
+2022-01-27 02:57:34.840 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.840 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to springfox.documentation.swagger.web.ApiResourceController#swaggerResources()
+2022-01-27 02:57:34.840 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.840 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /swagger-resources] with attributes [permitAll]
+2022-01-27 02:57:34.840 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /swagger-resources
+2022-01-27 02:57:34.840 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/swagger-resources", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.841 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to springfox.documentation.swagger.web.ApiResourceController#swaggerResources()
+2022-01-27 02:57:34.841 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.method.HandlerMethod             : Arguments: []
+2022-01-27 02:57:34.841 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2022-01-27 02:57:34.842 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[springfox.documentation.swagger.web.SwaggerResource@269df7be]]
+2022-01-27 02:57:34.844 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.844 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.844 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:34.869 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /v2/api-docs
+2022-01-27 02:57:34.869 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:34.869 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to springfox.documentation.swagger2.web.Swagger2ControllerWebMvc#getDocumentation(String, HttpServletRequest)
+2022-01-27 02:57:34.869 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:34.870 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /v2/api-docs] with attributes [permitAll]
+2022-01-27 02:57:34.870 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /v2/api-docs
+2022-01-27 02:57:34.870 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/v2/api-docs", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:34.870 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to springfox.documentation.swagger2.web.Swagger2ControllerWebMvc#getDocumentation(String, HttpServletRequest)
+2022-01-27 02:57:34.877 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.web.method.HandlerMethod             : Arguments: [null, SecurityContextHolderAwareRequestWrapper[ org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@4ef3231e]]
+2022-01-27 02:57:34.943 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, */*] and supported [application/json, application/hal+json]
+2022-01-27 02:57:34.945 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [springfox.documentation.spring.web.json.Json@2be32e8f]
+2022-01-27 02:57:34.946 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:34.946 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:34.946 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-6] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:57:50.338 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/community/list
+2022-01-27 02:57:50.338 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:57:50.338 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.dd.api.controller.CommunityController#getCommunityList()
+2022-01-27 02:57:50.339 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:57:50.339 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/community/list] with attributes [permitAll]
+2022-01-27 02:57:50.339 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/community/list
+2022-01-27 02:57:50.339 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/community/list", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:57:50.339 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.dd.api.controller.CommunityController#getCommunityList()
+2022-01-27 02:57:50.340 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.web.method.HandlerMethod             : Arguments: []
+2022-01-27 02:57:50.488 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-01-27 02:57:50.488 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.dd.api.dto.response.CommunityGetListWrapperResponseDto@39cf0970]
+2022-01-27 02:57:50.491 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:57:50.493 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:57:50.493 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 02:58:35.134 DEBUG 4952 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 02:58:35.135 DEBUG 4952 --- [Thread-5] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 02:58:35.135 DEBUG 4952 --- [Thread-5] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6152b20, started on Thu Jan 27 02:57:11 KST 2022
+2022-01-27 02:58:35.146  INFO 4952 --- [Thread-5] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 02:58:35.150  INFO 4952 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 02:58:35.153  INFO 4952 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-01-27 02:58:35.156  INFO 4952 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-01-27 02:58:35.284 DEBUG 4952 --- [Thread-5] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@be90c2e
+2022-01-27 02:58:35.284 DEBUG 4952 --- [Thread-5] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 02:58:35.311  INFO 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 4952 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 02:58:35.311 DEBUG 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 02:58:35.311  INFO 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 02:58:35.311 DEBUG 4952 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 02:58:35.313 DEBUG 4952 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@17ac24ca
+2022-01-27 02:58:35.649  INFO 4952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 02:58:35.677  INFO 4952 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 6 JPA repository interfaces.
+2022-01-27 02:58:35.719  INFO 4952 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@332de234' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 02:58:35.720  INFO 4952 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 02:58:35.747 DEBUG 4952 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 02:58:35.747 DEBUG 4952 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 02:58:35.747 DEBUG 4952 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 02:58:35.806  INFO 4952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 02:58:35.807  INFO 4952 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 02:58:35.807  INFO 4952 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 02:58:35.819  INFO 4952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-01-27 02:58:35.819 DEBUG 4952 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 02:58:35.819  INFO 4952 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 506 ms
+2022-01-27 02:58:35.854 DEBUG 4952 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 02:58:35.854 DEBUG 4952 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 02:58:35.855 DEBUG 4952 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 02:58:35.855 DEBUG 4952 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 02:58:35.855 DEBUG 4952 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 02:58:35.855 DEBUG 4952 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 02:58:35.855 DEBUG 4952 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 02:58:35.888  INFO 4952 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 02:58:35.891  INFO 4952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2022-01-27 02:58:35.913  INFO 4952 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2022-01-27 02:58:35.913  INFO 4952 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 02:58:36.088  INFO 4952 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 02:58:36.088  INFO 4952 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 02:58:36.101 DEBUG 4952 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 02:58:36.102  INFO 4952 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 02:58:36.359 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 02:58:36.359 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 02:58:36.359 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/register]}: registerCommunity(CommunityRegisterRequestDto)
+	{GET [/api/community/{communityId}]}: getCommunity(UUID)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+	{GET [/api/community/list]}: getCommunityList()
+2022-01-27 02:58:36.360 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 02:58:36.361 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+2022-01-27 02:58:36.362 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 02:58:36.362 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 02:58:36.363 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 02:58:36.363 TRACE 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 02:58:36.365 DEBUG 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 22 mappings in 'requestMappingHandlerMapping'
+2022-01-27 02:58:36.401  INFO 4952 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 02:58:36.450 TRACE 4952 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 02:58:36.450 DEBUG 4952 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 02:58:36.453 DEBUG 4952 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 02:58:36.482 TRACE 4952 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 02:58:36.484 DEBUG 4952 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 02:58:36.485 TRACE 4952 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 02:58:36.485 DEBUG 4952 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 02:58:36.485 DEBUG 4952 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 02:58:36.485 DEBUG 4952 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 02:58:36.487  INFO 4952 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5051bf18, org.springframework.security.web.context.SecurityContextPersistenceFilter@418dd661, org.springframework.security.web.header.HeaderWriterFilter@2e0cf692, org.springframework.web.filter.CorsFilter@4bed046d, org.springframework.security.web.authentication.logout.LogoutFilter@53df7a12, com.dd.security.util.JwtAuthenticationFilter@5fa091de, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@fc1dc3d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7f88124c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4bc245da, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@67b275cd, org.springframework.security.web.session.SessionManagementFilter@4cabce6f, org.springframework.security.web.access.ExceptionTranslationFilter@3b40bf7b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4ef4e724]
+2022-01-27 02:58:36.499  INFO 4952 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 02:58:36.504 DEBUG 4952 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 02:58:36.513 DEBUG 4952 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 02:58:36.568  INFO 4952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 02:58:36.638  INFO 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.348 seconds (JVM running for 86.175)
+2022-01-27 02:58:36.640  INFO 4952 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 02:58:41.888  INFO 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:58:41.890  INFO 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-01-27 02:58:41.890 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.multipart.support.StandardServletMultipartResolver@5943b04a
+2022-01-27 02:58:41.890 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver@4e3b7a29
+2022-01-27 02:58:41.890 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.theme.FixedThemeResolver@600a4dae
+2022-01-27 02:58:41.891 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected DefaultRequestToViewNameTranslator
+2022-01-27 02:58:41.891 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected SessionFlashMapManager
+2022-01-27 02:58:41.891 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-01-27 02:58:41.891  INFO 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-01-27 02:58:41.891 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/community/list
+2022-01-27 02:58:41.891 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 02:58:41.892 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.dd.api.controller.CommunityController#getCommunityList()
+2022-01-27 02:58:41.892 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 02:58:41.892 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/community/list] with attributes [permitAll]
+2022-01-27 02:58:41.893 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/community/list
+2022-01-27 02:58:41.893 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/community/list", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 02:58:41.893 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.dd.api.controller.CommunityController#getCommunityList()
+2022-01-27 02:58:41.894 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.method.HandlerMethod             : Arguments: []
+2022-01-27 02:58:41.906 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-01-27 02:58:41.906 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.dd.api.dto.response.CommunityGetListWrapperResponseDto@2955aedc]
+2022-01-27 02:58:41.908 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 02:58:41.908 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK, headers={masked}
+2022-01-27 02:58:41.909 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 03:02:09.364 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/user/signup
+2022-01-27 03:02:09.364 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2022-01-27 03:02:09.364 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.dd.api.controller.UserController#signUp(UserRegisterRequestDto)
+2022-01-27 03:02:09.364 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2022-01-27 03:02:09.365 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [POST /api/user/signup] with attributes [permitAll]
+2022-01-27 03:02:09.365 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/user/signup
+2022-01-27 03:02:09.365 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/api/user/signup", parameters={}, headers={masked} in DispatcherServlet 'dispatcherServlet'
+2022-01-27 03:02:09.365 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.dd.api.controller.UserController#signUp(UserRegisterRequestDto)
+2022-01-27 03:02:09.395 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.dd.api.dto.request.UserRegisterRequestDto@7fc18ca]
+2022-01-27 03:02:09.397 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.web.method.HandlerMethod             : Arguments: [com.dd.api.dto.request.UserRegisterRequestDto@7fc18ca]
+2022-01-27 03:02:09.528 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-01-27 03:02:09.528 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.dd.common.model.BaseResponseDto@465bb01f]
+2022-01-27 03:02:09.528 TRACE 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.web.servlet.DispatcherServlet        : No view rendering, null ModelAndView returned.
+2022-01-27 03:02:09.528 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED, headers={masked}
+2022-01-27 03:02:09.528 DEBUG 4952 --- [http-nio-127.0.0.1-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2022-01-27 03:03:32.767 DEBUG 4952 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 03:03:32.768 DEBUG 4952 --- [Thread-9] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 03:03:32.769 DEBUG 4952 --- [Thread-9] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@17ac24ca, started on Thu Jan 27 02:58:35 KST 2022
+2022-01-27 03:03:32.798  INFO 4952 --- [Thread-9] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 03:03:32.800  INFO 4952 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 03:03:32.800  INFO 4952 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2022-01-27 03:03:32.806  INFO 4952 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2022-01-27 03:03:33.043 DEBUG 4952 --- [Thread-9] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@78ae8be9
+2022-01-27 03:03:33.043 DEBUG 4952 --- [Thread-9] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 03:03:33.080  INFO 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 4952 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 03:03:33.080 DEBUG 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 03:03:33.080  INFO 4952 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 03:03:33.081 DEBUG 4952 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 03:03:33.082 DEBUG 4952 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@35c2c3d6

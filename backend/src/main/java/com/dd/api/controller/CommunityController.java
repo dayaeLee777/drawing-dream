@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.CommunityRegisterRequestDto;
 import com.dd.api.dto.request.CommunityUpdateRequestDto;
+import com.dd.api.dto.response.CommunityGetListResponseDto;
+import com.dd.api.dto.response.CommunityGetListWrapperResponseDto;
 import com.dd.api.dto.response.CommunityGetResponseDto;
 import com.dd.api.service.CommunityService;
 import com.dd.common.model.BaseResponseDto;
@@ -63,6 +65,16 @@ public class CommunityController {
 		communityService.updateCommunity(communityRegisterRequestDto);
 		
 		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "게시글이 정상적으로 수정되었습니다."));
+	}
+	
+	@GetMapping("/list")
+	@ApiOperation(value="커뮤니티 글 목록 보기 - 글 목록 가져오기")
+	public ResponseEntity<? extends BaseResponseDto> getCommunityList() {
+//			@ApiIgnore @RequestHeader("Authorization") String accessToken
+//		CommunityGetListResponseDto communityGetListResponseDto = communityService.getCommunityList(accesstoken);
+		CommunityGetListWrapperResponseDto communityGetListWrapperResponseDto = communityService.getCommunityList();
+		
+		return ResponseEntity.status(200).body(CommunityGetListWrapperResponseDto.of(200, "게시글 목록을 정상적으로 불러왔습니다", communityGetListWrapperResponseDto));
 	}
 	
 	@GetMapping("/{communityId}")
