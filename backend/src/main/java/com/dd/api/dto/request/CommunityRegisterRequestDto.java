@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class CommunityRegistPostReq {
+public class CommunityRegisterRequestDto {
 	
 	@ApiModelProperty(name="게시글 정보 - 제목")
 	private String title;
