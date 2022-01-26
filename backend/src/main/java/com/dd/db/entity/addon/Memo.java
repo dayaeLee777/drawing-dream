@@ -1,7 +1,6 @@
 package com.dd.db.entity.addon;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.user.User;
@@ -44,6 +41,14 @@ public class Memo extends BaseEntity {
 		this.regTime = regTime;
 		this.delYn = delYn;
 		this.user = user;
+	}
+	
+	public void updateMemo(String content) {
+		this.content = content;
+	}
+	
+	public void deleteMemo() {
+		this.delYn = true;
 	}
 	
 }

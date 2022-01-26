@@ -12,5 +12,4 @@ public class MemoRegistRequestDto {
 
 	@ApiModelProperty(name="메모 내용", example="메모입니다~~")
 	private String content;
-	
 }
