@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.CommunityRegisterRequestDto;
 import com.dd.api.dto.request.CommunityUpdateRequestDto;
+import com.dd.api.dto.response.CommunityGetResponseDto;
 import com.dd.db.entity.board.Community;
 import com.dd.db.entity.school.School;
-import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.repository.AuthRepository;
@@ -65,21 +65,34 @@ public class CommunityServiceImpl implements CommunityService {
 	public void updateCommunity(CommunityUpdateRequestDto communityUpdateRequestDto) {
 //		String token = accessToken.split(" ")[1];
 //		String loginId = jwtAuthenticationProvider.getUsername(token);
-		String loginId = "test";
-		
-		Auth auth = authRepository.findByLoginId(loginId).get();
-		User user = auth.getUser();
 		
 		// 커뮤니티 글 제목, 내용 update
-		Community community = communityRepository.findByUser(user).get();
+		Community community = communityRepository.findById(communityUpdateRequestDto.getCommunityId()).get();
 		community.update(communityUpdateRequestDto.getTitle(), communityUpdateRequestDto.getContent());
 		
 		communityRepository.save(community);
 	}
 	
 	@Override
+//	public Community getCommunity(String accessToken, UUID communityID) {
+	public CommunityGetResponseDto getCommunity(UUID communityId) {
+		Community community = communityRepository.findById(communityId).get();
+		plusCommunityHit(community);
+		
+		CommunityGetResponseDto communityGetResponseDto = 
+				new CommunityGetResponseDto(community.getUser().getId(),
+						community.getTitle(),
+						community.getContent(),
+						community.getHit(),
+						community.getRegTime());
+		
+		return communityGetResponseDto;
+	}
+	
+	@Override
 	public void plusCommunityHit(Community community) {
 		community.updateHit();
+		communityRepository.save(community);
 	}
 	
 	

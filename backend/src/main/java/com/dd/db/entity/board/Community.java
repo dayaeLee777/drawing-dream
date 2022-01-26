@@ -61,4 +61,5 @@ public class Community extends BaseEntity {
 	public void updateHit() {
 		this.hit = this.hit + 1;
 	}
+	
 }
