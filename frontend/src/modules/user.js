@@ -7,6 +7,7 @@ const LOGOUT_SUCCESS = "USER/LOGOUT_SUCCESS";
 export const login = (user, isChecked) => async (dispatch) => {
   loginUser(user)
     .then((response) => {
+      console.log(response);
       if (response.headers.authorization && response.data) {
         if (isChecked) {
           localStorage.setItem("access-token", response.headers.authorization);
@@ -22,7 +23,8 @@ export const login = (user, isChecked) => async (dispatch) => {
         });
       }
     })
-    .catch(() => {
+    .catch((error) => {
+      console.log(error);
       dispatch({
         type: LOGIN_FAIL,
         error: true,
