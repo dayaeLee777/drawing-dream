@@ -1,8 +1,9 @@
 package com.dd.api.dto.request;
 
+import java.util.UUID;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class CommunityUpdateRequestDto {
+	
+	@ApiModelProperty(name="게시글 정보 - id")
+	private UUID communityId;
 	
 	@ApiModelProperty(name="게시글 정보 - 제목")
 	private String title;
