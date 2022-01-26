@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
+import ChattingList from './ChattingList'
 
 const ChatBox = styled.div`
   display:block;
   background: #efefef;
   position:fixed;
   right:110px;
-  bottom:120px; 
+  bottom:120px;
   width:350px;
   max-width: 85vw;
   max-height:100vh;
@@ -31,6 +32,7 @@ const ChatBoxHeader = styled.div`
 
 const Arrow = styled.div`
   margin-left: 2rem;
+  cursor: pointer;
 `;
 
 const Subject = styled.div`
@@ -85,8 +87,30 @@ const ChatLogs = styled.div`
   }
 
   &::-webkit-scrollbar-thumb{
-  	background-color: #5A5EB9;
+  	background-color: #fec25c;
   }
+`;
+
+const Me = styled.div`
+  background-color: #FEC25C;
+  display: table;
+  max-width: 12rem;
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+
+`;
+
+const You = styled.div`
+  background-color: white;
+  display: table;
+  max-width: 12rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
 `;
 
 const ChatInput = styled.div`
@@ -141,11 +165,18 @@ const Chatting = ({chatClose}) => {
         chatClose()
       }
     }
+
+    const [chatMove, setChatMove] = useState(false)
+    const chatMo = () => {
+        setChatMove(!chatMove);
+    };
+
   return (
     <>
-    <ChatBox>
+    {chatMove && <ChattingList chatClose={chatClose}></ChattingList>}
+    <ChatBox style={chatMove ? { display: 'none' } : { }}>
       <ChatBoxHeader>
-        <Arrow>←</Arrow>
+        <Arrow onClick={chatMo}>←</Arrow>
         <Subject>인주비</Subject>
         <ChatBoxToggle
           onClick={chatClose}>
@@ -155,7 +186,12 @@ const Chatting = ({chatClose}) => {
       <ChatBoxBody>
         <ChatBoxOverlay />   
         <ChatLogs>
-        chat-log
+          <Me>끝나고 약속 있어?</Me>
+          <You>약속은 없는데 야구 봐야됨</You>
+          <Me>장난하니?</Me>
+          <You>응응</You>
+          <Me>테스트입니다. 테스트입니다. 테스트입니다. 테스트입니다. 테스트입니다. 테스트입니다.</Me>
+          <You>알겠습니다. 알겠습니다. 알겠습니다. 알겠습니다. 알겠습니다. 알겠습니다. 알겠습니다.</You>
         </ChatLogs>
       </ChatBoxBody>
       <ChatInput>      
