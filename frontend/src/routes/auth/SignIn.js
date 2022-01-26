@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { login } from "modules/user";
-import axios from "axios";
 
 const Container = styled.div`
   display: grid;
@@ -47,7 +45,8 @@ const Logo = styled.img`
 
 const Welcome = styled.div`
   font-size: 2.5rem;
-  margin: 3rem 0;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
   font-weight: 600;
 `;
 
@@ -58,19 +57,22 @@ const InputContainer = styled.div`
 
 const Type = styled.div`
   width: 5.5rem;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+`;
+
+const Error = styled.div`
+  color: red;
 `;
 
 const SignIn = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(false);
+  const { error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  // const { isLoggedIn } = useSelector((state) => state.user);
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     navigate("/home");
-  //   }
-  // }, [isLoggedIn]);
+
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -85,10 +87,12 @@ const SignIn = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      dispatch(login({ loginId: id, password }));
-    } catch (error) {
-      console.log(error);
-    }
+      const user = {
+        loginId: id,
+        password,
+      };
+      dispatch(login(user, isChecked));
+    } catch (error) {}
   };
 
   return (
@@ -120,9 +124,17 @@ const SignIn = () => {
           ></Input>
         </InputContainer>
         <InputContainer>
-          <input type="checkbox" /> 로그인 유지
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={() => setIsChecked(true)}
+          />
+          <Type>로그인 유지</Type>
         </InputContainer>
-        <Button name="로그인" />
+        <InputContainer>
+          {error && <Error>아이디, 비밀번호를 확인해 주세요</Error>}
+        </InputContainer>
+        <Button mt="1rem" name="로그인" />
         <Link to={"/signup"}>→ 아직 회원이 아니신가요?</Link>
       </Form>
     </Container>
