@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { login } from "modules/user";
-import axios from "axios";
 
 const Container = styled.div`
   display: grid;
@@ -64,18 +62,17 @@ const Type = styled.div`
   align-items: center;
 `;
 
+const Error = styled.div`
+  color: red;
+`;
+
 const SignIn = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const navigate = useNavigate();
+  const { error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  // const { isLoggedIn } = useSelector((state) => state.user);
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     navigate("/home");
-  //   }
-  // }, [isLoggedIn]);
+
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -91,9 +88,7 @@ const SignIn = () => {
     event.preventDefault();
     try {
       dispatch(login({ loginId: id, password, isChecked }));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -129,8 +124,11 @@ const SignIn = () => {
             type="checkbox"
             checked={isChecked}
             onChange={() => setIsChecked(true)}
-          />{" "}
+          />
           <Type>로그인 유지</Type>
+        </InputContainer>
+        <InputContainer>
+          {error && <Error>아이디, 비밀번호를 확인해 주세요</Error>}
         </InputContainer>
         <Button mt="1rem" name="로그인" />
         <Link to={"/signup"}>→ 아직 회원이 아니신가요?</Link>

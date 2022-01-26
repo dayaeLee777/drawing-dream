@@ -7,7 +7,7 @@ const LOGOUT_SUCCESS = "USER/LOGOUT_SUCCESS";
 export const login =
   ({ loginId, password, isChecked }) =>
   async (dispatch) => {
-    const data = await axios
+    await axios
       .post(
         "/api/auth/login",
         { loginId, password },
@@ -28,16 +28,18 @@ export const login =
               response.headers.authorization
             );
           }
-          return response;
+          dispatch({
+            type: LOGIN_SUCCESS,
+            userId: response.data,
+          });
         }
       })
-      .catch(() => {});
-
-    console.log(data);
-    dispatch({
-      type: LOGIN_SUCCESS,
-      userId: data.data,
-    });
+      .catch(() => {
+        dispatch({
+          type: LOGIN_FAIL,
+          error: true,
+        });
+      });
   };
 
 export const logout = () => {
@@ -52,7 +54,9 @@ const token =
   sessionStorage.getItem("access-token") ||
   localStorage.getItem("access-token");
 
-const initialState = token ? { isLoggedIn: true } : { isLoggedIn: false };
+const initialState = token
+  ? { isLoggedIn: true, error: false }
+  : { isLoggedIn: false, error: false };
 
 const user = (state = initialState, action) => {
   switch (action.type) {
@@ -64,7 +68,7 @@ const user = (state = initialState, action) => {
     case LOGIN_FAIL:
       return {
         isLoggedIn: false,
-        userId: null,
+        error: true,
       };
     case LOGOUT_SUCCESS:
       return {
