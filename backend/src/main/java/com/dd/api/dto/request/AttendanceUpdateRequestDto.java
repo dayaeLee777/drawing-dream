@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
  */
 @Getter
 @NoArgsConstructor
-//@AllArgsConstructor
 @ApiModel("AttendanceUpdatePutReq")
 public class AttendanceUpdateRequestDto {
 	

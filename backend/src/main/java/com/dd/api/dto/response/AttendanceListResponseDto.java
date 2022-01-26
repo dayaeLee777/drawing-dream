@@ -1,4 +1,4 @@
-package com.dd.api.response;
+package com.dd.api.dto.response;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @ApiModel("AttendanceListGetRes")
-public class AttendanceListGetRes {
+public class AttendanceListResponseDto {
 	
 	@ApiModelProperty(name="출석 uuid", example="00000000-0000-0000-0000-00000000")
 	UUID attendanceId;

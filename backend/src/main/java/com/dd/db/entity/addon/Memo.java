@@ -1,5 +1,6 @@
 package com.dd.db.entity.addon;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,28 +13,22 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.dd.db.entity.BaseEntity;
-import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Memo extends BaseEntity {
 	
 	@Lob
 	private String content;
 	
-	@Temporal(TemporalType.TIME)
-	private Date regTime;
+	private LocalDateTime regTime;
 	
 	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
@@ -41,5 +36,14 @@ public class Memo extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@Builder
+	public Memo(String content, LocalDateTime regTime, boolean delYn, User user) {
+		super();
+		this.content = content;
+		this.regTime = regTime;
+		this.delYn = delYn;
+		this.user = user;
+	}
 	
 }
