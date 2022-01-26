@@ -16,7 +16,8 @@ public enum CommonCode {
 	K("공지사항"),
 	L("커뮤니티"),
 	M("위젯"),
-	N("승인");
+	N("승인"),
+	O("학기");
 	
 	private String name;
 

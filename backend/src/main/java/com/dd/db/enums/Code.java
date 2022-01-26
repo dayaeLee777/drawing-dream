@@ -95,7 +95,9 @@ public enum Code {
 	M06("오늘의 공부시간",true),
 	M07("시간표",true),
 	N01("승인",true),
-	N02("미승인",true);
+	N02("미승인",true),
+	O01("1학기",true),
+	O02("2학기",true);
 
 	private String name;
 	
