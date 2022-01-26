@@ -25,3 +25,12 @@ export const getSchool = async (params, success, fail) => {
     .then(success)
     .catch(fail);
 };
+
+export const getDept = async (userId, success, fail) => {
+  return await axios
+    .post(`/api/profile/${userId}`, {
+      headers: { "Context-Type": `application/json` },
+    })
+    .then(success)
+    .catch(fail);
+};

@@ -2,6 +2,7 @@ import Button from "components/commons/button";
 import styled from "styled-components";
 import profileImg from "assets/img/profile.png";
 import hand from "assets/img/waving-hand.png";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const Container = styled.div`
   border-radius: 10px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   background-color: ${({ theme }) => theme.widgetColor};
-  padding: 0.5rem 0;
+  height: 1fr;
 `;
 
 const Wrapper = styled.div`
@@ -34,20 +35,24 @@ const TextContainer = styled.div`
 const Name = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
+  margin-bottom: 1rem;
 `;
 
 const Info = styled.div`
-  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 const Profile = () => {
+  const { userId } = useSelector((state) => state.user);
+
   return (
     <Container>
       <Wrapper>
         <Image src={profileImg}></Image>
         <TextContainer>
           <Name>김하나</Name>
-          <Info>싸피고등학교 2학년 6반</Info>
+          <Info>싸피고등학교</Info>
+          <Info>2학년 6반</Info>
           <Info>학생</Info>
         </TextContainer>
       </Wrapper>
