@@ -1,9 +1,14 @@
 package com.dd.api.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.MemoRegistRequestDto;
 import com.dd.api.dto.request.MemoUpdateRequestDto;
+import com.dd.api.dto.response.AttendanceListResponseDto;
+import com.dd.api.dto.response.MemoResponseDto;
 import com.dd.api.service.MemoService;
 import com.dd.common.model.BaseResponse;
 
@@ -45,6 +52,19 @@ public class MemoController {
 		if(memoService.createMemo(accessToken, memoRegistRequestDto) != null)
 			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
 		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
+	}
+	
+	@GetMapping("/{memoId}")
+	@ApiOperation(value = "메모 불러오기", notes="<strong>memeID에 해당하는 메모를 불러온다.</strong>")
+	@ApiResponses({
+		@ApiResponse(code=201, message="메모을 정상적으로 조회하였습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="출석조회를 실패했습니다.")
+	})
+	public ResponseEntity<MemoResponseDto> getMemo(
+			@PathVariable("memoId") @RequestBody @ApiParam(value = "조회할 메모ID", required = true) UUID memoId){
+//		attendanceService.getAttendancebyUserIdAndDelYnOrderByDate(userId);
+		return ResponseEntity.status(200).body(memoService.getMemo(memoId));
 	}
 	
 	@PutMapping

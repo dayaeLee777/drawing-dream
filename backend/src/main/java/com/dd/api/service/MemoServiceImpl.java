@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.MemoRegistRequestDto;
 import com.dd.api.dto.request.MemoUpdateRequestDto;
+import com.dd.api.dto.response.MemoResponseDto;
 import com.dd.db.entity.addon.Memo;
 import com.dd.db.entity.user.User;
 import com.dd.db.repository.AuthRepository;
 import com.dd.db.repository.MemoRepository;
-import com.dd.db.repository.UserRepository;
 import com.dd.security.util.JwtAuthenticationProvider;
 
 import lombok.RequiredArgsConstructor;
@@ -67,6 +67,21 @@ public class MemoServiceImpl implements MemoService {
 		
 		memo.deleteMemo();
 		return memoRepository.save(memo);
+	}
+
+	@Override
+	public MemoResponseDto getMemo(UUID memoId) {
+		Memo memo = memoRepository.findById(memoId).orElse(null);
+		if(memo==null)
+			return null;
+		
+		MemoResponseDto memoResponseDto = MemoResponseDto.builder()
+				.memoId(memo.getId())
+				.content(memo.getContent())
+				.regTime(memo.getRegTime())
+				.build();
+		
+		return memoResponseDto;
 	}
 
 }
