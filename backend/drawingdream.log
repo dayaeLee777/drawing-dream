@@ -1944,3 +1944,877 @@ Caused by: java.lang.ClassNotFoundException: User
 2022-01-27 00:34:01.185  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
 2022-01-27 00:34:01.185 DEBUG 11376 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
 2022-01-27 00:34:01.187 DEBUG 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@63126476
+2022-01-27 00:34:01.514  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:34:01.540  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 26 ms. Found 6 JPA repository interfaces.
+2022-01-27 00:34:01.579  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1fce8e1' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:34:01.579  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:34:01.606 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:34:01.606 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:34:01.607 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:34:01.664  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:34:01.664  INFO 11376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:34:01.664  INFO 11376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:34:01.705  INFO 11376 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:34:01.705 DEBUG 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:34:01.705  INFO 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 518 ms
+2022-01-27 00:34:01.739 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:34:01.739 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:34:01.739 DEBUG 11376 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:34:01.739 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:34:01.739 DEBUG 11376 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:34:01.739 DEBUG 11376 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:34:01.740 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:34:01.767  INFO 11376 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:34:01.770  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-21 - Starting...
+2022-01-27 00:34:01.790  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-21 - Start completed.
+2022-01-27 00:34:01.790  INFO 11376 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:34:01.917  INFO 11376 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:34:01.917  INFO 11376 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:34:01.930 DEBUG 11376 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:34:01.932  INFO 11376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:34:02.147 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:34:02.147 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 00:34:02.147 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: registerCommunity(CommunityRegisterRequestDto)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+2022-01-27 00:34:02.147 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:34:02.148 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+2022-01-27 00:34:02.148 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:34:02.149 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 00:34:02.149 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:34:02.150 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:34:02.151 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:34:02.190  INFO 11376 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:34:02.234 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:34:02.234 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:34:02.237 DEBUG 11376 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:34:02.259 TRACE 11376 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:34:02.261 DEBUG 11376 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:34:02.262 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:34:02.262 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:34:02.263 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:34:02.263 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:34:02.264  INFO 11376 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3f28ba1a, org.springframework.security.web.context.SecurityContextPersistenceFilter@1fc63cbd, org.springframework.security.web.header.HeaderWriterFilter@71f5145a, org.springframework.web.filter.CorsFilter@2209ee48, org.springframework.security.web.authentication.logout.LogoutFilter@1281e47e, com.dd.security.util.JwtAuthenticationFilter@4a561849, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@74ad34aa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@158e688c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4c80e9a3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@331fb9a5, org.springframework.security.web.session.SessionManagementFilter@1bfd703d, org.springframework.security.web.access.ExceptionTranslationFilter@696c65cc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@76f1f82e]
+2022-01-27 00:34:02.275  INFO 11376 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:34:02.280 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:34:02.289 DEBUG 11376 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:34:02.341  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:34:02.390  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.227 seconds (JVM running for 2053.37)
+2022-01-27 00:34:02.391  INFO 11376 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:41:31.394 DEBUG 11376 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 00:41:31.397 DEBUG 11376 --- [Thread-99] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 00:41:31.398 DEBUG 11376 --- [Thread-99] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@63126476, started on Thu Jan 27 00:34:01 KST 2022
+2022-01-27 00:41:31.432  INFO 11376 --- [Thread-99] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:41:31.438  INFO 11376 --- [Thread-99] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:41:31.440  INFO 11376 --- [Thread-99] com.zaxxer.hikari.HikariDataSource       : HikariPool-21 - Shutdown initiated...
+2022-01-27 00:41:31.443  INFO 11376 --- [Thread-99] com.zaxxer.hikari.HikariDataSource       : HikariPool-21 - Shutdown completed.
+2022-01-27 00:41:31.741 DEBUG 11376 --- [Thread-99] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@2722f084
+2022-01-27 00:41:31.741 DEBUG 11376 --- [Thread-99] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 00:41:31.763  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 11376 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 00:41:31.763 DEBUG 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 00:41:31.763  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 00:41:31.763 DEBUG 11376 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 00:41:31.764 DEBUG 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@559cb4d1
+2022-01-27 00:41:32.089  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:41:32.114  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 6 JPA repository interfaces.
+2022-01-27 00:41:32.151  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@73a8ec85' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:41:32.152  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:41:32.178 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:41:32.178 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:41:32.178 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:41:32.238  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:41:32.238  INFO 11376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:41:32.238  INFO 11376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:41:32.252  INFO 11376 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:41:32.252 DEBUG 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:41:32.252  INFO 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 488 ms
+2022-01-27 00:41:32.283 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:41:32.283 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:41:32.283 DEBUG 11376 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:41:32.284 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:41:32.284 DEBUG 11376 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:41:32.284 DEBUG 11376 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:41:32.284 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:41:32.312  INFO 11376 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:41:32.315  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-22 - Starting...
+2022-01-27 00:41:32.335  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-22 - Start completed.
+2022-01-27 00:41:32.335  INFO 11376 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:41:32.458  INFO 11376 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:41:32.458  INFO 11376 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:41:32.471 DEBUG 11376 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:41:32.473  INFO 11376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:41:32.694 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:41:32.694 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 00:41:32.695 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: registerCommunity(CommunityRegisterRequestDto)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+2022-01-27 00:41:32.695 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:41:32.695 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+2022-01-27 00:41:32.696 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:41:32.696 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 00:41:32.696 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:41:32.697 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:41:32.698 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:41:32.733  INFO 11376 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:41:32.781 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:41:32.781 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:41:32.784 DEBUG 11376 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:41:32.806 TRACE 11376 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:41:32.808 DEBUG 11376 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:41:32.809 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:41:32.809 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:41:32.809 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:41:32.809 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:41:32.811  INFO 11376 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@73cc94cf, org.springframework.security.web.context.SecurityContextPersistenceFilter@2ce5c3c4, org.springframework.security.web.header.HeaderWriterFilter@3b9a85b0, org.springframework.web.filter.CorsFilter@6c95c3d6, org.springframework.security.web.authentication.logout.LogoutFilter@7872a0ad, com.dd.security.util.JwtAuthenticationFilter@4491013b, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@40d46025, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1b546957, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@740cd888, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@549b3851, org.springframework.security.web.session.SessionManagementFilter@6f4c28aa, org.springframework.security.web.access.ExceptionTranslationFilter@4f4f1926, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@310423c3]
+2022-01-27 00:41:32.822  INFO 11376 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:41:32.826 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:41:32.835 DEBUG 11376 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:41:32.885  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:41:32.935  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.188 seconds (JVM running for 2503.915)
+2022-01-27 00:41:32.936  INFO 11376 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:44:42.268 DEBUG 11376 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 00:44:42.269 DEBUG 11376 --- [Thread-104] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 00:44:42.269 DEBUG 11376 --- [Thread-104] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@559cb4d1, started on Thu Jan 27 00:41:31 KST 2022
+2022-01-27 00:44:42.291  INFO 11376 --- [Thread-104] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:44:42.293  INFO 11376 --- [Thread-104] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:44:42.294  INFO 11376 --- [Thread-104] com.zaxxer.hikari.HikariDataSource       : HikariPool-22 - Shutdown initiated...
+2022-01-27 00:44:42.296  INFO 11376 --- [Thread-104] com.zaxxer.hikari.HikariDataSource       : HikariPool-22 - Shutdown completed.
+2022-01-27 00:44:42.600 DEBUG 11376 --- [Thread-104] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@383b89b5
+2022-01-27 00:44:42.600 DEBUG 11376 --- [Thread-104] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 00:44:42.624  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 11376 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 00:44:42.625 DEBUG 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 00:44:42.625  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 00:44:42.625 DEBUG 11376 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 00:44:42.626 DEBUG 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2974647d
+2022-01-27 00:44:42.943  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:44:42.968  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 6 JPA repository interfaces.
+2022-01-27 00:44:43.004  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5a4f4226' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:44:43.006  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:44:43.029 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:44:43.029 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:44:43.029 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:44:43.085  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:44:43.086  INFO 11376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:44:43.086  INFO 11376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:44:43.107  INFO 11376 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:44:43.107 DEBUG 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:44:43.107  INFO 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 481 ms
+2022-01-27 00:44:43.138 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:44:43.138 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:44:43.138 DEBUG 11376 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:44:43.138 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:44:43.138 DEBUG 11376 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:44:43.138 DEBUG 11376 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:44:43.138 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:44:43.166  INFO 11376 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:44:43.168  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-23 - Starting...
+2022-01-27 00:44:43.189  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-23 - Start completed.
+2022-01-27 00:44:43.189  INFO 11376 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:44:43.309  INFO 11376 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:44:43.310  INFO 11376 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:44:43.322 DEBUG 11376 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:44:43.324  INFO 11376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:44:43.543 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:44:43.544 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 00:44:43.544 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: registerCommunity(CommunityRegisterRequestDto)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+2022-01-27 00:44:43.544 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:44:43.544 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+2022-01-27 00:44:43.545 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:44:43.545 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 00:44:43.545 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:44:43.546 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:44:43.547 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:44:43.581  INFO 11376 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:44:43.628 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:44:43.628 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:44:43.632 DEBUG 11376 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:44:43.654 TRACE 11376 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:44:43.657 DEBUG 11376 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:44:43.657 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:44:43.657 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:44:43.658 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:44:43.658 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:44:43.659  INFO 11376 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ce764cf, org.springframework.security.web.context.SecurityContextPersistenceFilter@40a08040, org.springframework.security.web.header.HeaderWriterFilter@2d149840, org.springframework.web.filter.CorsFilter@75ec1ed1, org.springframework.security.web.authentication.logout.LogoutFilter@49cee0b8, com.dd.security.util.JwtAuthenticationFilter@45883815, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@24c92d62, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2fd8565d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@26070d7e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4b067fc8, org.springframework.security.web.session.SessionManagementFilter@2631a6ad, org.springframework.security.web.access.ExceptionTranslationFilter@5dd4940, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4039c733]
+2022-01-27 00:44:43.671  INFO 11376 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:44:43.675 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:44:43.684 DEBUG 11376 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:44:43.732  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:44:43.780  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.174 seconds (JVM running for 2694.761)
+2022-01-27 00:44:43.782  INFO 11376 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:44:55.539 DEBUG 11376 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 00:44:55.540 DEBUG 11376 --- [Thread-109] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 00:44:55.540 DEBUG 11376 --- [Thread-109] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2974647d, started on Thu Jan 27 00:44:42 KST 2022
+2022-01-27 00:44:55.573  INFO 11376 --- [Thread-109] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:44:55.575  INFO 11376 --- [Thread-109] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:44:55.576  INFO 11376 --- [Thread-109] com.zaxxer.hikari.HikariDataSource       : HikariPool-23 - Shutdown initiated...
+2022-01-27 00:44:55.578  INFO 11376 --- [Thread-109] com.zaxxer.hikari.HikariDataSource       : HikariPool-23 - Shutdown completed.
+2022-01-27 00:44:55.944 DEBUG 11376 --- [Thread-109] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@646922b7
+2022-01-27 00:44:55.944 DEBUG 11376 --- [Thread-109] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 00:44:55.963  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 11376 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 00:44:55.963 DEBUG 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 00:44:55.963  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 00:44:55.963 DEBUG 11376 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 00:44:55.964 DEBUG 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1352f406
+2022-01-27 00:44:56.273  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:44:56.298  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 6 JPA repository interfaces.
+2022-01-27 00:44:56.335  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@60b52548' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:44:56.335  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:44:56.359 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:44:56.359 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:44:56.359 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:44:56.369  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:44:56.370  INFO 11376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:44:56.370  INFO 11376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:44:56.392  INFO 11376 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:44:56.392 DEBUG 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:44:56.392  INFO 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 428 ms
+2022-01-27 00:44:56.423 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:44:56.423 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:44:56.423 DEBUG 11376 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:44:56.423 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:44:56.423 DEBUG 11376 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:44:56.423 DEBUG 11376 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:44:56.423 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:44:56.450  INFO 11376 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:44:56.453  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-24 - Starting...
+2022-01-27 00:44:56.474  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-24 - Start completed.
+2022-01-27 00:44:56.474  INFO 11376 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:44:56.599  INFO 11376 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:44:56.599  INFO 11376 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:44:56.611 DEBUG 11376 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:44:56.613  INFO 11376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:44:56.840 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:44:56.840 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 00:44:56.841 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: registerCommunity(CommunityRegisterRequestDto)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+2022-01-27 00:44:56.841 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:44:56.842 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+2022-01-27 00:44:56.842 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:44:56.843 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 00:44:56.844 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:44:56.845 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:44:56.847 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:44:56.900  INFO 11376 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:44:56.945 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:44:56.945 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:44:56.948 DEBUG 11376 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:44:56.970 TRACE 11376 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:44:56.972 DEBUG 11376 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:44:56.973 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:44:56.973 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:44:56.973 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:44:56.974 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:44:56.975  INFO 11376 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@794c3e25, org.springframework.security.web.context.SecurityContextPersistenceFilter@6a1cf4f1, org.springframework.security.web.header.HeaderWriterFilter@3e357e39, org.springframework.web.filter.CorsFilter@630bb5ba, org.springframework.security.web.authentication.logout.LogoutFilter@1e2a7de1, com.dd.security.util.JwtAuthenticationFilter@50c88270, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4b1e7491, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@9bb8b4e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1c6af8f6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@19de67d6, org.springframework.security.web.session.SessionManagementFilter@55ab5a4e, org.springframework.security.web.access.ExceptionTranslationFilter@74f2f6da, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@139b488f]
+2022-01-27 00:44:56.986  INFO 11376 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:44:56.990 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:44:57.000 DEBUG 11376 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:44:57.053  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:44:57.103  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.156 seconds (JVM running for 2708.085)
+2022-01-27 00:44:57.105  INFO 11376 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:45:34.568 DEBUG 11376 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 00:45:34.569 DEBUG 11376 --- [Thread-114] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 00:45:34.569 DEBUG 11376 --- [Thread-114] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1352f406, started on Thu Jan 27 00:44:55 KST 2022
+2022-01-27 00:45:34.602  INFO 11376 --- [Thread-114] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:45:34.603  INFO 11376 --- [Thread-114] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:45:34.604  INFO 11376 --- [Thread-114] com.zaxxer.hikari.HikariDataSource       : HikariPool-24 - Shutdown initiated...
+2022-01-27 00:45:34.607  INFO 11376 --- [Thread-114] com.zaxxer.hikari.HikariDataSource       : HikariPool-24 - Shutdown completed.
+2022-01-27 00:45:34.851 DEBUG 11376 --- [Thread-114] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@73675c41
+2022-01-27 00:45:34.851 DEBUG 11376 --- [Thread-114] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 00:45:34.873  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 11376 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 00:45:34.873 DEBUG 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 00:45:34.873  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 00:45:34.873 DEBUG 11376 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 00:45:34.874 DEBUG 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2e25e165
+2022-01-27 00:45:35.193  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:45:35.218  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 6 JPA repository interfaces.
+2022-01-27 00:45:35.259  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@310f31e9' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:45:35.259  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:45:35.285 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:45:35.285 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:45:35.285 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:45:35.345  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:45:35.345  INFO 11376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:45:35.345  INFO 11376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:45:35.366  INFO 11376 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:45:35.366 DEBUG 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:45:35.366  INFO 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 492 ms
+2022-01-27 00:45:35.396 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:45:35.396 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:45:35.397 DEBUG 11376 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:45:35.397 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:45:35.397 DEBUG 11376 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:45:35.397 DEBUG 11376 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:45:35.397 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:45:35.426  INFO 11376 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:45:35.429  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-25 - Starting...
+2022-01-27 00:45:35.449  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-25 - Start completed.
+2022-01-27 00:45:35.449  INFO 11376 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:45:35.569  INFO 11376 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:45:35.569  INFO 11376 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:45:35.583 DEBUG 11376 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:45:35.584  INFO 11376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:45:35.793 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:45:35.794 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 00:45:35.794 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: registerCommunity(CommunityRegisterRequestDto)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+2022-01-27 00:45:35.794 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:45:35.794 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+2022-01-27 00:45:35.795 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:45:35.795 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 00:45:35.795 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:45:35.796 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:45:35.797 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:45:35.830  INFO 11376 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:45:35.873 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:45:35.873 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:45:35.876 DEBUG 11376 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:45:35.897 TRACE 11376 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:45:35.900 DEBUG 11376 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:45:35.900 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:45:35.900 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:45:35.901 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:45:35.901 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:45:35.902  INFO 11376 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@434a8f5b, org.springframework.security.web.context.SecurityContextPersistenceFilter@e07239b, org.springframework.security.web.header.HeaderWriterFilter@37506d18, org.springframework.web.filter.CorsFilter@21fa6f7b, org.springframework.security.web.authentication.logout.LogoutFilter@35b03de3, com.dd.security.util.JwtAuthenticationFilter@3a69feb0, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@41798a4d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1d5d3c04, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@29d1ba1a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a32cf1c, org.springframework.security.web.session.SessionManagementFilter@6c5a464, org.springframework.security.web.access.ExceptionTranslationFilter@1f718718, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@ca38d0c]
+2022-01-27 00:45:35.913  INFO 11376 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:45:35.917 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:45:35.926 DEBUG 11376 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:45:35.975  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:45:36.023  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.166 seconds (JVM running for 2747.004)
+2022-01-27 00:45:36.025  INFO 11376 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:54:49.631 DEBUG 11376 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 00:54:49.632 DEBUG 11376 --- [Thread-119] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 00:54:49.633 DEBUG 11376 --- [Thread-119] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2e25e165, started on Thu Jan 27 00:45:34 KST 2022
+2022-01-27 00:54:49.672  INFO 11376 --- [Thread-119] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:54:49.674  INFO 11376 --- [Thread-119] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:54:49.675  INFO 11376 --- [Thread-119] com.zaxxer.hikari.HikariDataSource       : HikariPool-25 - Shutdown initiated...
+2022-01-27 00:54:49.677  INFO 11376 --- [Thread-119] com.zaxxer.hikari.HikariDataSource       : HikariPool-25 - Shutdown completed.
+2022-01-27 00:54:49.989 DEBUG 11376 --- [Thread-119] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@460487e8
+2022-01-27 00:54:49.990 DEBUG 11376 --- [Thread-119] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 00:54:50.050  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 11376 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 00:54:50.050 DEBUG 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 00:54:50.050  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 00:54:50.050 DEBUG 11376 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 00:54:50.052 DEBUG 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3e963277
+2022-01-27 00:54:50.373  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:54:50.399  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 6 JPA repository interfaces.
+2022-01-27 00:54:50.435  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@68bb2af9' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:54:50.436  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:54:50.460 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:54:50.460 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:54:50.460 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:54:50.520  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:54:50.520  INFO 11376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:54:50.520  INFO 11376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:54:50.542  INFO 11376 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:54:50.542 DEBUG 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:54:50.542  INFO 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 490 ms
+2022-01-27 00:54:50.573 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:54:50.573 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:54:50.574 DEBUG 11376 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:54:50.574 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:54:50.574 DEBUG 11376 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:54:50.574 DEBUG 11376 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:54:50.574 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:54:50.601  INFO 11376 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:54:50.605  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-26 - Starting...
+2022-01-27 00:54:50.626  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-26 - Start completed.
+2022-01-27 00:54:50.626  INFO 11376 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:54:50.748  INFO 11376 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:54:50.748  INFO 11376 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:54:50.761 DEBUG 11376 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:54:50.763  INFO 11376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:54:50.979 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:54:50.980 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 00:54:50.980 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: registerCommunity(CommunityRegisterRequestDto)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+2022-01-27 00:54:50.980 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:54:50.980 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+2022-01-27 00:54:50.981 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:54:50.981 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 00:54:50.982 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:54:50.982 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:54:50.984 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:54:51.018  INFO 11376 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:54:51.063 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:54:51.063 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:54:51.067 DEBUG 11376 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:54:51.089 TRACE 11376 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:54:51.091 DEBUG 11376 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:54:51.092 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:54:51.092 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:54:51.092 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:54:51.092 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:54:51.094  INFO 11376 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@44f3ebd0, org.springframework.security.web.context.SecurityContextPersistenceFilter@4de1147b, org.springframework.security.web.header.HeaderWriterFilter@c5c6838, org.springframework.web.filter.CorsFilter@72fdd3a3, org.springframework.security.web.authentication.logout.LogoutFilter@41991435, com.dd.security.util.JwtAuthenticationFilter@3addbff2, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6fb949a1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@23d1bbfc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4c231a16, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7a39b221, org.springframework.security.web.session.SessionManagementFilter@5c5294ff, org.springframework.security.web.access.ExceptionTranslationFilter@2dd870d3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4c518eb6]
+2022-01-27 00:54:51.106  INFO 11376 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:54:51.111 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:54:51.120 DEBUG 11376 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:54:51.175  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:54:51.232  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.227 seconds (JVM running for 3302.214)
+2022-01-27 00:54:51.234  INFO 11376 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:55:20.484 DEBUG 11376 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 00:55:20.485 DEBUG 11376 --- [Thread-124] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 00:55:20.485 DEBUG 11376 --- [Thread-124] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3e963277, started on Thu Jan 27 00:54:50 KST 2022
+2022-01-27 00:55:20.518  INFO 11376 --- [Thread-124] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:55:20.520  INFO 11376 --- [Thread-124] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:55:20.520  INFO 11376 --- [Thread-124] com.zaxxer.hikari.HikariDataSource       : HikariPool-26 - Shutdown initiated...
+2022-01-27 00:55:20.522  INFO 11376 --- [Thread-124] com.zaxxer.hikari.HikariDataSource       : HikariPool-26 - Shutdown completed.
+2022-01-27 00:55:20.795 DEBUG 11376 --- [Thread-124] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@2ad4c17e
+2022-01-27 00:55:20.795 DEBUG 11376 --- [Thread-124] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 00:55:20.816  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 11376 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 00:55:20.816 DEBUG 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 00:55:20.816  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 00:55:20.816 DEBUG 11376 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 00:55:20.817 DEBUG 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4e500bdc
+2022-01-27 00:55:21.152  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:55:21.178  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 26 ms. Found 6 JPA repository interfaces.
+2022-01-27 00:55:21.217  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5d9ecc9d' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:55:21.217  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:55:21.242 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:55:21.242 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:55:21.242 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:55:21.300  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:55:21.300  INFO 11376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:55:21.300  INFO 11376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:55:21.322  INFO 11376 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:55:21.322 DEBUG 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:55:21.322  INFO 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 505 ms
+2022-01-27 00:55:21.354 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:55:21.354 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:55:21.354 DEBUG 11376 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:55:21.354 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:55:21.355 DEBUG 11376 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:55:21.355 DEBUG 11376 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:55:21.355 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:55:21.381  INFO 11376 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:55:21.384  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-27 - Starting...
+2022-01-27 00:55:21.404  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-27 - Start completed.
+2022-01-27 00:55:21.404  INFO 11376 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:55:21.530  INFO 11376 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:55:21.530  INFO 11376 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:55:21.543 DEBUG 11376 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:55:21.545  INFO 11376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:55:21.783 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:55:21.783 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 00:55:21.783 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: registerCommunity(CommunityRegisterRequestDto)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+2022-01-27 00:55:21.783 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:55:21.783 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+2022-01-27 00:55:21.784 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:55:21.784 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 00:55:21.785 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:55:21.785 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:55:21.786 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:55:21.821  INFO 11376 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:55:21.866 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:55:21.866 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:55:21.869 DEBUG 11376 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:55:21.891 TRACE 11376 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:55:21.893 DEBUG 11376 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:55:21.893 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:55:21.893 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:55:21.894 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:55:21.894 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:55:21.895  INFO 11376 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@24e09c4c, org.springframework.security.web.context.SecurityContextPersistenceFilter@de092fb, org.springframework.security.web.header.HeaderWriterFilter@21fb7083, org.springframework.web.filter.CorsFilter@2f5b5b1c, org.springframework.security.web.authentication.logout.LogoutFilter@6fd41f25, com.dd.security.util.JwtAuthenticationFilter@2093913d, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@20709953, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2fec00ec, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@55e912fa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5d7e02c7, org.springframework.security.web.session.SessionManagementFilter@21c25640, org.springframework.security.web.access.ExceptionTranslationFilter@32421d86, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@266b6f7f]
+2022-01-27 00:55:21.907  INFO 11376 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:55:21.911 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:55:21.920 DEBUG 11376 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:55:21.967  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:55:22.016  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.217 seconds (JVM running for 3332.998)
+2022-01-27 00:55:22.018  INFO 11376 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:55:40.942 DEBUG 11376 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 00:55:40.943 DEBUG 11376 --- [Thread-129] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 00:55:40.943 DEBUG 11376 --- [Thread-129] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4e500bdc, started on Thu Jan 27 00:55:20 KST 2022
+2022-01-27 00:55:40.962  INFO 11376 --- [Thread-129] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:55:40.963  INFO 11376 --- [Thread-129] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:55:40.964  INFO 11376 --- [Thread-129] com.zaxxer.hikari.HikariDataSource       : HikariPool-27 - Shutdown initiated...
+2022-01-27 00:55:40.966  INFO 11376 --- [Thread-129] com.zaxxer.hikari.HikariDataSource       : HikariPool-27 - Shutdown completed.
+2022-01-27 00:55:41.215 DEBUG 11376 --- [Thread-129] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@54147001
+2022-01-27 00:55:41.215 DEBUG 11376 --- [Thread-129] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 00:55:41.235  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 11376 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 00:55:41.235 DEBUG 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 00:55:41.235  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 00:55:41.235 DEBUG 11376 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 00:55:41.236 DEBUG 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@137a5dbf
+2022-01-27 00:55:41.556  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:55:41.584  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 6 JPA repository interfaces.
+2022-01-27 00:55:41.625  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5e5c10fd' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:55:41.625  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:55:41.651 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:55:41.651 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:55:41.652 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:55:41.672  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:55:41.672  INFO 11376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:55:41.672  INFO 11376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:55:41.686  INFO 11376 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:55:41.686 DEBUG 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:55:41.686  INFO 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 450 ms
+2022-01-27 00:55:41.718 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:55:41.718 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:55:41.718 DEBUG 11376 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:55:41.718 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:55:41.718 DEBUG 11376 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:55:41.718 DEBUG 11376 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:55:41.718 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:55:41.746  INFO 11376 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:55:41.749  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-28 - Starting...
+2022-01-27 00:55:41.770  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-28 - Start completed.
+2022-01-27 00:55:41.770  INFO 11376 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:55:41.888  INFO 11376 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:55:41.889  INFO 11376 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:55:41.902 DEBUG 11376 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:55:41.903  INFO 11376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:55:42.131 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:55:42.131 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 00:55:42.131 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: registerCommunity(CommunityRegisterRequestDto)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+2022-01-27 00:55:42.131 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:55:42.132 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+2022-01-27 00:55:42.132 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:55:42.133 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 00:55:42.133 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:55:42.134 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:55:42.135 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:55:42.168  INFO 11376 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:55:42.212 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:55:42.212 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:55:42.215 DEBUG 11376 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:55:42.236 TRACE 11376 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:55:42.239 DEBUG 11376 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:55:42.240 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:55:42.240 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:55:42.240 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:55:42.240 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:55:42.242  INFO 11376 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@51962e69, org.springframework.security.web.context.SecurityContextPersistenceFilter@5f4cf08d, org.springframework.security.web.header.HeaderWriterFilter@5cc04dbd, org.springframework.web.filter.CorsFilter@6da1888e, org.springframework.security.web.authentication.logout.LogoutFilter@45b762f5, com.dd.security.util.JwtAuthenticationFilter@42ec00be, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2fbf7061, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4f24b8ca, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@11d7a936, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7df768c6, org.springframework.security.web.session.SessionManagementFilter@42d1a2e, org.springframework.security.web.access.ExceptionTranslationFilter@10601315, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1c7dc71]
+2022-01-27 00:55:42.253  INFO 11376 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:55:42.257 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:55:42.265 DEBUG 11376 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:55:42.313  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:55:42.364  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.145 seconds (JVM running for 3353.346)
+2022-01-27 00:55:42.366  INFO 11376 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:56:33.284 DEBUG 11376 --- [File Watcher] o.s.boot.devtools.restart.Restarter      : Restarting application
+2022-01-27 00:56:33.285 DEBUG 11376 --- [Thread-134] o.s.boot.devtools.restart.Restarter      : Stopping application
+2022-01-27 00:56:33.285 DEBUG 11376 --- [Thread-134] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@137a5dbf, started on Thu Jan 27 00:55:41 KST 2022
+2022-01-27 00:56:33.305  INFO 11376 --- [Thread-134] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:56:33.307  INFO 11376 --- [Thread-134] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:56:33.307  INFO 11376 --- [Thread-134] com.zaxxer.hikari.HikariDataSource       : HikariPool-28 - Shutdown initiated...
+2022-01-27 00:56:33.310  INFO 11376 --- [Thread-134] com.zaxxer.hikari.HikariDataSource       : HikariPool-28 - Shutdown completed.
+2022-01-27 00:56:33.690 DEBUG 11376 --- [Thread-134] o.s.boot.devtools.restart.Restarter      : Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@45599d98
+2022-01-27 00:56:33.690 DEBUG 11376 --- [Thread-134] o.s.boot.devtools.restart.Restarter      : Starting application com.dd.DrawingdreamBackendApplication with URLs [file:/C:/SSAFY/%ea%b3%b5%ed%86%b5/S06P12A607/backend/bin/main/]
+2022-01-27 00:56:33.734  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Starting DrawingdreamBackendApplication using Java 1.8.0_192 on DESKTOP-KVCQHCD with PID 11376 (C:\SSAFY\공통\S06P12A607\backend\bin\main started by SSAFY in C:\SSAFY\공통\S06P12A607\backend)
+2022-01-27 00:56:33.734 DEBUG 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Running with Spring Boot v2.4.5, Spring v5.3.6
+2022-01-27 00:56:33.734  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : No active profile set, falling back to default profiles: default
+2022-01-27 00:56:33.734 DEBUG 11376 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.dd.DrawingdreamBackendApplication
+2022-01-27 00:56:33.735 DEBUG 11376 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@15ddfdec
+2022-01-27 00:56:34.059  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-27 00:56:34.086  INFO 11376 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 6 JPA repository interfaces.
+2022-01-27 00:56:34.125  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2d78755a' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:56:34.125  INFO 11376 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-27 00:56:34.150 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:56:34.150 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : Code archive: C:\Users\SSAFY\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot\2.4.5\d9b82470df2e9549e448d7cef39e578d91f9867f\spring-boot-2.4.5.jar
+2022-01-27 00:56:34.150 DEBUG 11376 --- [restartedMain] .s.b.w.e.t.TomcatServletWebServerFactory : None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-01-27 00:56:34.207  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-27 00:56:34.207  INFO 11376 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-27 00:56:34.207  INFO 11376 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-01-27 00:56:34.219  INFO 11376 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-01-27 00:56:34.219 DEBUG 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-01-27 00:56:34.219  INFO 11376 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 484 ms
+2022-01-27 00:56:34.250 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2022-01-27 00:56:34.251 DEBUG 11376 --- [restartedMain] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2022-01-27 00:56:34.251 DEBUG 11376 --- [restartedMain] o.s.b.a.m.w.servlet.WebMvcMetricsFilter  : Filter 'webMvcMetricsFilter' configured for use
+2022-01-27 00:56:34.251 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedRequestContextFilter  : Filter 'requestContextFilter' configured for use
+2022-01-27 00:56:34.251 DEBUG 11376 --- [restartedMain] s.b.w.s.f.OrderedCharacterEncodingFilter : Filter 'characterEncodingFilter' configured for use
+2022-01-27 00:56:34.251 DEBUG 11376 --- [restartedMain] .DelegatingFilterProxyRegistrationBean$1 : Filter 'springSecurityFilterChain' configured for use
+2022-01-27 00:56:34.251 DEBUG 11376 --- [restartedMain] o.s.b.w.s.f.OrderedFormContentFilter     : Filter 'formContentFilter' configured for use
+2022-01-27 00:56:34.278  INFO 11376 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-27 00:56:34.281  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-29 - Starting...
+2022-01-27 00:56:34.301  INFO 11376 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-29 - Start completed.
+2022-01-27 00:56:34.301  INFO 11376 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-01-27 00:56:34.425  INFO 11376 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-27 00:56:34.425  INFO 11376 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:56:34.438 DEBUG 11376 --- [restartedMain] inMXBeanRegistrar$SpringApplicationAdmin : Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+2022-01-27 00:56:34.440  INFO 11376 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-27 00:56:34.667 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AttendanceController:
+	{PUT [/api/attendance]}: update(String,AttendanceUpdateRequestDto)
+	{PUT [/api/attendance/delete/{attendanceId}]}: delete(String,UUID)
+	{GET [/api/attendance/{userId}]}: getList(String,UUID)
+	{POST [/api/attendance/attend]}: attend(String)
+2022-01-27 00:56:34.667 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.AuthController:
+	{POST [/api/auth/login]}: login(AuthLoginRequestDto)
+2022-01-27 00:56:34.667 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.CommunityController:
+	{POST [/api/community/write]}: registerCommunity(CommunityRegisterRequestDto)
+	{PUT [/api/community/update]}: updateCommunity(CommunityUpdateRequestDto)
+2022-01-27 00:56:34.667 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.ProfileController:
+	{GET [/api/profile/{userId}]}: getProfile(UUID)
+2022-01-27 00:56:34.667 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.d.a.c.UserController:
+	{GET [/api/user/{userId}]}: getUserInfo(String,UUID)
+	{PUT [/api/user]}: updateUser(String,UserUpdateRequestDto)
+	{PUT [/api/user/delete/{userId}]}: deleteUser(UUID)
+	{GET [/api/user/idCheck/{loginId}]}: idCheck(String)
+	{POST [/api/user/signup]}: signUp(UserRegisterRequestDto)
+2022-01-27 00:56:34.667 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.Swagger2ControllerWebMvc:
+	{GET [/v2/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:56:34.668 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.s.w.ApiResourceController:
+	{GET [/swagger-resources], produces [application/json]}: swaggerResources()
+	{GET [/swagger-resources/configuration/ui], produces [application/json]}: uiConfiguration()
+	{GET [/swagger-resources/configuration/security], produces [application/json]}: securityConfiguration()
+2022-01-27 00:56:34.668 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	s.d.o.w.OpenApiControllerWebMvc:
+	{GET [/v3/api-docs], produces [application/json || application/hal+json]}: getDocumentation(String,HttpServletRequest)
+2022-01-27 00:56:34.669 TRACE 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2022-01-27 00:56:34.670 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2022-01-27 00:56:34.706  INFO 11376 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-01-27 00:56:34.752 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/] onto ParameterizableViewController [view="forward:/swagger-ui/index.html"]
+2022-01-27 00:56:34.752 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-01-27 00:56:34.756 DEBUG 11376 --- [restartedMain] o.s.w.s.h.BeanNameUrlHandlerMapping      : Detected 0 mappings in 'beanNameHandlerMapping'
+2022-01-27 00:56:34.778 TRACE 11376 --- [restartedMain] o.s.w.s.f.support.RouterFunctionMapping  : 0 RouterFunction(s) in 'routerFunctionMapping'
+2022-01-27 00:56:34.780 DEBUG 11376 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-01-27 00:56:34.781 TRACE 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped [/swagger-ui/**] onto ResourceHttpRequestHandler [Classpath [META-INF/resources/webjars/springfox-swagger-ui/]]
+2022-01-27 00:56:34.781 DEBUG 11376 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/**] in 'resourceHandlerMapping'
+2022-01-27 00:56:34.781 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for Ant [pattern='/auth/**']
+2022-01-27 00:56:34.782 DEBUG 11376 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for any request
+2022-01-27 00:56:34.783  INFO 11376 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@583cae6b, org.springframework.security.web.context.SecurityContextPersistenceFilter@45211999, org.springframework.security.web.header.HeaderWriterFilter@60cbd841, org.springframework.web.filter.CorsFilter@518c7ba1, org.springframework.security.web.authentication.logout.LogoutFilter@74e6f85d, com.dd.security.util.JwtAuthenticationFilter@1dbeb050, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@50fd0e4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3628e61b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@81f294f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5dac7ae4, org.springframework.security.web.session.SessionManagementFilter@29731362, org.springframework.security.web.access.ExceptionTranslationFilter@1bb5b818, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@128a4b08]
+2022-01-27 00:56:34.795  INFO 11376 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:56:34.800 DEBUG 11376 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-01-27 00:56:34.809 DEBUG 11376 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-01-27 00:56:34.857  INFO 11376 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-27 00:56:34.905  INFO 11376 --- [restartedMain] com.dd.DrawingdreamBackendApplication    : Started DrawingdreamBackendApplication in 1.198 seconds (JVM running for 3405.886)
+2022-01-27 00:56:34.906  INFO 11376 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-01-27 00:56:41.044  INFO 11376 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2022-01-27 00:56:41.045 DEBUG 11376 --- [RMI TCP Connection(2)-127.0.0.1] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@15ddfdec, started on Thu Jan 27 00:56:33 KST 2022
+2022-01-27 00:56:41.073  INFO 11376 --- [RMI TCP Connection(2)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-01-27 00:56:41.075  INFO 11376 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-27 00:56:41.075  INFO 11376 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-29 - Shutdown initiated...
+2022-01-27 00:56:41.078  INFO 11376 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-29 - Shutdown completed.

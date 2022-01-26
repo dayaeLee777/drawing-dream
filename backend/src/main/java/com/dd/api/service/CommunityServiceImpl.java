@@ -1,6 +1,7 @@
 package com.dd.api.service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import com.dd.api.dto.request.CommunityRegisterRequestDto;
 import com.dd.api.dto.request.CommunityUpdateRequestDto;
 import com.dd.db.entity.board.Community;
 import com.dd.db.entity.school.School;
+import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.repository.AuthRepository;
@@ -65,9 +67,19 @@ public class CommunityServiceImpl implements CommunityService {
 //		String loginId = jwtAuthenticationProvider.getUsername(token);
 		String loginId = "test";
 		
-		User user = userRepository.
-		Community community = communityRepository.findByUser()
+		Auth auth = authRepository.findByLoginId(loginId).get();
+		User user = auth.getUser();
 		
+		// 커뮤니티 글 제목, 내용 update
+		Community community = communityRepository.findByUser(user).get();
+		community.update(communityUpdateRequestDto.getTitle(), communityUpdateRequestDto.getContent());
+		
+		communityRepository.save(community);
+	}
+	
+	@Override
+	public void plusCommunityHit(Community community) {
+		community.updateHit();
 	}
 	
 	
@@ -76,6 +88,7 @@ public class CommunityServiceImpl implements CommunityService {
 		String token = accessToken.split(" ")[1];
 		return jwtAuthenticationProvider.getUsername(token);
 	}
+	
 
 
 }
