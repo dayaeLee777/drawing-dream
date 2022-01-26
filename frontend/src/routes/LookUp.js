@@ -111,7 +111,7 @@ const LookUp = () => {
             onClick={chatClose}>
           · · ·
       </ChatCircle>
-        { chatOpen && <Chatting chatClose={chatClose}></Chatting>}
+        { chatOpen && <ChattingList chatClose={chatClose}></ChattingList>}
     </>
   );
 };
