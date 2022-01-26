@@ -1,15 +1,20 @@
 package com.dd.api.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.CommunityRegisterRequestDto;
 import com.dd.api.dto.request.CommunityUpdateRequestDto;
+import com.dd.api.dto.response.CommunityGetListResponseDto;
+import com.dd.api.dto.response.CommunityGetListWrapperResponseDto;
 import com.dd.api.dto.response.CommunityGetResponseDto;
 import com.dd.db.entity.board.Community;
 import com.dd.db.entity.school.School;
+import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.repository.AuthRepository;
@@ -39,7 +44,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public void registerCommunity(CommunityRegisterRequestDto communityRegisterRequestDto) {
 //		String token = accessToken.split(" ")[1];
 //		String loginId = jwtAuthenticationProvider.getUsername(token);
-		String loginId = "test";
+		String loginId = "test1";
 		// 게시글 등록하는 유저 정보 가져오기
 		User user = authRepository.findByLoginId(loginId).get().getUser();
 		// 유저 소속 정보 가져오기
@@ -71,6 +76,28 @@ public class CommunityServiceImpl implements CommunityService {
 		community.update(communityUpdateRequestDto.getTitle(), communityUpdateRequestDto.getContent());
 		
 		communityRepository.save(community);
+	}
+	
+	@Override
+//	public CommunityGetListWrapperResponseDto getCommunityList(String accessToken) {
+	public CommunityGetListWrapperResponseDto getCommunityList() {
+//		String loginId = getLoginIdFromToken(accessToken);
+		String loginId = "test1";
+		Auth auth = authRepository.findByLoginId(loginId).get();
+		User user = auth.getUser();
+		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
+		School school = userDepartment.getSchool();
+		
+		List<CommunityGetListResponseDto> list = new ArrayList<>();
+		
+		for(Community c : communityRepository.findBySchool(school).get()) {
+			list.add(
+				new CommunityGetListResponseDto(c.getUser().getId(),
+				c.getTitle(), c.getHit(), c.getRegTime(), c.getId())
+			);
+		}
+		
+		return new CommunityGetListWrapperResponseDto(list);
 	}
 	
 	@Override
