@@ -12,8 +12,12 @@ public interface UserService {
 	
 	void signUp(UserRegisterRequestDto userRegistPostReq);
 	UUID getUserId(String loginId);
-	void deleteUser(String accessToken, UUID userId);
+//	void deleteUser(String accessToken, UUID userId);
+	void deleteUser(UUID userId);
 	void updateUser(String accessToken, UserUpdateRequestDto userUpdatePutReq);
+//	UserInfoResponseDto getUserInfo(String accessToken, UUID userId);
 	UserInfoResponseDto getUserInfo(UUID userId);
+	boolean checkLoginIdExists(String loginId);
+	String GetLoginIdFromToken(String accessToken);
 	
 }

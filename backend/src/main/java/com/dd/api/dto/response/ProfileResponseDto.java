@@ -1,6 +1,6 @@
 package com.dd.api.dto.response;
 
-import com.dd.common.model.BaseResponse;
+import com.dd.common.model.BaseResponseDto;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.enums.Code;
@@ -12,8 +12,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@ApiModel("ProfileRes")
-public class ProfileResponseDto extends BaseResponse {
+@ApiModel("ProfileResponseDto")
+public class ProfileResponseDto extends BaseResponseDto {
 
 	@ApiModelProperty(name="유저 정보 - 이름")
 	private String userName;

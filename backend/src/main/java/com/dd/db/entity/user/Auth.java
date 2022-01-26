@@ -35,4 +35,13 @@ public class Auth extends BaseEntity{
 	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
 	
+	// 프로필 수정 - [비밀번호] 수정
+	public void update(String password) {
+		this.password = password;
+	}
+	
+	// 회원 탈퇴 - [회원 인증 정보 삭제 여부] 반영
+	public void update(boolean delYn) {
+		this.delYn = delYn;
+	}
 }

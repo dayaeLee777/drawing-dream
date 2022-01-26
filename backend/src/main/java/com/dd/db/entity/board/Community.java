@@ -45,4 +45,20 @@ public class Community extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	// 커뮤니티 글 수정 - [제목, 내용] 수정
+	public void update(String title, String content) {
+		this.title = title;
+		this.content = content;
+	}
+
+	// 커뮤니티 글 삭제 - [커뮤니티 글 삭제 여부] - 삭제 반영
+	public void update(boolean delYn) {
+		this.delYn = delYn;
+	}
+	
+	// 커뮤니티 글 조회수 증가 - [조회수] 수정
+	public void updateHit() {
+		this.hit = this.hit + 1;
+	}
 }
