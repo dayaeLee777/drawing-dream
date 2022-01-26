@@ -50,16 +50,9 @@ const AppRouter = () => {
         <>
           <Routes>
             <Route path="/" element={<Navigate replace to="/signin" />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/home" element={<Navigate replace to="/signin" />} />
-            <Route
-              path="/modifyprofile"
-              element={<Navigate replace to="/signin" />}
-            />
-            <Route path="/notice" element={<Navigate replace to="/signin" />} />
-            <Route path="/school" element={<Navigate replace to="/signin" />} />
-            <Route path="/lookup" element={<Navigate replace to="/signin" />} />
+            <Route path="/signin" exact element={<SignIn />} />
+            <Route path="/signup" exact element={<SignUp />} />
+            <Route path="/*" element={<Navigate replace to="/signin" />} />
           </Routes>
         </>
       )}
