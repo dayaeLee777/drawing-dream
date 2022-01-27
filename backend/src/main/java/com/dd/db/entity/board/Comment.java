@@ -1,6 +1,6 @@
 package com.dd.db.entity.board;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,15 +15,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.dd.db.entity.BaseEntity;
-import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Builder
@@ -35,8 +32,7 @@ public class Comment extends BaseEntity {
 	@Lob
 	private String content;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date regTime;
+	private LocalDateTime regTime;
 
 	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;

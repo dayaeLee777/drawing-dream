@@ -33,7 +33,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @CrossOrigin("*")
-@Api(value="User API")
+@Api(value="User API", tags = { "User" })
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
 public class UserController {

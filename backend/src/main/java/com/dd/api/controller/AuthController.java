@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@Api(value="Auth API")
+@Api(value="Auth API", tags = { "Auth" })
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
 public class AuthController {
