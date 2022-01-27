@@ -38,7 +38,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 		User user = authRepository.findByLoginId(loginId).get().getUser();
 		LocalDate todayDate = LocalDate.now();
 		
-		if(attendanceRepository.findByDateAndUser(todayDate, user).orElse(null) == null)
+		if(attendanceRepository.findByDateAndUser(todayDate, user).orElse(null) != null)
 			return null;
 		
 		Attendance attendance = Attendance.builder()
