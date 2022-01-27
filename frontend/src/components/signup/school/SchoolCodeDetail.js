@@ -22,6 +22,8 @@ const SchoolCodeDetailContainer = styled.div`
 const SchoolCodeDetail = ({ data, onClick }) => {
   return (
     <SchoolCodeDetailContainer onClick={() => onClick(data)}>
+      {/* <div>{data.SCHUL_NM}</div>
+      <div className="sido">{data.LCTN_SC_NM}</div> */}
       <div>{data.SCHUL_NM}</div>
       <div className="sido">{data.LCTN_SC_NM}</div>
     </SchoolCodeDetailContainer>

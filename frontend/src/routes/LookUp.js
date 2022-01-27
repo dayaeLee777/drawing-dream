@@ -2,10 +2,12 @@ import Button from "components/commons/button";
 import React, { useState } from "react";
 import styled from "styled-components";
 import board from "assets/img/board.png";
-import Modal from "../components/modal/Modal";
+import AttendanceModal from "../components/attendance/AttendanceModal";
 import Chatting from "../components/layout/Chatting";
 import ChattingList from "../components/layout/ChattingList";
 import axios from "axios";
+import { motion } from "framer-motion";
+import { attend } from "api/attendance";
 
 const Board = styled.article`
   background-image: url(${board});
@@ -80,19 +82,39 @@ const ChatCircle = styled.div`
     0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 `;
 
+const Overlay = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const overlay = {
+  hidden: { backgroundColor: "rgba(0, 0, 0, 0)" },
+  visible: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+  exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
+};
+
 const LookUp = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const modalClose = () => {
-    // // api -> db
-    // axios.post("/api/adttendance/attend").then((response) => {
-    //   if (response.status === 200)
-    //     setModalOpen(!modalOpen);
-    //   else if (response.status===401)
-    //     //error
-    //     console.log("error");
-    // })
-  };
 
+  const attendToday = () => {
+    console.log(modalOpen);
+    attend().then((response) => {
+      if (response.status === 200) {
+        setModalOpen(true);
+        console.log(response);
+      }
+      // else if (response.status === 401)
+      //error
+    });
+  };
   const [chatOpen, setChatOpen] = useState(false);
   const chatClose = () => {
     setChatOpen(!chatOpen);
@@ -112,9 +134,21 @@ const LookUp = () => {
           종례시간에 선생님 온라인 교실에서 만나요~
         </Main>
         <Main>
-          <Button name="출석하기" onClick={modalClose} />
+          <Button name="출석하기" onClick={attendToday} />
         </Main>
-        {modalOpen && <Modal modalClose={modalClose}></Modal>}
+        {modalOpen && (
+          <Overlay
+            variants={overlay}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={() => setModalOpen(false)}
+          >
+            {modalOpen && (
+              <AttendanceModal modalClose={setModalOpen}></AttendanceModal>
+            )}
+          </Overlay>
+        )}
       </Board>
       <ChatCircle onClick={chatClose}>· · ·</ChatCircle>
       {chatOpen && <ChattingList chatClose={chatClose}></ChattingList>}
