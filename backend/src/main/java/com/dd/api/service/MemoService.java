@@ -1,5 +1,6 @@
 package com.dd.api.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.dd.api.dto.request.MemoRegistRequestDto;
@@ -12,4 +13,5 @@ public interface MemoService {
 	Memo updateMemo(MemoUpdateRequestDto memoUpdateRequestDto);
 	Memo deleteMemo(UUID memoId);
 	MemoResponseDto getMemo(UUID memoId);
+	List<MemoResponseDto> getMemoList(String accessToken);
 }

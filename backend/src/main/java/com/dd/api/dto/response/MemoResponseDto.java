@@ -9,11 +9,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @ApiModel("memoResponseDto")
 public class MemoResponseDto {
 	
@@ -23,7 +25,7 @@ public class MemoResponseDto {
 	@ApiModelProperty(name="내용", example="메모 내용입니다.")
 	String content;
 	
-	@ApiModelProperty(name="등록일시", example="2022-01-01")
+	@ApiModelProperty(name="등록일시", example="2022-01-27T10:08:12.963")
 	LocalDateTime regTime;
 	
 }

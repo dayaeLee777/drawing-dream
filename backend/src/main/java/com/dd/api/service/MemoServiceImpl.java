@@ -1,6 +1,8 @@
 package com.dd.api.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -69,6 +71,7 @@ public class MemoServiceImpl implements MemoService {
 		return memoRepository.save(memo);
 	}
 
+	@Transactional
 	@Override
 	public MemoResponseDto getMemo(UUID memoId) {
 		Memo memo = memoRepository.findById(memoId).orElse(null);
@@ -82,6 +85,24 @@ public class MemoServiceImpl implements MemoService {
 				.build();
 		
 		return memoResponseDto;
+	}
+
+	@Transactional
+	@Override
+	public List<MemoResponseDto> getMemoList(String accessToken) {
+		String token = accessToken.split(" ")[1];
+		String loginId = jwtAuthenticationProvider.getUsername(token);
+		User user = authRepository.findByLoginId(loginId).get().getUser();
+		List<MemoResponseDto> memoList = new ArrayList<MemoResponseDto>();
+		memoRepository.findByUserIdAndDelYnOrderByRegTimeDesc(user.getId(), false).forEach(memo -> {
+			MemoResponseDto memoResponseDto = MemoResponseDto.builder()
+					.content(memo.getContent())
+					.memoId(memo.getId())
+					.regTime(memo.getRegTime())
+					.build();
+			memoList.add(memoResponseDto);
+		});
+		return memoList;
 	}
 
 }

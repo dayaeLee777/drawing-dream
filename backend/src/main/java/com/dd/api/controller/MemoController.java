@@ -1,10 +1,7 @@
 package com.dd.api.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.MemoRegistRequestDto;
 import com.dd.api.dto.request.MemoUpdateRequestDto;
-import com.dd.api.dto.response.AttendanceListResponseDto;
 import com.dd.api.dto.response.MemoResponseDto;
 import com.dd.api.service.MemoService;
-import com.dd.common.model.BaseResponse;
+import com.dd.common.model.BaseResponseDto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,27 +40,38 @@ public class MemoController {
 	@ApiResponses({
 		@ApiResponse(code=201, message="메모가 정상적으로 등록되었습니다."),
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
-		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
+		@ApiResponse(code=409, message="메모등록을 실패했습니다.")
 	})
-	public ResponseEntity<? extends BaseResponse> regist(
+	public ResponseEntity<? extends BaseResponseDto> regist(
 		@ApiIgnore @RequestHeader("Authorization") String accessToken, 
 		@RequestBody @ApiParam(value = "등록할 메모", required = true) MemoRegistRequestDto memoRegistRequestDto){
 		if(memoService.createMemo(accessToken, memoRegistRequestDto) != null)
-			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
-		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
 	
 	@GetMapping("/{memoId}")
-	@ApiOperation(value = "메모 불러오기", notes="<strong>memeID에 해당하는 메모를 불러온다.</strong>")
+	@ApiOperation(value = "메모 불러오기", notes="<strong>memoID에 해당하는 메모를 불러온다.</strong>")
 	@ApiResponses({
 		@ApiResponse(code=201, message="메모을 정상적으로 조회하였습니다."),
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
-		@ApiResponse(code=409, message="출석조회를 실패했습니다.")
+		@ApiResponse(code=409, message="메모조회를 실패했습니다.")
 	})
 	public ResponseEntity<MemoResponseDto> getMemo(
 			@PathVariable("memoId") @RequestBody @ApiParam(value = "조회할 메모ID", required = true) UUID memoId){
-//		attendanceService.getAttendancebyUserIdAndDelYnOrderByDate(userId);
 		return ResponseEntity.status(200).body(memoService.getMemo(memoId));
+	}
+	
+	@GetMapping("/list")
+	@ApiOperation(value = "메모 목록 불러오기", notes="<strong>로그인한 유저가 작성한 메모 리스트를 불러온다.</strong>")
+	@ApiResponses({
+		@ApiResponse(code=201, message="메모 목록을 정상적으로 조회하였습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="메모조회를 실패했습니다.")
+	})
+	public ResponseEntity<List<MemoResponseDto>> getMemoList(
+			@ApiIgnore @RequestHeader("Authorization") String accessToken ) {
+		return ResponseEntity.status(200).body(memoService.getMemoList(accessToken));
 	}
 	
 	@PutMapping
@@ -72,13 +79,13 @@ public class MemoController {
 	@ApiResponses({
 		@ApiResponse(code=201, message="메모가 정상적으로 수정되었습니다."),
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
-		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
+		@ApiResponse(code=409, message="메모수정을 실패했습니다.")
 	})
-	public ResponseEntity<? extends BaseResponse> update(
+	public ResponseEntity<? extends BaseResponseDto> update(
 		@RequestBody @ApiParam(value = "등록할 메모", required = true) MemoUpdateRequestDto memoUpdateRequestDto){
 		if(memoService.updateMemo(memoUpdateRequestDto) != null)
-			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
-		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
 	
 	@PutMapping("/delete/{memoId}")
@@ -86,12 +93,12 @@ public class MemoController {
 	@ApiResponses({
 		@ApiResponse(code=201, message="메모가 정상적으로 삭제되었습니다."),
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
-		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
+		@ApiResponse(code=409, message="메모삭제를 실패했습니다.")
 	})
-	public ResponseEntity<? extends BaseResponse> update(
+	public ResponseEntity<? extends BaseResponseDto> update(
 			@PathVariable("memoId") @RequestBody @ApiParam(value = "삭제할 메모ID ", required = true) UUID memoId){
 		if(memoService.deleteMemo(memoId) != null)
-			return ResponseEntity.status(200).body(BaseResponse.of(200, "Success"));
-		return ResponseEntity.status(409).body(BaseResponse.of(409, "Fail"));
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
 }
