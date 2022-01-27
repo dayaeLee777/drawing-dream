@@ -118,10 +118,10 @@ public class UserController {
 	public ResponseEntity<? extends BaseResponseDto> idCheck(
 			@PathVariable("loginId") @ApiParam(value="중복 체크하려는 loginId", required=true) String loginId) {
 		
-		if(userService.checkLoginIdExists(loginId))
-			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "해당 loginId는 중복입니다."));
+		if(!userService.checkLoginIdExists(loginId))
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "해당 loginId는 회원가입 가능합니다."));
 		else
-			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "해당 loginId로 회원가입 가능합니다."));
+			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "해당 loginId은 중복입니다."));
 	}
 	
 }
