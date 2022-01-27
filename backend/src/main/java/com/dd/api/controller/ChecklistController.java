@@ -62,7 +62,7 @@ public class ChecklistController {
 		return ResponseEntity.status(200).body(checklistService.getChecklist(checklistId));
 	}
 	
-	@GetMapping("/list/{userId}")
+	@GetMapping("/list")
 	@ApiOperation(value = "체크리스트 목록 불러오기", notes="<strong>로그인한 유저가 작성한 체크리스트 리스트를 불러온다.</strong>")
 	@ApiResponses({
 		@ApiResponse(code=201, message="체크리스트 목록을 정상적으로 조회하였습니다."),
