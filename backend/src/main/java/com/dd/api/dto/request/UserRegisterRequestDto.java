@@ -38,6 +38,9 @@ public class UserRegisterRequestDto {
 	@ApiModelProperty(name="유저 정보 - 주소")
 	private String address;
 	
+	@ApiModelProperty(name="소속 정보 - 학교 시리얼 번호")
+	private String schoolSerialNo;
+	
 	@ApiModelProperty(name="소속 정보 - 학교명")
 	private String schoolName;
 	

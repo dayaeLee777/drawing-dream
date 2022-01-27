@@ -16,9 +16,11 @@ public interface CommunityService {
 	void updateCommunity(CommunityUpdateRequestDto communityUpdateRequestDto);
 	void plusCommunityHit(Community community);
 //	Community getCommunity(String accessToken, UUID communityID);
-	CommunityGetResponseDto getCommunity(UUID communityID);
+	CommunityGetResponseDto getCommunity(UUID communityId);
 //	CommunityGetListWrapperResponseDto getCommunityList(String accessToken);
 	CommunityGetListWrapperResponseDto getCommunityList();
+//	boolean deleteCommunity(String accessToken, UUID communityId);
+	boolean deleteCommunity(UUID communityId);
 	
 	String getLoginIdFromToken(String accessToken);
 }
