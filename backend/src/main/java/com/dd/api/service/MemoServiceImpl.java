@@ -24,19 +24,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemoServiceImpl implements MemoService {
 
-	private final AuthRepository authRepository;
-
 	private final MemoRepository memoRepository;
 
-	private final JwtAuthenticationProvider jwtAuthenticationProvider;
+	private final JwtTokenService jwtTokenService;
 
 	@Transactional
 	@Override
 	public Memo createMemo(String accessToken, MemoRegistRequestDto memoRegistRequestDto) {
-		String token = accessToken.split(" ")[1];
-		String loginId = jwtAuthenticationProvider.getUsername(token);
-		User user = authRepository.findByLoginId(loginId).get().getUser();
-
+		User user = jwtTokenService.convertTokenToUser(accessToken);
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
 		Memo memo = Memo.builder()
@@ -90,9 +85,7 @@ public class MemoServiceImpl implements MemoService {
 	@Transactional
 	@Override
 	public List<MemoResponseDto> getMemoList(String accessToken) {
-		String token = accessToken.split(" ")[1];
-		String loginId = jwtAuthenticationProvider.getUsername(token);
-		User user = authRepository.findByLoginId(loginId).get().getUser();
+		User user = jwtTokenService.convertTokenToUser(accessToken);
 		List<MemoResponseDto> memoList = new ArrayList<MemoResponseDto>();
 		memoRepository.findByUserIdAndDelYnOrderByRegTimeDesc(user.getId(), false).forEach(memo -> {
 			MemoResponseDto memoResponseDto = MemoResponseDto.builder()
