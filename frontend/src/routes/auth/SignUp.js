@@ -10,6 +10,7 @@ import SchoolCode from "components/signup/school/SchoolCode";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { idCheck, signUp } from "api/user";
+import { ReactNewWindowStyles } from "react-new-window-styles";
 
 const Container = styled.div`
   display: flex;
@@ -431,13 +432,13 @@ const SignUp = () => {
         </NewWindow>
       )}
       {isSchoolCodeOpen && (
-        <NewWindow title="학교찾기" onUnload={closeSchoolCode}>
+        <ReactNewWindowStyles title="학교찾기" onUnload={closeSchoolCode}>
           <SchoolCode
             setSchoolName={setSchoolName}
             setSchoolCode={setSchoolCode}
             onClose={closeSchoolCode}
           />
-        </NewWindow>
+        </ReactNewWindowStyles>
       )}
       <MainContainer>
         <FormContainer>
