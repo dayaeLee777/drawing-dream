@@ -503,6 +503,9 @@ const ModifyProfile = () => {
             />
           </InputContainer>
 
+          {/*---------------------------------------------------------------------------------------------*/}
+          {/*---------------------------------------------------------------------------------------------*/}
+          {/* 학년 반 번호 일단 주석 */}
           {/* <InputContainer>
                 <Wrapper>
                   <Type>
@@ -547,7 +550,8 @@ const ModifyProfile = () => {
                   />
                 </Wrapper>
               </InputContainer> */}
-
+          {/*---------------------------------------------------------------------------------------------*/}
+          {/*---------------------------------------------------------------------------------------------*/}
           {/* <Button
               mt="3rem"
               mr="1rem"
@@ -567,11 +571,20 @@ const ModifyProfile = () => {
         </ModifyContainer>
         {/* </InnerContainer> */}
         <InputContainer>
-          <Button name="수정하기" mr="1rem" width="7rem" />
           <Button
+            mt="3rem"
+            mr="1rem"
+            width="10rem"
+            height="3rem"
+            name="수정하기"
+            onClick={onSubmit}
+          />
+          <Button
+            mt="3rem"
+            color="#C4C4C4"
+            width="10rem"
+            height="3rem"
             name="취소"
-            color="#c4c4c4"
-            width="7rem"
             hoverColor="#a2a2a2"
           />
         </InputContainer>
