@@ -56,9 +56,8 @@ public class AttendanceController {
 		@ApiResponse(code=409, message="출석조회를 실패했습니다.")
 	})
 	public ResponseEntity<List<AttendanceListResponseDto>> getList(
-			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@PathVariable("userId") @RequestBody @ApiParam(value = "출석 조회할 유저의 UUID", required = true) UUID userId){
-		return ResponseEntity.status(200).body(attendanceService.getAttendancebyUserId(accessToken, userId));
+		return ResponseEntity.status(200).body(attendanceService.getAttendancebyUserId(userId));
 	}
 	
 	@PutMapping
@@ -69,9 +68,8 @@ public class AttendanceController {
 		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
 	})
 	public ResponseEntity<? extends BaseResponseDto> update(
-			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@RequestBody @ApiParam(value = "출석 수정", required = true) AttendanceUpdateRequestDto updateInfo){
-		if(attendanceService.updateAttendance(accessToken, updateInfo) != null)
+		if(attendanceService.updateAttendance(updateInfo) != null)
 			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
 		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
@@ -84,9 +82,8 @@ public class AttendanceController {
 		@ApiResponse(code=409, message="출석하기를 실패했습니다.")
 	})
 	public ResponseEntity<? extends BaseResponseDto> delete(
-			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@PathVariable("attendanceId") @RequestBody @ApiParam(value = "삭제할 출석ID ", required = true) UUID attendanceId){
-		if(attendanceService.deleteAttendance(accessToken, attendanceId) != null)
+		if(attendanceService.deleteAttendance( attendanceId) != null)
 			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
 		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
