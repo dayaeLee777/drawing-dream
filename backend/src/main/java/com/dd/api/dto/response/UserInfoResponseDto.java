@@ -1,6 +1,6 @@
 package com.dd.api.dto.response;
 
-import com.dd.common.model.BaseResponse;
+import com.dd.common.model.BaseResponseDto;
 import com.dd.db.entity.user.User;
 
 import io.swagger.annotations.ApiModel;
@@ -9,8 +9,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@ApiModel("UserInfoRes")
-public class UserInfoResponseDto extends BaseResponse {
+@ApiModel("UserInfoResponseDto")
+public class UserInfoResponseDto extends BaseResponseDto {
 	
 	@ApiModelProperty(name="유저 정보 - 이름")
 	private String userName;

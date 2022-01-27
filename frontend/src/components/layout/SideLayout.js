@@ -3,7 +3,7 @@ import SideMenu from "components/layout/SideMenu";
 import styled from "styled-components";
 
 const SideWrapper = styled.div`
-  width: 25rem;
+  width: 20rem;
   display: grid;
   grid-template-rows: 0fr 2fr;
   grid-gap: 2rem;

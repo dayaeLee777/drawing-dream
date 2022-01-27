@@ -12,8 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@ApiModel("BaseResponse")
-public class BaseResponse {
+@ApiModel("BaseResponseDto")
+public class BaseResponseDto {
 	
 	@ApiModelProperty(name="응답 메세지", example="정상")
 	String message = null;
@@ -21,19 +21,19 @@ public class BaseResponse {
 	@ApiModelProperty(name="응답 코드", example="200")
 	Integer statusCode = null;
 	
-	public BaseResponse() {}
+	public BaseResponseDto() {}
 	
-	public BaseResponse(Integer statusCode) {
+	public BaseResponseDto(Integer statusCode) {
 		this.statusCode = statusCode;
 	}
 	
-	public BaseResponse(Integer statusCode, String message) {
+	public BaseResponseDto(Integer statusCode, String message) {
 		this.statusCode = statusCode;
 		this.message = message;
 	}
 	
-	public static BaseResponse of(Integer statusCode, String message) {
-		BaseResponse baseResponse = new BaseResponse();
+	public static BaseResponseDto of(Integer statusCode, String message) {
+		BaseResponseDto baseResponse = new BaseResponseDto();
 		baseResponse.statusCode = statusCode;
 		baseResponse.message = message;
 		return baseResponse;

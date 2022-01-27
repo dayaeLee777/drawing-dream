@@ -1,25 +1,33 @@
-import { loginUser } from "api/user";
+import { loginUser, getDept } from "api/user";
 
 const LOGIN_SUCCESS = "USER/LOGIN_SUCCESS";
 const LOGIN_FAIL = "USER/LOGIN_FAIL";
 const LOGOUT_SUCCESS = "USER/LOGOUT_SUCCESS";
+const GET_DEPT_SUCCESS = "USER/GET_DEPT_SUCCESS";
 
 export const login = (user, isChecked) => async (dispatch) => {
   loginUser(user)
     .then((response) => {
       console.log(response);
-      if (response.headers.authorization && response.data) {
+      if (response.data) {
         if (isChecked) {
-          localStorage.setItem("access-token", response.headers.authorization);
+          localStorage.setItem("access-token", response.data.accessToken);
         } else {
-          sessionStorage.setItem(
-            "access-token",
-            response.headers.authorization
-          );
+          sessionStorage.setItem("access-token", response.data.accessToken);
         }
-        dispatch({
-          type: LOGIN_SUCCESS,
-          userId: response.data,
+
+        const userId = response.data.userId;
+
+        getDept(userId).then((response) => {
+          dispatch({
+            type: LOGIN_SUCCESS,
+            userId: userId,
+            data: response.data,
+          });
+          // dispatch({
+          //   type: GET_DEPT_SUCCESS,
+          //   data: response,
+          // });
         });
       }
     })
@@ -45,23 +53,34 @@ const token =
   localStorage.getItem("access-token");
 
 const initialState = token
-  ? { isLoggedIn: true, error: false }
-  : { isLoggedIn: false, error: false };
+  ? { isLoggedIn: true, userId: "", userName: "", schoolName: "", error: false }
+  : {
+      isLoggedIn: false,
+      userId: "",
+      userName: "",
+      schoolName: "",
+      error: false,
+    };
 
 const user = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
+        ...state,
         isLoggedIn: true,
         userId: action.userId,
+        userName: action.data.userName,
+        schoolName: action.data.schoolName,
       };
     case LOGIN_FAIL:
       return {
+        ...state,
         isLoggedIn: false,
         error: true,
       };
     case LOGOUT_SUCCESS:
       return {
+        ...state,
         isLoggedIn: false,
         userId: null,
       };
