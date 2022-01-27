@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import blankProfile from "assets/img/blank-profile.png";
 import NewWindow from "react-new-window";
 import PostCode from "components/signup/postcode/FindPostCode";
-import { getUser, idCheck } from "api/user";
+import { getUser } from "api/user";
 import { useSelector } from "react-redux";
 import validationCheck from "components/signup/validationCheck";
 
@@ -126,7 +126,7 @@ const ModifyProfile = () => {
   const [valids, setValids] = useState({
     validPassword: false,
     equelPassword: false,
-    validEmail: false,
+    validEmail: true,
   });
   // VALIDATION END
 
@@ -178,13 +178,15 @@ const ModifyProfile = () => {
   };
 
   const onSubmit = async () => {
+    console.log(inputs);
     if (
-      validEmail &&
-      validPassword &&
-      equelPassword &&
-      gradeCode &&
-      classCode &&
-      studentNo
+      validEmail
+      // &&
+      // validPassword &&
+      // equelPassword &&
+      // gradeCode &&
+      // classCode &&
+      // studentNo
     ) {
       console.log(inputs);
       //   try {

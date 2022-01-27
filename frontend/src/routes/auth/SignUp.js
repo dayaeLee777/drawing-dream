@@ -7,9 +7,8 @@ import logo from "assets/img/logo.png";
 import NewWindow from "react-new-window";
 import PostCode from "components/signup/postcode/FindPostCode";
 import SchoolCode from "components/signup/school/SchoolCode";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { idCheck, signUp } from "api/user";
+import { signUp } from "api/user";
 import validationCheck from "components/signup/validationCheck";
 
 const Container = styled.div`
