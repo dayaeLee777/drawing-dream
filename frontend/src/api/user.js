@@ -37,6 +37,7 @@ export const getDept = async (userId, success, fail) => {
 };
 
 export const getUser = async (userId, success, fail) => {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${userId}`;
   return await axios
     .get(`/api/user/${userId}`, {
       headers: { "Context-Type": `application/json` },

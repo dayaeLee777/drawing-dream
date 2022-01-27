@@ -5,6 +5,8 @@ const StyledInput = styled.input`
   height: 1.5rem;
   border-radius: 5px;
   border: 1px solid #787878;
+  padding-left: 0.5rem;
+  font-size: 1rem;
 
   ${(props) =>
     props.width &&
