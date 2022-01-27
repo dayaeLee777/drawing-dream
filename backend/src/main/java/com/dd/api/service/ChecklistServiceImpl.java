@@ -1,11 +1,14 @@
 package com.dd.api.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.TypedSort;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.ChecklistRegistRequestDto;
@@ -55,17 +58,60 @@ public class ChecklistServiceImpl implements ChecklistService {
 		return null;
 	}
 
+	@Transactional
 	@Override
 	public ChecklistResponseDto getChecklist(UUID checklistId) {
-		// TODO Auto-generated method stub
-		return null;
+		Checklist checklist = checklistRepository.findById(checklistId).orElse(null);
+		if(checklist==null)
+			return null;
+		
+		ChecklistResponseDto checklistResponseDto = ChecklistResponseDto.builder()
+				.cheklistId(checklist.getId())
+				.content(checklist.getContent())
+				.isChecked(checklist.isChecked())
+				.build();
+			
+		return checklistResponseDto;
 	}
 
 	@Transactional
 	@Override
 	public List<ChecklistResponseDto> getChecklistList(String accessToken) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = jwtTokenService.convertTokenToUser(accessToken);
+		List<ChecklistResponseDto> checklistList = new ArrayList<ChecklistResponseDto>();
+		
+		TypedSort<Checklist> checklistSort = Sort.sort(Checklist.class);
+
+		Sort sort = checklistSort.by(Checklist::getRegTime).descending()
+		  .and(checklistSort.by(Checklist::isChecked).descending());
+		
+		checklistRepository.findByUserIdAndDelYn(user.getId(), false, sort).forEach(checklist -> {
+			ChecklistResponseDto checklistResponseDto = ChecklistResponseDto.builder()
+					.cheklistId(checklist.getId())
+					.content(checklist.getContent())
+					.isChecked(checklist.isChecked())
+					.build();
+			checklistList.add(checklistResponseDto);
+		});
+		
+//		checklistRepository.findByUserIdAndDelYnAndIsCheckedOrderByRegTimeDesc(user.getId(), false, false).forEach(checklist -> {
+//			ChecklistResponseDto checklistResponseDto = ChecklistResponseDto.builder()
+//					.cheklistId(checklist.getId())
+//					.content(checklist.getContent())
+//					.isChecked(checklist.isChecked())
+//					.build();
+//			checklistList.add(checklistResponseDto);
+//		});
+		
+//		checklistRepository.findByUserIdAndDelYnAndIsCheckedOrderByRegTimeDesc(user.getId(), false, false).forEach(checklist -> {
+//			ChecklistResponseDto checklistResponseDto = ChecklistResponseDto.builder()
+//					.cheklistId(checklist.getId())
+//					.content(checklist.getContent())
+//					.isChecked(checklist.isChecked())
+//					.build();
+//			checklistList.add(checklistResponseDto);
+//		});
+		return checklistList;
 	}
 
 }

@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.user.User;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

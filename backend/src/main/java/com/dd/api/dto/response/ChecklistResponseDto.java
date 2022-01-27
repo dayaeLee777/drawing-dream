@@ -1,6 +1,5 @@
 package com.dd.api.dto.response;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import io.swagger.annotations.ApiModel;
@@ -16,16 +15,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-@ApiModel("memoResponseDto")
+@ApiModel("checklistResponseDto")
 public class ChecklistResponseDto {
 	
-	@ApiModelProperty(name="메모Id", example="00000000-0000-0000-0000-00000000")
-	UUID memoId;
+	@ApiModelProperty(name="체크리스트 Id", example="00000000-0000-0000-0000-00000000")
+	UUID cheklistId;
 	
 	@ApiModelProperty(name="내용", example="메모 내용입니다.")
 	String content;
 	
-	@ApiModelProperty(name="등록일시", example="2022-01-27T10:08:12.963")
-	LocalDateTime regTime;
+	@ApiModelProperty(name="체크리스트 완료여부", example="true")
+	boolean isChecked;
 	
 }
