@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@ApiModel("UserRegistPostReq")
+@ApiModel("UserRegisterRequestDto")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

@@ -28,7 +28,16 @@ export const getSchool = async (params, success, fail) => {
 
 export const getDept = async (userId, success, fail) => {
   return await axios
-    .post(`/api/profile/${userId}`, {
+    .get(`/api/profile/${userId}`, {
+      headers: { "Context-Type": `application/json` },
+    })
+    .then(success)
+    .catch(fail);
+};
+
+export const getUser = async (userId, success, fail) => {
+  return await axios
+    .get(`/api/user/${userId}`, {
       headers: { "Context-Type": `application/json` },
     })
     .then(success)

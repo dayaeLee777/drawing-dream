@@ -15,7 +15,8 @@ import lombok.NoArgsConstructor;
  */
 @Getter
 @NoArgsConstructor
-@ApiModel("AttendanceUpdatePutReq")
+@ApiModel("AttendanceUpdateRequestDto")
+
 public class AttendanceUpdateRequestDto {
 	
 	@ApiModelProperty(name="변경할 출석 uuid", example="00000000-0000-0000-0000-00000000")

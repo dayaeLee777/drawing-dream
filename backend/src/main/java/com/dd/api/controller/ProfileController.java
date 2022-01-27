@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dd.api.dto.response.ProfileResponseDto;
 import com.dd.api.dto.response.UserInfoResponseDto;
 import com.dd.api.service.ProfileService;
-import com.dd.common.model.BaseResponse;
+import com.dd.common.model.BaseResponseDto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,15 +39,15 @@ public class ProfileController {
 		@ApiResponse(code=200, message="프로필 정보를 정상적으로 불러왔습니다."),
 		@ApiResponse(code=409, message="프로필 정보를 불러오지 못했습니다."),
 	})
-	public ResponseEntity<? extends BaseResponse> getProfile(
+	public ResponseEntity<? extends BaseResponseDto> getProfile(
 //			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@PathVariable("userId") @ApiParam(value="회원의 userId", required=true) UUID userId) {
 		ProfileResponseDto profileResponseDto = null;
 		try {
 //			profileResponseDto = profileService.getProfile(accessToken, userId);
 			profileResponseDto = profileService.getProfile(userId);
-		} catch(NoSuchElementException e) {
-			return ResponseEntity.status(409).body(BaseResponse.of(200, "회원정보를 불러오지 못했습니다."));
+		} catch(Exception e) {
+			return ResponseEntity.status(409).body(BaseResponseDto.of(200, "회원정보를 불러오지 못했습니다."));
 		}
 		
 		return ResponseEntity.status(200).body(ProfileResponseDto.of(200, "회원정보를 정상적으로 불러왔습니다", profileResponseDto));

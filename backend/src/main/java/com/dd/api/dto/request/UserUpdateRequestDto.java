@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@ApiModel("UserUpdatePutReq")
+@ApiModel("UserUpdateRequestDto")
 @NoArgsConstructor
 @Getter
 public class UserUpdateRequestDto {
