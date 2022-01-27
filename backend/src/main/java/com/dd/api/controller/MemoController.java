@@ -35,7 +35,7 @@ public class MemoController {
 	@Autowired
 	MemoService memoService;
 	
-	@PostMapping()
+	@PostMapping
 	@ApiOperation(value = "메모 등록하기", notes="<strong>로그인한 회원이 작성한 메모를 등록한다.</strong><br/>")
 	@ApiResponses({
 		@ApiResponse(code=201, message="메모가 정상적으로 등록되었습니다."),
@@ -95,7 +95,7 @@ public class MemoController {
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
 		@ApiResponse(code=409, message="메모삭제를 실패했습니다.")
 	})
-	public ResponseEntity<? extends BaseResponseDto> update(
+	public ResponseEntity<? extends BaseResponseDto> delete(
 			@PathVariable("memoId") @RequestBody @ApiParam(value = "삭제할 메모ID ", required = true) UUID memoId){
 		if(memoService.deleteMemo(memoId) != null)
 			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
