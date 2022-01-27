@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.AttendanceUpdateRequestDto;
-import com.dd.api.response.AttendanceListGetRes;
+import com.dd.api.dto.response.AttendanceListResponseDto;
 import com.dd.db.entity.schoollife.Attendance;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
@@ -52,10 +52,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
 	@Transactional
 	@Override
-	public List<AttendanceListGetRes> getAttendancebyUserId(String accessToken, UUID userId) {
-		List<AttendanceListGetRes> attendanceListGetRes = new ArrayList<AttendanceListGetRes>();
+	public List<AttendanceListResponseDto> getAttendancebyUserId(String accessToken, UUID userId) {
+		List<AttendanceListResponseDto> attendanceListGetRes = new ArrayList<AttendanceListResponseDto>();
 		attendanceRepository.findByUserIdAndDelYnOrderByDateDesc(userId, false).forEach(attendance -> {
-			AttendanceListGetRes attendanceGetRes = AttendanceListGetRes.builder()
+			AttendanceListResponseDto attendanceGetRes = AttendanceListResponseDto.builder()
 					.attendanceId(attendance.getId())
 					.userId(attendance.getUser().getId())
 					.attendanceCode(attendance.getAttendanceCode())

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.AttendanceUpdateRequestDto;
-import com.dd.api.response.AttendanceListGetRes;
+import com.dd.api.dto.response.AttendanceListResponseDto;
 import com.dd.api.service.AttendanceService;
 import com.dd.api.service.ProfileService;
 import com.dd.common.model.BaseResponseDto;
@@ -57,7 +57,7 @@ public class AttendanceController {
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
 		@ApiResponse(code=409, message="출석조회를 실패했습니다.")
 	})
-	public ResponseEntity<List<AttendanceListGetRes>> getList(
+	public ResponseEntity<List<AttendanceListResponseDto>> getList(
 			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@PathVariable("userId") @RequestBody @ApiParam(value = "출석 조회할 유저의 UUID", required = true) UUID userId){
 //		attendanceService.getAttendancebyUserIdAndDelYnOrderByDate(userId);
