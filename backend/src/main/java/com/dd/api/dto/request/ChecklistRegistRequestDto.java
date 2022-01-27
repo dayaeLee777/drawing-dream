@@ -1,7 +1,5 @@
 package com.dd.api.dto.request;
 
-import java.util.UUID;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -15,6 +13,4 @@ public class ChecklistRegistRequestDto {
 	@ApiModelProperty(name="체크리스트 내용", example="체크리스트 내용입니다~~")
 	private String content;
 	
-	@ApiModelProperty(name="UUID", example="UUID")
-	private UUID userid;
 }

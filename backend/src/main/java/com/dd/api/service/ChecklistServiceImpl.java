@@ -8,7 +8,6 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.TypedSort;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.ChecklistRegistRequestDto;
@@ -17,7 +16,6 @@ import com.dd.api.dto.response.ChecklistResponseDto;
 import com.dd.db.entity.addon.Checklist;
 import com.dd.db.entity.user.User;
 import com.dd.db.repository.ChecklistRepository;
-import com.dd.db.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,15 +27,11 @@ public class ChecklistServiceImpl implements ChecklistService {
 	
 	private final JwtTokenService jwtTokenService;
 	
-	private final UserRepository userRepository;
-	
 	@Transactional
 	@Override
-//	public Checklist createChecklist(String accessToken, ChecklistRegistRequestDto checklistRegistRequestDto) {
-		public Checklist createChecklist(ChecklistRegistRequestDto checklistRegistRequestDto) {
-//		User user = jwtTokenService.convertTokenToUser(accessToken);
+	public Checklist createChecklist(String accessToken, ChecklistRegistRequestDto checklistRegistRequestDto) {
+		User user = jwtTokenService.convertTokenToUser(accessToken);
 		LocalDateTime currentDateTime = LocalDateTime.now();
-		User user = userRepository.findById(checklistRegistRequestDto.getUserid()).get();
 		Checklist checklist = Checklist.builder()
 				.content(checklistRegistRequestDto.getContent())
 				.regTime(currentDateTime)
@@ -89,10 +83,8 @@ public class ChecklistServiceImpl implements ChecklistService {
 
 	@Transactional
 	@Override
-//	public List<ChecklistResponseDto> getChecklistList(String accessToken) {
-		public List<ChecklistResponseDto> getChecklistList(UUID userId) {
-//		User user = jwtTokenService.convertTokenToUser(accessToken);
-		User user = userRepository.findById(userId).get();
+	public List<ChecklistResponseDto> getChecklistList(String accessToken) {
+		User user = jwtTokenService.convertTokenToUser(accessToken);
 		List<ChecklistResponseDto> checklistList = new ArrayList<ChecklistResponseDto>();
 		
 		Sort sort = Sort.by("regTime").descending();

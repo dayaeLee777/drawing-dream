@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.ChecklistRegistRequestDto;
 import com.dd.api.dto.request.ChecklistUpdateRequestDto;
-import com.dd.api.dto.request.MemoUpdateRequestDto;
 import com.dd.api.dto.response.ChecklistResponseDto;
 import com.dd.api.service.ChecklistService;
 import com.dd.common.model.BaseResponseDto;
@@ -44,10 +43,9 @@ public class ChecklistController {
 		@ApiResponse(code=409, message="체크리스트 등록을 실패했습니다.")
 	})
 	public ResponseEntity<? extends BaseResponseDto> regist(
-//		@ApiIgnore @RequestHeader("Authorization") String accessToken, 
+		@ApiIgnore @RequestHeader("Authorization") String accessToken, 
 		@RequestBody @ApiParam(value = "등록할 체크리스트", required = true) ChecklistRegistRequestDto checklistRegistRequestDto){
-//		if(checklistService.createChecklist(accessToken, checklistRegistRequestDto) != null)
-			if(checklistService.createChecklist(checklistRegistRequestDto) != null)
+		if(checklistService.createChecklist(accessToken, checklistRegistRequestDto) != null)
 			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
 		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
@@ -72,10 +70,8 @@ public class ChecklistController {
 		@ApiResponse(code=409, message="체크리스트조회를 실패했습니다.")
 	})
 	public ResponseEntity<List<ChecklistResponseDto>> getChecklistList(
-//			@ApiIgnore @RequestHeader("Authorization") String accessToken ) {
-			@PathVariable("userId") @RequestBody @ApiParam(value = "조회할 체크리스트ID", required = true) UUID userId){
-		return ResponseEntity.status(200).body(checklistService.getChecklistList(userId));
-//		return ResponseEntity.status(200).body(checklistService.getChecklistList(accessToken));
+			@ApiIgnore @RequestHeader("Authorization") String accessToken ) {
+		return ResponseEntity.status(200).body(checklistService.getChecklistList(accessToken));
 	}
 	
 	@PutMapping
