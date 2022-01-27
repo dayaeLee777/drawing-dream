@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import board from "assets/img/board.png";
 import Modal from "../components/modal/Modal";
-import Chatting from '../components/layout/Chatting'
-import ChattingList from '../components/layout/ChattingList'
+import Chatting from "../components/layout/Chatting";
+import ChattingList from "../components/layout/ChattingList";
+import axios from "axios";
 
 const Board = styled.article`
   background-image: url(${board});
@@ -65,9 +66,9 @@ const ChatCircle = styled.div`
   position: fixed;
   bottom: 50px;
   right: 50px;
-  background: #FEC25C;
+  background: #fec25c;
   width: 80px;
-  height: 80px;  
+  height: 80px;
   border-radius: 50%;
   color: white;
   padding: 28px;
@@ -75,18 +76,26 @@ const ChatCircle = styled.div`
   text-align: center;
   line-height: 5rem;
   font-size: 2.3rem;
-  box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 `;
 
 const LookUp = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const modalClose = () => {
-    setModalOpen(!modalOpen);
+    // // api -> db
+    // axios.post("/api/adttendance/attend").then((response) => {
+    //   if (response.status === 200)
+    //     setModalOpen(!modalOpen);
+    //   else if (response.status===401)
+    //     //error
+    //     console.log("error");
+    // })
   };
 
-  const [chatOpen, setChatOpen] = useState(false)
+  const [chatOpen, setChatOpen] = useState(false);
   const chatClose = () => {
-      setChatOpen(!chatOpen);
+    setChatOpen(!chatOpen);
   };
 
   return (
@@ -107,11 +116,8 @@ const LookUp = () => {
         </Main>
         {modalOpen && <Modal modalClose={modalClose}></Modal>}
       </Board>
-      <ChatCircle
-            onClick={chatClose}>
-          · · ·
-      </ChatCircle>
-        { chatOpen && <ChattingList chatClose={chatClose}></ChattingList>}
+      <ChatCircle onClick={chatClose}>· · ·</ChatCircle>
+      {chatOpen && <ChattingList chatClose={chatClose}></ChattingList>}
     </>
   );
 };
