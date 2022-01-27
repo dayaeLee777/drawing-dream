@@ -122,6 +122,23 @@ public class CommunityServiceImpl implements CommunityService {
 		communityRepository.save(community);
 	}
 	
+	@Override
+//	public boolean deleteCommunity(String accessToken, UUID communityId) {
+	public boolean deleteCommunity(UUID communityId) {
+		String loginId = "test";
+		// 삭제 요청자 userId
+		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
+		// 삭제할 Community 객체
+		Community community = communityRepository.findById(communityId).get();
+		
+		if(userId != community.getUser().getId()) return false;
+		
+		// community 삭제처리 - delYn=true
+		community.update(true);
+		communityRepository.save(community);
+		
+		return true;
+	}
 	
 	@Override
 	public String getLoginIdFromToken(String accessToken) {

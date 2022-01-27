@@ -29,6 +29,8 @@ public class School extends BaseEntity {
 	
 	private String schoolName;
 	
+	private String schoolSerialNo;
+	
 	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
 	

@@ -3,6 +3,7 @@ package com.dd.api.controller;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,6 +87,18 @@ public class CommunityController {
 		CommunityGetResponseDto communityGetResponseDto = communityService.getCommunity(communityId);
 		
 		return ResponseEntity.status(200).body(CommunityGetResponseDto.of(200, "게시글을 정상적으로 불러왔습니다", communityGetResponseDto));
+	}
+	
+	@DeleteMapping("/{communityId}")
+	@ApiOperation(value="커뮤니티 글 삭제")
+	public ResponseEntity<? extends BaseResponseDto> deleteCommunity(
+//			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@PathVariable("communityId") @ApiParam(value="삭제하려는 커뮤니티 글의 communityId", required=true) UUID communityId) {
+		if(!communityService.deleteCommunity(communityId)) {
+			return ResponseEntity.status(401).body(BaseResponseDto.of(401, "삭제 권한이 없습니다."));
+		}
+		
+		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "게시글을 정상적으로 삭제했습니다."));
 	}
 	
 }
