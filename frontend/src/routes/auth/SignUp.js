@@ -8,8 +8,9 @@ import NewWindow from "react-new-window";
 import PostCode from "components/signup/postcode/FindPostCode";
 import SchoolCode from "components/signup/school/SchoolCode";
 import { useNavigate } from "react-router-dom";
-import { signUp } from "api/user";
 import validationCheck from "components/signup/validationCheck";
+import { signUp } from "api/user";
+import { ReactNewWindowStyles } from "react-new-window-styles";
 
 const Container = styled.div`
   display: flex;
@@ -276,13 +277,13 @@ const SignUp = () => {
         </NewWindow>
       )}
       {isSchoolCodeOpen && (
-        <NewWindow title="학교찾기" onUnload={closeSchoolCode}>
+        <ReactNewWindowStyles title="학교찾기" onUnload={closeSchoolCode}>
           <SchoolCode
             setSchoolName={setSchoolName}
             setSchoolCode={setSchoolCode}
             onClose={closeSchoolCode}
           />
-        </NewWindow>
+        </ReactNewWindowStyles>
       )}
       <MainContainer>
         <FormContainer>
