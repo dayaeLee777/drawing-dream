@@ -3,7 +3,6 @@ package com.dd.api.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dd.api.dto.request.AttendanceUpdateRequestDto;
 import com.dd.api.dto.response.AttendanceListResponseDto;
 import com.dd.api.service.AttendanceService;
-import com.dd.api.service.ProfileService;
 import com.dd.common.model.BaseResponseDto;
 
 import io.swagger.annotations.Api;
@@ -60,7 +58,6 @@ public class AttendanceController {
 	public ResponseEntity<List<AttendanceListResponseDto>> getList(
 			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@PathVariable("userId") @RequestBody @ApiParam(value = "출석 조회할 유저의 UUID", required = true) UUID userId){
-//		attendanceService.getAttendancebyUserIdAndDelYnOrderByDate(userId);
 		return ResponseEntity.status(200).body(attendanceService.getAttendancebyUserId(accessToken, userId));
 	}
 	
