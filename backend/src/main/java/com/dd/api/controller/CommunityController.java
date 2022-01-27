@@ -30,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@Api(value="Community API")
+@Api(value="Community API", tags = { "Community" })
 @RequiredArgsConstructor
 @RequestMapping("/api/community")
 public class CommunityController {

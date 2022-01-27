@@ -26,7 +26,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @CrossOrigin("*")
-@Api(value="Profile API")
+@Api(value="Profile API", tags = { "Profile" })
 @RequiredArgsConstructor
 @RequestMapping("/api/profile")
 public class ProfileController {
