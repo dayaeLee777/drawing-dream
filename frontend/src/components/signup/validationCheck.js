@@ -38,17 +38,8 @@ const validationCheck = (
     }
     // id 중복 검사
     else if (value.length >= 6) {
-      idCheck(value).then((res) => {
-        if (res.data.statusCode === 200) {
-          setValids({
-            ...valids,
-            validId: false,
-          });
-          setErrors({
-            ...errors,
-            idErrMsg: "이미 사용중인 아이디입니다.",
-          });
-        } else if (res.data.statusCode === 409) {
+      idCheck(value)
+        .then(() => {
           setValids({
             ...valids,
             validId: true,
@@ -57,8 +48,18 @@ const validationCheck = (
             ...errors,
             idErrMsg: "사용가능한 아이디입니다.",
           });
-        }
-      });
+        })
+        .catch(() => {
+          console.warn = console.error = () => {};
+          setValids({
+            ...valids,
+            validId: false,
+          });
+          setErrors({
+            ...errors,
+            idErrMsg: "이미 사용중인 아이디입니다.",
+          });
+        });
     }
   } else if (name === "userName") {
     const regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
