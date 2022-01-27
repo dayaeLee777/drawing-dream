@@ -9,7 +9,7 @@ import PostCode from "components/signup/postcode/FindPostCode";
 import SchoolCode from "components/signup/school/SchoolCode";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { signUp } from "api/user";
+import { idCheck, signUp } from "api/user";
 
 const Container = styled.div`
   display: flex;
@@ -111,6 +111,8 @@ const SignUp = () => {
   };
   // 주소 찾기 학교 찾기 END
 
+  const [possibleId, setPossibleId] = useState(false);
+
   // USER INFO STATE
   const [inputs, setInputs] = useState({
     userId: "",
@@ -186,7 +188,6 @@ const SignUp = () => {
           ...errors,
           idErrMsg: "6자리 이상 입력해주세요.",
         });
-        console.log(idErrMsg);
       } else if (!regType1.test(value)) {
         setValids({
           ...valids,
@@ -196,14 +197,29 @@ const SignUp = () => {
           ...errors,
           idErrMsg: "알파벳 소문자와 숫자만 사용가능합니다.",
         });
-      } else {
-        setValids({
-          ...valids,
-          validId: true,
-        });
-        setErrors({
-          ...errors,
-          idErrMsg: "사용가능한 아이디입니다.",
+      }
+      // id 중복 검사
+      else if (value.length >= 6) {
+        idCheck(value).then((res) => {
+          if (res.data.statusCode === 200) {
+            setValids({
+              ...valids,
+              validId: false,
+            });
+            setErrors({
+              ...errors,
+              idErrMsg: "이미 사용중인 아이디입니다.",
+            });
+          } else if (res.data.statusCode === 409) {
+            setValids({
+              ...valids,
+              validId: true,
+            });
+            setErrors({
+              ...errors,
+              idErrMsg: "사용가능한 아이디입니다.",
+            });
+          }
         });
       }
     } else if (name === "userName") {
