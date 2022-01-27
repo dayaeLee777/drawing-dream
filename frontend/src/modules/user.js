@@ -9,19 +9,16 @@ export const login = (user, isChecked) => async (dispatch) => {
   loginUser(user)
     .then((response) => {
       console.log(response);
-      if (response.headers.authorization && response.data) {
+      if (response.data) {
         if (isChecked) {
-          localStorage.setItem("access-token", response.headers.authorization);
+          localStorage.setItem("access-token", response.data.accessToken);
         } else {
-          sessionStorage.setItem(
-            "access-token",
-            response.headers.authorization
-          );
+          sessionStorage.setItem("access-token", response.data.accessToken);
         }
 
-        const userId = response.data;
+        const userId = response.data.userId;
 
-        getDept(response.data).then((response) => {
+        getDept(userId).then((response) => {
           dispatch({
             type: LOGIN_SUCCESS,
             userId: userId,
