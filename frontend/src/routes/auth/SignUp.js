@@ -243,17 +243,18 @@ const SignUp = () => {
     ) {
       try {
         const user = {
-          loginId: userId,
-          password: password,
           address: fullAddress + " " + addressDetail,
-          phone: phoneNumber,
+          classCode: classCode,
+          gradeCode: gradeCode,
+          loginId: userId,
           parentPhone: parentPhoneNumber,
+          password: password,
+          phone: phoneNumber,
           schoolName: schoolName,
+          schoolSerialNo: schoolCode,
+          studentNo: studentNo,
           userEmail: email,
           userName: userName,
-          gradeCode: gradeCode,
-          classCode: classCode,
-          studentNo: studentNo,
         };
 
         signUp(user).then((res) => {
