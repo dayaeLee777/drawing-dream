@@ -26,16 +26,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
 	private final AttendanceRepository attendanceRepository;
 	
-	private final AuthRepository authRepository;
-	
-	private final JwtAuthenticationProvider jwtAuthenticationProvider;
+	private final JwtTokenService jwtTokenService;
 	
 	@Transactional
 	@Override
 	public Attendance createAttendance(String accessToken) {
-		String token = accessToken.split(" ")[1];
-		String loginId = jwtAuthenticationProvider.getUsername(token);
-		User user = authRepository.findByLoginId(loginId).get().getUser();
+		User user = jwtTokenService.convertTokenToUser(accessToken);
 		LocalDate todayDate = LocalDate.now();
 		
 		if(attendanceRepository.findByDateAndUser(todayDate, user).orElse(null) != null)
@@ -52,7 +48,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
 	@Transactional
 	@Override
-	public List<AttendanceListResponseDto> getAttendancebyUserId(String accessToken, UUID userId) {
+	public List<AttendanceListResponseDto> getAttendancebyUserId(UUID userId) {
 		List<AttendanceListResponseDto> attendanceListGetRes = new ArrayList<AttendanceListResponseDto>();
 		attendanceRepository.findByUserIdAndDelYnOrderByDateDesc(userId, false).forEach(attendance -> {
 			AttendanceListResponseDto attendanceGetRes = AttendanceListResponseDto.builder()
@@ -68,7 +64,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
 	@Transactional
 	@Override
-	public Attendance updateAttendance(String accessToken, AttendanceUpdateRequestDto attendanceUpdatePutReq) {
+	public Attendance updateAttendance(AttendanceUpdateRequestDto attendanceUpdatePutReq) {
 		UUID attendanceId = attendanceUpdatePutReq.getAttendanceId();
 		Attendance attendance = attendanceRepository.findById(attendanceId).orElse(null);
 		
@@ -81,7 +77,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
 	@Transactional
 	@Override
-	public Attendance deleteAttendance(String accessToken, UUID attendanceId) {		
+	public Attendance deleteAttendance(UUID attendanceId) {		
 		Attendance attendance = attendanceRepository.findById(attendanceId).orElse(null);
 		
 		if(attendance==null)

@@ -9,7 +9,7 @@ import com.dd.db.entity.schoollife.Attendance;
 
 public interface AttendanceService {
 	Attendance createAttendance(String accessToken);
-	List<AttendanceListResponseDto> getAttendancebyUserId(String accessToken, UUID userId);
-	Attendance updateAttendance(String accessToken, AttendanceUpdateRequestDto attendanceUpdatePutReq);
-	Attendance deleteAttendance(String accessToken, UUID attendanceId);
+	List<AttendanceListResponseDto> getAttendancebyUserId(UUID userId);
+	Attendance updateAttendance(AttendanceUpdateRequestDto attendanceUpdatePutReq);
+	Attendance deleteAttendance(UUID attendanceId);
 }
