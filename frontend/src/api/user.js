@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "config";
 
 // const api = () => {
 //   return axios.create({
@@ -42,4 +43,10 @@ export const getUser = async (userId, success, fail) => {
     })
     .then(success)
     .catch(fail);
+};
+
+export const idCheck = async (userId) => {
+  return await axios.get(`/api/user/idCheck/${userId}`, {
+    headers: { "Context-Type": "application/json" },
+  });
 };
