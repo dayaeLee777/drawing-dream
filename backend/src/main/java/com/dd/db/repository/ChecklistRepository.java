@@ -12,6 +12,5 @@ import com.dd.db.entity.addon.Checklist;
 @Repository
 public interface ChecklistRepository extends JpaRepository<Checklist, UUID> {
 	List<Checklist> findByUserIdAndDelYnAndIsCheckedOrderByRegTimeDesc(UUID userId, boolean delYn, boolean isChecked);
-	List<Checklist> findByUserIdAndDelYn(UUID userId, boolean delYn, Sort sort);
-//	Iterable<Order> findByUserIdAndDelYn(UUID id, boolean delYn, Sort sort);
+	List<Checklist> findByUserIdAndDelYnAndIsChecked(UUID userId, boolean delYn, boolean isChecked, Sort sort);
 }

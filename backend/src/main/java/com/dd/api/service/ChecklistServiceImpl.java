@@ -17,6 +17,7 @@ import com.dd.api.dto.response.ChecklistResponseDto;
 import com.dd.db.entity.addon.Checklist;
 import com.dd.db.entity.user.User;
 import com.dd.db.repository.ChecklistRepository;
+import com.dd.db.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,12 +29,15 @@ public class ChecklistServiceImpl implements ChecklistService {
 	
 	private final JwtTokenService jwtTokenService;
 	
+	private final UserRepository userRepository;
+	
 	@Transactional
 	@Override
-	public Checklist createChecklist(String accessToken, ChecklistRegistRequestDto checklistRegistRequestDto) {
-		User user = jwtTokenService.convertTokenToUser(accessToken);
+//	public Checklist createChecklist(String accessToken, ChecklistRegistRequestDto checklistRegistRequestDto) {
+		public Checklist createChecklist(ChecklistRegistRequestDto checklistRegistRequestDto) {
+//		User user = jwtTokenService.convertTokenToUser(accessToken);
 		LocalDateTime currentDateTime = LocalDateTime.now();
-		
+		User user = userRepository.findById(checklistRegistRequestDto.getUserid()).get();
 		Checklist checklist = Checklist.builder()
 				.content(checklistRegistRequestDto.getContent())
 				.regTime(currentDateTime)
@@ -47,8 +51,13 @@ public class ChecklistServiceImpl implements ChecklistService {
 	@Transactional
 	@Override
 	public Checklist updateChecklist(ChecklistUpdateRequestDto checklistUpdateRequestDto) {
-		// TODO Auto-generated method stub
-		return null;
+		Checklist checklist = checklistRepository.findById(checklistUpdateRequestDto.getChecklistId()).orElse(null);
+		if(checklist == null)
+			return null;
+		
+		checklist.updateChecklist(checklistUpdateRequestDto.getContent(), checklistUpdateRequestDto.isChecked());
+		
+		return checklistRepository.save(checklist);
 	}
 
 	@Transactional
@@ -76,16 +85,15 @@ public class ChecklistServiceImpl implements ChecklistService {
 
 	@Transactional
 	@Override
-	public List<ChecklistResponseDto> getChecklistList(String accessToken) {
-		User user = jwtTokenService.convertTokenToUser(accessToken);
+//	public List<ChecklistResponseDto> getChecklistList(String accessToken) {
+		public List<ChecklistResponseDto> getChecklistList(UUID userId) {
+//		User user = jwtTokenService.convertTokenToUser(accessToken);
+		User user = userRepository.findById(userId).get();
 		List<ChecklistResponseDto> checklistList = new ArrayList<ChecklistResponseDto>();
 		
-		TypedSort<Checklist> checklistSort = Sort.sort(Checklist.class);
-
-		Sort sort = checklistSort.by(Checklist::getRegTime).descending()
-		  .and(checklistSort.by(Checklist::isChecked).descending());
+		Sort sort = Sort.by("regTime").descending();
 		
-		checklistRepository.findByUserIdAndDelYn(user.getId(), false, sort).forEach(checklist -> {
+		checklistRepository.findByUserIdAndDelYnAndIsChecked(user.getId(), false, false, sort).forEach(checklist -> {
 			ChecklistResponseDto checklistResponseDto = ChecklistResponseDto.builder()
 					.cheklistId(checklist.getId())
 					.content(checklist.getContent())
@@ -94,23 +102,15 @@ public class ChecklistServiceImpl implements ChecklistService {
 			checklistList.add(checklistResponseDto);
 		});
 		
-//		checklistRepository.findByUserIdAndDelYnAndIsCheckedOrderByRegTimeDesc(user.getId(), false, false).forEach(checklist -> {
-//			ChecklistResponseDto checklistResponseDto = ChecklistResponseDto.builder()
-//					.cheklistId(checklist.getId())
-//					.content(checklist.getContent())
-//					.isChecked(checklist.isChecked())
-//					.build();
-//			checklistList.add(checklistResponseDto);
-//		});
+		checklistRepository.findByUserIdAndDelYnAndIsChecked(user.getId(), false, true, sort).forEach(checklist -> {
+			ChecklistResponseDto checklistResponseDto = ChecklistResponseDto.builder()
+					.cheklistId(checklist.getId())
+					.content(checklist.getContent())
+					.isChecked(checklist.isChecked())
+					.build();
+			checklistList.add(checklistResponseDto);
+		});
 		
-//		checklistRepository.findByUserIdAndDelYnAndIsCheckedOrderByRegTimeDesc(user.getId(), false, false).forEach(checklist -> {
-//			ChecklistResponseDto checklistResponseDto = ChecklistResponseDto.builder()
-//					.cheklistId(checklist.getId())
-//					.content(checklist.getContent())
-//					.isChecked(checklist.isChecked())
-//					.build();
-//			checklistList.add(checklistResponseDto);
-//		});
 		return checklistList;
 	}
 

@@ -7,12 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.ChecklistRegistRequestDto;
+import com.dd.api.dto.request.ChecklistUpdateRequestDto;
+import com.dd.api.dto.request.MemoUpdateRequestDto;
 import com.dd.api.dto.response.ChecklistResponseDto;
 import com.dd.api.service.ChecklistService;
 import com.dd.common.model.BaseResponseDto;
@@ -41,9 +44,10 @@ public class ChecklistController {
 		@ApiResponse(code=409, message="체크리스트 등록을 실패했습니다.")
 	})
 	public ResponseEntity<? extends BaseResponseDto> regist(
-		@ApiIgnore @RequestHeader("Authorization") String accessToken, 
+//		@ApiIgnore @RequestHeader("Authorization") String accessToken, 
 		@RequestBody @ApiParam(value = "등록할 체크리스트", required = true) ChecklistRegistRequestDto checklistRegistRequestDto){
-		if(checklistService.createChecklist(accessToken, checklistRegistRequestDto) != null)
+//		if(checklistService.createChecklist(accessToken, checklistRegistRequestDto) != null)
+			if(checklistService.createChecklist(checklistRegistRequestDto) != null)
 			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
 		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
@@ -60,7 +64,7 @@ public class ChecklistController {
 		return ResponseEntity.status(200).body(checklistService.getChecklist(checklistId));
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/list/{userId}")
 	@ApiOperation(value = "체크리스트 목록 불러오기", notes="<strong>로그인한 유저가 작성한 체크리스트 리스트를 불러온다.</strong>")
 	@ApiResponses({
 		@ApiResponse(code=201, message="체크리스트 목록을 정상적으로 조회하였습니다."),
@@ -68,7 +72,23 @@ public class ChecklistController {
 		@ApiResponse(code=409, message="체크리스트조회를 실패했습니다.")
 	})
 	public ResponseEntity<List<ChecklistResponseDto>> getChecklistList(
-			@ApiIgnore @RequestHeader("Authorization") String accessToken ) {
-		return ResponseEntity.status(200).body(checklistService.getChecklistList(accessToken));
+//			@ApiIgnore @RequestHeader("Authorization") String accessToken ) {
+			@PathVariable("userId") @RequestBody @ApiParam(value = "조회할 체크리스트ID", required = true) UUID userId){
+		return ResponseEntity.status(200).body(checklistService.getChecklistList(userId));
+//		return ResponseEntity.status(200).body(checklistService.getChecklistList(accessToken));
+	}
+	
+	@PutMapping
+	@ApiOperation(value = "체크리스트 수정하기", notes="<strong>작성한 체크리스트를 수정한다.</strong>")
+	@ApiResponses({
+		@ApiResponse(code=201, message="체크리스트가 정상적으로 수정되었습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="체크리스트 수정을 실패했습니다.")
+	})
+	public ResponseEntity<? extends BaseResponseDto> update(
+		@RequestBody @ApiParam(value = "등록할 체크리스트", required = true) ChecklistUpdateRequestDto checklistUpdateRequestDto){
+		if(checklistService.updateChecklist(checklistUpdateRequestDto) != null)
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
 }

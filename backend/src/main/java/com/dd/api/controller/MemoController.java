@@ -35,7 +35,7 @@ public class MemoController {
 	@Autowired
 	MemoService memoService;
 	
-	@PostMapping()
+	@PostMapping
 	@ApiOperation(value = "메모 등록하기", notes="<strong>로그인한 회원이 작성한 메모를 등록한다.</strong><br/>")
 	@ApiResponses({
 		@ApiResponse(code=201, message="메모가 정상적으로 등록되었습니다."),
