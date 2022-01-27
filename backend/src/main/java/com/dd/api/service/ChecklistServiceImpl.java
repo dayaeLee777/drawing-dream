@@ -63,8 +63,12 @@ public class ChecklistServiceImpl implements ChecklistService {
 	@Transactional
 	@Override
 	public Checklist deleteChecklist(UUID checklistId) {
-		// TODO Auto-generated method stub
-		return null;
+		Checklist checklist = checklistRepository.findById(checklistId).orElse(null);
+		if(checklist == null)
+			return null;
+		
+		checklist.deleteChecklist();
+		return checklistRepository.save(checklist);
 	}
 
 	@Transactional
