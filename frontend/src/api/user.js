@@ -34,7 +34,5 @@ export const getUser = async (userId, success, fail) => {
 };
 
 export const idCheck = async (userId) => {
-  return await axios.get(`/api/user/idCheck/${userId}`, {
-    headers: { "Context-Type": "application/json" },
-  });
+  return await axios.get(`/api/user/idCheck/${userId}`);
 };
