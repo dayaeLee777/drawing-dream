@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import CheckListContent from "../checkList/CheckListContent";
 
 const Wrapper = styled(motion.div)`
   width: 600px;
@@ -41,6 +42,7 @@ const CheckListModal = ({ layoutId }) => {
     <Wrapper onClick={onClick} layoutId={layoutId}>
       <Header>
         <Title>체크 리스트</Title>
+        <CheckListContent />
       </Header>
     </Wrapper>
   );
