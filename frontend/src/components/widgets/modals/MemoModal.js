@@ -35,6 +35,8 @@ const Title = styled.div`
 `;
 
 const MemoModal = ({ layoutId }) => {
+  const [showDetail, setShowDetail] = useState(false);
+
   const onClick = (event) => {
     event.stopPropagation();
   };
@@ -44,7 +46,8 @@ const MemoModal = ({ layoutId }) => {
       <Header>
         <Title>메모</Title>
       </Header>
-      <MemoList />
+
+      {showDetail ? <div></div> : <MemoList />}
     </Wrapper>
   );
 };
