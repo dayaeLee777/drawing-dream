@@ -49,8 +49,8 @@ const validationCheck = (
             idErrMsg: "사용가능한 아이디입니다.",
           });
         })
-        .catch(() => {
-          console.warn = console.error = () => {};
+        .catch((error) => {
+          // console.warn = console.error = () => {};
           setValids({
             ...valids,
             validId: false,
