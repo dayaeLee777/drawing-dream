@@ -33,8 +33,12 @@ const Title = styled.div`
 `;
 
 const TodayClassModal = ({ layoutId }) => {
+  const onClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
-    <Wrapper layoutId={layoutId}>
+    <Wrapper onClick={onClick} layoutId={layoutId}>
       <Header>
         <Title>오늘의 수업</Title>
       </Header>

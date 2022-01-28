@@ -33,8 +33,12 @@ const Title = styled.div`
 `;
 
 const DdayModal = ({ layoutId }) => {
+  const onClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
-    <Wrapper layoutId={layoutId}>
+    <Wrapper onClick={onClick} layoutId={layoutId}>
       <Header>
         <Title>D-DAY</Title>
       </Header>
