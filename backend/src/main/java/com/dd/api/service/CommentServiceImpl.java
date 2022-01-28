@@ -1,17 +1,24 @@
 package com.dd.api.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.CommentRegisterRequestDto;
+import com.dd.api.dto.response.CommentGetListResponseDto;
+import com.dd.api.dto.response.CommentGetListWrapperResponseDto;
 import com.dd.db.entity.board.Comment;
 import com.dd.db.entity.board.Community;
+import com.dd.db.entity.school.School;
+import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
+import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.repository.AuthRepository;
 import com.dd.db.repository.CommentRepository;
 import com.dd.db.repository.CommunityRepository;
-import com.dd.db.repository.UserDepartmentRepository;
 import com.dd.db.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -50,5 +57,23 @@ public class CommentServiceImpl implements CommentService {
 				.build();
 		
 		commentRepository.save(comment);
+	}
+	
+	@Override
+//	public CommentGetListWrapperResponseDto getCommentList(String accessToken, UUID communityId) {
+	public CommentGetListWrapperResponseDto getCommentList(UUID communityId) {
+
+		List<CommentGetListResponseDto> list = new ArrayList<>();
+		Community community = communityRepository.findById(communityId).get();
+		
+		for(Comment c : commentRepository.findByCommunityAndParentIsNull(community).get()) {
+			if(c.isDelYn()) continue;
+			list.add(
+				new CommentGetListResponseDto(c.getUser().getId(),
+				c.getContent(), c.getRegTime(), c.getId())
+			);
+		}
+		
+		return new CommentGetListWrapperResponseDto(list);
 	}
 }

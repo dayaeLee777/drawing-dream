@@ -91,6 +91,7 @@ public class CommunityServiceImpl implements CommunityService {
 		List<CommunityGetListResponseDto> list = new ArrayList<>();
 		
 		for(Community c : communityRepository.findBySchool(school).get()) {
+			if(c.isDelYn()) continue;
 			list.add(
 				new CommunityGetListResponseDto(c.getUser().getId(),
 				c.getTitle(), c.getHit(), c.getRegTime(), c.getId())

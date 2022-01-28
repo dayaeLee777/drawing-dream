@@ -51,4 +51,14 @@ public class Comment extends BaseEntity {
 
 	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> children;
+	
+	// 삭제 처리 update
+	public void update(boolean delYn) {
+		this.delYn = delYn;
+	}
+	
+	// 내용 수정 update
+	public void update(String content) {
+		this.content = content;
+	}
 }
