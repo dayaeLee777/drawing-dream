@@ -33,8 +33,12 @@ const Title = styled.div`
 `;
 
 const CheckListModal = ({ layoutId }) => {
+  const onClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
-    <Wrapper layoutId={layoutId}>
+    <Wrapper onClick={onClick} layoutId={layoutId}>
       <Header>
         <Title>체크 리스트</Title>
       </Header>
