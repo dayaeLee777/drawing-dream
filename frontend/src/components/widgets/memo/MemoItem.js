@@ -21,8 +21,11 @@ const Title = styled.div`
 const Time = styled.div``;
 
 const MemoItem = () => {
+  const getMemo = () => {
+    console.log("hi");
+  };
   return (
-    <Container>
+    <Container onClick={getMemo}>
       <Title>오늘 공부할 것들</Title>
       <Time>2022-01-26 12:33</Time>
     </Container>
