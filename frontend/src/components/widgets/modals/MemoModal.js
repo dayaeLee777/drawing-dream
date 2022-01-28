@@ -35,8 +35,12 @@ const Title = styled.div`
 `;
 
 const MemoModal = ({ layoutId }) => {
+  const onClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
-    <Wrapper layoutId={layoutId}>
+    <Wrapper onClick={onClick} layoutId={layoutId}>
       <Header>
         <Title>메모</Title>
       </Header>
