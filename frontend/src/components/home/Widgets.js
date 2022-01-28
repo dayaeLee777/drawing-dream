@@ -14,6 +14,7 @@ const Container = styled.div`
   display: grid;
   gap: 2rem;
   grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 2fr;
 `;
 
 const Overlay = styled(motion.div)`

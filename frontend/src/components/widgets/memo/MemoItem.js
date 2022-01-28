@@ -1,4 +1,5 @@
-import React from "react";
+import { getMemo } from "api/memo";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -9,7 +10,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 1rem;
+  padding: 1.5rem;
   margin-bottom: 2rem;
   border-radius: 10px;
   /* background-color: ${({ theme }) => theme.widgetColor}; */
@@ -20,14 +21,16 @@ const Title = styled.div`
 `;
 const Time = styled.div``;
 
-const MemoItem = () => {
-  const getMemo = () => {
-    console.log("hi");
+const MemoItem = ({ data, memoId, setShowDetail, setMemoId }) => {
+  // const [showDetail, setShowDetail] = useState(false);
+  const getDetail = () => {
+    // setShowDetail(true);
+    setMemoId(memoId);
   };
   return (
-    <Container onClick={getMemo}>
-      <Title>오늘 공부할 것들</Title>
-      <Time>2022-01-26 12:33</Time>
+    <Container onClick={getDetail}>
+      <Title>{data.content}</Title>
+      <Time>{data.regTime}</Time>
     </Container>
   );
 };
