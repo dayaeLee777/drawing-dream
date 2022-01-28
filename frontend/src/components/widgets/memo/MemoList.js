@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import MemoItem from "./MemoItem";
 
@@ -11,6 +11,7 @@ const Container = styled.div`
 `;
 
 const MemoList = () => {
+  useEffect(() => {}, []);
   return (
     <Container>
       <MemoItem />
