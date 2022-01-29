@@ -11,6 +11,7 @@ const CheckListItemsContainer = styled.div`
   align-items: center;
   overflow-y: auto;
   width: 100%;
+  height: 100%;
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -18,6 +19,12 @@ const CheckListItemsContainer = styled.div`
     background-color: #adb5bd;
     border-radius: 10px;
   }
+`;
+const NullList = styled.div`
+height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CheckListItems = ({ isLoad, setIsLoad, main }) => {
@@ -29,24 +36,24 @@ const CheckListItems = ({ isLoad, setIsLoad, main }) => {
     setIsLoad(false);
   }, [isLoad]);
   if (main) {
-    if (list) {
+    if (list && list.length > 0) {
       return (
         <CheckListItemsContainer>
           {list &&
-            list.slice(0,list.length < 8 ? list.length:7).map((item) => (
-              <CheckListItem
-                item={item}
-                key={item.cheklistId}
-                setIsLoad={setIsLoad}
-                main
-              />
-            ))}
+            list
+              .slice(0, list.length < 8 ? list.length : 7)
+              .map((item) => (
+                <CheckListItem
+                  item={item}
+                  key={item.cheklistId}
+                  setIsLoad={setIsLoad}
+                  main
+                />
+              ))}
         </CheckListItemsContainer>
       );
     } else {
-      return (
-        <>체크리스트를 등록해주세요.</>
-      )
+      return <NullList>체크리스트를 등록해주세요.</NullList>;
     }
   }
   return (

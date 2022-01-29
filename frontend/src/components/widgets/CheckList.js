@@ -25,8 +25,9 @@ const CloseButton = styled.div`
 `;
 
 const Content = styled.div`
-  padding-left: 4rem;
+  padding-left: 5rem;
   padding-right: 5rem;
+  height: 85%;
 `;
 
 const CheckList = ({ setWidgetId, setIsShow, isLoad, setIsLoad }) => {
