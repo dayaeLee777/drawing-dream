@@ -100,6 +100,24 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
+//	public boolean deleteComment(String accessToken, UUID commentId) {
+	public boolean deleteComment(UUID commentId) {
+//		String loginId = getLoginIdFromToken(accessToken);
+		String loginId = "test1";
+		
+		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
+		// 삭제할 Comment
+		Comment comment = commentRepository.findById(commentId).get();
+		
+		if(userId != comment.getUser().getId()) return false;
+		
+		comment.update(true);
+		
+		commentRepository.save(comment);
+		return true;
+	}
+	
+	@Override
 	public String getLoginIdFromToken(String accessToken) {
 		String token = accessToken.split(" ")[1];
 		return jwtAuthenticationProvider.getUsername(token);

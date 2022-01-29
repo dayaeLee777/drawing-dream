@@ -3,6 +3,7 @@ package com.dd.api.controller;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,5 +77,17 @@ public class CommentController {
 		}
 		
 		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "댓글이 정상적으로 수정되었습니다."));
+	}
+	
+	@DeleteMapping("/{commentId}")
+	@ApiOperation(value="커뮤니티 대댓글 삭제")
+	public ResponseEntity<? extends BaseResponseDto> deleteComment(
+//			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@PathVariable("commentId") @ApiParam(value="삭제하려는 커뮤니티 댓글의 commentId", required=true) UUID commentId) {
+		if(!commentService.deleteComment(commentId)) {
+			return ResponseEntity.status(401).body(BaseResponseDto.of(401, "삭제 권한이 없습니다."));
+		}
+		
+		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "댓글을 정상적으로 삭제했습니다."));
 	}
 }

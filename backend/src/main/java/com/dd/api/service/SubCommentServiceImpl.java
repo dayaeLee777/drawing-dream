@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.dd.api.dto.request.CommentUpdateRequestDto;
 import com.dd.api.dto.request.SubCommentRegisterRequestDto;
 import com.dd.api.dto.response.CommentGetListResponseDto;
 import com.dd.api.dto.response.CommentGetListWrapperResponseDto;
@@ -80,6 +81,24 @@ public class SubCommentServiceImpl implements SubCommentService {
 		}
 		
 		return new SubCommentGetListWrapperResponseDto(list);
+	}
+	
+	@Override
+//	public boolean updateSubComment(String accessToken, CommentUpdateRequestDto commentUpdateRequestDto) {
+	public boolean updateSubComment(CommentUpdateRequestDto commentUpdateRequestDto) {
+//		String loginId = getLoginIdFromToken(accessToken);
+		String loginId = "test1";
+		
+		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
+		// 수정할 Comment
+		Comment comment = commentRepository.findById(commentUpdateRequestDto.getCommentId()).get();
+		
+		if(userId != comment.getUser().getId()) return false;
+		
+		comment.update(commentUpdateRequestDto.getContent());
+		commentRepository.save(comment);
+		
+		return true;
 	}
 	
 	@Override
