@@ -16,6 +16,7 @@ import LookUp from "routes/LookUp";
 import Layout from "components/layout/SideLayout";
 import Nav from "components/layout/Nav";
 import styled from "styled-components";
+import Chat from "./chat/Chat";
 
 const Container = styled.div`
   display: grid;
@@ -45,6 +46,7 @@ const AppRouter = () => {
               <Route path="/lookup" element={<LookUp />} />
             </Routes>
           </Container>
+          <Chat />
         </>
       ) : (
         <>
