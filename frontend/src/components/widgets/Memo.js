@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding: 1rem 2rem;
   width: 85%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   /* margin-left: 3rem; */
 `;
 
