@@ -56,14 +56,15 @@ public class CommunityController {
 	@ApiOperation(value="커뮤니티 게시글 수정")
 	@ApiResponses({
 		@ApiResponse(code=200, message="게시글이 정상적으로 수정되었습니다."),
-		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
-		@ApiResponse(code=409, message="게시글 수정에 실패했습니다.")
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다.")
 	})
 	public ResponseEntity<? extends BaseResponseDto> updateCommunity(
 //			@ApiIgnore @RequestHeader("Authorization") String accessToken,
-			@RequestBody @ApiParam(value="커뮤니티 게시글 수정 - 게시글 제목, 내용", required=true) CommunityUpdateRequestDto communityRegisterRequestDto) {
-//		communityService.writeArticle(accessToken, communityRegisterRequestDto);
-		communityService.updateCommunity(communityRegisterRequestDto);
+			@RequestBody @ApiParam(value="커뮤니티 게시글 수정 - 게시글 제목, 내용", required=true) CommunityUpdateRequestDto communityUpdateRequestDto) {
+//		communityService.updateCommunity(accessToken, communityUpdaterRequestDto);
+		if(!communityService.updateCommunity(communityUpdateRequestDto)) {
+			return ResponseEntity.status(401).body(BaseResponseDto.of(401, "게시글 수정 권한이 없습니다"));
+		}
 		
 		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "게시글이 정상적으로 수정되었습니다."));
 	}
