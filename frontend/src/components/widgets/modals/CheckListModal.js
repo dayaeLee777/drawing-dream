@@ -6,6 +6,7 @@ import CheckListContent from "../checkList/CheckListContent";
 const Wrapper = styled(motion.div)`
   width: 600px;
   height: 600px;
+
   background-color: rgba(255, 255, 255, 1);
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
@@ -13,7 +14,6 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   letter-spacing: -1px;
 `;
 const Header = styled.div`
@@ -22,6 +22,8 @@ const Header = styled.div`
   align-items: center;
   width: 60%;
   height: fit-content;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 `;
 
 const Title = styled.div`
@@ -42,8 +44,8 @@ const CheckListModal = ({ layoutId }) => {
     <Wrapper onClick={onClick} layoutId={layoutId}>
       <Header>
         <Title>체크 리스트</Title>
-        <CheckListContent />
       </Header>
+      <CheckListContent />
     </Wrapper>
   );
 };

@@ -4,6 +4,7 @@ import { MdAdd } from "react-icons/md";
 
 const CheckListInsertContainer = styled.form`
   display: flex;
+  width: 100%;
   input {
     outline: none;
     border: 1px solid #dca03a;

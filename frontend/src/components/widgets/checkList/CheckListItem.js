@@ -10,7 +10,7 @@ const CheckListItemContainer = styled.div`
   padding: 1rem;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 90%;
   & + & {
     border-top: 1px solid #dee2e6;
   }
