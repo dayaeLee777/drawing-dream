@@ -3,7 +3,7 @@ import linkImg from "assets/img/link.png";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  background-color: #f1f1f1;
+  background-color: ${(props) => (props.bc ? "#fec25c" : "#f1f1f1")};
   height: 4rem;
   margin-bottom: 1rem;
   display: flex;
@@ -30,11 +30,12 @@ const Icon = styled.img`
   margin-right: 1rem;
 `;
 
-const SideMenuItem = ({ url, path, name }) => {
-  const navigate = useNavigate();
-
+const SideMenuItem = ({ onClick, url, path, name, isSelected }) => {
   return (
-    <Container onClick={() => navigate(url)}>
+    <Container
+      onClick={() => onClick(url)}
+      bc={isSelected === url ? true : false}
+    >
       <Content>
         <Title>
           <Icon src={path} />
