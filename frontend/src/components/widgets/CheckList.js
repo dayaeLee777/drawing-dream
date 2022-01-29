@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import CheckListContent from "./checkList/CheckListContent";
 import CheckListItems from "./checkList/CheckListItems";
 
 const Container = styled(motion.div)`
@@ -26,10 +25,12 @@ const CloseButton = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 3rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  height: 85%;
 `;
 
-const CheckList = ({ setWidgetId, setIsShow }) => {
+const CheckList = ({ setWidgetId, setIsShow, isLoad, setIsLoad }) => {
   const close = () => {
     setIsShow(false);
   };
@@ -48,9 +49,9 @@ const CheckList = ({ setWidgetId, setIsShow }) => {
         <Title>체크 리스트</Title>
         <CloseButton onClick={close}>❌</CloseButton>
       </Wrapper>
-      {/* <Content>
-        <CheckListItems />
-      </Content> */}
+      <Content>
+        <CheckListItems isLoad={isLoad} setIsLoad={setIsLoad} main/>
+      </Content>
     </Container>
   );
 };
