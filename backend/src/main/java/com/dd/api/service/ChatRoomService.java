@@ -1,14 +1,13 @@
 package com.dd.api.service;
 
-import java.util.List;
 import java.util.UUID;
 
+import com.dd.api.dto.response.ChatRoomGetListWrapperResponseDTO;
 import com.dd.api.dto.response.ChatRoomResponseDTO;
-import com.dd.db.entity.chat.ChatRoom;
 
 public interface ChatRoomService {
 
-	List<ChatRoom> findAllRooms();
+	ChatRoomGetListWrapperResponseDTO findAllRooms();
 
 	ChatRoomResponseDTO findByRoomId(UUID roomId);
 
