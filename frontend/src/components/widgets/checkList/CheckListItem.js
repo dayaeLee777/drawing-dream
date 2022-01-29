@@ -1,3 +1,4 @@
+import { deleteCheckList, modifyCheckList } from "api/checklist";
 import React from "react";
 import {
   MdCheckBoxOutlineBlank,
@@ -48,15 +49,29 @@ const Remove = styled.div`
   }
 `;
 
-const CheckListItem = ({ item }) => {
-  const { text, checked } = item;
+const CheckListItem = ({ item, setLoading }) => {
+  const { content, checked } = item;
+  const onCheck = () => {
+    modifyCheckList({
+      ...item,
+      checklistId: item.cheklistId,
+      checked: !item.checked,
+    }).then(setLoading(true));
+  };
+  const onRemove = () => {
+    deleteCheckList(item.cheklistId).then(setLoading(true));
+  };
   return (
     <CheckListItemContainer>
       <CheckBox className={checked ? "checked" : ""}>
-        {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
-        <div className="text">{text}</div>
+        {checked ? (
+          <MdCheckBox onClick={onCheck} />
+        ) : (
+          <MdCheckBoxOutlineBlank onClick={onCheck} />
+        )}
+        <div className="text">{content}</div>
       </CheckBox>
-      <Remove>
+      <Remove onClick={onRemove}>
         <MdRemoveCircleOutline />
       </Remove>
     </CheckListItemContainer>

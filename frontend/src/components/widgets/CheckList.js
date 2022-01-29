@@ -48,9 +48,9 @@ const CheckList = ({ setWidgetId, setIsShow }) => {
         <Title>체크 리스트</Title>
         <CloseButton onClick={close}>❌</CloseButton>
       </Wrapper>
-      <Content>
+      {/* <Content>
         <CheckListItems />
-      </Content>
+      </Content> */}
     </Container>
   );
 };

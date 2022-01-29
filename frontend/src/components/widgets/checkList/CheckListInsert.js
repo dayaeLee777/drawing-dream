@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MdAdd } from "react-icons/md";
+import { registerCheckList } from "api/checklist";
 
-const CheckListInsertContainer = styled.form`
+const CheckListInsertContainer = styled.div`
   display: flex;
   width: 100%;
   input {
@@ -35,11 +36,19 @@ const CheckListInsertContainer = styled.form`
   }
 `;
 
-const CheckListInsert = () => {
+const CheckListInsert = ({ setLoading }) => {
+  const [text, setText] = useState("");
+  const onChange = (e) => {
+    setText(e.target.value);
+  };
+  const onClick = () => {
+    registerCheckList({ content: text }).then(setLoading(true));
+    setText("");
+  };
   return (
     <CheckListInsertContainer>
-      <input placeholder="내용을 입력하세요" />
-      <button type="submit">
+      <input placeholder="내용을 입력하세요" value={text} onChange={onChange} />
+      <button onClick={onClick}>
         <MdAdd />
       </button>
     </CheckListInsertContainer>
