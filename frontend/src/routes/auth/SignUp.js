@@ -18,10 +18,12 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   justify-content: center;
+  overflow: auto;
 `;
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: auto;
   min-width: 40rem;
   background-color: white;
   padding-top: 3rem;
