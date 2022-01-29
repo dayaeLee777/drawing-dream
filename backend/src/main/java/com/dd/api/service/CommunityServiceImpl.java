@@ -12,6 +12,7 @@ import com.dd.api.dto.request.CommunityUpdateRequestDto;
 import com.dd.api.dto.response.CommunityGetListResponseDto;
 import com.dd.api.dto.response.CommunityGetListWrapperResponseDto;
 import com.dd.api.dto.response.CommunityGetResponseDto;
+import com.dd.db.entity.board.Comment;
 import com.dd.db.entity.board.Community;
 import com.dd.db.entity.school.School;
 import com.dd.db.entity.user.Auth;
@@ -66,16 +67,23 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-//	public void updateCommunity(String accessToken, CommunityUpdateRequestDto communityUpdateRequestDto) {
-	public void updateCommunity(CommunityUpdateRequestDto communityUpdateRequestDto) {
+//	public boolean updateCommunity(String accessToken, CommunityUpdateRequestDto communityUpdateRequestDto) {
+	public boolean updateCommunity(CommunityUpdateRequestDto communityUpdateRequestDto) {
 //		String token = accessToken.split(" ")[1];
 //		String loginId = jwtAuthenticationProvider.getUsername(token);
+		String loginId = "test1";
 		
-		// 커뮤니티 글 제목, 내용 update
+		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
+		// 수정할 Comment
 		Community community = communityRepository.findById(communityUpdateRequestDto.getCommunityId()).get();
+		
+		if(userId != community.getUser().getId()) return false;
+		// 커뮤니티 글 제목, 내용 update
 		community.update(communityUpdateRequestDto.getTitle(), communityUpdateRequestDto.getContent());
 		
 		communityRepository.save(community);
+		
+		return true;
 	}
 	
 	@Override
@@ -147,6 +155,4 @@ public class CommunityServiceImpl implements CommunityService {
 		return jwtAuthenticationProvider.getUsername(token);
 	}
 	
-
-
 }
