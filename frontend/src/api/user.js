@@ -21,7 +21,7 @@ export const signUp = async (user, success, fail) => {
 
 export const getSchool = async (params, success, fail) => {
   console.log(params);
-  return await api
+  return await axios
     .get("https://open.neis.go.kr/hub/schoolInfo", { params })
     .then(success)
     .catch(fail);

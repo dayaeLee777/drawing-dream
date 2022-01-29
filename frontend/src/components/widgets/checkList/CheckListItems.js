@@ -20,14 +20,35 @@ const CheckListItemsContainer = styled.div`
   }
 `;
 
-const CheckListItems = ({ loading, setLoading }) => {
+const CheckListItems = ({ isLoad, setIsLoad, main }) => {
   const [list, setList] = useState(null);
   useEffect(() => {
     getCheckList().then((res) => {
       setList(res.data);
     });
-    setLoading(false);
-  }, [loading]);
+    setIsLoad(false);
+  }, [isLoad]);
+  if (main) {
+    if (list) {
+      return (
+        <CheckListItemsContainer>
+          {list &&
+            list.slice(0,list.length < 8 ? list.length:7).map((item) => (
+              <CheckListItem
+                item={item}
+                key={item.cheklistId}
+                setIsLoad={setIsLoad}
+                main
+              />
+            ))}
+        </CheckListItemsContainer>
+      );
+    } else {
+      return (
+        <>체크리스트를 등록해주세요.</>
+      )
+    }
+  }
   return (
     <CheckListItemsContainer>
       {list &&
@@ -35,7 +56,7 @@ const CheckListItems = ({ loading, setLoading }) => {
           <CheckListItem
             item={item}
             key={item.cheklistId}
-            setLoading={setLoading}
+            setIsLoad={setIsLoad}
           />
         ))}
     </CheckListItemsContainer>

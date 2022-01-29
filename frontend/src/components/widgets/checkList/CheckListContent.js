@@ -11,12 +11,11 @@ const CheckListContainer = styled.div`
   flex-direction: column;
 `;
 
-const CheckListContent = () => {
-  const [loading, setLoading] = useState(true);
+const CheckListContent = ({ isLoad, setIsLoad }) => {
   return (
     <CheckListContainer>
-      <CheckListInsert setLoading={setLoading} />
-      <CheckListItems loading={loading} setLoading={setLoading} />
+      <CheckListInsert setIsLoad={setIsLoad} />
+      <CheckListItems isLoad={isLoad} setIsLoad={setIsLoad} />
     </CheckListContainer>
   );
 };
