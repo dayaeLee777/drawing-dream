@@ -11,7 +11,6 @@ const validationCheck = (
   setErrors
 ) => {
   let { value, name } = e.target;
-  // console.log(value);
 
   const { password } = inputs;
 
