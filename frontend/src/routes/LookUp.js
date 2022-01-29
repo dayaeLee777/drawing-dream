@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import board from "assets/img/board.png";
 import AttendanceModal from "../components/attendance/AttendanceModal";
-import Chatting from "../components/layout/Chatting";
-import ChattingList from "../components/layout/ChattingList";
-import axios from "axios";
 import { motion } from "framer-motion";
 import { attend } from "api/attendance";
 
@@ -64,24 +61,6 @@ const Main = styled.article`
   }
 `;
 
-const ChatCircle = styled.div`
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-  background: #fec25c;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  color: white;
-  padding: 28px;
-  cursor: pointer;
-  text-align: center;
-  line-height: 5rem;
-  font-size: 2.3rem;
-  box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-`;
-
 const Overlay = styled(motion.div)`
   width: 100vw;
   height: 100vh;
@@ -115,10 +94,6 @@ const LookUp = () => {
       //error
     });
   };
-  const [chatOpen, setChatOpen] = useState(false);
-  const chatClose = () => {
-    setChatOpen(!chatOpen);
-  };
 
   return (
     <>
@@ -150,8 +125,6 @@ const LookUp = () => {
           </Overlay>
         )}
       </Board>
-      <ChatCircle onClick={chatClose}>· · ·</ChatCircle>
-      {chatOpen && <ChattingList chatClose={chatClose}></ChattingList>}
     </>
   );
 };
