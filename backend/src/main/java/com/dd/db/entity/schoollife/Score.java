@@ -9,17 +9,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.dd.db.entity.BaseEntity;
-import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.dd.db.enums.SubCode;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.ToString;
+@ToString
 @Getter
 @Builder
 @NoArgsConstructor
@@ -31,10 +30,10 @@ public class Score extends BaseEntity {
 	private Code gradeCode;
 	
 	@Enumerated(EnumType.STRING)
-	private Code testCode;
+	private SubCode testCode;
 
 	@Enumerated(EnumType.STRING)
-	private Code subjectCode;
+	private SubCode subjectCode;
 	
 	@Enumerated(EnumType.STRING)
 	private Code semestertCode;

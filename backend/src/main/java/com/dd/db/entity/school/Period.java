@@ -1,6 +1,6 @@
 package com.dd.db.entity.school;
 
-import java.util.Date;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,20 +9,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.dd.db.entity.BaseEntity;
-import com.dd.db.entity.user.Auth;
-import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Builder
@@ -34,11 +28,9 @@ public class Period extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Code periodCode;
 
-	@Temporal(TemporalType.TIME)
-	private Date startTime;
+	private LocalTime startTime;
 
-	@Temporal(TemporalType.TIME)
-	private Date endTime;
+	private LocalTime endTime;
 
 	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;

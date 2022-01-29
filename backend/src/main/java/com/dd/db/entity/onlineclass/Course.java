@@ -9,16 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.dd.db.entity.BaseEntity;
-import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
-import com.dd.db.enums.Code;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.dd.db.enums.SubCode;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Builder
@@ -28,7 +25,7 @@ import lombok.Setter;
 public class Course extends BaseEntity {
 	
 	@Enumerated(EnumType.STRING)
-	private Code subjectCode;
+	private SubCode subjectCode;
 
 	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
 	private boolean delYn;
