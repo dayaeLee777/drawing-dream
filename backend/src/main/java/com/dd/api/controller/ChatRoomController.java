@@ -1,5 +1,6 @@
 package com.dd.api.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.ChatRoomRequestDTO;
+import com.dd.api.dto.response.ChatRoomGetListWrapperResponseDTO;
 import com.dd.api.dto.response.ChatRoomResponseDTO;
 import com.dd.api.service.ChatRoomService;
 import com.dd.common.model.BaseResponseDto;
@@ -32,14 +34,8 @@ public class ChatRoomController {
 	@PostMapping
 	public ResponseEntity<? extends BaseResponseDto> create(
 			@ApiParam(value = "채팅방 이름") @RequestBody ChatRoomRequestDTO chatRoomRequestDTO) {
-		UUID roomId;
 		String name = chatRoomRequestDTO.getName();
-
-		try {
-			roomId = chatRoomService.createRoom(name);
-		} catch (Exception e) {
-			return ResponseEntity.ok(BaseResponseDto.of(409, "Fail"));
-		}
+		UUID roomId = chatRoomService.createRoom(name);
 
 		ChatRoomResponseDTO chatRoomResponseDTO = ChatRoomResponseDTO.builder().roomId(roomId).name(name).build();
 
@@ -48,17 +44,19 @@ public class ChatRoomController {
 
 	@ApiOperation(value = "채팅방 조회")
 	@GetMapping("/{roomId}")
-	public ResponseEntity<? extends BaseResponseDto> getRoom(
-			@ApiParam(value = "채팅방 ID") @PathVariable UUID roomId) {
-		ChatRoomResponseDTO chatRoomResponseDTO = null;
-
-		try {
-			chatRoomResponseDTO = chatRoomService.findByRoomId(roomId);
-		} catch (Exception e) {
-			return ResponseEntity.ok(BaseResponseDto.of(409, "Fail"));
-		}
+	public ResponseEntity<? extends BaseResponseDto> getRoom(@ApiParam(value = "채팅방 ID") @PathVariable UUID roomId) {
+		ChatRoomResponseDTO chatRoomResponseDTO = chatRoomService.findByRoomId(roomId);
 
 		return ResponseEntity.ok(ChatRoomResponseDTO.of(200, "Success", chatRoomResponseDTO));
+	}
+
+	@ApiOperation(value = "채팅방 전체 조회")
+	@GetMapping("/all")
+	public ResponseEntity<? extends BaseResponseDto> getAllRooms() {
+		ChatRoomGetListWrapperResponseDTO chatRoomGetListWrapperResponseDTO = chatRoomService.findAllRooms();
+
+		return ResponseEntity
+				.ok(ChatRoomGetListWrapperResponseDTO.of(200, "Success", chatRoomGetListWrapperResponseDTO));
 	}
 
 }
