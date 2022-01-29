@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
 import ChatList from "components/chat/ChatList";
+import { conn, disconnect, subscribe, publish } from "api/chat";
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
 
 const ChatBox = styled.div`
   display: block;
@@ -153,7 +156,7 @@ const ChatForm = styled.form`
   }
 `;
 
-const ChatRoom = ({ chatClose }) => {
+const ChatRoom = ({ roomId, chatClose }) => {
   const onCloseChat = (e) => {
     console.log("e.target: ", e.target);
     console.log("e.tarcurrentTargetget: ", e.currentTarget);
@@ -167,9 +170,29 @@ const ChatRoom = ({ chatClose }) => {
     setChatMove(!chatMove);
   };
 
+  useEffect(() => {
+    const token =
+      sessionStorage.getItem("access-token") ||
+      localStorage.getItem("access-token");
+
+    const socket = new SockJS("http://localhost:8080/ws-dd");
+    let client = Stomp.over(socket);
+
+    let headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    client.connect(headers, (frame) => {
+      console.log("STOMP Connection");
+      client.subscribe(`/topic/room/${roomId}`, ({ response }) => {
+        console.log(response);
+      });
+    });
+
+    return () => disconnect();
+  }, []);
+
   return (
     <>
-      {chatMove && <ChatList chatClose={chatClose}></ChatList>}
       <ChatBox style={chatMove ? { display: "none" } : {}}>
         <ChatBoxHeader>
           <Arrow onClick={chatMo}>←</Arrow>
