@@ -26,9 +26,9 @@ const MainContainer = styled.div`
   overflow: auto;
   min-width: 40rem;
   background-color: white;
-  padding-top: 3rem;
   box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
   padding: 0 8rem;
+  padding-top: 3rem;
 `;
 const Logo = styled.img`
   width: 7rem;
