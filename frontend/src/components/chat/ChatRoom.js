@@ -4,7 +4,6 @@ import Button from "components/commons/button";
 import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
 import ChatList from "components/chat/ChatList";
-import { conn, disconnect, subscribe, publish } from "api/chat";
 import SockJS from "sockjs-client";
 import Stomp, { client } from "stompjs";
 
@@ -217,7 +216,7 @@ const ChatRoom = ({ roomId, chatClose }) => {
       }
     );
 
-    return () => disconnect();
+    return () => client.disconnect();
   }, []);
 
   const onClick = (event) => {
