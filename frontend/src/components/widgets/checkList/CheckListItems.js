@@ -11,6 +11,7 @@ const CheckListItemsContainer = styled.div`
   align-items: center;
   overflow-y: auto;
   width: 100%;
+  height: 100%;
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -19,15 +20,42 @@ const CheckListItemsContainer = styled.div`
     border-radius: 10px;
   }
 `;
+const NullList = styled.div`
+height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-const CheckListItems = ({ loading, setLoading }) => {
+const CheckListItems = ({ isLoad, setIsLoad, main }) => {
   const [list, setList] = useState(null);
   useEffect(() => {
     getCheckList().then((res) => {
       setList(res.data);
     });
-    setLoading(false);
-  }, [loading]);
+    setIsLoad(false);
+  }, [isLoad]);
+  if (main) {
+    if (list && list.length > 0) {
+      return (
+        <CheckListItemsContainer>
+          {list &&
+            list
+              .slice(0, list.length < 8 ? list.length : 7)
+              .map((item) => (
+                <CheckListItem
+                  item={item}
+                  key={item.cheklistId}
+                  setIsLoad={setIsLoad}
+                  main
+                />
+              ))}
+        </CheckListItemsContainer>
+      );
+    } else {
+      return <NullList>체크리스트를 등록해주세요.</NullList>;
+    }
+  }
   return (
     <CheckListItemsContainer>
       {list &&
@@ -35,7 +63,7 @@ const CheckListItems = ({ loading, setLoading }) => {
           <CheckListItem
             item={item}
             key={item.cheklistId}
-            setLoading={setLoading}
+            setIsLoad={setIsLoad}
           />
         ))}
     </CheckListItemsContainer>

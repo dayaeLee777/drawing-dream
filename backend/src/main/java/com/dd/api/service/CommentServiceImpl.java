@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.CommentRegisterRequestDto;
+import com.dd.api.dto.request.CommentUpdateRequestDto;
 import com.dd.api.dto.response.CommentGetListResponseDto;
 import com.dd.api.dto.response.CommentGetListWrapperResponseDto;
 import com.dd.db.entity.board.Comment;
@@ -20,6 +21,7 @@ import com.dd.db.repository.AuthRepository;
 import com.dd.db.repository.CommentRepository;
 import com.dd.db.repository.CommunityRepository;
 import com.dd.db.repository.UserRepository;
+import com.dd.security.util.JwtAuthenticationProvider;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +36,8 @@ public class CommentServiceImpl implements CommentService {
 	private final CommunityRepository communityRepository;
 	
 	private final CommentRepository commentRepository;
+	
+	private final JwtAuthenticationProvider jwtAuthenticationProvider;
 
 	@Override
 //	public void registerComment(String accessToken, CommentRegisterRequestDto commentRegisterRequestDto) {
@@ -75,5 +79,47 @@ public class CommentServiceImpl implements CommentService {
 		}
 		
 		return new CommentGetListWrapperResponseDto(list);
+	}
+	
+	@Override
+//	public boolean updateComment(String accessToken, CommentUpdateRequestDto commentUpdateRequestDto) {
+	public boolean updateComment(CommentUpdateRequestDto commentUpdateRequestDto) {
+//		String loginId = getLoginIdFromToken(accessToken);
+		String loginId = "test1";
+		
+		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
+		// 수정할 Comment
+		Comment comment = commentRepository.findById(commentUpdateRequestDto.getCommentId()).get();
+		
+		if(userId != comment.getUser().getId()) return false;
+		
+		comment.update(commentUpdateRequestDto.getContent());
+		commentRepository.save(comment);
+		
+		return true;
+	}
+	
+	@Override
+//	public boolean deleteComment(String accessToken, UUID commentId) {
+	public boolean deleteComment(UUID commentId) {
+//		String loginId = getLoginIdFromToken(accessToken);
+		String loginId = "test1";
+		
+		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
+		// 삭제할 Comment
+		Comment comment = commentRepository.findById(commentId).get();
+		
+		if(userId != comment.getUser().getId()) return false;
+		
+		comment.update(true);
+		
+		commentRepository.save(comment);
+		return true;
+	}
+	
+	@Override
+	public String getLoginIdFromToken(String accessToken) {
+		String token = accessToken.split(" ")[1];
+		return jwtAuthenticationProvider.getUsername(token);
 	}
 }

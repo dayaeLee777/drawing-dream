@@ -36,18 +36,27 @@ const CheckListInsertContainer = styled.div`
   }
 `;
 
-const CheckListInsert = ({ setLoading }) => {
+const CheckListInsert = ({ setIsLoad }) => {
   const [text, setText] = useState("");
   const onChange = (e) => {
     setText(e.target.value);
   };
   const onClick = () => {
-    registerCheckList({ content: text }).then(setLoading(true));
+    registerCheckList({ content: text }).then(setIsLoad(true));
     setText("");
   };
   return (
     <CheckListInsertContainer>
-      <input placeholder="내용을 입력하세요" value={text} onChange={onChange} />
+      <input
+        placeholder="내용을 입력하세요"
+        value={text}
+        onChange={onChange}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            onClick();
+          }
+        }}
+      />
       <button onClick={onClick}>
         <MdAdd />
       </button>

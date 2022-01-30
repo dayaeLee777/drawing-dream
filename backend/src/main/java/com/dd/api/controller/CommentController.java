@@ -3,14 +3,18 @@ package com.dd.api.controller;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.CommentRegisterRequestDto;
+import com.dd.api.dto.request.CommentUpdateRequestDto;
+import com.dd.api.dto.request.CommunityUpdateRequestDto;
 import com.dd.api.dto.response.CommentGetListWrapperResponseDto;
 import com.dd.api.service.CommentService;
 import com.dd.api.service.CommentService;
@@ -56,5 +60,34 @@ public class CommentController {
 		CommentGetListWrapperResponseDto commentGetListWrapperResponseDto = commentService.getCommentList(communityId);
 		
 		return ResponseEntity.status(200).body(CommentGetListWrapperResponseDto.of(200, "게시글 목록을 정상적으로 불러왔습니다", commentGetListWrapperResponseDto));
+	}
+	
+	@PutMapping("/update")
+	@ApiOperation(value="커뮤니티 댓글 수정")
+	@ApiResponses({
+		@ApiResponse(code=200, message="댓글이 정상적으로 수정되었습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다.")
+	})
+	public ResponseEntity<? extends BaseResponseDto> updateComment(
+//			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@RequestBody @ApiParam(value="커뮤니티 댓글 수정 - 댓글 내용", required=true) CommentUpdateRequestDto commentUpdateRequestDto) {
+//		commentService.updateComment(accessToken, commentUpdateRequestDto);
+		if(!commentService.updateComment(commentUpdateRequestDto)) {
+			return ResponseEntity.status(401).body(BaseResponseDto.of(401, "댓글 수정 권한이 없습니다"));
+		}
+		
+		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "댓글이 정상적으로 수정되었습니다."));
+	}
+	
+	@DeleteMapping("/{commentId}")
+	@ApiOperation(value="커뮤니티 대댓글 삭제")
+	public ResponseEntity<? extends BaseResponseDto> deleteComment(
+//			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@PathVariable("commentId") @ApiParam(value="삭제하려는 커뮤니티 댓글의 commentId", required=true) UUID commentId) {
+		if(!commentService.deleteComment(commentId)) {
+			return ResponseEntity.status(401).body(BaseResponseDto.of(401, "삭제 권한이 없습니다."));
+		}
+		
+		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "댓글을 정상적으로 삭제했습니다."));
 	}
 }

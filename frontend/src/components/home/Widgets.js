@@ -42,6 +42,7 @@ const Widgets = () => {
   const [isShowDD, setIsShowDD] = useState(true);
   const [isShowMM, setIsShowMM] = useState(true);
   const [widgetId, setWidgetId] = useState();
+  const [isLoad, setIsLoad] = useState(false);
   return (
     <>
       <Container>
@@ -52,7 +53,7 @@ const Widgets = () => {
           <Dday setWidgetId={setWidgetId} setIsShow={setIsShowDD}></Dday>
         )}
         {isShowCL && (
-          <CheckList setWidgetId={setWidgetId} setIsShow={setIsShowCL} />
+          <CheckList setWidgetId={setWidgetId} setIsShow={setIsShowCL} isLoad={isLoad} setIsLoad={setIsLoad} />
         )}
         {isShowMM && (
           <Memo setWidgetId={setWidgetId} setIsShow={setIsShowMM}></Memo>
@@ -72,7 +73,7 @@ const Widgets = () => {
             )}
             {widgetId === "M02" && <DdayModal layoutId={widgetId}></DdayModal>}
             {widgetId === "M03" && (
-              <CheckListModal layoutId={widgetId}></CheckListModal>
+              <CheckListModal layoutId={widgetId} isLoad={isLoad} setIsLoad={setIsLoad} />
             )}
             {widgetId === "M04" && <MemoModal layoutId={widgetId}></MemoModal>}
           </Overlay>

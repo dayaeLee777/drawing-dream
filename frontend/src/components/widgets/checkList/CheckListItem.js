@@ -49,31 +49,33 @@ const Remove = styled.div`
   }
 `;
 
-const CheckListItem = ({ item, setLoading }) => {
+const CheckListItem = ({ item, setIsLoad, main }) => {
   const { content, checked } = item;
   const onCheck = () => {
     modifyCheckList({
       ...item,
       checklistId: item.cheklistId,
       checked: !item.checked,
-    }).then(setLoading(true));
+    }).then(setIsLoad(true));
   };
   const onRemove = () => {
-    deleteCheckList(item.cheklistId).then(setLoading(true));
+    deleteCheckList(item.cheklistId).then(setIsLoad(true));
   };
   return (
     <CheckListItemContainer>
       <CheckBox className={checked ? "checked" : ""}>
         {checked ? (
-          <MdCheckBox onClick={onCheck} />
+          <MdCheckBox onClick={main? null:onCheck} />
         ) : (
-          <MdCheckBoxOutlineBlank onClick={onCheck} />
+          <MdCheckBoxOutlineBlank onClick={main? null:onCheck} />
         )}
         <div className="text">{content}</div>
       </CheckBox>
+      {!main &&
       <Remove onClick={onRemove}>
         <MdRemoveCircleOutline />
       </Remove>
+      }
     </CheckListItemContainer>
   );
 };

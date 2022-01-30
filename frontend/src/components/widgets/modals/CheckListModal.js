@@ -35,7 +35,7 @@ const Title = styled.div`
   margin-bottom: 20px;
 `;
 
-const CheckListModal = ({ layoutId }) => {
+const CheckListModal = ({ layoutId, isLoad, setIsLoad }) => {
   const onClick = (event) => {
     event.stopPropagation();
   };
@@ -45,7 +45,7 @@ const CheckListModal = ({ layoutId }) => {
       <Header>
         <Title>체크 리스트</Title>
       </Header>
-      <CheckListContent />
+      <CheckListContent isLoad={isLoad} setIsLoad={setIsLoad} />
     </Wrapper>
   );
 };
