@@ -3,7 +3,9 @@ import styled from "styled-components";
 import profileImg from "assets/img/profile.png";
 import hand from "assets/img/waving-hand.png";
 import { useSelector } from "react-redux";
-import { getDept } from "api/user";
+import { useEffect, useState } from "react";
+import commonCode from "config/commonCode";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -43,8 +45,12 @@ const Info = styled.div`
 `;
 
 const Profile = () => {
-  const { userName, schoolName } = useSelector((state) => state.user);
-
+  const navigate = useNavigate();
+  const { userName, schoolName, gradeCode, classCode, userCode, isAttend } =
+    useSelector((state) => state.user);
+  const onClick = () => {
+    navigate("/lookup");
+  };
   return (
     <Container>
       <Wrapper>
@@ -52,17 +58,32 @@ const Profile = () => {
         <TextContainer>
           <Name>{userName}</Name>
           <Info>{schoolName}</Info>
-          <Info>2학년 6반</Info>
-          <Info>학생</Info>
+          <Info>
+            {commonCode.E[gradeCode]} {commonCode.F[classCode]}
+          </Info>
+          <Info>{commonCode.A[userCode]}</Info>
         </TextContainer>
       </Wrapper>
       <Wrapper>
-        <Button
-          mb="2rem"
-          width="17rem"
-          height="2.5rem"
-          name="등교하기"
-        ></Button>
+        {isAttend ? (
+          <Button
+            mb="2rem"
+            width="17rem"
+            height="2.5rem"
+            name="하교하기"
+            onClick={onClick}
+          />
+        ) : (
+          <>
+            <Button
+              mb="2rem"
+              width="17rem"
+              height="2.5rem"
+              name="등교하기"
+              onClick={onClick}
+            ></Button>
+          </>
+        )}
       </Wrapper>
     </Container>
   );

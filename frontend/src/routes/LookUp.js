@@ -5,6 +5,8 @@ import board from "assets/img/board.png";
 import AttendanceModal from "../components/attendance/AttendanceModal";
 import { motion } from "framer-motion";
 import { attend } from "api/attendance";
+import { useDispatch } from "react-redux";
+import { attendance } from "modules/user";
 
 const Board = styled.article`
   background-image: url(${board});
@@ -81,12 +83,14 @@ const overlay = {
 };
 
 const LookUp = () => {
+  const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
 
   const attendToday = () => {
     console.log(modalOpen);
     attend().then((response) => {
       if (response.status === 200) {
+        dispatch(attendance());
         setModalOpen(true);
         console.log(response);
       }
