@@ -4,7 +4,6 @@ import Button from "components/commons/button";
 import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
 import ChatList from "components/chat/ChatList";
-import { conn, disconnect, subscribe, publish } from "api/chat";
 import SockJS from "sockjs-client";
 import Stomp, { client } from "stompjs";
 
@@ -157,9 +156,10 @@ const ChatForm = styled.form`
 `;
 
 const ChatRoom = ({ roomId, chatClose }) => {
-  let sockJS;
-  let client;
+  let sockJS = new SockJS("http://localhost:8080/ws-dd");
+  let client = Stomp.over(sockJS);
   const [chatMove, setChatMove] = useState(false);
+  const [contents, setContents] = useState([]);
   const [message, setMessage] = useState("");
   const [headers, setHeaders] = useState({});
 
@@ -190,14 +190,12 @@ const ChatRoom = ({ roomId, chatClose }) => {
     Authorization: `Bearer ${token}`,
   };
   useEffect(() => {
-    sockJS = new SockJS("http://localhost:8080/ws-dd");
-    client = Stomp.over(sockJS);
-
     // setHeaders({
     //   Authorization: `Bearer ${token}`,
     // });
 
     // console.log(headers);
+    console.log(client);
     client.connect(
       {
         Authorization: `Bearer ${token}`,
@@ -205,7 +203,8 @@ const ChatRoom = ({ roomId, chatClose }) => {
       (frame) => {
         console.log("STOMP Connection");
         client.subscribe(`/topic/room/${roomId}`, (response) => {
-          console.log(response + "hi");
+          setContents((prev) => [...prev, JSON.parse(response.body)]);
+          console.log(contents);
         });
         client.send(
           "/app/chat/enter",
@@ -217,10 +216,12 @@ const ChatRoom = ({ roomId, chatClose }) => {
       }
     );
 
-    return () => disconnect();
+    return () => client.disconnect();
   }, []);
 
-  const send = () => {
+  const onClick = (event) => {
+    event.preventDefault();
+    console.log(client);
     client.send(
       "/app/chat/room",
       {
@@ -243,6 +244,9 @@ const ChatRoom = ({ roomId, chatClose }) => {
         <ChatBoxBody>
           <ChatBoxOverlay />
           <ChatLogs>
+            {contents.map((content, index) => (
+              <Me key={index}>{content.content}</Me>
+            ))}
             {/* <Me>끝나고 약속 있어?</Me>
             <You>약속은 없는데 야구 봐야됨</You>
             <Me>장난하니?</Me>
@@ -264,7 +268,7 @@ const ChatRoom = ({ roomId, chatClose }) => {
               onChange={onChange}
               placeholder="Send a message..."
             />
-            <Button onClick={send} name="전송" />
+            <Button onClick={onClick} name="전송" />
           </ChatForm>
         </ChatInput>
       </ChatBox>
