@@ -6,7 +6,7 @@ import profileImg from "assets/img/profile.png";
 import ChatList from "components/chat/ChatList";
 import { conn, disconnect, subscribe, publish } from "api/chat";
 import SockJS from "sockjs-client";
-import Stomp from "stompjs";
+import Stomp, { client } from "stompjs";
 
 const ChatBox = styled.div`
   display: block;
@@ -157,6 +157,12 @@ const ChatForm = styled.form`
 `;
 
 const ChatRoom = ({ roomId, chatClose }) => {
+  let sockJS;
+  let client;
+  const [chatMove, setChatMove] = useState(false);
+  const [message, setMessage] = useState("");
+  const [headers, setHeaders] = useState({});
+
   const onCloseChat = (e) => {
     console.log("e.target: ", e.target);
     console.log("e.tarcurrentTargetget: ", e.currentTarget);
@@ -165,31 +171,64 @@ const ChatRoom = ({ roomId, chatClose }) => {
     }
   };
 
-  const [chatMove, setChatMove] = useState(false);
   const chatMo = () => {
     setChatMove(!chatMove);
   };
 
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setMessage(value);
+  };
+
+  const token =
+    sessionStorage.getItem("access-token") ||
+    localStorage.getItem("access-token");
+
+  const header = {
+    Authorization: `Bearer ${token}`,
+  };
   useEffect(() => {
-    const token =
-      sessionStorage.getItem("access-token") ||
-      localStorage.getItem("access-token");
+    sockJS = new SockJS("http://localhost:8080/ws-dd");
+    client = Stomp.over(sockJS);
 
-    const socket = new SockJS("http://localhost:8080/ws-dd");
-    let client = Stomp.over(socket);
+    // setHeaders({
+    //   Authorization: `Bearer ${token}`,
+    // });
 
-    let headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    client.connect(headers, (frame) => {
-      console.log("STOMP Connection");
-      client.subscribe(`/topic/room/${roomId}`, ({ response }) => {
-        console.log(response);
-      });
-    });
+    // console.log(headers);
+    client.connect(
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      (frame) => {
+        console.log("STOMP Connection");
+        client.subscribe(`/topic/room/${roomId}`, (response) => {
+          console.log(response + "hi");
+        });
+        client.send(
+          "/app/chat/enter",
+          {
+            Authorization: `Bearer ${token}`,
+          },
+          JSON.stringify({ roomId })
+        );
+      }
+    );
 
     return () => disconnect();
   }, []);
+
+  const send = () => {
+    client.send(
+      "/app/chat/room",
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      JSON.stringify({ roomId, content: message })
+    );
+  };
 
   return (
     <>
@@ -204,7 +243,7 @@ const ChatRoom = ({ roomId, chatClose }) => {
         <ChatBoxBody>
           <ChatBoxOverlay />
           <ChatLogs>
-            <Me>끝나고 약속 있어?</Me>
+            {/* <Me>끝나고 약속 있어?</Me>
             <You>약속은 없는데 야구 봐야됨</You>
             <Me>장난하니?</Me>
             <You>응응</You>
@@ -215,13 +254,17 @@ const ChatRoom = ({ roomId, chatClose }) => {
             <You>
               알겠습니다. 알겠습니다. 알겠습니다. 알겠습니다. 알겠습니다.
               알겠습니다. 알겠습니다.
-            </You>
+            </You> */}
           </ChatLogs>
         </ChatBoxBody>
         <ChatInput>
           <ChatForm>
-            <Input placeholder="Send a message..." />
-            <Button name="전송" />
+            <Input
+              value={message}
+              onChange={onChange}
+              placeholder="Send a message..."
+            />
+            <Button onClick={send} name="전송" />
           </ChatForm>
         </ChatInput>
       </ChatBox>
