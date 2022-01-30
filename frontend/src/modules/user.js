@@ -3,7 +3,7 @@ import { loginUser, getDept } from "api/user";
 const LOGIN_SUCCESS = "USER/LOGIN_SUCCESS";
 const LOGIN_FAIL = "USER/LOGIN_FAIL";
 const LOGOUT_SUCCESS = "USER/LOGOUT_SUCCESS";
-const GET_DEPT_SUCCESS = "USER/GET_DEPT_SUCCESS";
+const ATTEND_SUCCESS = "USER/ATTEND_SUCCESS";
 
 export const login = (user, isChecked) => async (dispatch) => {
   loginUser(user)
@@ -24,10 +24,6 @@ export const login = (user, isChecked) => async (dispatch) => {
             userId: userId,
             data: response.data,
           });
-          // dispatch({
-          //   type: GET_DEPT_SUCCESS,
-          //   data: response,
-          // });
         });
       }
     })
@@ -48,19 +44,42 @@ export const logout = () => {
   };
 };
 
-const token =
-  sessionStorage.getItem("access-token") ||
-  localStorage.getItem("access-token");
+export const attendance = () => {
+  return {
+    type: ATTEND_SUCCESS,
+  };
+};
 
-const initialState = token
-  ? { isLoggedIn: true, userId: "", userName: "", schoolName: "", error: false }
-  : {
-      isLoggedIn: false,
-      userId: "",
-      userName: "",
-      schoolName: "",
-      error: false,
-    };
+// const token =
+//   sessionStorage.getItem("access-token") ||
+//   localStorage.getItem("access-token");
+
+// const initialState = token
+//   ? { isLoggedIn: true, userId: "", userName: "", schoolName: "", error: false }
+//   : {
+//       isLoggedIn: false,
+//       userId: "",
+//       userName: "",
+//       schoolName: "",
+//       gradeCode: "",
+//       classCode: "",
+//       studentNo: "",
+//       userCode: "",
+//       error: false,
+//     };
+
+const initialState = {
+  isLoggedIn: false,
+  userId: "",
+  userName: "",
+  schoolName: "",
+  gradeCode: "",
+  classCode: "",
+  studentNo: "",
+  userCode: "",
+  isAttend: false,
+  error: false,
+};
 
 const user = (state = initialState, action) => {
   switch (action.type) {
@@ -71,6 +90,10 @@ const user = (state = initialState, action) => {
         userId: action.userId,
         userName: action.data.userName,
         schoolName: action.data.schoolName,
+        gradeCode: action.data.gradeCode,
+        classCode: action.data.classCode,
+        studentNo: action.data.studentNo,
+        userCode: action.data.userCode,
       };
     case LOGIN_FAIL:
       return {
@@ -84,6 +107,13 @@ const user = (state = initialState, action) => {
         isLoggedIn: false,
         userId: null,
       };
+
+    case ATTEND_SUCCESS: {
+      return {
+        ...state,
+        isAttend: true,
+      };
+    }
     default:
       return state;
   }
