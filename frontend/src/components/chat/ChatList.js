@@ -4,7 +4,7 @@ import Button from "components/commons/button";
 import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
 import ChatRoom from "components/chat/ChatRoom";
-import { connect, disconnect, subscribe, publish } from "api/chat";
+import { connect, disconnect, subscribe, publish, getRooms } from "api/chat";
 
 const ChatBox = styled.div`
   display: block;
@@ -145,6 +145,9 @@ const ChatInput = styled.div`
 `;
 
 const ChatList = ({ chatClose }) => {
+  const [chatMove, setChatMove] = useState(false);
+  const [rooms, setRooms] = useState([]);
+  const [roomId, setRoomId] = useState("");
   const onCloseChat = (e) => {
     console.log("e.target: ", e.target);
     console.log("e.tarcurrentTargetget: ", e.currentTarget);
@@ -153,21 +156,17 @@ const ChatList = ({ chatClose }) => {
     }
   };
 
-  const [chatMove, setChatMove] = useState(false);
-  const chatMo = () => {
-    setChatMove(!chatMove);
-  };
-
   useEffect(() => {
-    connect();
-
-    return () => disconnect();
+    getRooms().then((res) => {
+      console.log(res);
+      setRooms(res.data.chatRoomGetListResponseDTOs);
+    });
   }, []);
 
   return (
     <>
-      {chatMove && <ChatRoom chatClose={chatClose}></ChatRoom>}
-      <ChatBox style={chatMove ? { display: "none" } : {}}>
+      {roomId && <ChatRoom roomId={roomId} chatClose={chatClose}></ChatRoom>}
+      <ChatBox style={roomId ? { display: "none" } : {}}>
         <ChatBoxHeader>
           <Subject>채팅</Subject>
           <ChatBoxToggle onClick={chatClose}>
@@ -177,15 +176,21 @@ const ChatList = ({ chatClose }) => {
         <ChatBoxBody>
           <ChatBoxOverlay />
           <ChatLogs>
-            <List onClick={chatMo}>
-              <Image src={profileImg}></Image>
-              <Middle>
-                <Name>인주비</Name>
-                <Content>약속은 없는데 야구 봐야 됨</Content>
-              </Middle>
-              <Date>오전 10:41</Date>
-            </List>
-
+            {rooms.map((room) => (
+              <List
+                key={room.roomId}
+                // onClick={chatMo(room.roomId)}
+                onClick={() => setRoomId(room.roomId)}
+              >
+                <Image src={profileImg}></Image>
+                <Middle>
+                  <Name>인주비</Name>
+                  <Content>{room.name}</Content>
+                </Middle>
+                <Date>오전 10:41</Date>
+              </List>
+            ))}
+            {/* 
             <List>
               <Image src={profileImg}></Image>
               <Middle>
@@ -220,7 +225,7 @@ const ChatList = ({ chatClose }) => {
                 <Content>서울 6반 7팀 화이팅~!~!</Content>
               </Middle>
               <Date>오전 10:37</Date>
-            </List>
+            </List> */}
           </ChatLogs>
         </ChatBoxBody>
       </ChatBox>
