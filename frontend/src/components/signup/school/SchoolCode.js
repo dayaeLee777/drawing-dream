@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import searchIcon from "assets/img/search-solid.png";
 import searchIconHover from "assets/img/search-solid-hover.png";
@@ -55,6 +55,12 @@ const InputContainer = styled.div`
 const SchoolCode = (props) => {
   const [inputSchoolName, setInputSchoolName] = useState("");
   const [schoolName, setSchoolName] = useState("null");
+  const searchElement = useRef(null);
+  useEffect(() => {
+    if (searchElement.current) {
+      searchElement.current.focus();
+    }
+  }, [])
 
   const onChange = (e) => {
     setInputSchoolName(e.target.value);
@@ -86,6 +92,7 @@ const SchoolCode = (props) => {
               onSubmit();
             }
           }}
+          ref={searchElement}
         />
         <button className="searchBtn" onClick={(e) => onSubmit(e)}></button>
       </InputContainer>
