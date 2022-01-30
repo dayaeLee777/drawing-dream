@@ -1,6 +1,5 @@
 package com.dd.api.controller;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -31,9 +30,10 @@ public class ChatController {
 	public void enter(ChatMessageRequestDTO message, @Header("Authorization") String token) throws Exception {
 		System.out.println("enterChat : " + message);
 
-		UUID roomId = getRoomId(message.getRoomId());
+		UUID roomId = message.getRoomId();
+		System.out.println("enter 채팅방 ID : " + roomId);
 //		UUID userId = getUserId(token);
-		String username = jwtAuthenticationProvider.getUsername(token);
+		String username = jwtAuthenticationProvider.getUsername(token.substring(7));
 
 		ChatMessageResponseDTO response = ChatMessageResponseDTO.builder().roomId(roomId)
 				.content(username + " 님이 채팅방에 입장하였습니다.").sendTime(LocalDateTime.now()).username(username).build();
@@ -43,9 +43,10 @@ public class ChatController {
 
 	@MessageMapping("/chat/room")
 	public void sendToRoom(ChatMessageRequestDTO message, @Header("Authorization") String token) throws Exception {
-		UUID roomId = getRoomId(message.getRoomId());
+		UUID roomId = message.getRoomId();
+		System.out.println("send 채팅방 ID : " + roomId);
 //		UUID userId = getUserId(token);
-		String username = jwtAuthenticationProvider.getUsername(token);
+		String username = jwtAuthenticationProvider.getUsername(token.substring(7));
 
 		ChatMessageResponseDTO response = ChatMessageResponseDTO.builder().roomId(roomId).content(message.getContent())
 				.sendTime(LocalDateTime.now()).username(username).build();
@@ -55,9 +56,9 @@ public class ChatController {
 
 	@MessageMapping("/chat/one")
 	public void sendToOne(ChatMessageRequestDTO message, @Header("Authorization") String token) throws Exception {
-		UUID roomId = getRoomId(message.getRoomId());
+		UUID roomId = message.getRoomId();
 //		UUID userId = getUserId(token);
-		String username = jwtAuthenticationProvider.getUsername(token);
+		String username = jwtAuthenticationProvider.getUsername(token.substring(7));
 
 		ChatMessageResponseDTO response = ChatMessageResponseDTO.builder().roomId(roomId).content(message.getContent())
 				.sendTime(LocalDateTime.now()).username(username).build();
@@ -65,10 +66,10 @@ public class ChatController {
 		template.convertAndSendToUser(username.toString(), "/queue/" + response.getRoomId(), response);
 	}
 
-	public UUID getRoomId(String uuid) {
-		return new UUID(new BigInteger(uuid.substring(0, 16), 16).longValue(),
-				new BigInteger(uuid.substring(16), 16).longValue());
-	}
+//	public UUID getRoomId(String uuid) {
+//		return new UUID(new BigInteger(uuid.substring(0, 16), 16).longValue(),
+//				new BigInteger(uuid.substring(16), 16).longValue());
+//	}
 
 	public UUID getUserId(String token) throws Exception {
 		String username = jwtAuthenticationProvider.getUsername(token);
