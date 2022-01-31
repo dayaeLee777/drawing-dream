@@ -4,8 +4,6 @@ import styled from "styled-components";
 const SchoolCodeDetailContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #c4c4c4;
-  border-bottom: 1px solid #c4c4c4;
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 0.1rem;
@@ -16,6 +14,9 @@ const SchoolCodeDetailContainer = styled.div`
   }
   .sido {
     font-size: 0.8rem;
+  }
+  & + & {
+    border-top: 1px solid #c4c4c4;
   }
 `;
 

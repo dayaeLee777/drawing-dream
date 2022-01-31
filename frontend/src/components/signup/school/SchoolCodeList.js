@@ -7,6 +7,13 @@ import { getSchool } from "api/user";
 const SchoolCodeListContainer = styled.div`
   max-height: 70vh;
   overflow: auto;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #adb5bd;
+    border-radius: 10px;
+  }
 `;
 
 const SchoolCodeList = ({ schoolName, onComplate }) => {
