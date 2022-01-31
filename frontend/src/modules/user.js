@@ -1,3 +1,4 @@
+import { setApiHeaders } from "api/api";
 import { loginUser, getDept } from "api/user";
 
 const LOGIN_SUCCESS = "USER/LOGIN_SUCCESS";
@@ -17,6 +18,7 @@ export const login = (user, isChecked) => async (dispatch) => {
         }
 
         const userId = response.data.userId;
+        setApiHeaders()
 
         getDept(userId).then((response) => {
           dispatch({
