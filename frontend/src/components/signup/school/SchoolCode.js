@@ -7,7 +7,7 @@ import SchoolCodeList from "components/signup/school/SchoolCodeList";
 const SchoolCodeContainer = styled.div`
   display: flex;
   flex-direction: column;
-
+  overflow: hidden;
   .desc {
     font-size: 1.3rem;
     margin: 1rem;
@@ -60,7 +60,7 @@ const SchoolCode = (props) => {
     if (searchElement.current) {
       searchElement.current.focus();
     }
-  }, [])
+  }, []);
 
   const onChange = (e) => {
     setInputSchoolName(e.target.value);
