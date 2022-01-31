@@ -5,7 +5,7 @@ import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
 import ChatList from "components/chat/ChatList";
 import SockJS from "sockjs-client";
-import Stomp, { client } from "stompjs";
+import Stomp from "stompjs";
 
 const ChatBox = styled.div`
   display: block;
@@ -30,6 +30,7 @@ const ChatBoxHeader = styled.div`
   color: white;
   font-size: 1.5rem;
   line-height: 4rem;
+  font-size: 1rem;
 `;
 
 const Arrow = styled.div`
@@ -98,7 +99,7 @@ const Me = styled.div`
   margin-left: auto;
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.5rem;
 `;
 
@@ -108,7 +109,7 @@ const You = styled.div`
   max-width: 12rem;
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.5rem;
 `;
 

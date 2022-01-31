@@ -29,6 +29,7 @@ const ChatBoxHeader = styled.div`
   color: white;
   font-size: 1.5rem;
   line-height: 4rem;
+  font-size: 1rem;
 `;
 
 const Subject = styled.div`
@@ -112,6 +113,8 @@ const Name = styled.div``;
 const Content = styled.div`
   margin: 0.4rem 0;
   line-height: 1.5rem;
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.menuColor};
 
   /* ... 으로 만들어 주는 코드 */
   white-space: nowrap;
@@ -145,7 +148,6 @@ const ChatInput = styled.div`
 `;
 
 const ChatList = ({ chatClose }) => {
-  const [chatMove, setChatMove] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [roomId, setRoomId] = useState("");
   const onCloseChat = (e) => {
