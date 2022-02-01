@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import CheckListItems from "./checkList/CheckListItems";
+import CheckListItems from "./checklist/CheckListItems";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -50,7 +50,7 @@ const CheckList = ({ setWidgetId, setIsShow, isLoad, setIsLoad }) => {
         <CloseButton onClick={close}>❌</CloseButton>
       </Wrapper>
       <Content>
-        <CheckListItems isLoad={isLoad} setIsLoad={setIsLoad} main/>
+        <CheckListItems isLoad={isLoad} setIsLoad={setIsLoad} main />
       </Content>
     </Container>
   );
