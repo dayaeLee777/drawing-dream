@@ -36,8 +36,10 @@ const SideMenu = () => {
       />
       <SideMenuItem path={star} name="모아보기" isSelected={isSelected} />
       <SideMenuItem
+        url="/myclassroom"
         path={teacher}
         name="우리 반 보기"
+        onClick={onClick}
         isSelected={isSelected}
       />
       <SideMenuItem

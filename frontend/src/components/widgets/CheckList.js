@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import CheckListItems from "./checklist/CheckListItems";
+import CheckListItems from "components/widgets/checkList/CheckListItems";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;

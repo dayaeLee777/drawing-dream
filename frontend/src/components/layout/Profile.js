@@ -3,7 +3,6 @@ import styled from "styled-components";
 import profileImg from "assets/img/profile.png";
 import hand from "assets/img/waving-hand.png";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import commonCode from "config/commonCode";
 import { useNavigate } from "react-router-dom";
 
