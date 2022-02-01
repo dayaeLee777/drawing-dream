@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CourseName from "./CourseName";
+import TodayClassList from "./TodayClassList";
 
 const Container = styled.div`
   margin-bottom: 3rem;
@@ -10,25 +11,15 @@ const Container = styled.div`
     font-weight: 600;
   }
 `;
-const CourseList = styled.div`
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
 
-const TodayClass = (props) => {
+const TodayClassContainer = (props) => {
   const data = props.data;
   return (
     <Container>
       <div className="title">오늘의 수업</div>
-      <CourseList>
-        {data.map((course, idx) => (
-          <CourseName key={idx} data={course} now={idx === 0 ? true : false} />
-        ))}
-      </CourseList>
+      <TodayClassList data={data} />
     </Container>
   );
 };
 
-export default TodayClass;
+export default TodayClassContainer;
