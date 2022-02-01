@@ -10,34 +10,12 @@ const Container = styled.div`
   /* justify-content: center;
   align-items: center; */
 `;
-const MemberList = () => {
+const MemberList = ({ data }) => {
   return (
     <Container>
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
+      {data.map((member, index) => (
+        <Member key={index} data={member} />
+      ))}
     </Container>
   );
 };

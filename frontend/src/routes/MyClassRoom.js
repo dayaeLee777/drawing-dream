@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import commonCode from "config/commonCode";
 import MemberList from "components/classroom/MemberList";
+import { getMyClass } from "api/myclass";
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -40,16 +41,20 @@ const Line = styled.div`
 `;
 
 const MyClassRoom = () => {
-  const { gradeCode, classCode } = useSelector((state) => state.user);
-  useSelector((state) => state.user);
+  // const { gradeCode, classCode } = useSelector((state) => state.user);
+  // useSelector((state) => state.user);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getMyClass().then((response) => {
+      setData(response.data.myClassGetListResponseDtoList);
+    });
+  }, []);
   return (
     <Container>
       <Title>우리 반 보기</Title>
-      {/* <Desc>
-        {commonCode.E[gradeCode]} {commonCode.F[classCode]}
-      </Desc> */}
       <InnerContainer>
-        <MemberList />
+        <MemberList data={data} />
       </InnerContainer>
     </Container>
   );

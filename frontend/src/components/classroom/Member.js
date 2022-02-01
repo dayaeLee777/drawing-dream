@@ -34,7 +34,8 @@ const Name = styled.div`
   margin-right: 2rem;
 `;
 
-const Member = () => {
+const Member = ({ data }) => {
+  // console.log(data);
   return (
     <Container
       whileHover={{
@@ -43,7 +44,7 @@ const Member = () => {
     >
       <Img src={profileImg} />
       <Wrapper>
-        <Name>김하나</Name>
+        <Name>{data.userName}</Name>
         <FontAwesomeIcon icon={faCommentDots} size="lg" />
       </Wrapper>
     </Container>
