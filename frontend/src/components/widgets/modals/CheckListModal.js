@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import CheckListContent from "components/widgets/checkList/CheckListContent";
+import CheckListContent from "components/widgets/checklist/CheckListContent";
 
 const Wrapper = styled(motion.div)`
   width: 600px;
