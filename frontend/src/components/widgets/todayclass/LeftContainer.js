@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CourseInfo from "./CourseInfo";
-import TodayClass from "./TodayClass";
+import TodayClass from "./TodayClassContainer";
 
 const Container = styled.div`
   display: flex;
