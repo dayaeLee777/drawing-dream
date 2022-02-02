@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import MemoDetail from "./MemoDetail";
 import MemoItem from "./MemoItem";
+import MemoInsert from "./MemoInsert";
 
 const Container = styled.div`
   width: 70%;
@@ -11,6 +12,15 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #adb5bd;
+    border-radius: 10px;
+  }
 `;
 
 const MemoList = () => {
@@ -42,6 +52,16 @@ const MemoList = () => {
     }
   }, [memoId]);
 
+  useEffect(() => {
+    if(loading){
+  getMemoList().then((response) => {
+    setMemos(response.data);
+    setLoading(false);
+    console.log(response);
+  });
+  }
+}, [loading]);
+
   return (
     <Container>
       {loading ? (
@@ -49,13 +69,19 @@ const MemoList = () => {
       ) : (
         <>
           {memoId ? (
-            <MemoDetail content={content} regTime={regTime} />
+            <MemoDetail
+            content={content}
+            regTime={regTime} 
+            setMemoId={setMemoId}
+            />
           ) : (
             <>
-              {memos.slice(0, 3).map((data) => (
+            <MemoInsert setLoading={setLoading} />
+              {memos.slice(0, memos.length).map((data) => (
                 <MemoItem
                   setMemoId={setMemoId}
                   memoId={data.memoId}
+                  setLoading={setLoading}
                   key={data.memoId}
                   data={data}
                 />
