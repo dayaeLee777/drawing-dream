@@ -13,12 +13,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-//@AllArgsConstructor
 @ApiModel("ChatMessageResponseDTO")
 public class ChatMessageResponseDTO {
-
-	@ApiModelProperty(name = "채팅방 uuid", example = "00000000-0000-0000-0000-00000000")
-	UUID roomId;
 
 	@ApiModelProperty(name = "메시지 내용", example = "안녕")
 	private String content;
@@ -26,19 +22,18 @@ public class ChatMessageResponseDTO {
 	@ApiModelProperty(name = "메시지 보낸 시간", example = "2022-01-01")
 	private LocalDateTime sendTime;
 
-	@ApiModelProperty(name = "메시지 보낸 사용자 id", example = "user123")
-	private String username;
+	@ApiModelProperty(name = "메시지 보낸 사용자 UUID", example = "user123")
+	private UUID userId;
+
+	@ApiModelProperty(name = "메시지 보낸 사용자 이름", example = "김싸피")
+	private String userName;
 
 	@Builder
-	public ChatMessageResponseDTO(UUID roomId, String content, LocalDateTime sendTime, String username) {
-		this.roomId = roomId;
+	public ChatMessageResponseDTO(String content, LocalDateTime sendTime, UUID userId, String userName) {
 		this.content = content;
 		this.sendTime = sendTime;
-		this.username = username;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
+		this.userId = userId;
+		this.userName = userName;
 	}
 
 }
