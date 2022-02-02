@@ -1,7 +1,7 @@
 import Button from "components/commons/button";
 import Input from "components/commons/input";
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import blankProfile from "assets/img/blank-profile.png";
 import PostCode from "components/signup/postcode/FindPostCode";
 import { getUser } from "api/user";
@@ -77,27 +77,40 @@ const InputBlock = styled.div`
 const ModifyProfile = () => {
   const [isPostCodeOpen, setIsPostCodeOpen] = useState(false);
   const [isSchoolCodeOpen, setIsSchoolCodeOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [fullAddress, setFullAddress] = useState("");
   const [newSchoolCode, setSchoolCode] = useState("");
   const [newSchoolName, setSchoolName] = useState("");
-  const {
-    userId,
-    userName,
-    schoolName,
-    gradeCode,
-    classCode,
-    studentNo,
-    userCode,
-  } = useSelector((state) => state.user);
+  const [inputs, setInputs] = useState();
+  const state = useSelector((state) => state.user);
 
-  // USER INFO STATE
-  const [inputs, setInputs] = useState({
-    phoneNumber: "",
-    parentPhoneNumber: "",
-    email: "",
-    addressDetail: "",
-  });
-  // USER INFO END
+  useEffect(() => {
+    if (isLoading) {
+      getUser(state.userId).then(
+        (res) => (
+          console.log(res),
+          console.log(state),
+          setInputs({
+            ...inputs,
+            address: res.data.address,
+            phoneNumber: res.data.phone,
+            parentPhoneNumber: res.data.parentPhone,
+            email: res.data.userEmail,
+            userName: res.data.userName,
+            gradeCode: state.gradeCode,
+            classCode: state.classCode,
+            studentNo: state.studentNo,
+            schoolCode: state.schoolCode,
+            schoolName: state.schoolName,
+            addressDetail: "",
+          }),
+          setFullAddress(res.data.address),
+          console.log(inputs),
+          setIsLoading(false)
+        )
+      );
+    }
+  }, []);
 
   // VALIDATION STATE
   const [valids, setValids] = useState({
@@ -112,19 +125,6 @@ const ModifyProfile = () => {
   // ERROR MSG END
   const { validEmail } = valids;
   const { emailErrMsg } = errors;
-
-  useEffect(() => {
-    getUser(userId).then((response) => {
-      const data = response.data;
-      console.log(data);
-      setInputs({
-        ...inputs,
-        email: data.userEmail,
-        phoneNumber: data.phone,
-      });
-      setFullAddress(data.address);
-    });
-  }, []);
 
   const openPostCode = () => {
     setIsPostCodeOpen(true);
@@ -158,7 +158,6 @@ const ModifyProfile = () => {
   // GRADECODE CLASSCODE SET END
 
   const onSubmit = async () => {
-    console.log(inputs);
     if (
       validEmail
       // gradeCode &&
@@ -194,150 +193,137 @@ const ModifyProfile = () => {
   };
   return (
     <>
-      <FormContainer>
-        <Desc>프로필 수정</Desc>
-
-        {/* <InnerContainer> */}
-        {/* <ProfileImageContainer>
+      {/* <InnerContainer> */}
+      {/* <ProfileImageContainer>
             <img src={blankProfile} alt="blank-profile"></img>
             <Button width="6rem" name="파일 찾기" />
           </ProfileImageContainer> */}
-        <ModifyContainer>
-          <InputBlock>
-            <Wrapper>
-              <div className="desc">이름</div>
-              <div className="desc">{userName}</div>
-            </Wrapper>
-          </InputBlock>
-          <InputContainer
-            desc="전화번호"
-            onChange={onChange}
-            name="phoneNumber"
-          />
-          <InputContainer
-            desc="보호자 전화번호"
-            onChange={onChange}
-            name="parentPhoneNumber"
-          />
-          <InputContainer
-            desc="이메일"
-            star
-            onChange={onChange}
-            name="email"
-            isValid={validEmail}
-            errMsg={emailErrMsg}
-          />
+      {!isLoading && (
+        <FormContainer>
+          <Desc>프로필 수정</Desc>
+          <ModifyContainer>
+            <InputBlock>
+              <Wrapper>
+                <div className="desc">이름</div>
+                <div className="desc">{inputs.userName}</div>
+              </Wrapper>
+            </InputBlock>
+            <InputContainer
+              desc="전화번호"
+              onChange={onChange}
+              name="phoneNumber"
+              value={inputs.phoneNumber}
+            />
+            <InputContainer
+              desc="보호자 전화번호"
+              onChange={onChange}
+              name="parentPhoneNumber"
+              value={inputs.parentPhoneNumber}
+            />
+            <InputContainer
+              desc="이메일"
+              star
+              onChange={onChange}
+              name="email"
+              isValid={validEmail}
+              errMsg={emailErrMsg}
+              value={inputs.email}
+            />
 
-          <InputBlock>
-            <Wrapper>
-              <div className="desc">주소</div>
-              {fullAddress && (
-                <Input mr="1rem" width="25rem" value={fullAddress} readOnly />
-              )}
-              <Button
-                name="도로명 주소 찾기"
-                width={fullAddress ? "8rem" : "12.75rem"}
-                height="2.1rem"
-                onClick={openPostCode}
-              />
-            </Wrapper>
-          </InputBlock>
-          <InputContainer
-            desc="상세주소"
-            onChange={onChange}
-            name="emaiaddressDetaill"
-            width="25rem"
-          />
+            <InputBlock>
+              <Wrapper>
+                <div className="desc">주소</div>
+                {fullAddress && (
+                  <Input mr="1rem" width="25rem" value={fullAddress} readOnly />
+                )}
+                <Button
+                  name="도로명 주소 찾기"
+                  width={fullAddress ? "8rem" : "12.75rem"}
+                  height="2.1rem"
+                  onClick={openPostCode}
+                />
+              </Wrapper>
+            </InputBlock>
+            <InputContainer
+              desc="상세주소"
+              onChange={onChange}
+              name="emaiaddressDetaill"
+              width="25rem"
+            />
 
-          <InputBlock>
-            <Wrapper>
-              <div className="desc">
-                학교
-                <div className="star">*</div>
-              </div>
-              {schoolName && <Input value={schoolName} readOnly mr="1rem" />}
-              <Button
-                width={schoolName ? "6rem" : "12.75rem"}
-                name="학교 찾기"
-                height="2.1rem"
-                onClick={openSchoolCode}
-              />
-            </Wrapper>
-          </InputBlock>
-
-          <InputBlock>
-            <Wrapper>
-              <div className="desc">
-                학년<div className="star">*</div>
-              </div>
-              <SelectBox
-                onChange={onGradeCodeSelect}
-                name="gradeCode"
-                defaultValue={gradeCode ? gradeCode : "default"}
-              >
-                <option value="default" disabled hidden>
-                  선택
-                </option>
-                {Object.entries(commonCode.E).map(([key, value]) => (
-                  <option key={key} value={key}>
-                    {value}
+            <InputBlock>
+              <Wrapper>
+                <div className="desc">
+                  학년<div className="star">*</div>
+                </div>
+                <SelectBox
+                  onChange={onGradeCodeSelect}
+                  name="gradeCode"
+                  defaultValue={inputs.gradeCode ? inputs.gradeCode : "default"}
+                >
+                  <option value="default" disabled hidden>
+                    선택
                   </option>
-                ))}
-              </SelectBox>
-            </Wrapper>
+                  {Object.entries(commonCode.E).map(([key, value]) => (
+                    <option key={key} value={key}>
+                      {value}
+                    </option>
+                  ))}
+                </SelectBox>
+              </Wrapper>
 
-            <Wrapper small>
-              <div className="desc">
-                반<div className="star">*</div>
-              </div>
-              <SelectBox
-                onChange={onGradeCodeSelect}
-                name="classCode"
-                defaultValue={classCode ? classCode : "default"}
-              >
-                <option value="default" disabled hidden>
-                  선택
-                </option>
-                {Object.entries(commonCode.F).map(([key, value]) => (
-                  <option key={key} value={key}>
-                    {value}
+              <Wrapper small>
+                <div className="desc">
+                  반<div className="star">*</div>
+                </div>
+                <SelectBox
+                  onChange={onGradeCodeSelect}
+                  name="classCode"
+                  defaultValue={inputs.classCode ? inputs.classCode : "default"}
+                >
+                  <option value="default" disabled hidden>
+                    선택
                   </option>
-                ))}
-              </SelectBox>
-            </Wrapper>
+                  {Object.entries(commonCode.F).map(([key, value]) => (
+                    <option key={key} value={key}>
+                      {value}
+                    </option>
+                  ))}
+                </SelectBox>
+              </Wrapper>
 
-            <Wrapper small>
-              <div className="desc">
-                번호<div className="star">*</div>
-              </div>
-              <Input
-                name="studentNo"
-                value={studentNo}
-                onChange={onChange}
-                width="3rem"
-                height="2rem"
-              />
-            </Wrapper>
+              <Wrapper small>
+                <div className="desc">
+                  번호<div className="star">*</div>
+                </div>
+                <Input
+                  name="studentNo"
+                  value={inputs.studentNo}
+                  onChange={onChange}
+                  width="3rem"
+                  height="2rem"
+                />
+              </Wrapper>
+            </InputBlock>
+          </ModifyContainer>
+          <InputBlock>
+            <Button
+              name="수정 하기"
+              mt="3rem"
+              mr="1rem"
+              height="3rem"
+              onClick={onSubmit}
+            />
+            <Button
+              name="취소"
+              mt="3rem"
+              bc="#C4C4C4"
+              height="3rem"
+              hoverColor="#a2a2a2"
+            />
           </InputBlock>
-        </ModifyContainer>
-        <InputBlock>
-          <Button
-            name="수정 하기"
-            mt="3rem"
-            mr="1rem"
-            height="3rem"
-            onClick={onSubmit}
-          />
-          <Button
-            name="취소"
-            mt="3rem"
-            bc="#C4C4C4"
-            height="3rem"
-            hoverColor="#a2a2a2"
-          />
-        </InputBlock>
-      </FormContainer>
-
+        </FormContainer>
+      )}
       {isPostCodeOpen && (
         <ReactNewWindowStyles
           title="주소찾기"
@@ -345,19 +331,6 @@ const ModifyProfile = () => {
           windowProps={{ width: 580, height: 600 }}
         >
           <PostCode setFullAddress={setFullAddress} onClose={closePostCode} />
-        </ReactNewWindowStyles>
-      )}
-      {isSchoolCodeOpen && (
-        <ReactNewWindowStyles
-          title="학교찾기"
-          onClose={closeSchoolCode}
-          windowProps={{ width: 580, height: 600 }}
-        >
-          <SchoolCode
-            setSchoolName={setSchoolName}
-            setSchoolCode={setSchoolCode}
-            onClose={closeSchoolCode}
-          />
         </ReactNewWindowStyles>
       )}
     </>
