@@ -1,9 +1,11 @@
 package com.dd.db.entity.chat;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.dd.db.entity.BaseEntity;
+import com.dd.db.entity.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,10 +19,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class ChatRoom extends BaseEntity {
+public class UserChatRoomJoin extends BaseEntity {
 
-	// 채팅방 이름
-	@Column(nullable = false)
-	private String name;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "room_id")
+	private ChatRoom chatRoom;
 
 }
