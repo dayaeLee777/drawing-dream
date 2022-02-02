@@ -46,12 +46,23 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		User me = jwtTokenService.convertTokenToUser(accessToken);
 		System.out.println("me: " + me.getId());
 
+		// 내 채팅방
 		List<ChatRoom> chatRoomList = userChatRoomJoinRepository.findByUserId(me.getId()).get();
 		System.out.println("findAllRooms : chatRoomList - " + chatRoomList.toString());
 
 		List<ChatRoomGetListResponseDTO> rooms = new ArrayList<>();
-		chatRoomList.forEach(room -> rooms
-				.add(ChatRoomGetListResponseDTO.builder().roomId(room.getId()).name(room.getName()).build()));
+		chatRoomList.forEach(room -> {
+			// 채팅방 참여 인원
+			List<User> userList = userChatRoomJoinRepository.findByRoomId(room.getId()).get();
+
+			List<ChatRoomUserResponseDTO> users = new ArrayList<>();
+
+			userList.forEach(user -> users
+					.add(ChatRoomUserResponseDTO.builder().userId(user.getId()).userName(user.getUserName()).build()));
+
+			rooms.add(ChatRoomGetListResponseDTO.builder().roomId(room.getId()).roomName(room.getName()).users(users)
+					.build());
+		});
 
 		return new ChatRoomGetListWrapperResponseDTO(rooms);
 
@@ -66,6 +77,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 		// 채팅방 참여 인원
 		List<User> userList = userChatRoomJoinRepository.findByRoomId(roomId).get();
+		System.out.println("userList: " + userList);
 
 		List<ChatRoomUserResponseDTO> users = new ArrayList<>();
 		userList.forEach(user -> users
