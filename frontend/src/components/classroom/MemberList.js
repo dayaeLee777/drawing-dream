@@ -14,7 +14,7 @@ const MemberList = ({ data }) => {
   return (
     <Container>
       {data.map((member, index) => (
-        <Member key={index} data={member} />
+        <Member key={index} member={member} />
       ))}
     </Container>
   );

@@ -178,56 +178,29 @@ const ChatList = ({ chatClose }) => {
         <ChatBoxBody>
           <ChatBoxOverlay />
           <ChatLogs>
-            {rooms.map((room) => (
-              <List
-                key={room.roomId}
-                // onClick={chatMo(room.roomId)}
-                onClick={() => setRoomId(room.roomId)}
-              >
-                <Image src={profileImg}></Image>
-                <Middle>
-                  <Name>인주비</Name>
-                  <Content>{room.name}</Content>
-                </Middle>
-                <Date>오전 10:41</Date>
-              </List>
-            ))}
-            {/* 
-            <List>
-              <Image src={profileImg}></Image>
-              <Middle>
-                <Name>이다예</Name>
-                <Content>이것은 테스트 메시지입니다.</Content>
-              </Middle>
-              <Date>오전 10:40</Date>
-            </List>
-
-            <List>
-              <Image src={profileImg}></Image>
-              <Middle>
-                <Name>손창현</Name>
-                <Content>쓸 말이 없어서 그냥 쓰는 중</Content>
-              </Middle>
-              <Date>오전 10:39</Date>
-            </List>
-
-            <List>
-              <Image src={profileImg}></Image>
-              <Middle>
-                <Name>박기범</Name>
-                <Content>아 이제 무슨 말을 써야하지</Content>
-              </Middle>
-              <Date>오전 10:38</Date>
-            </List>
-
-            <List>
-              <Image src={profileImg}></Image>
-              <Middle>
-                <Name>제진명</Name>
-                <Content>서울 6반 7팀 화이팅~!~!</Content>
-              </Middle>
-              <Date>오전 10:37</Date>
-            </List> */}
+            {rooms ? (
+              <>
+                {rooms.map((room) => (
+                  <List
+                    key={room.roomId}
+                    // onClick={chatMo(room.roomId)}
+                    onClick={() => setRoomId(room.roomId)}
+                  >
+                    <Image src={profileImg}></Image>
+                    <Middle>
+                      <Name>인주비</Name>
+                      <Content>{room.name}</Content>
+                    </Middle>
+                    <Date>오전 10:41</Date>
+                  </List>
+                ))}
+              </>
+            ) : (
+              <div>
+                현재 진행 중인 채팅이 없습니다. 우리 반 보기에서 채팅을
+                시작하세요!
+              </div>
+            )}
           </ChatLogs>
         </ChatBoxBody>
       </ChatBox>
