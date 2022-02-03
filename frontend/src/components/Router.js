@@ -30,29 +30,43 @@ const Container = styled.div`
 
 const AppRouter = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
-  console.log(isLoggedIn);
   return (
     <Router>
       {isLoggedIn ? (
         <>
           <Nav />
-          <Container>
-            <Layout />
-            <Routes>
-              <Route path="/" element={<Navigate replace to="/home" />} />
-              <Route path="/signin" element={<Navigate replace to="/home" />} />
-              <Route path="/signup" element={<Navigate replace to="/home" />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/modifyprofile" element={<ModifyProfile />} />
-              <Route path="/notice" element={<Notice />} />
-              <Route path="/school" element={<School />} />
-              <Route path="/lookup" element={<LookUp />} />
-              <Route path="/myclassroom" element={<MyClassRoom />} />
-              <Route path="/widgetlist" element={<WidgetList />} />
-              <Route path="/setting/home" element={<HomeSetting />} />
-            </Routes>
-          </Container>
-          <Chat />
+          {window.location.pathname === "/setting/home" ? (
+            <>
+              <Routes>
+                <Route path="/setting/home" element={<HomeSetting />} />
+              </Routes>
+            </>
+          ) : (
+            <>
+              <Container>
+                <Layout />
+                <Routes>
+                  <Route path="/" element={<Navigate replace to="/home" />} />
+                  <Route
+                    path="/signin"
+                    element={<Navigate replace to="/home" />}
+                  />
+                  <Route
+                    path="/signup"
+                    element={<Navigate replace to="/home" />}
+                  />
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/modifyprofile" element={<ModifyProfile />} />
+                  <Route path="/notice" element={<Notice />} />
+                  <Route path="/school" element={<School />} />
+                  <Route path="/lookup" element={<LookUp />} />
+                  <Route path="/myclassroom" element={<MyClassRoom />} />
+                  <Route path="/widgetlist" element={<WidgetList />} />
+                </Routes>
+              </Container>
+              <Chat />
+            </>
+          )}
         </>
       ) : (
         <>
