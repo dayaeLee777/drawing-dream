@@ -30,6 +30,9 @@ public class ChatRoomResponseDTO extends BaseResponseDto {
 	@ApiModelProperty(name = "채팅방 정보 - user")
 	List<ChatRoomUserResponseDTO> users;
 
+	@ApiModelProperty(name = "채팅방 정보 - 새로 생성")
+	boolean isNew;
+
 	public static ChatRoomResponseDTO of(Integer statusCode, String message, ChatRoomResponseDTO chatRoomResponseDTO) {
 		ChatRoomResponseDTO res = chatRoomResponseDTO;
 		res.setStatusCode(statusCode);
