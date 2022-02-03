@@ -82,7 +82,7 @@ public class UserController {
 		if(accessToken == null) return ResponseEntity.status(401).body(BaseResponseDto.of(401, "인증되지 않은 사용자입니다."));
 		
 		if(!userService.updatePassword(accessToken, passwordUpdateRequestDto)) {
-			return ResponseEntity.status(202).body(BaseResponseDto.of(200, "현재와 다른 비밀번호를 사용해주세요."));
+			return ResponseEntity.status(202).body(BaseResponseDto.of(202, "현재와 다른 비밀번호를 사용해주세요."));
 		}
 		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "비밀번호가 정상적으로 수정되었습니다."));
 	}
