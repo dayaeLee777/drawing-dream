@@ -3,8 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 90%;
-  height: 70%;
+  height: 40%;
   display: flex;
   border: 1px solid #828282;
   border-radius: 10px;

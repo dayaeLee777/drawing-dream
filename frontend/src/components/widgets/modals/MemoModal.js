@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { getMemoList } from "api/memo";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import MemoList from "../memo/MemoList";
+import MemoInsert from "../memo/MemoInsert";
+
 
 const Wrapper = styled(motion.div)`
   width: 600px;
@@ -10,11 +13,8 @@ const Wrapper = styled(motion.div)`
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
   background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: space-around; */
-  /* letter-spacing: -1px; */
+  display: grid;
+  grid-template-rows: 1fr 3fr 1fr;
 `;
 const Header = styled.div`
   display: flex;
@@ -35,11 +35,21 @@ const Title = styled.div`
 `;
 
 const MemoModal = ({ layoutId }) => {
-  const [showDetail, setShowDetail] = useState(false);
+  const [memos, setMemos] = useState([]);
+  const [showInsert, setShowInsert] = useState(false);
+
+  useEffect(() => {
+    getMemoList().then((response) => {
+      setMemos(response.data);
+      console.log(response);
+    });
+  }, []);
 
   const onClick = (event) => {
     event.stopPropagation();
   };
+  console.log("showInsert")
+  console.log(showInsert)
 
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>
@@ -47,7 +57,17 @@ const MemoModal = ({ layoutId }) => {
         <Title>메모</Title>
       </Header>
 
-      {showDetail ? <div></div> : <MemoList />}
+      {showInsert ?
+        <MemoInsert
+          setShowInsert={setShowInsert}
+        /> :
+      <div>
+      <MemoList
+        setShowInsert={setShowInsert}
+       mod = {true}
+      />
+      </div>
+      }
     </Wrapper>
   );
 };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import MemoItems from "./memo/MemoItems";
+import MemoList from "./memo/MemoList";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -50,7 +50,9 @@ const Memo = ({ setWidgetId, setIsShow }) => {
         <Title>메모</Title>
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
-      <MemoItems />
+      <MemoList
+      mod={false}
+      />
     </Container>
   );
 };
