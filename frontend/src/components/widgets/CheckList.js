@@ -47,7 +47,7 @@ const CheckList = ({ setWidgetId, setIsShow, isLoad, setIsLoad }) => {
     >
       <Wrapper>
         <Title>체크 리스트</Title>
-        <CloseButton onClick={close}>❌</CloseButton>
+        {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
       <Content>
         <CheckListItems isLoad={isLoad} setIsLoad={setIsLoad} main />

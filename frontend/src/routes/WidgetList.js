@@ -32,6 +32,8 @@ const Wrapper = styled.div`
   width: 80%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
 `;
 
 const Overlay = styled(motion.div)`
@@ -77,6 +79,7 @@ const WidgetList = () => {
               key={index}
               id={`M0${index + 1}`}
               name={widget}
+              loc="list"
             />
           ))}
         </Wrapper>

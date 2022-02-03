@@ -82,7 +82,9 @@ const Nav = () => {
             설정
           </Item>
           <DropDownContent>
-            <DropDownItem>홈 화면 설정</DropDownItem>
+            <DropDownItem onClick={() => navigate("/setting/home")}>
+              홈 화면 설정
+            </DropDownItem>
             <DropDownItem onClick={() => navigate("/modifyprofile")}>
               프로필 수정
             </DropDownItem>

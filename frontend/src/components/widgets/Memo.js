@@ -48,7 +48,7 @@ const Memo = ({ setWidgetId, setIsShow }) => {
     >
       <Wrapper>
         <Title>메모</Title>
-        <CloseButton onClick={close}>❌</CloseButton>
+        {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
       <MemoItems />
     </Container>

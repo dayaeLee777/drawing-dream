@@ -37,27 +37,19 @@ const overlay = {
 };
 
 const Widgets = () => {
-  const [isShowTC, setIsShowTC] = useState(true);
-  const [isShowCL, setIsShowCL] = useState(true);
-  const [isShowDD, setIsShowDD] = useState(true);
-  const [isShowMM, setIsShowMM] = useState(true);
   const [widgetId, setWidgetId] = useState();
   const [isLoad, setIsLoad] = useState(false);
   return (
     <>
       <Container>
-        {isShowTC && (
-          <TodayClass setWidgetId={setWidgetId} setIsShow={setIsShowTC} />
-        )}
-        {isShowDD && (
-          <Dday setWidgetId={setWidgetId} setIsShow={setIsShowDD}></Dday>
-        )}
-        {isShowCL && (
-          <CheckList setWidgetId={setWidgetId} setIsShow={setIsShowCL} isLoad={isLoad} setIsLoad={setIsLoad} />
-        )}
-        {isShowMM && (
-          <Memo setWidgetId={setWidgetId} setIsShow={setIsShowMM}></Memo>
-        )}
+        <TodayClass setWidgetId={setWidgetId} />
+        <Dday setWidgetId={setWidgetId}></Dday>
+        <CheckList
+          setWidgetId={setWidgetId}
+          isLoad={isLoad}
+          setIsLoad={setIsLoad}
+        />
+        <Memo setWidgetId={setWidgetId}></Memo>
       </Container>
       <AnimatePresence>
         {widgetId && (
@@ -73,7 +65,11 @@ const Widgets = () => {
             )}
             {widgetId === "M02" && <DdayModal layoutId={widgetId}></DdayModal>}
             {widgetId === "M03" && (
-              <CheckListModal layoutId={widgetId} isLoad={isLoad} setIsLoad={setIsLoad} />
+              <CheckListModal
+                layoutId={widgetId}
+                isLoad={isLoad}
+                setIsLoad={setIsLoad}
+              />
             )}
             {widgetId === "M04" && <MemoModal layoutId={widgetId}></MemoModal>}
           </Overlay>

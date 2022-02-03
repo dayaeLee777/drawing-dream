@@ -41,7 +41,7 @@ const Dday = ({ setWidgetId, setIsShow }) => {
     >
       <Wrapper>
         <Title>D-DAY</Title>
-        <CloseButton onClick={close}>❌</CloseButton>
+        {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
     </Container>
   );
