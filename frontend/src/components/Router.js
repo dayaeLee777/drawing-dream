@@ -18,6 +18,7 @@ import Nav from "components/layout/Nav";
 import styled from "styled-components";
 import Chat from "./chat/Chat";
 import MyClassRoom from "routes/MyClassRoom";
+import WidgetList from "routes/WidgetList";
 
 const Container = styled.div`
   display: grid;
@@ -46,6 +47,7 @@ const AppRouter = () => {
               <Route path="/school" element={<School />} />
               <Route path="/lookup" element={<LookUp />} />
               <Route path="/myclassroom" element={<MyClassRoom />} />
+              <Route path="/widgetlist" element={<WidgetList />} />
             </Routes>
           </Container>
           <Chat />
