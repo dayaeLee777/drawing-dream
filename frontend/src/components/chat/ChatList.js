@@ -4,7 +4,8 @@ import Button from "components/commons/button";
 import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
 import ChatRoom from "components/chat/ChatRoom";
-import { connect, disconnect, subscribe, publish, getRooms } from "api/chat";
+import { getRooms } from "api/chat";
+import { useSelector } from "react-redux";
 
 const ChatBox = styled.div`
   display: block;
@@ -150,6 +151,8 @@ const ChatInput = styled.div`
 const ChatList = ({ chatClose }) => {
   const [rooms, setRooms] = useState([]);
   const [roomId, setRoomId] = useState("");
+  const [users, setUsers] = useState([]);
+  const { userName, userId } = useSelector((state) => state.user);
   const onCloseChat = (e) => {
     console.log("e.target: ", e.target);
     console.log("e.tarcurrentTargetget: ", e.currentTarget);
@@ -161,13 +164,19 @@ const ChatList = ({ chatClose }) => {
   useEffect(() => {
     getRooms().then((res) => {
       console.log(res);
-      setRooms(res.data.chatRoomGetListResponseDTOs);
+      setRooms(res.data.rooms);
     });
   }, []);
 
   return (
     <>
-      {roomId && <ChatRoom roomId={roomId} chatClose={chatClose}></ChatRoom>}
+      {roomId && (
+        <ChatRoom
+          roomId={roomId}
+          users={users}
+          chatClose={chatClose}
+        ></ChatRoom>
+      )}
       <ChatBox style={roomId ? { display: "none" } : {}}>
         <ChatBoxHeader>
           <Subject>채팅</Subject>
@@ -184,12 +193,18 @@ const ChatList = ({ chatClose }) => {
                   <List
                     key={room.roomId}
                     // onClick={chatMo(room.roomId)}
-                    onClick={() => setRoomId(room.roomId)}
+                    onClick={() => (
+                      setRoomId(room.roomId), setUsers(room.users)
+                    )}
                   >
                     <Image src={profileImg}></Image>
                     <Middle>
-                      <Name>인주비</Name>
-                      <Content>{room.name}</Content>
+                      <Name>
+                        {room.users.map((user) => (
+                          <>{user.userId !== userId && <>{user.userName}</>}</>
+                        ))}
+                      </Name>
+                      <Content>{room.rooName}</Content>
                     </Middle>
                     <Date>오전 10:41</Date>
                   </List>

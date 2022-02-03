@@ -46,9 +46,6 @@ const Member = ({ member }) => {
       name: userName + ", " + member.userName,
       userList: [
         {
-          userId: userId,
-        },
-        {
           userId: member.userId,
         },
       ],
