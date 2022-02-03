@@ -19,6 +19,7 @@ import styled from "styled-components";
 import Chat from "./chat/Chat";
 import MyClassRoom from "routes/MyClassRoom";
 import WidgetList from "routes/WidgetList";
+import HomeSetting from "routes/HomeSetting";
 
 const Container = styled.div`
   display: grid;
@@ -48,6 +49,7 @@ const AppRouter = () => {
               <Route path="/lookup" element={<LookUp />} />
               <Route path="/myclassroom" element={<MyClassRoom />} />
               <Route path="/widgetlist" element={<WidgetList />} />
+              <Route path="/setting/home" element={<HomeSetting />} />
             </Routes>
           </Container>
           <Chat />
