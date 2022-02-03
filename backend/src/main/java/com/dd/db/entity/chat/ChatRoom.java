@@ -23,4 +23,12 @@ public class ChatRoom extends BaseEntity {
 	@Column(nullable = false)
 	private String name;
 
+	// 채팅방 인원 수
+	@Column(nullable = false)
+	private int headCount;
+
+	public void setHeadCount(int headCount) {
+		this.headCount = headCount;
+	}
+
 }
