@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dd.api.dto.request.PasswordUpdateRequestDto;
 import com.dd.api.dto.request.UserRegisterRequestDto;
 import com.dd.api.dto.request.UserUpdateRequestDto;
 import com.dd.api.dto.response.UserInfoResponseDto;
@@ -66,6 +67,24 @@ public class UserController {
 		
 		userService.updateUser(accessToken, userUpdateRequestDto);
 		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "회원정보가 정상적으로 수정되었습니다."));
+	}
+	
+	@PutMapping("/password")
+	@ApiOperation(value="비밀번호 수정")
+	@ApiResponses({
+		@ApiResponse(code=200, message="비밀번호가 정상적으로 수정되었습니다."),
+		@ApiResponse(code=202, message="현재와 다른 비밀번호를 사용해주세요."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+	})
+	public ResponseEntity<? extends BaseResponseDto> updatePassword(
+			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@RequestBody @ApiParam(value="변경할 비밀번호 정보", required=true) PasswordUpdateRequestDto passwordUpdateRequestDto) {
+		if(accessToken == null) return ResponseEntity.status(401).body(BaseResponseDto.of(401, "인증되지 않은 사용자입니다."));
+		
+		if(!userService.updatePassword(accessToken, passwordUpdateRequestDto)) {
+			return ResponseEntity.status(202).body(BaseResponseDto.of(202, "현재와 다른 비밀번호를 사용해주세요."));
+		}
+		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "비밀번호가 정상적으로 수정되었습니다."));
 	}
 	
 	@PutMapping("/delete/{userId}")

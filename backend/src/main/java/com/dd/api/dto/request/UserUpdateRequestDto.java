@@ -13,9 +13,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class UserUpdateRequestDto {
 	
-	@ApiModelProperty(name="인증 정보 - 비밀번호", example="***")
-	private String password;
-	
 	@ApiModelProperty(name="유저 정보 - 전화번호")
 	private String phone;
 	@ApiModelProperty(name="유저 정보 - 보호자 전화번호")
@@ -24,6 +21,8 @@ public class UserUpdateRequestDto {
 	private String userEmail;
 	@ApiModelProperty(name="유저 정보 - 주소")
 	private String address;
+	@ApiModelProperty(name="유저 정보 - 상세 주소")
+	private String addressDetail;
 	
 	@ApiModelProperty(name="소속 정보 - 학년코드")
 	private Code gradeCode;
