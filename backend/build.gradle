@@ -182,6 +182,10 @@ dependencies {
     implementation("io.springfox:springfox-boot-starter:3.0.0")
 
     compile("javax.annotation:javax.annotation-api:1.2")
+    
+    // S3 Bucket
+    compile 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+	implementation 'com.amazonaws:aws-java-sdk:1.11.404'
 }
 
 test {
