@@ -6,7 +6,7 @@ import { registerMemo } from "api/memo";
 const MemoInsertContainer = styled.div`
   display: flex;
   width: 100%;
-  input {
+  textarea {
     outline: none;
     border: 1px solid #dca03a;
     padding: 0.5rem;
@@ -36,26 +36,28 @@ const MemoInsertContainer = styled.div`
   }
 `;
 
-const MemoInsert = ({ setLoading }) => {
+const MemoInsert = ({setShowInsert }) => {
   const [text, setText] = useState("");
   const onChange = (e) => {
     setText(e.target.value);
   };
   const onClick = () => {
-    registerMemo({ content: text }).then(setLoading(true));
+    registerMemo({ content: text }).then();
+    setShowInsert(false);
     setText("");
   };
   return (
     <MemoInsertContainer>
-      <input
+      <textarea
         placeholder="내용을 입력하세요"
         value={text}
         onChange={onChange}
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            onClick();
-          }
-        }}
+      //   onKeyPress={(e) => {
+      //     if (e.key === "Enter") {
+      //       onClick();
+      //     }
+      //   }
+      // }
       />
       <button onClick={onClick}>
         <MdAdd />
