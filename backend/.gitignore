@@ -18,6 +18,7 @@ bin/
 !**/src/test/**/bin/
 *.log
 *.gz
+src/main/resources/application-prod.properties
 
 ### IntelliJ IDEA ###
 .idea
