@@ -23,6 +23,12 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
+const ProfileImage = styled.div`
+  input{
+    display: none;
+  }
+`;
+
 const Image = styled.img`
   width: 8rem;
   padding-left: 2rem;
@@ -53,7 +59,12 @@ const Profile = () => {
   return (
     <Container>
       <Wrapper>
-        <Image src={profileImg}></Image>
+        <ProfileImage>
+          <label for="file-input">
+            <Image src={profileImg} accept="image/*" />
+          </label>
+          <input id="file-input" type="file"/>
+        </ProfileImage>
         <TextContainer>
           <Name>{userName}</Name>
           <Info>{schoolName}</Info>
