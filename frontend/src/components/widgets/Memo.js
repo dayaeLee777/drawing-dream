@@ -31,9 +31,20 @@ const CloseButton = styled.div`
   align-items: center;
 `;
 
-const Memo = ({ setWidgetId, setIsShow }) => {
+const Memo = ({
+  isShow,
+  setIsShow,
+  isntShow,
+  setIsntShow,
+  widgetId,
+  setWidgetId,
+}) => {
   const close = () => {
-    setIsShow(false);
+    const newIsShow = isShow.filter((wid) => {
+      return wid !== widgetId;
+    });
+    setIsShow(newIsShow);
+    setIsntShow([...isntShow, widgetId]);
   };
   return (
     <Container
@@ -43,16 +54,14 @@ const Memo = ({ setWidgetId, setIsShow }) => {
         scale: 1.01,
       }}
       onClick={() => {
-        setWidgetId("M04");
+        if (setWidgetId) setWidgetId("M04");
       }}
     >
       <Wrapper>
         <Title>메모</Title>
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
-      <MemoList
-      mod={false}
-      />
+      <MemoList mod={false} />
     </Container>
   );
 };

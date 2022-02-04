@@ -24,9 +24,20 @@ const CloseButton = styled.div`
   align-items: center;
 `;
 
-const Dday = ({ setWidgetId, setIsShow }) => {
+const Dday = ({
+  isShow,
+  setIsShow,
+  isntShow,
+  setIsntShow,
+  widgetId,
+  setWidgetId,
+}) => {
   const close = () => {
-    setIsShow("false");
+    const newIsShow = isShow.filter((wid) => {
+      return wid !== widgetId;
+    });
+    setIsShow(newIsShow);
+    setIsntShow([...isntShow, widgetId]);
   };
   return (
     <Container
@@ -36,7 +47,7 @@ const Dday = ({ setWidgetId, setIsShow }) => {
         scale: 1.01,
       }}
       onClick={() => {
-        setWidgetId("M02");
+        if (setWidgetId) setWidgetId("M02");
       }}
     >
       <Wrapper>

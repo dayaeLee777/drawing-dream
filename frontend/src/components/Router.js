@@ -62,6 +62,10 @@ const AppRouter = () => {
                   <Route path="/lookup" element={<LookUp />} />
                   <Route path="/myclassroom" element={<MyClassRoom />} />
                   <Route path="/widgetlist" element={<WidgetList />} />
+                  {/* <Route
+                    path="/setting/*"
+                    element={<Navigate replace to="/setting/home" />}
+                  /> */}
                 </Routes>
               </Container>
               <Chat />

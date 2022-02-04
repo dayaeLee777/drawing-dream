@@ -5,6 +5,9 @@ import TodayClassList from "./todayclass/TodayClassList";
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   background-color: ${({ theme }) => theme.widgetColor};
+  width: 50rem;
+  height: 100%;
+  max-height: 15rem;
 `;
 
 const Wrapper = styled.div`
@@ -28,9 +31,20 @@ const ListContainer = styled.div`
   margin-top: 2rem;
 `;
 
-const TodayClass = ({ setIsShow, setWidgetId }) => {
+const TodayClass = ({
+  isShow,
+  setIsShow,
+  isntShow,
+  setIsntShow,
+  widgetId,
+  setWidgetId,
+}) => {
   const close = () => {
-    setIsShow(false);
+    const newIsShow = isShow.filter((wid) => {
+      return wid !== widgetId;
+    });
+    setIsShow(newIsShow);
+    setIsntShow([...isntShow, widgetId]);
   };
 
   /////////////testdata//////////////
@@ -79,7 +93,7 @@ const TodayClass = ({ setIsShow, setWidgetId }) => {
         scale: 1.01,
       }}
       onClick={() => {
-        setWidgetId("M01");
+        if (setWidgetId) setWidgetId("M01");
       }}
     >
       <Wrapper>

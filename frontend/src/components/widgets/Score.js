@@ -30,19 +30,30 @@ const CloseButton = styled.div`
   align-items: center;
 `;
 
-const Score = ({ setWidgetId, setIsShow }) => {
+const Score = ({
+  isShow,
+  setIsShow,
+  isntShow,
+  setIsntShow,
+  widgetId,
+  setWidgetId,
+}) => {
   const close = () => {
-    setIsShow(false);
+    const newIsShow = isShow.filter((wid) => {
+      return wid !== widgetId;
+    });
+    setIsShow(newIsShow);
+    setIsntShow([...isntShow, widgetId]);
   };
   return (
     <Container
       layout
-      layoutId="M04"
+      layoutId="M05"
       whileHover={{
         scale: 1.01,
       }}
       onClick={() => {
-        setWidgetId("M04");
+        if (setWidgetId) setWidgetId("M05");
       }}
     >
       <Wrapper>

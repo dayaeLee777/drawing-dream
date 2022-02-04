@@ -5,10 +5,6 @@ import CheckList from "components/widgets/CheckList";
 import Dday from "components/widgets/Dday";
 import Memo from "components/widgets/Memo";
 import TodayClass from "components/widgets/TodayClass";
-import TodayClassModal from "components/widgets/modals/TodayClassModal";
-import MemoModal from "components/widgets/modals/MemoModal";
-import DdayModal from "components/widgets/modals/DdayModal";
-import CheckListModal from "components/widgets/modals/CheckListModal";
 
 const Container = styled.div`
   display: grid;

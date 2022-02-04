@@ -30,19 +30,30 @@ const CloseButton = styled.div`
   align-items: center;
 `;
 
-const StudyPlanner = ({ setWidgetId, setIsShow }) => {
+const StudyPlanner = ({
+  isShow,
+  setIsShow,
+  isntShow,
+  setIsntShow,
+  widgetId,
+  setWidgetId,
+}) => {
   const close = () => {
-    setIsShow(false);
+    const newIsShow = isShow.filter((wid) => {
+      return wid !== widgetId;
+    });
+    setIsShow(newIsShow);
+    setIsntShow([...isntShow, widgetId]);
   };
   return (
     <Container
       layout
-      layoutId="M04"
+      layoutId="M06"
       whileHover={{
         scale: 1.01,
       }}
       onClick={() => {
-        setWidgetId("M04");
+        if (setWidgetId) setWidgetId("M06");
       }}
     >
       <Wrapper>
