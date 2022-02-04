@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { login } from "modules/user";
+import { useCookies } from "react-cookie";
 
 const Container = styled.div`
   display: grid;
@@ -71,8 +72,13 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const { error } = useSelector((state) => state.user);
+  const [cookies, setCookie, removeCookie] = useCookies(["myWidgets"]);
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (!cookies.myWidgets) {
+      setCookie("myWidgets", ["M01", "M02", "M03", "M04"], { path: "/" });
+    }
+  }, []);
   const onChange = (event) => {
     const {
       target: { name, value },

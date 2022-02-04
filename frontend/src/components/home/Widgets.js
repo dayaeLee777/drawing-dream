@@ -86,8 +86,6 @@ const Widgets = () => {
   useEffect(() => {
     if (cookies.myWidgets) {
       console.log(cookies.myWidgets);
-    } else {
-      setCookie("myWidgets", ["M01", "M02", "M03", "M04"]);
     }
   }, []);
 

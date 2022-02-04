@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import WidgetEdit from "components/widgets/homesetting/WidgetEdit";
 import commonCode from "config/commonCode";
 import CheckList from "components/widgets/CheckList";
 import Dday from "components/widgets/Dday";
