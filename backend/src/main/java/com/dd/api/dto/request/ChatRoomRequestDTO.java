@@ -1,18 +1,23 @@
 package com.dd.api.dto.request;
 
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@ApiModel("ChatRoomRequestDTO")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
+@ToString
+@NoArgsConstructor
+@ApiModel("ChatRoomRequestDTO")
 public class ChatRoomRequestDTO {
 
 	@ApiModelProperty(name = "채팅방 정보 - 이름", example = "채팅방")
 	private String name;
+
+	@ApiModelProperty(name = "채팅방 정보 - 참여 인원")
+	private List<ChatRoomUserRequestDTO> userList;
 
 }

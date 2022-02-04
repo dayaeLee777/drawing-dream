@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.dd.api.dto.request.PasswordUpdateRequestDto;
 import com.dd.api.dto.request.UserRegisterRequestDto;
 import com.dd.api.dto.request.UserUpdateRequestDto;
 import com.dd.api.dto.response.UserInfoResponseDto;
@@ -111,15 +112,10 @@ public class UserServiceImpl implements UserService {
 		user.update(userUpdateRequestDto.getPhone(),
 				userUpdateRequestDto.getParentPhone(),
 				userUpdateRequestDto.getUserEmail(),
-				userUpdateRequestDto.getAddress());
+				userUpdateRequestDto.getAddress(),
+				userUpdateRequestDto.getAddressDetail());
 
 		userRepository.save(user);
-		
-		// Auth 정보 update
-		Auth auth = authRepository.findByLoginId(loginId).get();
-		auth.update(passwordEncoder.encode(userUpdateRequestDto.getPassword()));
-		
-		authRepository.save(auth);
 		
 		// UserDepartment 정보 update
 		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
@@ -128,6 +124,24 @@ public class UserServiceImpl implements UserService {
 				userUpdateRequestDto.getStudentNo());
 		
 		userDepartmentRepository.save(userDepartment);
+	}
+	
+	@Transactional
+	@Override
+	public boolean updatePassword(String accessToken, PasswordUpdateRequestDto passwordUpdateRequestDto) {
+		String loginId = GetLoginIdFromToken(accessToken);
+		Auth auth = authRepository.findByLoginId(loginId).get();
+		
+		// 변경하려는 비밀번호가 현재 비밀번호와 같으면  false;
+		if(auth.getPassword().equals(passwordEncoder.encode(passwordUpdateRequestDto.getPassword()))) {
+			return false;
+		}
+		
+		// 비밀번호 update
+		auth.update(passwordEncoder.encode(passwordUpdateRequestDto.getPassword()));
+		
+		authRepository.save(auth);
+		return true;
 	}
 	
 	@Transactional

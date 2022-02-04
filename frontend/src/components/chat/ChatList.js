@@ -4,7 +4,8 @@ import Button from "components/commons/button";
 import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
 import ChatRoom from "components/chat/ChatRoom";
-import { connect, disconnect, subscribe, publish, getRooms } from "api/chat";
+import { getRooms } from "api/chat";
+import { useSelector } from "react-redux";
 
 const ChatBox = styled.div`
   display: block;
@@ -150,6 +151,8 @@ const ChatInput = styled.div`
 const ChatList = ({ chatClose }) => {
   const [rooms, setRooms] = useState([]);
   const [roomId, setRoomId] = useState("");
+  const [users, setUsers] = useState([]);
+  const { userName, userId } = useSelector((state) => state.user);
   const onCloseChat = (e) => {
     console.log("e.target: ", e.target);
     console.log("e.tarcurrentTargetget: ", e.currentTarget);
@@ -161,13 +164,19 @@ const ChatList = ({ chatClose }) => {
   useEffect(() => {
     getRooms().then((res) => {
       console.log(res);
-      setRooms(res.data.chatRoomGetListResponseDTOs);
+      setRooms(res.data.rooms);
     });
   }, []);
 
   return (
     <>
-      {roomId && <ChatRoom roomId={roomId} chatClose={chatClose}></ChatRoom>}
+      {roomId && (
+        <ChatRoom
+          roomId={roomId}
+          users={users}
+          chatClose={chatClose}
+        ></ChatRoom>
+      )}
       <ChatBox style={roomId ? { display: "none" } : {}}>
         <ChatBoxHeader>
           <Subject>채팅</Subject>
@@ -178,56 +187,35 @@ const ChatList = ({ chatClose }) => {
         <ChatBoxBody>
           <ChatBoxOverlay />
           <ChatLogs>
-            {rooms.map((room) => (
-              <List
-                key={room.roomId}
-                // onClick={chatMo(room.roomId)}
-                onClick={() => setRoomId(room.roomId)}
-              >
-                <Image src={profileImg}></Image>
-                <Middle>
-                  <Name>인주비</Name>
-                  <Content>{room.name}</Content>
-                </Middle>
-                <Date>오전 10:41</Date>
-              </List>
-            ))}
-            {/* 
-            <List>
-              <Image src={profileImg}></Image>
-              <Middle>
-                <Name>이다예</Name>
-                <Content>이것은 테스트 메시지입니다.</Content>
-              </Middle>
-              <Date>오전 10:40</Date>
-            </List>
-
-            <List>
-              <Image src={profileImg}></Image>
-              <Middle>
-                <Name>손창현</Name>
-                <Content>쓸 말이 없어서 그냥 쓰는 중</Content>
-              </Middle>
-              <Date>오전 10:39</Date>
-            </List>
-
-            <List>
-              <Image src={profileImg}></Image>
-              <Middle>
-                <Name>박기범</Name>
-                <Content>아 이제 무슨 말을 써야하지</Content>
-              </Middle>
-              <Date>오전 10:38</Date>
-            </List>
-
-            <List>
-              <Image src={profileImg}></Image>
-              <Middle>
-                <Name>제진명</Name>
-                <Content>서울 6반 7팀 화이팅~!~!</Content>
-              </Middle>
-              <Date>오전 10:37</Date>
-            </List> */}
+            {rooms ? (
+              <>
+                {rooms.map((room) => (
+                  <List
+                    key={room.roomId}
+                    // onClick={chatMo(room.roomId)}
+                    onClick={() => (
+                      setRoomId(room.roomId), setUsers(room.users)
+                    )}
+                  >
+                    <Image src={profileImg}></Image>
+                    <Middle>
+                      <Name>
+                        {room.users.map((user) => (
+                          <>{user.userId !== userId && <>{user.userName}</>}</>
+                        ))}
+                      </Name>
+                      <Content>{room.rooName}</Content>
+                    </Middle>
+                    <Date>오전 10:41</Date>
+                  </List>
+                ))}
+              </>
+            ) : (
+              <div>
+                현재 진행 중인 채팅이 없습니다. 우리 반 보기에서 채팅을
+                시작하세요!
+              </div>
+            )}
           </ChatLogs>
         </ChatBoxBody>
       </ChatBox>

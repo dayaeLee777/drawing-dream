@@ -1,9 +1,9 @@
+import Button from "components/commons/button";
 import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 90%;
-  height: 70%;
+  height: 40%;
   display: flex;
   border: 1px solid #828282;
   border-radius: 10px;
@@ -12,9 +12,13 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const MemoDetail = ({ content, regTime }) => {
+const MemoDetail = ({ content, regTime, setMemoId }) => {
+  const onBack = () => {
+    setMemoId ("")
+  };
   return (
     <Container>
+      <Button onClick={onBack} name="←" />
       <div>{content}</div>
       <div>{regTime}</div>
     </Container>

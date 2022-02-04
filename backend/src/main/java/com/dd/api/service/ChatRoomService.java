@@ -2,15 +2,22 @@ package com.dd.api.service;
 
 import java.util.UUID;
 
+import com.dd.api.dto.request.ChatRoomRequestDTO;
+import com.dd.api.dto.request.ChatRoomUserRequestDTO;
 import com.dd.api.dto.response.ChatRoomGetListWrapperResponseDTO;
 import com.dd.api.dto.response.ChatRoomResponseDTO;
+import com.dd.api.dto.response.ChatRoomWithMessageResponseDTO;
 
 public interface ChatRoomService {
 
-	ChatRoomGetListWrapperResponseDTO findAllRooms();
+	ChatRoomGetListWrapperResponseDTO findAllRooms(String accessToken);
 
-	ChatRoomResponseDTO findByRoomId(UUID roomId);
+	ChatRoomWithMessageResponseDTO findByRoomId(UUID roomId);
 
-	UUID createRoom(String name);
+	ChatRoomResponseDTO createRoom(ChatRoomRequestDTO chatRoomRequestDTO, String accessToken);
+
+	void addUser(UUID roomId, ChatRoomUserRequestDTO chatRoomUserRequestDTO);
+
+	void leaveRoom(UUID roomId, String accessToken);
 
 }

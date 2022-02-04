@@ -6,6 +6,7 @@ import profileImg from "assets/img/profile.png";
 import ChatList from "components/chat/ChatList";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
+import { useSelector } from "react-redux";
 
 const ChatBox = styled.div`
   display: block;
@@ -156,13 +157,14 @@ const ChatForm = styled.form`
   }
 `;
 
-const ChatRoom = ({ roomId, chatClose }) => {
+const ChatRoom = ({ roomId, users, chatClose }) => {
   let sockJS = new SockJS("http://localhost:8080/ws-dd");
   let client = Stomp.over(sockJS);
   const [chatMove, setChatMove] = useState(false);
   const [contents, setContents] = useState([]);
   const [message, setMessage] = useState("");
   const [headers, setHeaders] = useState({});
+  const { userName, userId } = useSelector((state) => state.user);
 
   const onCloseChat = (e) => {
     console.log("e.target: ", e.target);
@@ -230,6 +232,7 @@ const ChatRoom = ({ roomId, chatClose }) => {
       },
       JSON.stringify({ roomId, content: message })
     );
+    setMessage("");
   };
 
   return (
@@ -237,7 +240,11 @@ const ChatRoom = ({ roomId, chatClose }) => {
       <ChatBox style={chatMove ? { display: "none" } : {}}>
         <ChatBoxHeader>
           <Arrow onClick={chatMo}>←</Arrow>
-          <Subject>인주비</Subject>
+          <Subject>
+            {users.map((user) => (
+              <>{user.userName !== userName && <>{user.userName}</>}</>
+            ))}
+          </Subject>
           <ChatBoxToggle onClick={chatClose}>
             <i className="material-icons">close</i>
           </ChatBoxToggle>
@@ -246,20 +253,14 @@ const ChatRoom = ({ roomId, chatClose }) => {
           <ChatBoxOverlay />
           <ChatLogs>
             {contents.map((content, index) => (
-              <Me key={index}>{content.content}</Me>
+              <>
+                {content.userId === userId ? (
+                  <Me key={index}>{content.content}</Me>
+                ) : (
+                  <You key={index}>{content.content}</You>
+                )}
+              </>
             ))}
-            {/* <Me>끝나고 약속 있어?</Me>
-            <You>약속은 없는데 야구 봐야됨</You>
-            <Me>장난하니?</Me>
-            <You>응응</You>
-            <Me>
-              테스트입니다. 테스트입니다. 테스트입니다. 테스트입니다.
-              테스트입니다. 테스트입니다.
-            </Me>
-            <You>
-              알겠습니다. 알겠습니다. 알겠습니다. 알겠습니다. 알겠습니다.
-              알겠습니다. 알겠습니다.
-            </You> */}
           </ChatLogs>
         </ChatBoxBody>
         <ChatInput>

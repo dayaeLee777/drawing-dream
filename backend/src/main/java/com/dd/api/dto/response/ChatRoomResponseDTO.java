@@ -1,5 +1,6 @@
 package com.dd.api.dto.response;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.dd.common.model.BaseResponseDto;
@@ -10,8 +11,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +26,12 @@ public class ChatRoomResponseDTO extends BaseResponseDto {
 
 	@ApiModelProperty(name = "채팅방 정보 - name")
 	String name;
+
+	@ApiModelProperty(name = "채팅방 정보 - user")
+	List<ChatRoomUserResponseDTO> users;
+
+	@ApiModelProperty(name = "채팅방 정보 - 새로 생성")
+	boolean isNew;
 
 	public static ChatRoomResponseDTO of(Integer statusCode, String message, ChatRoomResponseDTO chatRoomResponseDTO) {
 		ChatRoomResponseDTO res = chatRoomResponseDTO;

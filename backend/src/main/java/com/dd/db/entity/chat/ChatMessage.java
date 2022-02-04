@@ -14,10 +14,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-@Setter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,22 +28,16 @@ public class ChatMessage extends BaseEntity {
 	private String content;
 
 	// 시간
-	private LocalDateTime regTime;
+	private LocalDateTime sendTime;
 
 	// 채팅방
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_id")
-	private ChatRoom room;
+	private ChatRoom chatRoom;
 
 	// 작성자
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User user;
-
-	public ChatMessage(String content, ChatRoom room, User user) {
-		this.content = content;
-		this.room = room;
-		this.user = user;
-	}
+	private User writer;
 
 }
