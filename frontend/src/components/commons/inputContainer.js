@@ -33,6 +33,7 @@ const InputContainer = (props) => {
         name={props.name}
         type={props.type ? props.type : "text"}
         width={props.width}
+        value={props.value}
       />
       <ValidContainer isValid={props.isValid} errMsg={props.errMsg} />
     </InputBlock>

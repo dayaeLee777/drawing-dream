@@ -17,7 +17,10 @@ const PostCode = (props) => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    props.setFullAddress(fullAddress);
+    props.setInputs({
+      ...props.inputs,
+      address: fullAddress,
+    });
     props.onClose();
   };
 

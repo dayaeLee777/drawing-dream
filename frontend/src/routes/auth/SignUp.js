@@ -96,7 +96,10 @@ const SignUp = () => {
     phoneNumber: "",
     parentPhoneNumber: "",
     email: "",
+    address: "",
     addressDetail: "",
+    schoolCode: "",
+    schoolName: "",
     gradeCode: "",
     classCode: "",
     studentNo: "",
@@ -130,7 +133,10 @@ const SignUp = () => {
     phoneNumber,
     parentPhoneNumber,
     email,
+    address,
     addressDetail,
+    schoolCode,
+    schoolName,
     gradeCode,
     classCode,
     studentNo,
@@ -152,12 +158,6 @@ const SignUp = () => {
     validationCheck(e, inputs, setInputs, valids, setValids, errors, setErrors);
   };
 
-  // ADDRESS, SCHOOL INFO STATE
-  const [fullAddress, setFullAddress] = useState("");
-  const [schoolCode, setSchoolCode] = useState("");
-  const [schoolName, setSchoolName] = useState("");
-  // ADDRESS, SCHOOL INFO END
-
   // GRADECODE, CLASSCODE SET
   const onGradeCodeSelect = (e) => {
     let { value, name } = e.target;
@@ -176,6 +176,7 @@ const SignUp = () => {
 
   // 회원 가입 요청
   const onSubmit = async () => {
+    console.log(inputs);
     if (
       validId &&
       validName &&
@@ -189,7 +190,8 @@ const SignUp = () => {
     ) {
       try {
         const user = {
-          address: fullAddress + " " + addressDetail,
+          address: address,
+          addressDetail: addressDetail,
           classCode: classCode,
           gradeCode: gradeCode,
           loginId: userId,
@@ -224,7 +226,11 @@ const SignUp = () => {
           onClose={closePostCode}
           windowProps={{ width: 580, height: 600 }}
         >
-          <PostCode setFullAddress={setFullAddress} onClose={closePostCode} />
+          <PostCode
+            setInputs={setInputs}
+            inputs={inputs}
+            onClose={closePostCode}
+          />
         </ReactNewWindowStyles>
       )}
       {isSchoolCodeOpen && (
@@ -234,8 +240,8 @@ const SignUp = () => {
           windowProps={{ width: 580, height: 600 }}
         >
           <SchoolCode
-            setSchoolName={setSchoolName}
-            setSchoolCode={setSchoolCode}
+            setInputs={setInputs}
+            inputs={inputs}
             onClose={closeSchoolCode}
           />
         </ReactNewWindowStyles>
@@ -300,12 +306,12 @@ const SignUp = () => {
         <InputBlock>
           <Wrapper>
             <div className="desc">주소</div>
-            {fullAddress && (
-              <Input mr="1rem" width="25rem" value={fullAddress} readOnly />
+            {address && (
+              <Input mr="1rem" width="25rem" value={address} readOnly />
             )}
             <Button
               name="도로명 주소 찾기"
-              width={fullAddress ? "8rem" : "12.75rem"}
+              width={address ? "8rem" : "12.75rem"}
               height="2.1rem"
               onClick={openPostCode}
             />
@@ -314,7 +320,7 @@ const SignUp = () => {
         <InputContainer
           desc="상세주소"
           onChange={onChange}
-          name="emaiaddressDetaill"
+          name="addressDetail"
           width="25rem"
         />
 
