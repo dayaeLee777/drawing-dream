@@ -74,8 +74,11 @@ const SchoolCode = (props) => {
     let choiceSchoolName = schoolData.SCHUL_NM;
     let choiceSchoolCode = schoolData.SD_SCHUL_CODE;
 
-    props.setSchoolName(choiceSchoolName);
-    props.setSchoolCode(choiceSchoolCode);
+    props.setInputs({
+      ...props.inputs,
+      schoolName: choiceSchoolName,
+      schoolCode: choiceSchoolCode,
+    });
     props.onClose();
   };
 

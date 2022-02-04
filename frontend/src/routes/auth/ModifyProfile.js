@@ -4,13 +4,14 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import blankProfile from "assets/img/blank-profile.png";
 import PostCode from "components/signup/postcode/FindPostCode";
-import { getUser } from "api/user";
+import { getUser, putUser } from "api/user";
 import { useSelector } from "react-redux";
 import validationCheck from "components/signup/validationCheck";
 import commonCode from "config/commonCode";
 import InputContainer from "components/commons/inputContainer";
 import { ReactNewWindowStyles } from "react-new-window-styles";
 import SchoolCode from "components/signup/school/SchoolCode";
+import { useNavigate } from "react-router-dom";
 
 const FormContainer = styled.div`
   /* width: 50rem;
@@ -39,17 +40,6 @@ const Wrapper = styled.div`
     }
   }
 `;
-const ProfileImageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  img {
-    border-radius: 100px;
-    width: 5rem;
-    height: 5rem;
-    margin-bottom: 1rem;
-  }
-`;
 const Desc = styled.div`
   font-size: 1.8rem;
   margin: 3rem 0;
@@ -76,20 +66,17 @@ const InputBlock = styled.div`
 
 const ModifyProfile = () => {
   const [isPostCodeOpen, setIsPostCodeOpen] = useState(false);
-  const [isSchoolCodeOpen, setIsSchoolCodeOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [fullAddress, setFullAddress] = useState("");
-  const [newSchoolCode, setSchoolCode] = useState("");
-  const [newSchoolName, setSchoolName] = useState("");
   const [inputs, setInputs] = useState();
   const state = useSelector((state) => state.user);
+
+  const Navigate = useNavigate();
 
   useEffect(() => {
     if (isLoading) {
       getUser(state.userId).then(
         (res) => (
           console.log(res),
-          console.log(state),
           setInputs({
             ...inputs,
             address: res.data.address,
@@ -100,12 +87,8 @@ const ModifyProfile = () => {
             gradeCode: state.gradeCode,
             classCode: state.classCode,
             studentNo: state.studentNo,
-            schoolCode: state.schoolCode,
-            schoolName: state.schoolName,
-            addressDetail: "",
+            addressDetail: res.data.addressDetail,
           }),
-          setFullAddress(res.data.address),
-          console.log(inputs),
           setIsLoading(false)
         )
       );
@@ -132,12 +115,6 @@ const ModifyProfile = () => {
   const closePostCode = () => {
     setIsPostCodeOpen(false);
   };
-  const openSchoolCode = () => {
-    setIsSchoolCodeOpen(true);
-  };
-  const closeSchoolCode = () => {
-    setIsSchoolCodeOpen(false);
-  };
   const onChange = (e) => {
     validationCheck(e, inputs, setInputs, valids, setValids, errors, setErrors);
   };
@@ -159,45 +136,38 @@ const ModifyProfile = () => {
 
   const onSubmit = async () => {
     if (
-      validEmail
-      // gradeCode &&
-      // classCode &&
-      // studentNo
+      validEmail &&
+      inputs.gradeCode &&
+      inputs.classCode &&
+      inputs.studentNo
     ) {
-      console.log(inputs);
-      //   try {
-      //     const user = {
-      //       loginId: userId,
-      //       address: fullAddress + " " + addressDetail,
-      //       phone: phoneNumber,
-      //       parentPhone: parentPhoneNumber,
-      //       userEmail: email,
-      //       userName: userName,
-      //       gradeCode: gradeCode,
-      //       classCode: classCode,
-      //       studentNo: studentNo,
-      //     };
-
-      //     signUp(user).then((res) => {
-      //       if (res.status === 201) {
-      //         alert("회원가입에 성공하였습니다.");
-      //         Navigate("/signin");
-      //       }
-      //     });
-      //   } catch (e) {}
-      // } else {
-      //   alert("필수 입력 항목을 확인해주세요.");
-      // }
+      // console.log(inputs);
+      try {
+        const user = {
+          address: inputs.address,
+          addressDetail: inputs.addressDetail,
+          phone: inputs.phoneNumber,
+          parentPhone: inputs.parentPhoneNumber,
+          userEmail: inputs.email,
+          gradeCode: inputs.gradeCode,
+          classCode: inputs.classCode,
+          studentNo: inputs.studentNo,
+        };
+        console.log(user);
+        putUser(user).then((res) => {
+          if (res.status === 200) {
+            alert("프로필 수정을 성공하였습니다.");
+            Navigate("/home");
+          }
+        });
+      } catch (e) {}
+    } else {
+      alert("필수 입력 항목을 확인해주세요.");
     }
     // 회원가입 요청 END
   };
   return (
     <>
-      {/* <InnerContainer> */}
-      {/* <ProfileImageContainer>
-            <img src={blankProfile} alt="blank-profile"></img>
-            <Button width="6rem" name="파일 찾기" />
-          </ProfileImageContainer> */}
       {!isLoading && (
         <FormContainer>
           <Desc>프로필 수정</Desc>
@@ -233,12 +203,17 @@ const ModifyProfile = () => {
             <InputBlock>
               <Wrapper>
                 <div className="desc">주소</div>
-                {fullAddress && (
-                  <Input mr="1rem" width="25rem" value={fullAddress} readOnly />
+                {inputs.address && (
+                  <Input
+                    mr="1rem"
+                    width="25rem"
+                    value={inputs.address}
+                    readOnly
+                  />
                 )}
                 <Button
                   name="도로명 주소 찾기"
-                  width={fullAddress ? "8rem" : "12.75rem"}
+                  width={inputs.address ? "8rem" : "12.75rem"}
                   height="2.1rem"
                   onClick={openPostCode}
                 />
@@ -247,7 +222,7 @@ const ModifyProfile = () => {
             <InputContainer
               desc="상세주소"
               onChange={onChange}
-              name="emaiaddressDetaill"
+              name="addressDetail"
               width="25rem"
             />
 
@@ -330,7 +305,11 @@ const ModifyProfile = () => {
           onClose={closePostCode}
           windowProps={{ width: 580, height: 600 }}
         >
-          <PostCode setFullAddress={setFullAddress} onClose={closePostCode} />
+          <PostCode
+            setInputs={setInputs}
+            inputs={inputs}
+            onClose={closePostCode}
+          />
         </ReactNewWindowStyles>
       )}
     </>
