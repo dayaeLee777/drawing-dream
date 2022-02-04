@@ -1,18 +1,20 @@
 package com.dd.api.controller;
 
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dd.api.dto.response.ProfileResponseDto;
-import com.dd.api.dto.response.UserInfoResponseDto;
+import com.dd.api.service.AwsS3Service;
 import com.dd.api.service.ProfileService;
 import com.dd.common.model.BaseResponseDto;
 
@@ -33,6 +35,8 @@ public class ProfileController {
 	
 	private final ProfileService profileService;
 	
+	private final AwsS3Service awsS3Service;
+	
 	@GetMapping("{userId}")
 	@ApiOperation(value="유저 프로필 정보 불러오기(소속정보)")
 	@ApiResponses({
@@ -51,5 +55,18 @@ public class ProfileController {
 		}
 		
 		return ResponseEntity.status(200).body(ProfileResponseDto.of(200, "회원정보를 정상적으로 불러왔습니다", profileResponseDto));
+	}
+	
+	@PostMapping
+	@ApiOperation(value = "프로필 이미지 업로드")
+	@ApiResponses({
+		@ApiResponse(code=201, message="파일이 정상적으로 등록되었습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="업로드를 실패했습니다.")
+	})
+	public ResponseEntity<String> uploadProfileImg(
+		@ApiIgnore @RequestHeader("Authorization") String accessToken, 
+			@ApiParam(value="프로필 이미지", required = true) @RequestPart MultipartFile multipartFile) {
+		return ResponseEntity.status(200).body(awsS3Service.uploadProfileImg(accessToken, multipartFile));
 	}
 }
