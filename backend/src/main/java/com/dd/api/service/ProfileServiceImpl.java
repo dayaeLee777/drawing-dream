@@ -2,14 +2,11 @@ package com.dd.api.service;
 
 import java.util.UUID;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.response.ProfileResponseDto;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
-import com.dd.db.repository.AuthRepository;
 import com.dd.db.repository.UserDepartmentRepository;
 import com.dd.db.repository.UserRepository;
 
@@ -23,6 +20,7 @@ public class ProfileServiceImpl implements ProfileService {
 	
 	private final UserDepartmentRepository userDepartmentRepository;
 	
+	private final AwsS3Service awsS3Service;
 	
 	@Override
 	public ProfileResponseDto getProfile(UUID userId) {
@@ -32,6 +30,9 @@ public class ProfileServiceImpl implements ProfileService {
 		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).orElseThrow(() 
 				-> new IllegalArgumentException("해당 유저가 없습니다. id = + userId"));
 		
-		return new ProfileResponseDto(user, userDepartment);
+		String fileName = awsS3Service.getThumbnailPath(user);
+		System.out.println("파일ㄴㅔㅔㅔㅔㅔㅔ임");
+		System.out.println(fileName);
+		return new ProfileResponseDto(user, userDepartment, fileName);
 	}
 }

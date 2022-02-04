@@ -58,6 +58,6 @@ public class FileController {
 	public ResponseEntity<List<String>> upload(
 		@ApiIgnore @RequestHeader("Authorization") String accessToken, 
 			@ApiParam(value="파일들(여러 파일 업로드 가능)", required = true) @RequestPart List<MultipartFile> multipartFile) {
-		return ResponseEntity.status(200).body(awsS3Service.uploadFile(accessToken, multipartFile, "profile"));
+		return ResponseEntity.status(200).body(awsS3Service.uploadFile(accessToken, multipartFile));
 	}
 }

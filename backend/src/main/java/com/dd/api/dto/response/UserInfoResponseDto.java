@@ -27,6 +27,9 @@ public class UserInfoResponseDto extends BaseResponseDto {
 	@ApiModelProperty(name="유저 정보 - 주소")
 	private String address;
 	
+	@ApiModelProperty(name="유저 정보 - 상세 주소")
+	private String addressDetail;
+	
 	@Builder
 	public UserInfoResponseDto(User user) {
 		this.userName = user.getUserName();
@@ -34,6 +37,7 @@ public class UserInfoResponseDto extends BaseResponseDto {
 		this.parentPhone = user.getParentPhone();
 		this.userEmail = user.getUserEmail();
 		this.address = user.getAddress();
+		this.addressDetail = user.getAddressDetail();
 	}
 	
 	@Builder
@@ -44,6 +48,7 @@ public class UserInfoResponseDto extends BaseResponseDto {
 		this.parentPhone = userInfoResponseDto.parentPhone;
 		this.userEmail = userInfoResponseDto.userEmail;
 		this.address = userInfoResponseDto.address;
+		this.addressDetail = userInfoResponseDto.addressDetail;
 	}
 	
 	public static UserInfoResponseDto of(Integer statusCode, String message, UserInfoResponseDto userInfoResponseDto) {

@@ -1,8 +1,5 @@
 package com.dd.api.dto.request;
 
-import com.dd.db.entity.user.Auth;
-import com.dd.db.entity.user.User;
-import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.enums.Code;
 
 import io.swagger.annotations.ApiModel;
@@ -37,6 +34,9 @@ public class UserRegisterRequestDto {
 	
 	@ApiModelProperty(name="유저 정보 - 주소")
 	private String address;
+	
+	@ApiModelProperty(name="유저 정보 - 상세 주소")
+	private String addressDetail;
 	
 	@ApiModelProperty(name="소속 정보 - 학교 시리얼 번호")
 	private String schoolSerialNo;
