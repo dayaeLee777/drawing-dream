@@ -22,7 +22,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class StudyRecord extends BaseEntity {
 
@@ -40,4 +39,25 @@ public class StudyRecord extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@Builder
+	public StudyRecord(LocalDate studyDate, String title, LocalDateTime startTime, LocalDateTime endTime, boolean delYn,
+			User user) {
+		super();
+		this.studyDate = studyDate;
+		this.title = title;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.delYn = delYn;
+		this.user = user;
+	}
+	
+	public void finishStudyRecord(LocalDateTime endTime) {
+		this.endTime = endTime;
+	}
+	
+	public void deleteStudyRecord() {
+		this.delYn = true;
+	}
+	
 }

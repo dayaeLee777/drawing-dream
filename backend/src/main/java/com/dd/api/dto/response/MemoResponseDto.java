@@ -25,7 +25,8 @@ public class MemoResponseDto {
 	@ApiModelProperty(name="내용", example="메모 내용입니다.")
 	String content;
 	
-	@ApiModelProperty(name="등록일시", example="2022-01-27T10:08:12.963")
-	LocalDateTime regTime;
+	@ApiModelProperty(name="등록일시", example="2022-01-27 10:08:12")
+	String regTime;
+//	LocalDateTime regTime;
 	
 }

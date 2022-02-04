@@ -1,13 +1,18 @@
 package com.dd.api.controller;
 
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.StudyRecordRegistRequestDto;
+import com.dd.api.dto.response.StudyRecordFinishResponseDto;
 import com.dd.api.service.StudyRecordService;
 import com.dd.common.model.BaseResponseDto;
 
@@ -40,5 +45,17 @@ public class StudyRecordController {
 		if(studyRecordService.createStudyRecord(accessToken, studyRecordRegistRequestDto) != null)
 			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
 		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
+	}
+	
+	@PutMapping("/{studyRecordId}")
+	@ApiOperation(value = "공부시간 기록 종료하기", notes="<strong>공부시간 기록을 종료한다.</strong>")
+	@ApiResponses({
+		@ApiResponse(code=201, message="공부시간 기록이 정상적으로 종료되었습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="공부시간 기록 종료를 실패했습니다.")
+	})
+	public ResponseEntity<StudyRecordFinishResponseDto> finish(
+			@PathVariable("studyRecordId") @RequestBody @ApiParam(value = "종료할 공부기록", required = true) UUID studyRecordId){
+		return ResponseEntity.status(200).body(studyRecordService.finishStudyRecord(studyRecordId));
 	}
 }
