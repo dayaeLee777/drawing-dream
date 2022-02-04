@@ -7,7 +7,7 @@ const Container = styled(motion.div)`
   background-color: ${({ theme }) => theme.widgetColor};
   width: 50rem;
   height: 100%;
-  max-height: 15rem;
+  max-height: 20rem;
 `;
 
 const Wrapper = styled.div`
