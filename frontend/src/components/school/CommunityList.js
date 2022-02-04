@@ -1,5 +1,6 @@
 import Button from "components/commons/button";
-import React, { useCallback, useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CommunityItem from "./CommunityItem";
 
@@ -45,7 +46,8 @@ const StyledTh = styled.td`
   }
 `;
 
-const CommunityList = ({setIsRegister, setCommunityId}) => {
+const CommunityList = () => {
+  const Navigate = useNavigate();
   const sampleData = [
     {
       id: 1,
@@ -118,16 +120,13 @@ const CommunityList = ({setIsRegister, setCommunityId}) => {
       title: "네번째 글",
     },
   ];
-  const onRegister = () => {
-    setIsRegister(true);
-  }
 
   return (
     <>
       <Desc>우리 학교 커뮤니티</Desc>
       <Container>
         <ButtonContainer>
-          <Button name="글쓰기" width="7rem" height="2rem" onClick={onRegister}/>
+          <Button name="글쓰기" width="7rem" height="2rem" onClick={() => Navigate('./register')}/>
         </ButtonContainer>
         <StyledTable>
           <colgroup>
@@ -148,7 +147,7 @@ const CommunityList = ({setIsRegister, setCommunityId}) => {
           </thead>
           <tbody>
             {sampleData.map((item) => (
-              <CommunityItem key={item.id} data={item} setCommunityId={setCommunityId}/>
+              <CommunityItem key={item.id} data={item} />
             ))}
           </tbody>
         </StyledTable>
