@@ -56,29 +56,37 @@ const overlay = {
 };
 
 const WidgetList = () => {
-  const [isShow, setIsShow] = useState(true);
   const [widgetId, setWidgetId] = useState("");
   const [isLoad, setIsLoad] = useState(false);
-  const widgetList = [
-    commonCode.M.M01,
-    commonCode.M.M02,
-    commonCode.M.M03,
-    commonCode.M.M04,
-    commonCode.M.M05,
-    commonCode.M.M06,
-    commonCode.M.M07,
-  ];
+  const widgets = ["M01", "M02", "M03", "M04", "M05", "M06", "M07"];
+  const widgetList = commonCode.M;
+  const mod = {
+    M01: <TodayClassModal layoutId={widgetId} />,
+    M02: <DdayModal layoutId={widgetId} />,
+    M03: (
+      <CheckListModal
+        layoutId={widgetId}
+        isLoad={isLoad}
+        setIsLoad={setIsLoad}
+      />
+    ),
+    M04: <MemoModal layoutId={widgetId} />,
+    M05: <ScoreModal layoutId={widgetId} />,
+    M06: <StudyPlannerModal layoutId={widgetId} />,
+    M07: <TimeTableModal layoutId={widgetId} />,
+  };
+
   return (
     <Container>
       <Desc>모아보기</Desc>
       <>
         <Wrapper>
-          {widgetList.map((widget, index) => (
+          {widgets.map((widget) => (
             <Widget
               setWidgetId={setWidgetId}
-              key={index}
-              id={`M0${index + 1}`}
-              name={widget}
+              key={widget}
+              id={widget}
+              name={widgetList[widget]}
               loc="list"
             />
           ))}
@@ -92,31 +100,7 @@ const WidgetList = () => {
               exit="exit"
               onClick={() => setWidgetId(null)}
             >
-              {widgetId === "M01" && (
-                <TodayClassModal layoutId={widgetId}></TodayClassModal>
-              )}
-              {widgetId === "M02" && (
-                <DdayModal layoutId={widgetId}></DdayModal>
-              )}
-              {widgetId === "M03" && (
-                <CheckListModal
-                  layoutId={widgetId}
-                  isLoad={isLoad}
-                  setIsLoad={setIsLoad}
-                />
-              )}
-              {widgetId === "M04" && (
-                <MemoModal layoutId={widgetId}></MemoModal>
-              )}
-              {widgetId === "M05" && (
-                <ScoreModal layoutId={widgetId}></ScoreModal>
-              )}
-              {widgetId === "M06" && (
-                <StudyPlannerModal layoutId={widgetId}></StudyPlannerModal>
-              )}
-              {widgetId === "M07" && (
-                <TimeTableModal layoutId={widgetId}></TimeTableModal>
-              )}
+              {mod[widgetId]}
             </Overlay>
           )}
         </AnimatePresence>

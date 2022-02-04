@@ -30,9 +30,22 @@ const Content = styled.div`
   height: 85%;
 `;
 
-const CheckList = ({ setWidgetId, setIsShow, isLoad, setIsLoad }) => {
+const CheckList = ({
+  widgetId,
+  setWidgetId,
+  isShow,
+  setIsShow,
+  isntShow,
+  setIsntShow,
+  isLoad,
+  setIsLoad,
+}) => {
   const close = () => {
-    setIsShow(false);
+    const newIsShow = isShow.filter((wid) => {
+      return wid !== widgetId;
+    });
+    setIsShow(newIsShow);
+    setIsntShow([...isntShow, widgetId]);
   };
   return (
     <Container
@@ -42,7 +55,7 @@ const CheckList = ({ setWidgetId, setIsShow, isLoad, setIsLoad }) => {
         scale: 1.01,
       }}
       onClick={() => {
-        setWidgetId("M03");
+        if (setWidgetId) setWidgetId("M03");
       }}
     >
       <Wrapper>

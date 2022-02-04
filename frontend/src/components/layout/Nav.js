@@ -72,7 +72,12 @@ const Nav = () => {
   };
   return (
     <Container>
-      <Item onClick={() => navigate("/home")}>
+      <Item
+        onClick={() => {
+          navigate("/home");
+          window.location.reload();
+        }}
+      >
         <Logo src={logo}></Logo>
       </Item>
       <MenuWrapper>
@@ -82,7 +87,12 @@ const Nav = () => {
             설정
           </Item>
           <DropDownContent>
-            <DropDownItem onClick={() => navigate("/setting/home")}>
+            <DropDownItem
+              onClick={() => {
+                navigate("/setting/home");
+                window.location.reload();
+              }}
+            >
               홈 화면 설정
             </DropDownItem>
             <DropDownItem onClick={() => navigate("/modifyprofile")}>
