@@ -25,6 +25,10 @@ export const getUser = async (userId, success, fail) => {
   return await api.get(`/api/user/${userId}`).then(success).catch(fail);
 };
 
+export const putUser = async (user, success, fail) => {
+  return await api.put("/api/user", user);
+};
+
 export const idCheck = async (userId) => {
   return await api.get(`/api/user/idCheck/${userId}`);
 };
