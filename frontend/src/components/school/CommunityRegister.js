@@ -7,7 +7,7 @@ import { Editor } from "@toast-ui/react-editor";
 import { createRef, useState } from "react";
 
 const Container = styled.div`
-  padding: 2rem;
+  padding: 3rem 2rem;
 `;
 
 const StyledInput = styled.input`
@@ -32,7 +32,7 @@ const Title = styled.div`
   text-align: center;
   font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 `;
 
 const CommunityRegister = ({ setIsRegister }) => {
@@ -55,7 +55,7 @@ const CommunityRegister = ({ setIsRegister }) => {
       <Editor
         initialValue={content}
         previewStyle="tab"
-        height="550px"
+        height="500px"
         initialEditType="wysiwyg"
         useCommandShortcut={true}
         ref={editorRef}

@@ -25,6 +25,7 @@ const CommunityItem = ({data, setCommunityId}) => {
     <StyledTr onClick={onSetCommunityId}>
       <StyledTd>{data.id}</StyledTd>
       <StyledTd ta="left">{data.title}</StyledTd>
+      <StyledTd>{data.userName}</StyledTd>
       <StyledTd>{data.hit}</StyledTd>
       <StyledTd>{data.regTime}</StyledTd>
     </StyledTr>

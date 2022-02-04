@@ -34,10 +34,11 @@ const StyledCol = styled.col`
 
 const StyledTh = styled.td`
   background-color: #fec25c;
-  height: 2rem;
+  height: 2.2rem;
   vertical-align: middle;
   text-align: center;
   font-weight: 600;
+  border-radius: 3px;
 
   & + & {
     border-left: 2px solid white;
@@ -49,24 +50,70 @@ const CommunityList = ({setIsRegister, setCommunityId}) => {
     {
       id: 1,
       regTime: "2022.02.04",
+      userName: "이학생",
       hit: 23,
       title: "첫번째 글",
     },
     {
       id: 2,
       regTime: "2022.02.04",
+      userName: "박학생",
       hit: 5,
       title: "두번째 글",
     },
     {
       id: 3,
       regTime: "2022.02.04",
+      userName: "최학생",
       hit: 67,
       title: "세번째 글",
     },
     {
       id: 4,
       regTime: "2022.02.04",
+      userName: "윤학생",
+      hit: 55,
+      title: "네번째 글",
+    },
+    {
+      id: 5,
+      regTime: "2022.02.04",
+      userName: "김학생",
+      hit: 55,
+      title: "네번째 글",
+    },
+    {
+      id: 6,
+      regTime: "2022.02.04",
+      userName: "정학생",
+      hit: 55,
+      title: "네번째 글",
+    },
+    {
+      id: 7,
+      regTime: "2022.02.04",
+      userName: "이학생",
+      hit: 55,
+      title: "네번째 글",
+    },
+    {
+      id: 8,
+      regTime: "2022.02.04",
+      userName: "장학생",
+      hit: 55,
+      title: "네번째 글",
+    },
+    {
+      id: 9,
+      regTime: "2022.02.04",
+      userName: "박학생",
+      hit: 55,
+      title: "네번째 글",
+    },
+    {
+      id: 10,
+      regTime: "2022.02.04",
+      userName: "손학생",
       hit: 55,
       title: "네번째 글",
     },
@@ -84,15 +131,17 @@ const CommunityList = ({setIsRegister, setCommunityId}) => {
         </ButtonContainer>
         <StyledTable>
           <colgroup>
-            <StyledCol width="10%"></StyledCol>
-            <StyledCol width="65%"></StyledCol>
-            <StyledCol width="10%"></StyledCol>
+            <StyledCol width="5%"></StyledCol>
+            <StyledCol width="60%"></StyledCol>
+            <StyledCol width="13%"></StyledCol>
+            <StyledCol width="7%"></StyledCol>
             <StyledCol width="15%"></StyledCol>
           </colgroup>
           <thead>
             <tr>
               <StyledTh>글번호</StyledTh>
               <StyledTh>제목</StyledTh>
+              <StyledTh>작성자</StyledTh>
               <StyledTh>조회수</StyledTh>
               <StyledTh>등록일</StyledTh>
             </tr>
