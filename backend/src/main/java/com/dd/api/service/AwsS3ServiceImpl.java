@@ -2,6 +2,7 @@ package com.dd.api.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -9,7 +10,9 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,8 +20,13 @@ import org.springframework.web.server.ResponseStatusException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.util.IOUtils;
+import com.dd.api.dto.response.FilesResponseDto;
 import com.dd.db.entity.files.Files;
 import com.dd.db.entity.user.User;
 import com.dd.db.repository.FileRepository;
@@ -40,7 +48,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     
 	@Transactional
 	@Override
-	public List<String> uploadFile(String accessToken, List<MultipartFile> multipartFile) {
+	public List<String> uploadFile(String accessToken, List<MultipartFile> multipartFile, String db) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
 		List<String> fileNameList = new ArrayList<>();
 		
@@ -55,6 +63,10 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	                        .withCannedAcl(CannedAccessControlList.PublicRead));
 	            } catch(IOException e) {
 	                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+	            }
+	            
+	            if(db.equals("profile")) {
+	            	profileImageDB(fileName, file.getOriginalFilename() ,user);
 	            }
 	            
 	            Files fileEntity = Files.builder()
@@ -90,6 +102,39 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	        } catch (StringIndexOutOfBoundsException e) {
 	            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일(" + fileName + ") 입니다.");
 	        }
+	}
+
+	@Override
+	public FilesResponseDto getObject(String storedFileName) throws IOException {
+		S3Object o = amazonS3.getObject(new GetObjectRequest(bucket, storedFileName));
+        S3ObjectInputStream objectInputStream = o.getObjectContent();
+        byte[] bytes = IOUtils.toByteArray(objectInputStream);
+
+        String fileName = URLEncoder.encode(storedFileName, "UTF-8").replaceAll("\\+", "%20");
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        httpHeaders.setContentLength(bytes.length);
+        httpHeaders.setContentDispositionFormData("attachment", fileName);
+        FilesResponseDto filesResponseDto = FilesResponseDto.builder()
+        		.bytes(bytes)
+        		.httpHeaders(httpHeaders)
+        		.build();
+		return filesResponseDto;
+	}
+	
+	@Override
+	public String getThumbnailPath(String storedFileName) {
+        return amazonS3.getUrl(bucket, storedFileName).toString();
+    }
+	
+	public void profileImageDB(String fileName, String originName, User user) {
+		Files fileEntity = Files.builder()
+        		.newFileName(fileName)
+        		.originFileName(originName)
+        		.user(user)
+        		.build();
+        
+        fileRepository.save(fileEntity);
 	}
 
 }
