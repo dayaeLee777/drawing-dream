@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledTr = styled.tr`
@@ -17,12 +18,10 @@ const StyledTd = styled.td`
   padding: 0 1.5rem;
 `;
 
-const CommunityItem = ({data, setCommunityId}) => {
-  const onSetCommunityId = () => {
-    setCommunityId(data.id);
-  }
+const CommunityItem = ({data}) => {
+  const Navigate = useNavigate();
   return (
-    <StyledTr onClick={onSetCommunityId}>
+    <StyledTr onClick={() => Navigate(`./${data.id}`)}>
       <StyledTd>{data.id}</StyledTd>
       <StyledTd ta="left">{data.title}</StyledTd>
       <StyledTd>{data.userName}</StyledTd>
