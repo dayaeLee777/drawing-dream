@@ -28,10 +28,17 @@ public class StudyRecordResponseDto {
 	@ApiModelProperty(name="날짜", example="2022-01-01")
 	private LocalDate studyDate;
 	
-	@ApiModelProperty(name="공부 시작시간", example="2022-02-05 00:00:56.599000")
+	@ApiModelProperty(name="공부 시작시간", example="2022-02-05 00:00:56")
 	private LocalDateTime startTime;
 	
-	@ApiModelProperty(name="공부 종료시간", example="2022-02-05 00:30:56.599000")
+	@ApiModelProperty(name="공부 종료시간", example="2022-02-05 00:30:56")
 	private LocalDateTime endTime;
+
+	@ApiModelProperty(name="공부 지속 시간", example="01:30")
+	private LocalTime durationTime;
 	
+	public void updateEndTime(LocalDateTime endTime, LocalTime durationTime) {
+		this.endTime = endTime;
+		this.durationTime = durationTime;
+	}
 }
