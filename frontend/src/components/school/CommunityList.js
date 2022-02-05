@@ -54,16 +54,15 @@ const CommunityList = () => {
 
   // useEffect 데이터 read
   useEffect(() => {
-    console.log('community 리스트 조회')
+    // console.log("community 리스트 조회");
     if (isLoading) {
-      getCommunityList()
-      .then(res => {
-        setData(res.data.communityGetListResponseDtoList)
+      getCommunityList().then((res) => {
+        setData(res.data.communityGetListResponseDtoList);
         setIsLoading(false);
-      })
+      });
     }
-    console.log(data);
-  }, [isLoading])
+    // console.log(data);
+  }, [isLoading]);
 
   // const sampleData = [
   //   {
@@ -143,7 +142,12 @@ const CommunityList = () => {
       <Desc>우리 학교 커뮤니티</Desc>
       <Container>
         <ButtonContainer>
-          <Button name="글쓰기" width="7rem" height="2rem" onClick={() => Navigate('./register')}/>
+          <Button
+            name="글쓰기"
+            width="7rem"
+            height="2rem"
+            onClick={() => Navigate("./register")}
+          />
         </ButtonContainer>
         <StyledTable>
           <colgroup>
@@ -163,9 +167,10 @@ const CommunityList = () => {
             </tr>
           </thead>
           <tbody>
-            {data && data.map((item) => (
-              <CommunityItem key={item.communityId} data={item} />
-            ))}
+            {data &&
+              data.map((item) => (
+                <CommunityItem key={item.communityId} data={item} />
+              ))}
           </tbody>
         </StyledTable>
       </Container>

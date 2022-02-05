@@ -54,8 +54,6 @@ const CommunityRegister = () => {
   };
 
   const onRegister = () => {
-    console.log(editorRef.current.getInstance().getHTML());
-    console.log(data.title);
     if (
       data.title &&
       editorRef.current.getInstance().getHTML() !== contentEmpty
@@ -63,10 +61,7 @@ const CommunityRegister = () => {
       registerCommunity({
         title: data.title,
         content: editorRef.current.getInstance().getHTML(),
-      }).then(
-        alert("글 등록에 성공하였습니다."),
-        Navigate("../")
-      );
+      }).then(alert("글 등록에 성공하였습니다."), Navigate("../"));
     } else {
       alert("제목과 내용을 모두 작성해주세요.");
     }

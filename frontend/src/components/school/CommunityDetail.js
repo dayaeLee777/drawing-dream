@@ -73,13 +73,12 @@ const CommunityDetail = () => {
 
   useEffect(() => {
     if (isLoading) {
-      getCommunityDetail(params.communityid).then((res) => {
-        console.log(res);
+      getCommunityDetail(params.communityId).then((res) => {
         setData(res.data);
         setIsLoading(false);
       });
     }
-    // console.log(data.content);
+    console.log(data);
   }, [isLoading]);
 
   // const sampleData = {
@@ -115,7 +114,7 @@ const CommunityDetail = () => {
         </BoardContainer>
       )}
 
-      <CommentContainer />
+      <CommentContainer communityId={params.communityId}/>
     </DetailContainer>
   );
 };

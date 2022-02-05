@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import CommentInsert from './CommentInsert';
+import CommentRegister from './CommentRegister';
 import CommentList from './CommentList';
 
 const Container = styled.div`
@@ -13,12 +13,12 @@ const Container = styled.div`
   }
 `;
 
-const CommentContainer = () => {
+const CommentContainer = ({communityId}) => {
   return (
     <Container>
       <div className="desc">댓글</div>
-      <CommentList />
-      <CommentInsert />
+      <CommentList communityId={communityId}/>
+      <CommentRegister communityId={communityId} children/>
     </Container>
   );
 };

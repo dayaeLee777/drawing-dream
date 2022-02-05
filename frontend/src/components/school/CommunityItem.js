@@ -1,6 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const StyledTr = styled.tr`
   &:hover {
@@ -14,11 +14,11 @@ const StyledTr = styled.tr`
 const StyledTd = styled.td`
   height: 3rem;
   vertical-align: middle;
-  text-align: ${props=> props.ta || "center"};
+  text-align: ${(props) => props.ta || "center"};
   padding: 0 1.5rem;
 `;
 
-const CommunityItem = ({data}) => {
+const CommunityItem = ({ data }) => {
   const Navigate = useNavigate();
   return (
     <StyledTr onClick={() => Navigate(`./${data.communityId}`)}>

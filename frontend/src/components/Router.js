@@ -64,7 +64,7 @@ const AppRouter = () => {
                   <Route path="/school/" element={<School />} >
                     <Route path="" element={<CommunityList />} />
                     <Route path="register" element={<CommunityRegister />} />
-                    <Route path=":communityid" element={<CommunityDetail />} />
+                    <Route path=":communityId" element={<CommunityDetail />} />
                   </Route>
                   <Route path="/lookup" element={<LookUp />} />
                   <Route path="/myclassroom" element={<MyClassRoom />} />
