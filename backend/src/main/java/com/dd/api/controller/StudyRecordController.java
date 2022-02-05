@@ -73,7 +73,7 @@ public class StudyRecordController {
 	})
 	public ResponseEntity<StudyRecordGetListWrapperResponseDto> getStudyRecordList(
 			@ApiIgnore @RequestHeader("Authorization") String accessToken,
-			@PathVariable("studyDate") @RequestBody @ApiParam(value = "공부한 날짜", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate studyDate) {
+			@PathVariable("studyDate") @RequestBody @ApiParam(value = "공부한 날짜", example = "2022-02-06", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate studyDate) {
 		return ResponseEntity.status(200).body(studyRecordService.getStudyRecordListByDate(accessToken, studyDate));
 	}
 
@@ -85,7 +85,21 @@ public class StudyRecordController {
 		@ApiResponse(code=409, message="오늘의 공부시간 조회를 실패했습니다.")
 	})
 	public ResponseEntity<StudyRecordResponseDto> getStudyRecord(
-			@PathVariable("studyRecordId") @RequestBody @ApiParam(value = "조회할 studyRecordId", required = true) UUID studyRecordId){
+			@PathVariable("studyRecordId") @RequestBody @ApiParam(value = "조회할 오늘의 공부시간 Id", required = true) UUID studyRecordId){
 		return ResponseEntity.status(200).body(studyRecordService.getStudyRecord(studyRecordId));
+	}
+	
+	@PutMapping("/delete/{studyRecordId}")
+	@ApiOperation(value = "오늘의 공부시간 삭제하기", notes="<strong>오늘의 공부시간을 삭제한다.</strong>")
+	@ApiResponses({
+		@ApiResponse(code=201, message="오늘의 공부시간이 정상적으로 삭제되었습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="오늘의 공부시간 삭제를 실패했습니다.")
+	})
+	public ResponseEntity<? extends BaseResponseDto> delete(
+			@PathVariable("studyRecordId") @RequestBody @ApiParam(value = "삭제할 오늘의 공부시간 ID ", required = true) UUID studyRecordId){
+		if(studyRecordService.deleteStudyRecord(studyRecordId) != null)
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
 }

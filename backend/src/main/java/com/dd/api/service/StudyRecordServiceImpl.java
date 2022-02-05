@@ -121,6 +121,18 @@ public class StudyRecordServiceImpl implements StudyRecordService {
 		
 		return studyRecordResponseDto;
 	}
+
+	@Transactional
+	@Override
+	public StudyRecord deleteStudyRecord(UUID studyRecordId) {
+		StudyRecord studyRecord = studyRecordRepository.findById(studyRecordId).orElse(null);
+		
+		if(studyRecord == null)
+			return null;
+		
+		studyRecord.deleteStudyRecord();
+		return studyRecordRepository.save(studyRecord);
+	}
 	
 
 }

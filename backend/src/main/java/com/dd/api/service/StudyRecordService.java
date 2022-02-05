@@ -15,5 +15,5 @@ public interface StudyRecordService {
 	StudyRecordGetListWrapperResponseDto getStudyRecordListByDate(String accessToken, LocalDate studyDate);
 	StudyRecordResponseDto getStudyRecord(UUID studyRecordId);
 	//	StudyRecord updateChecklist(ChecklistUpdateRequestDto checklistUpdateRequestDto);
-//	StudyRecord deleteChecklist(UUID checklistId);
+	StudyRecord deleteStudyRecord(UUID studyRecordId);
 }
