@@ -23,15 +23,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 public class Course extends BaseEntity {
-	
+
 	@Enumerated(EnumType.STRING)
 	private SubCode subjectCode;
 
-	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
+	@Column(name = "del_yn", columnDefinition = "BOOLEAN DEFAULT false")
 	private boolean delYn;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User user;
-	
+	private User teacher;
+
 }
