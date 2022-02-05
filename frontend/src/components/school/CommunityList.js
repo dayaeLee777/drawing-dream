@@ -1,5 +1,6 @@
+import { getCommunityList } from "api/community";
 import Button from "components/commons/button";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CommunityItem from "./CommunityItem";
@@ -48,6 +49,16 @@ const StyledTh = styled.td`
 
 const CommunityList = () => {
   const Navigate = useNavigate();
+  const [data, setData] = useState(null);
+
+  // useEffect 데이터 read
+  useEffect(() => {
+    console.log('community 리스트 조회')
+    getCommunityList()
+    .then(res => {
+      setData(res.data);
+    }, [])
+  })
   const sampleData = [
     {
       id: 1,
