@@ -1,4 +1,4 @@
-import { getReCommentList } from "api/community";
+import { deleteComment, deleteReComment, getReCommentList } from "api/community";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CommentRegister from "./CommentRegister";
@@ -78,12 +78,25 @@ const CommentItem = ({ data, children, communityId }) => {
   });
 
   const onReCommentRegister = () => {
-    console.log(data.commentId);
     setReCommentRegister({
       commentId: data.commentId,
       isReComment: !reCommentRegister.isReComment,
     });
   };
+
+  const onDelete = () => {
+    if (children) {
+      deleteComment(data.commentId)
+      .then(() => {
+        alert("댓글이 삭제되었습니다.");
+      })
+    } else {
+      deleteReComment(data.commentId)
+      .then(() => {
+        alert("대댓글이 삭제되었습니다.");
+      })
+    }
+  }
 
   return (
     <Container>
@@ -96,7 +109,7 @@ const CommentItem = ({ data, children, communityId }) => {
             답글달기
           </span>
           <span className="reCommentBtn">수정하기</span>
-          <span className="reCommentBtn">삭제하기</span>
+          <span className="reCommentBtn" onClick={onDelete}>삭제하기</span>
         </FeatureContainer>
         {reCommentRegister.commentId === data.commentId &&
           reCommentRegister.isReComment && (

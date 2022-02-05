@@ -3,8 +3,8 @@ import styled from "styled-components";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
 import CommentContainer from "./comment/CommentContainer";
-import { useParams } from "react-router-dom";
-import { getCommunityDetail } from "api/community";
+import { useNavigate, useParams } from "react-router-dom";
+import { deleteCommunity, getCommunityDetail } from "api/community";
 import { useSelector } from "react-redux";
 
 const DetailContainer = styled.div`
@@ -60,6 +60,7 @@ const EditContainer = styled.div`
 
 const CommunityDetail = () => {
   const params = useParams();
+  const Navigate = useNavigate();
 
   const [data, setData] = useState({
     title: "",
@@ -78,8 +79,15 @@ const CommunityDetail = () => {
         setIsLoading(false);
       });
     }
-    console.log(data);
   }, [isLoading]);
+
+  const onDelete = () => {
+    deleteCommunity(params.communityId)
+    .then(() => {
+      alert("글이 삭제되었습니다.");
+      Navigate("../");
+    })
+  }
 
   // const sampleData = {
   //   regTime: "2022.02.04",
@@ -103,7 +111,7 @@ const CommunityDetail = () => {
           {userId === data.userId && (
             <>
               <span className="edit">수정하기</span>
-              <span className="delete">삭제하기</span>
+              <span className="delete" onClick={onDelete}>삭제하기</span>
             </>
           )}
         </EditContainer>

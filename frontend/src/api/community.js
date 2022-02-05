@@ -18,7 +18,7 @@ export const getCommunityList = async (success, fail) => {
   return await api.get("/api/community/list").then(success).catch(fail);
 };
 
-export const deleteCommunityList = async (communityId, success, fail) => {
+export const deleteCommunity = async (communityId, success, fail) => {
   return await api
     .delete(`/api/community/${communityId}`)
     .then(success)
@@ -67,9 +67,15 @@ export const registerSubComment = async (content, success, fail) => {
 };
 
 export const getReCommentList = async (commentId, success, fail) => {
-  console.log(commentId)
   return await api
     .get(`/api/subComment/list/${commentId}`)
+    .then(success)
+    .catch(fail)
+}
+
+export const deleteReComment = async (commentId, success, fail) => {
+  return await api
+    .delete(`/api/subComment/${commentId}`)
     .then(success)
     .catch(fail)
 }
