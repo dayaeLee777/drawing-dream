@@ -13,14 +13,10 @@ import com.dd.api.dto.response.CommentGetListResponseDto;
 import com.dd.api.dto.response.CommentGetListWrapperResponseDto;
 import com.dd.db.entity.board.Comment;
 import com.dd.db.entity.board.Community;
-import com.dd.db.entity.school.School;
-import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
-import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.repository.AuthRepository;
 import com.dd.db.repository.CommentRepository;
 import com.dd.db.repository.CommunityRepository;
-import com.dd.db.repository.UserRepository;
 import com.dd.security.util.JwtAuthenticationProvider;
 
 import lombok.RequiredArgsConstructor;
@@ -31,8 +27,6 @@ public class CommentServiceImpl implements CommentService {
 	
 	private final AuthRepository authRepository;
 	
-	private final UserRepository userRepository;
-	
 	private final CommunityRepository communityRepository;
 	
 	private final CommentRepository commentRepository;
@@ -40,11 +34,8 @@ public class CommentServiceImpl implements CommentService {
 	private final JwtAuthenticationProvider jwtAuthenticationProvider;
 
 	@Override
-//	public void registerComment(String accessToken, CommentRegisterRequestDto commentRegisterRequestDto) {
-	public void registerComment(CommentRegisterRequestDto commentRegisterRequestDto) {
-//		String token = accessToken.split(" ")[1];
-//		String loginId = jwtAuthenticationProvider.getUsername(token);
-		String loginId = "test1";
+	public void registerComment(String accessToken, CommentRegisterRequestDto commentRegisterRequestDto) {
+		String loginId = getLoginIdFromToken(accessToken);
 		
 		// 댓글을 등록하는 게시물 정보 가져오기
 		Community community = communityRepository.findById(commentRegisterRequestDto.getCommunityId()).get();
@@ -64,7 +55,6 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-//	public CommentGetListWrapperResponseDto getCommentList(String accessToken, UUID communityId) {
 	public CommentGetListWrapperResponseDto getCommentList(UUID communityId) {
 
 		List<CommentGetListResponseDto> list = new ArrayList<>();
@@ -82,10 +72,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-//	public boolean updateComment(String accessToken, CommentUpdateRequestDto commentUpdateRequestDto) {
-	public boolean updateComment(CommentUpdateRequestDto commentUpdateRequestDto) {
-//		String loginId = getLoginIdFromToken(accessToken);
-		String loginId = "test1";
+	public boolean updateComment(String accessToken, CommentUpdateRequestDto commentUpdateRequestDto) {
+		String loginId = getLoginIdFromToken(accessToken);
 		
 		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
 		// 수정할 Comment
@@ -100,10 +88,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-//	public boolean deleteComment(String accessToken, UUID commentId) {
-	public boolean deleteComment(UUID commentId) {
-//		String loginId = getLoginIdFromToken(accessToken);
-		String loginId = "test1";
+	public boolean deleteComment(String accessToken, UUID commentId) {
+		String loginId = getLoginIdFromToken(accessToken);
 		
 		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
 		// 삭제할 Comment
