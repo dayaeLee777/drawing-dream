@@ -1,10 +1,9 @@
-import Button from "components/commons/button";
-import Input from "components/commons/input";
 import React from "react";
 import styled from "styled-components";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
 import CommentContainer from "./comment/CommentContainer";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Register = styled.div`
   padding: 3rem 5rem;
@@ -57,11 +56,10 @@ const EditContainer = styled.div`
 `;
 
 
-const CommunityDetail = ({ setCommunityId }) => {
-  const onClickHome = () => {
-    console.log(">>>");
-    setCommunityId("");
-  };
+const CommunityDetail = () => {
+  const params = useParams();
+  const Navigate = useNavigate();
+  console.log(params);
   const sampleData = {
     regTime: "2022.02.04",
     userName: "이학생",
@@ -73,7 +71,6 @@ const CommunityDetail = ({ setCommunityId }) => {
   };
   return (
     <Register>
-      <Button name="뒤로" width="5rem" onClick={onClickHome} mb="1rem" />
       <TitleContainer>
         <div className="title">{sampleData.title}</div>
         <ProfileContainer>

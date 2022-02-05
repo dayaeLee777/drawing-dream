@@ -20,6 +20,9 @@ import Chat from "./chat/Chat";
 import MyClassRoom from "routes/MyClassRoom";
 import WidgetList from "routes/WidgetList";
 import HomeSetting from "routes/HomeSetting";
+import CommunityRegister from "./school/CommunityRegister";
+import CommunityList from "./school/CommunityList";
+import CommunityDetail from "./school/CommunityDetail";
 
 const Container = styled.div`
   display: grid;
@@ -58,7 +61,11 @@ const AppRouter = () => {
                   <Route path="/home" element={<Home />} />
                   <Route path="/modifyprofile" element={<ModifyProfile />} />
                   <Route path="/notice" element={<Notice />} />
-                  <Route path="/school" element={<School />} />
+                  <Route path="/school/*" element={<School />} >
+                    <Route path="" element={<CommunityList />} />
+                    <Route path="register" element={<CommunityRegister />} />
+                    <Route path=":communityid" element={<CommunityDetail />} />
+                  </Route>
                   <Route path="/lookup" element={<LookUp />} />
                   <Route path="/myclassroom" element={<MyClassRoom />} />
                   <Route path="/widgetlist" element={<WidgetList />} />
