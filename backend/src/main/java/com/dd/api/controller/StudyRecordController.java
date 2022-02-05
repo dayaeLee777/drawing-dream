@@ -76,5 +76,16 @@ public class StudyRecordController {
 			@PathVariable("studyDate") @RequestBody @ApiParam(value = "공부한 날짜", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate studyDate) {
 		return ResponseEntity.status(200).body(studyRecordService.getStudyRecordListByDate(accessToken, studyDate));
 	}
-	
+
+	@GetMapping("/{studyRecordId}")
+	@ApiOperation(value = "오늘의 공부시간 불러오기", notes="<strong>studyRecordId 에 해당하는 오늘의 공부시간 기록을 불러온다.</strong>")
+	@ApiResponses({
+		@ApiResponse(code=201, message="오늘의 공부시간을 정상적으로 조회하였습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="오늘의 공부시간 조회를 실패했습니다.")
+	})
+	public ResponseEntity<StudyRecordResponseDto> getStudyRecord(
+			@PathVariable("studyRecordId") @RequestBody @ApiParam(value = "조회할 studyRecordId", required = true) UUID studyRecordId){
+		return ResponseEntity.status(200).body(studyRecordService.getStudyRecord(studyRecordId));
+	}
 }
