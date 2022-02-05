@@ -8,14 +8,10 @@ import com.dd.api.dto.response.SubCommentGetListWrapperResponseDto;
 
 public interface SubCommentService {
 
-//	void registerSubComment(String accessToken, SubCommentRegisterRequestDto subCommentRegisterRequestDto);
-	void registerSubComment(SubCommentRegisterRequestDto subCommentRegisterRequestDto);
-//	boolean deleteSubComment(String accessToken, UUID commentId)
-	boolean deleteSubComment(UUID commentId);
-//	SubCommentGetListWrapperResponseDto getSubCommentList(String accessToken, UUID commentId);
+	void registerSubComment(String accessToken, SubCommentRegisterRequestDto subCommentRegisterRequestDto);
 	SubCommentGetListWrapperResponseDto getSubCommentList(UUID commentId);
-//	boolean updateSubComment(String accessToken, CommentUpdateRequestDto commentUpdateRequestDto);
-	boolean updateSubComment(CommentUpdateRequestDto commentUpdateRequestDto);
+	boolean updateSubComment(String accessToken, CommentUpdateRequestDto commentUpdateRequestDto);
+	boolean deleteSubComment(String accessToken, UUID commentId);
 	String getLoginIdFromToken(String accessToken);
 
 }
