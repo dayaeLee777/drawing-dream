@@ -10,17 +10,11 @@ import com.dd.db.entity.board.Community;
 
 public interface CommunityService {
 
-//	void registerCommunity(String accessToken, CommunityRegisterRequestDto communityRegistPostReq);
-	void registerCommunity(CommunityRegisterRequestDto communityRegisterRequestDto);
-//	boolean updateCommnunity(String accessToken, CommunityUpdateRequestDto communityUpdateRequestDto);
-	boolean updateCommunity(CommunityUpdateRequestDto communityUpdateRequestDto);
-	void plusCommunityHit(Community community);
-//	Community getCommunity(String accessToken, UUID communityID);
+	void registerCommunity(String accessToken, CommunityRegisterRequestDto communityRegistPostReq);
+	boolean updateCommunity(String accessToken, CommunityUpdateRequestDto communityUpdateRequestDto);
+	CommunityGetListWrapperResponseDto getCommunityList(String accessToken);
 	CommunityGetResponseDto getCommunity(UUID communityId);
-//	CommunityGetListWrapperResponseDto getCommunityList(String accessToken);
-	CommunityGetListWrapperResponseDto getCommunityList();
-//	boolean deleteCommunity(String accessToken, UUID communityId);
-	boolean deleteCommunity(UUID communityId);
-	
+	void plusCommunityHit(Community community);
+	boolean deleteCommunity(String accessToken, UUID communityId);
 	String getLoginIdFromToken(String accessToken);
 }
