@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.CommentUpdateRequestDto;
 import com.dd.api.dto.request.SubCommentRegisterRequestDto;
-import com.dd.api.dto.response.CommentGetListResponseDto;
-import com.dd.api.dto.response.CommentGetListWrapperResponseDto;
 import com.dd.api.dto.response.SubCommentGetListResponseDto;
 import com.dd.api.dto.response.SubCommentGetListWrapperResponseDto;
 import com.dd.db.entity.board.Comment;
@@ -19,7 +17,6 @@ import com.dd.db.entity.user.User;
 import com.dd.db.repository.AuthRepository;
 import com.dd.db.repository.CommentRepository;
 import com.dd.db.repository.CommunityRepository;
-import com.dd.db.repository.UserRepository;
 import com.dd.security.util.JwtAuthenticationProvider;
 
 import lombok.RequiredArgsConstructor;
@@ -30,8 +27,6 @@ public class SubCommentServiceImpl implements SubCommentService {
 	
 	private final AuthRepository authRepository;
 	
-	private final UserRepository userRepository;
-	
 	private final CommunityRepository communityRepository;
 	
 	private final CommentRepository commentRepository;
@@ -39,11 +34,8 @@ public class SubCommentServiceImpl implements SubCommentService {
 	private final JwtAuthenticationProvider jwtAuthenticationProvider;
 
 	@Override
-//	public void registerSubComment(String accessToken, SubCommentRegisterRequestDto SubCommentRegisterRequestDto) {
-	public void registerSubComment(SubCommentRegisterRequestDto subCommentRegisterRequestDto) {
-//		String token = accessToken.split(" ")[1];
-//		String loginId = jwtAuthenticationProvider.getUsername(token);
-		String loginId = "test1";
+	public void registerSubComment(String accessToken, SubCommentRegisterRequestDto subCommentRegisterRequestDto) {
+		String loginId = getLoginIdFromToken(accessToken);
 		
 		// 댓글을 등록하는 게시물 정보 가져오기
 		Community community = communityRepository.findById(subCommentRegisterRequestDto.getCommunityId()).get();
@@ -66,7 +58,6 @@ public class SubCommentServiceImpl implements SubCommentService {
 	}
 	
 	@Override
-//	public SubCommentGetListWrapperResponseDto getSubCommentList(String accessToken, UUID commentId) {
 	public SubCommentGetListWrapperResponseDto getSubCommentList(UUID commentId) {
 
 		List<SubCommentGetListResponseDto> list = new ArrayList<>();
@@ -84,10 +75,8 @@ public class SubCommentServiceImpl implements SubCommentService {
 	}
 	
 	@Override
-//	public boolean updateSubComment(String accessToken, CommentUpdateRequestDto commentUpdateRequestDto) {
-	public boolean updateSubComment(CommentUpdateRequestDto commentUpdateRequestDto) {
-//		String loginId = getLoginIdFromToken(accessToken);
-		String loginId = "test1";
+	public boolean updateSubComment(String accessToken, CommentUpdateRequestDto commentUpdateRequestDto) {
+		String loginId = getLoginIdFromToken(accessToken);
 		
 		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
 		// 수정할 Comment
@@ -102,10 +91,8 @@ public class SubCommentServiceImpl implements SubCommentService {
 	}
 	
 	@Override
-//	public boolean deleteSubComment(String accessToken, UUID commentId) {
-	public boolean deleteSubComment(UUID commentId) {
-//		String loginId = getLoginIdFromToken(accessToken);
-		String loginId = "test1";
+	public boolean deleteSubComment(String accessToken, UUID commentId) {
+		String loginId = getLoginIdFromToken(accessToken);
 		
 		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
 		// 삭제할 Comment
