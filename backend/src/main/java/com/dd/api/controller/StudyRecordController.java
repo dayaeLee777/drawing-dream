@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dd.api.dto.request.MemoUpdateRequestDto;
 import com.dd.api.dto.request.StudyRecordRegistRequestDto;
+import com.dd.api.dto.request.StudyRecordUpdateRequestDto;
 import com.dd.api.dto.response.StudyRecordFinishResponseDto;
 import com.dd.api.dto.response.StudyRecordGetListWrapperResponseDto;
 import com.dd.api.dto.response.StudyRecordResponseDto;
@@ -65,7 +67,7 @@ public class StudyRecordController {
 	}
 	
 	@GetMapping("/list/{studyDate}")
-	@ApiOperation(value = "오늘의 공부시간 목록 불러오기", notes="<strong>로그인한 유저, 지정날짜에 대한 공부시간 기록을 불러온다.</strong>")
+	@ApiOperation(value = "오늘의 공부시간 목록 불러오기", notes="<strong>로그인한 유저, 지정날짜에 대한 공부시간 기록을 불러온다.</strong><br> 시작시간순으로 sort하여 return한다. ")
 	@ApiResponses({
 		@ApiResponse(code=201, message="오늘의 공부시간 목록을 정상적으로 조회하였습니다."),
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
@@ -99,6 +101,20 @@ public class StudyRecordController {
 	public ResponseEntity<? extends BaseResponseDto> delete(
 			@PathVariable("studyRecordId") @RequestBody @ApiParam(value = "삭제할 오늘의 공부시간 ID ", required = true) UUID studyRecordId){
 		if(studyRecordService.deleteStudyRecord(studyRecordId) != null)
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
+	}
+	
+	@PutMapping
+	@ApiOperation(value = "오늘의 공부시간 수정하기", notes="<strong>작성한 오늘의 공부시간를 수정한다.</strong>")
+	@ApiResponses({
+		@ApiResponse(code=201, message="오늘의 공부시간이 정상적으로 수정되었습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="오늘의 공부시간 수정을 실패했습니다.")
+	})
+	public ResponseEntity<? extends BaseResponseDto> update(
+		@RequestBody @ApiParam(value = "수정할 오늘의 공부시간", required = true) StudyRecordUpdateRequestDto studyRecordUpdateRequestDto){
+		if(studyRecordService.updateStudyRecord(studyRecordUpdateRequestDto) != null)
 			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
 		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}

@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.StudyRecordRegistRequestDto;
+import com.dd.api.dto.request.StudyRecordUpdateRequestDto;
 import com.dd.api.dto.response.StudyRecordFinishResponseDto;
 import com.dd.api.dto.response.StudyRecordGetListWrapperResponseDto;
 import com.dd.api.dto.response.StudyRecordResponseDto;
@@ -126,11 +127,21 @@ public class StudyRecordServiceImpl implements StudyRecordService {
 	@Override
 	public StudyRecord deleteStudyRecord(UUID studyRecordId) {
 		StudyRecord studyRecord = studyRecordRepository.findById(studyRecordId).orElse(null);
-		
 		if(studyRecord == null)
 			return null;
 		
 		studyRecord.deleteStudyRecord();
+		return studyRecordRepository.save(studyRecord);
+	}
+
+	@Transactional
+	@Override
+	public StudyRecord updateStudyRecord(StudyRecordUpdateRequestDto studyRecordUpdateRequestDto) {
+		StudyRecord studyRecord = studyRecordRepository.findById(studyRecordUpdateRequestDto.getStudyRecordId()).orElse(null);
+		if(studyRecord == null)
+			return null;
+		
+		studyRecord.updateStudyRecord(studyRecordUpdateRequestDto.getTitle());
 		return studyRecordRepository.save(studyRecord);
 	}
 	

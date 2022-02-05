@@ -62,4 +62,8 @@ public class StudyRecord extends BaseEntity {
 		this.delYn = true;
 	}
 	
+	public void updateStudyRecord(String title) {
+		this.title = title;
+	}
+	
 }
