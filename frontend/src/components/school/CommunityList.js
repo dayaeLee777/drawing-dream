@@ -50,87 +50,93 @@ const StyledTh = styled.td`
 const CommunityList = () => {
   const Navigate = useNavigate();
   const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   // useEffect 데이터 read
   useEffect(() => {
     console.log('community 리스트 조회')
-    getCommunityList()
-    .then(res => {
-      setData(res.data);
-    }, [])
-  })
-  const sampleData = [
-    {
-      id: 1,
-      regTime: "2022.02.04",
-      userName: "이학생",
-      hit: 23,
-      title: "첫번째 글",
-    },
-    {
-      id: 2,
-      regTime: "2022.02.04",
-      userName: "박학생",
-      hit: 5,
-      title: "두번째 글",
-    },
-    {
-      id: 3,
-      regTime: "2022.02.04",
-      userName: "최학생",
-      hit: 67,
-      title: "세번째 글",
-    },
-    {
-      id: 4,
-      regTime: "2022.02.04",
-      userName: "윤학생",
-      hit: 55,
-      title: "네번째 글",
-    },
-    {
-      id: 5,
-      regTime: "2022.02.04",
-      userName: "김학생",
-      hit: 55,
-      title: "네번째 글",
-    },
-    {
-      id: 6,
-      regTime: "2022.02.04",
-      userName: "정학생",
-      hit: 55,
-      title: "네번째 글",
-    },
-    {
-      id: 7,
-      regTime: "2022.02.04",
-      userName: "이학생",
-      hit: 55,
-      title: "네번째 글",
-    },
-    {
-      id: 8,
-      regTime: "2022.02.04",
-      userName: "장학생",
-      hit: 55,
-      title: "네번째 글",
-    },
-    {
-      id: 9,
-      regTime: "2022.02.04",
-      userName: "박학생",
-      hit: 55,
-      title: "네번째 글",
-    },
-    {
-      id: 10,
-      regTime: "2022.02.04",
-      userName: "손학생",
-      hit: 55,
-      title: "네번째 글",
-    },
-  ];
+    if (isLoading) {
+      getCommunityList()
+      .then(res => {
+        setData(res.data.communityGetListResponseDtoList)
+        setIsLoading(false);
+      })
+    }
+    console.log(data);
+  }, [isLoading])
+
+  // const sampleData = [
+  //   {
+  //     id: 1,
+  //     regTime: "2022.02.04",
+  //     userName: "이학생",
+  //     hit: 23,
+  //     title: "첫번째 글",
+  //   },
+  //   {
+  //     id: 2,
+  //     regTime: "2022.02.04",
+  //     userName: "박학생",
+  //     hit: 5,
+  //     title: "두번째 글",
+  //   },
+  //   {
+  //     id: 3,
+  //     regTime: "2022.02.04",
+  //     userName: "최학생",
+  //     hit: 67,
+  //     title: "세번째 글",
+  //   },
+  //   {
+  //     id: 4,
+  //     regTime: "2022.02.04",
+  //     userName: "윤학생",
+  //     hit: 55,
+  //     title: "네번째 글",
+  //   },
+  //   {
+  //     id: 5,
+  //     regTime: "2022.02.04",
+  //     userName: "김학생",
+  //     hit: 55,
+  //     title: "네번째 글",
+  //   },
+  //   {
+  //     id: 6,
+  //     regTime: "2022.02.04",
+  //     userName: "정학생",
+  //     hit: 55,
+  //     title: "네번째 글",
+  //   },
+  //   {
+  //     id: 7,
+  //     regTime: "2022.02.04",
+  //     userName: "이학생",
+  //     hit: 55,
+  //     title: "네번째 글",
+  //   },
+  //   {
+  //     id: 8,
+  //     regTime: "2022.02.04",
+  //     userName: "장학생",
+  //     hit: 55,
+  //     title: "네번째 글",
+  //   },
+  //   {
+  //     id: 9,
+  //     regTime: "2022.02.04",
+  //     userName: "박학생",
+  //     hit: 55,
+  //     title: "네번째 글",
+  //   },
+  //   {
+  //     id: 10,
+  //     regTime: "2022.02.04",
+  //     userName: "손학생",
+  //     hit: 55,
+  //     title: "네번째 글",
+  //   },
+  // ];
 
   return (
     <>
@@ -157,8 +163,8 @@ const CommunityList = () => {
             </tr>
           </thead>
           <tbody>
-            {sampleData.map((item) => (
-              <CommunityItem key={item.id} data={item} />
+            {data && data.map((item) => (
+              <CommunityItem key={item.communityId} data={item} />
             ))}
           </tbody>
         </StyledTable>

@@ -21,10 +21,10 @@ const StyledTd = styled.td`
 const CommunityItem = ({data}) => {
   const Navigate = useNavigate();
   return (
-    <StyledTr onClick={() => Navigate(`./${data.id}`)}>
-      <StyledTd>{data.id}</StyledTd>
+    <StyledTr onClick={() => Navigate(`./${data.communityId}`)}>
+      <StyledTd>{data.communityId}</StyledTd>
       <StyledTd ta="left">{data.title}</StyledTd>
-      <StyledTd>{data.userName}</StyledTd>
+      <StyledTd>{data.userId}</StyledTd>
       <StyledTd>{data.hit}</StyledTd>
       <StyledTd>{data.regTime}</StyledTd>
     </StyledTr>
