@@ -1,5 +1,7 @@
 package com.dd.api.dto.response;
 
+import java.time.LocalTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -17,7 +19,7 @@ public class StudyRecordFinishResponseDto {
 	@ApiModelProperty(name="공부기록 제목", example="영어 5단원 복습")
 	private String title;
 
-	@ApiModelProperty(name="공부 지속 시간", example="00:00")
-	private String durationTime;
+	@ApiModelProperty(name="공부 지속 시간", example="01:30")
+	private LocalTime durationTime;
 	
 }
