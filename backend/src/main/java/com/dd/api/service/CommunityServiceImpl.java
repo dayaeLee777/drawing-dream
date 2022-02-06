@@ -102,6 +102,8 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public CommunityGetResponseDto getCommunity(UUID communityId) {
 		Community community = communityRepository.findById(communityId).get();
+		if(community.isDelYn()) return null;
+		
 		plusCommunityHit(community);
 		
 		CommunityGetResponseDto communityGetResponseDto = 

@@ -81,6 +81,8 @@ public class CommunityController {
 	public ResponseEntity<? extends BaseResponseDto> getCommunity(
 			@PathVariable("communityId") @ApiParam(value="가져오려는 커뮤니티 글의 communityId", required=true) UUID communityId) {
 		CommunityGetResponseDto communityGetResponseDto = communityService.getCommunity(communityId);
+		if(communityGetResponseDto == null)
+			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "존재하지 않는 게시글입니다."));
 		
 		return ResponseEntity.status(200).body(CommunityGetResponseDto.of(200, "게시글을 정상적으로 불러왔습니다", communityGetResponseDto));
 	}
