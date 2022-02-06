@@ -5,6 +5,7 @@ import styled from "styled-components";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { createRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   padding: 3rem 2rem;
@@ -36,6 +37,7 @@ const Title = styled.div`
 `;
 
 const CommunityRegister = ({ setIsRegister }) => {
+  const Navigate = useNavigate();
   const [content, setContent] = useState("");
   const editorRef = createRef();
 
@@ -69,7 +71,7 @@ const CommunityRegister = ({ setIsRegister }) => {
           height="2.5rem"
           bc="#C4C4C4"
           hoverColor="#a2a2a2"
-          onClick={onClickCancle}
+          onClick={() => Navigate('../')}
         />
       </BtnContainer>
     </Container>

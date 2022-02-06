@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import CommentInsert from './CommentInsert';
+import CommentList from './CommentList';
 
 const Container = styled.div`
   margin-top: 2rem;
@@ -11,18 +13,12 @@ const Container = styled.div`
   }
 `;
 
-const Line = styled.div`
-  border-top: 1px solid #e2e2e2;
-  height: 0;
-  margin: 1rem 0;
-`;
-
-
 const CommentContainer = () => {
   return (
     <Container>
       <div className="desc">댓글</div>
-      <Line />
+      <CommentList />
+      <CommentInsert />
     </Container>
   );
 };

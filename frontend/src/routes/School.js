@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CommunityRegister from "components/school/CommunityRegister";
 import CommunityList from "components/school/CommunityList";
 import CommunityDetail from "components/school/CommunityDetail";
+import { Outlet } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -16,28 +17,13 @@ const Container = styled.div`
 `;
 
 const School = () => {
-  const [isRegister, setIsRegister] = useState(false);
-  const [communityId, setCommunityId] = useState("");
+  return (
+    <Container>
+      <Outlet />
+    </Container>
+  )
 
-  if (isRegister) {
-    return (
-      <Container>
-        <CommunityRegister setIsRegister={setIsRegister} />
-      </Container>
-    )
-  } else if (communityId) {
-    return (
-      <Container>
-        <CommunityDetail setCommunityId={setCommunityId} />
-      </Container>
-    )
-  } else {
-    return (
-      <Container>
-        <CommunityList setIsRegister={setIsRegister} setCommunityId={setCommunityId}/>
-      </Container>
-    )
-  }
+
 };
 
 export default School;
