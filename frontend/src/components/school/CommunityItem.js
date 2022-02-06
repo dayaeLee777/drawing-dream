@@ -18,11 +18,11 @@ const StyledTd = styled.td`
   padding: 0 1.5rem;
 `;
 
-const CommunityItem = ({ data }) => {
+const CommunityItem = ({ data, index }) => {
   const Navigate = useNavigate();
   return (
     <StyledTr onClick={() => Navigate(`./${data.communityId}`)}>
-      <StyledTd>{data.communityId}</StyledTd>
+      <StyledTd>{index+1}</StyledTd>
       <StyledTd ta="left">{data.title}</StyledTd>
       <StyledTd>{data.userId}</StyledTd>
       <StyledTd>{data.hit}</StyledTd>

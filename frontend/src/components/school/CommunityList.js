@@ -151,8 +151,8 @@ const CommunityList = () => {
         </ButtonContainer>
         <StyledTable>
           <colgroup>
-            <StyledCol width="5%"></StyledCol>
-            <StyledCol width="60%"></StyledCol>
+            <StyledCol width="7%"></StyledCol>
+            <StyledCol width="58%"></StyledCol>
             <StyledCol width="13%"></StyledCol>
             <StyledCol width="7%"></StyledCol>
             <StyledCol width="15%"></StyledCol>
@@ -168,8 +168,8 @@ const CommunityList = () => {
           </thead>
           <tbody>
             {data &&
-              data.map((item) => (
-                <CommunityItem key={item.communityId} data={item} />
+              data.map((item, idx) => (
+                <CommunityItem index={idx} key={item.communityId} data={item} />
               ))}
           </tbody>
         </StyledTable>
