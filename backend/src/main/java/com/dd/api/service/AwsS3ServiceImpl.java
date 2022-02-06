@@ -3,7 +3,6 @@ package com.dd.api.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -29,10 +28,13 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
 import com.dd.api.dto.response.FilesResponseDto;
+import com.dd.db.entity.board.Notice;
 import com.dd.db.entity.files.Files;
+import com.dd.db.entity.files.NoticeFile;
 import com.dd.db.entity.files.ProfileImg;
 import com.dd.db.entity.user.User;
 import com.dd.db.repository.FileRepository;
+import com.dd.db.repository.NoticeFileRepository;
 import com.dd.db.repository.ProfileImgRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -52,12 +54,13 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	
 	private final ProfileImgRepository profileImgRepository;
 
+	private final NoticeFileRepository noticeFileRepository;
+
 	private final JwtTokenService jwtTokenService;
     
 	@Transactional
 	@Override
-	public List<String> uploadFile(String accessToken, List<MultipartFile> multipartFile) {
-		User user = jwtTokenService.convertTokenToUser(accessToken);
+	public List<String> uploadFile(User user, Notice notice, List<MultipartFile> multipartFile) {
 		List<String> fileNameList = new ArrayList<>();
 		
 		multipartFile.forEach(file -> {
@@ -73,13 +76,14 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
 	            }
 	            
-	            Files fileEntity = Files.builder()
+	            NoticeFile noticefile = NoticeFile.builder()
 	            		.newFileName(fileName)
 	            		.originFileName(file.getOriginalFilename())
 	            		.user(user)
+	            		.notice(notice)
 	            		.build();
-	            
-	            fileRepository.save(fileEntity);
+
+	            noticeFileRepository.save(noticefile);
 
 	            fileNameList.add(fileName);
 	        });
@@ -96,7 +100,6 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
 	@Override
 	public String createFileName(String fileName) {
-//		return String.valueOf(LocalDateTime.now()).concat(fileName);
 		return UUID.randomUUID().toString().concat(getFileExtension(fileName));
 	}
 

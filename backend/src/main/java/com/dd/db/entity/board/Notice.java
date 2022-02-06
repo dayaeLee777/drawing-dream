@@ -1,6 +1,6 @@
 package com.dd.db.entity.board;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,21 +10,16 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.school.School;
-import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Builder
@@ -33,8 +28,6 @@ import lombok.Setter;
 @Entity
 public class Notice extends BaseEntity {
 	
-	private int noticeNo;
-	
 	private String title;
 	
 	@Lob
@@ -42,8 +35,7 @@ public class Notice extends BaseEntity {
 	
 	private int hit;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date regTime;
+	private LocalDateTime regTime;
 	
 	@Enumerated(EnumType.STRING)
 	private Code noticeCode;

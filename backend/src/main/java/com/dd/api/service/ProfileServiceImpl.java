@@ -31,8 +31,6 @@ public class ProfileServiceImpl implements ProfileService {
 				-> new IllegalArgumentException("해당 유저가 없습니다. id = + userId"));
 		
 		String fileName = awsS3Service.getThumbnailPath(user);
-		System.out.println("파일ㄴㅔㅔㅔㅔㅔㅔ임");
-		System.out.println(fileName);
 		return new ProfileResponseDto(user, userDepartment, fileName);
 	}
 }
