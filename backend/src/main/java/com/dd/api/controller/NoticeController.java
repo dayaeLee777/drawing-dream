@@ -67,7 +67,7 @@ public class NoticeController {
 		@ApiResponse(code=409, message="알림장 삭제를 실패했습니다.")
 	})
 	public ResponseEntity<? extends BaseResponseDto> delete(
-			@PathVariable("checklistId") @RequestBody @ApiParam(value = "삭제할 알림장ID ", required = true) UUID noticeId){
+			@PathVariable("noticeId") @RequestBody @ApiParam(value = "삭제할 알림장ID ", required = true) UUID noticeId){
 		if(noticeService.deleteNotice(noticeId) != null)
 			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
 		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));

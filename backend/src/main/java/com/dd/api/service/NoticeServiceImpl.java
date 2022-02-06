@@ -62,6 +62,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return 200;
 	}
 
+	@Transactional
 	@Override
 	public Notice deleteNotice(UUID noticeId) {
 		Notice notice = noticeRepository.findById(noticeId).orElse(null);

@@ -50,8 +50,6 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     
     private final AmazonS3Client amazonS3Client;
 	
-	private final FileRepository fileRepository;
-	
 	private final ProfileImgRepository profileImgRepository;
 
 	private final NoticeFileRepository noticeFileRepository;
@@ -93,7 +91,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	@Transactional
 	@Override
 	public void deleteFile(Notice notice) {
-		NoticeFile noticeFile = noticeFileRepository.findyByNotice(notice).orElse(null);
+		NoticeFile noticeFile = noticeFileRepository.findByNotice(notice).orElse(null);
 		if(noticeFile == null)
 			return;
 		

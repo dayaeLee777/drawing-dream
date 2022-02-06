@@ -9,5 +9,5 @@ import com.dd.db.entity.board.Notice;
 import com.dd.db.entity.files.NoticeFile;
 
 public interface NoticeFileRepository extends JpaRepository<NoticeFile, UUID> {
-	Optional<NoticeFile> findyByNotice(Notice notice);
+	Optional<NoticeFile> findByNotice(Notice notice);
 }
