@@ -92,10 +92,16 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
 	@Transactional
 	@Override
-	public void deleteFile(String accessToken, String fileName) {
+	public void deleteFile(Notice notice) {
+		NoticeFile noticeFile = noticeFileRepository.findyByNotice(notice).orElse(null);
+		if(noticeFile == null)
+			return;
+		
+		String fileName = noticeFile.getNewFileName();
 		amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
-		Files deleteFile = fileRepository.findByNewFileName(fileName).get();
-		fileRepository.delete(deleteFile);
+		noticeFileRepository.delete(noticeFile);
+//		Files deleteFile = fileRepository.findByNewFileName(fileName).get();
+//		fileRepository.delete(deleteFile);
 	}
 
 	@Override

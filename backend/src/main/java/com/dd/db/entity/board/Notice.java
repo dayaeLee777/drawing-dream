@@ -57,4 +57,7 @@ public class Notice extends BaseEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	public void deleteNotice() {
+		this.delYn = true;
+	}
 }

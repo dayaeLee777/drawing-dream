@@ -2,6 +2,7 @@ package com.dd.api.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -59,6 +60,17 @@ public class NoticeServiceImpl implements NoticeService {
 		awsS3Service.uploadFile(user, notice, multipartFile);
 		
 		return 200;
+	}
+
+	@Override
+	public Notice deleteNotice(UUID noticeId) {
+		Notice notice = noticeRepository.findById(noticeId).orElse(null);
+		if(notice == null)
+			return null;
+		
+		notice.deleteNotice();
+		awsS3Service.deleteFile(notice);
+		return noticeRepository.save(notice);
 	}
 	
 

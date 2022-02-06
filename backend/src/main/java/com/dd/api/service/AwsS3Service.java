@@ -13,7 +13,7 @@ public interface AwsS3Service {
 	
 	List<String> uploadFile(User user, Notice notice, List<MultipartFile> multipartFile);
 	String uploadProfileImg(String accessToken, MultipartFile multipartFile);
-	void deleteFile(String accessToken, String fileName);
+	void deleteFile(Notice notice);
 	String createFileName(String fileName);
 	String getFileExtension(String fileName); 
 	FilesResponseDto getObject(String storedFileName) throws IOException;

@@ -1,9 +1,12 @@
 package com.dd.api.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,5 +57,19 @@ public class NoticeController {
 			return ResponseEntity.status(408).body(BaseResponseDto.of(408, "Fail"));
 		else
 			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
+	}
+	
+	@PutMapping("/delete/{noticeId}")
+	@ApiOperation(value = "알림장 삭제하기", notes="<strong>작성한 알림장을 삭제한다.</strong>")
+	@ApiResponses({
+		@ApiResponse(code=201, message="알림장이 정상적으로 삭제되었습니다."),
+		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
+		@ApiResponse(code=409, message="알림장 삭제를 실패했습니다.")
+	})
+	public ResponseEntity<? extends BaseResponseDto> delete(
+			@PathVariable("checklistId") @RequestBody @ApiParam(value = "삭제할 알림장ID ", required = true) UUID noticeId){
+		if(noticeService.deleteNotice(noticeId) != null)
+			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
+		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 	}
 }

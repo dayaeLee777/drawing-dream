@@ -1,10 +1,12 @@
 package com.dd.api.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dd.api.dto.request.NoticeRegisterRequestDto;
+import com.dd.db.entity.board.Notice;
 
 public interface NoticeService {
 
@@ -13,5 +15,5 @@ public interface NoticeService {
 //	List<NoticeGetResponseDto> getNoticeList(String accessToken);
 //	NoticeGetResponseDto getNotice(UUID noticeId);
 //	void plusCommunityHit(Notice notice);
-//	boolean deleteNotice(String accessToken, UUID noticeId);
+	Notice deleteNotice(UUID noticeId);
 }
