@@ -63,7 +63,7 @@ public class CommentServiceImpl implements CommentService {
 		for(Comment c : commentRepository.findByCommunityAndParentIsNull(community).get()) {
 			if(c.isDelYn()) continue;
 			list.add(
-				new CommentGetListResponseDto(c.getUser().getId(),
+				new CommentGetListResponseDto(c.getUser().getUserName(),
 				c.getContent(), c.getRegTime(), c.getId())
 			);
 		}

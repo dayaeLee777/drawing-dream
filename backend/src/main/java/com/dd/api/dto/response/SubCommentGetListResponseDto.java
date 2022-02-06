@@ -12,8 +12,8 @@ import lombok.Getter;
 @ApiModel("SubCommentGetListResponseDto")
 public class SubCommentGetListResponseDto {
 	
-	@ApiModelProperty(name="회원 정보 - 대댓글 작성자 userId")
-	private UUID userId;
+	@ApiModelProperty(name="회원 정보 - 대댓글 작성자")
+	private String userName;
 	
 	@ApiModelProperty(name="커뮤니티 대댓글 정보 - 내용")
 	private String content;
@@ -23,8 +23,8 @@ public class SubCommentGetListResponseDto {
 	private UUID commentId;
 	
 	@Builder
-	public SubCommentGetListResponseDto(UUID userId, String content, LocalDateTime regTime, UUID commentId) {
-		this.userId = userId;
+	public SubCommentGetListResponseDto(String userName, String content, LocalDateTime regTime, UUID commentId) {
+		this.userName = userName;
 		this.content = content;
 		this.regTime = regTime;
 		this.commentId = commentId;
