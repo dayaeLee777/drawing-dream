@@ -73,6 +73,13 @@ export const getReCommentList = async (commentId, success, fail) => {
     .catch(fail)
 }
 
+export const modifyReComment = async (content, success, fail) => {
+  return await api
+    .put("/api/subComment/updata", content)
+    .then(success)
+    .catch(fail)
+}
+
 export const deleteReComment = async (commentId, success, fail) => {
   return await api
     .delete(`/api/subComment/${commentId}`)

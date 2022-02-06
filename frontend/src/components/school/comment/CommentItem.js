@@ -18,7 +18,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  padding-left: ${(props) => (props.pl ? "1rem" : "3rem")};
+  padding-left: ${(props) => (props.pl ? "1rem" : "5rem")};
 `;
 
 const FeatureContainer = styled.div`

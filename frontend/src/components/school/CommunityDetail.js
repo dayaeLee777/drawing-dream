@@ -89,6 +89,10 @@ const CommunityDetail = () => {
     })
   }
 
+  const onModify = () => {
+    Navigate(`../modify/${params.communityId}`);
+  }
+
   // const sampleData = {
   //   regTime: "2022.02.04",
   //   userName: "이학생",
@@ -110,7 +114,7 @@ const CommunityDetail = () => {
         <EditContainer>
           {userId === data.userId && (
             <>
-              <span className="edit">수정하기</span>
+              <span className="edit" onClick={onModify}>수정하기</span>
               <span className="delete" onClick={onDelete}>삭제하기</span>
             </>
           )}
