@@ -1,6 +1,11 @@
-import { registerComment, registerSubComment } from "api/community";
+import {
+  modifyComment,
+  modifyReComment,
+  registerComment,
+  registerSubComment,
+} from "api/community";
 import Button from "components/commons/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -23,30 +28,85 @@ const StyledTextArea = styled.textarea`
   resize: none;
 `;
 
-const CommentRegister = ({ communityId, children, commentId }) => {
+const BtnContainer = styled.div`
+  display: flex;
+`;
+
+const CommentRegister = ({
+  communityId,
+  children,
+  commentId,
+  data,
+  modify,
+  setCommentModify,
+  setCommentListIsLoading,
+  setReCommentListIsLoading,
+}) => {
   const { userName, userId } = useSelector((state) => state.user);
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    if (modify) {
+      setContent(data.content);
+    }
+  }, []);
 
   const onChange = (e) => {
     setContent(e.target.value);
   };
 
   const onRegister = () => {
-    if (children) {
-      registerComment({ communityId: communityId, content: content }).then(
-        () => {
-          alert("댓글이 등록되었습니다.");
-          setContent("");
-        }
-      );
+    if (modify) {
+      if (children) {
+        modifyComment({ commentId: data.commentId, content }).then(() => {
+          setCommentModify({
+            commentId: "",
+            isCommentModify: false,
+          });
+        })
+        .then(() => {
+          alert("댓글이 수정되었습니다.");
+          setCommentListIsLoading(true);
+        });
+      } else {
+        modifyReComment({ commentId: data.commentId, content })
+          .then(() => {
+            setCommentModify({
+              commentId: "",
+              isCommentModify: false,
+            });
+          })
+          .then(() => {
+            alert("대댓글이 수정되었습니다.");
+            setReCommentListIsLoading(true);
+          });
+      }
     } else {
-      registerSubComment({ communityId, content, commentId, userId }).then(
-        () => {
-          alert("대댓글이 등록되었습니다.");
-          setContent("");
-        }
-      );
+      if (children) {
+        registerComment({ communityId: communityId, content: content })
+        .then(() => {
+            alert("댓글이 등록되었습니다.");
+            setContent("");
+            setCommentListIsLoading(true);
+          });
+      } else {
+        registerSubComment({ communityId, content, commentId, userId })
+          .then(() => {
+            alert("대댓글이 등록되었습니다.");
+            setContent("");
+          })
+          .then(() => {
+            setReCommentListIsLoading(true);
+          });
+      }
     }
+  };
+
+  const onCancle = () => {
+    setCommentModify({
+      commentId: "",
+      isCommentModify: false,
+    });
   };
 
   return (
@@ -57,7 +117,23 @@ const CommentRegister = ({ communityId, children, commentId }) => {
         onChange={onChange}
         value={content}
       />
-      <Button name="등록" width="3.5rem" onClick={onRegister} />
+      <BtnContainer>
+        <Button
+          name={modify ? "수정" : "등록"}
+          width="3.5rem"
+          onClick={onRegister}
+          mr="1rem"
+        />
+        {modify && (
+          <Button
+            name="취소"
+            width="3.5rem"
+            bc="#C4C4C4"
+            hoverColor="#a2a2a2"
+            onClick={onCancle}
+          />
+        )}
+      </BtnContainer>
     </InputContainer>
   );
 };

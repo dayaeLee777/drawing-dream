@@ -47,7 +47,7 @@ export const getCommentList = async (communityId, success, fail) => {
 
 export const modifyComment = async (content, success, fail) => {
   return await api
-    .put("/api/comment/updata", content)
+    .put("/api/comment/update", content)
     .then(success)
     .catch(fail);
 };
@@ -75,7 +75,7 @@ export const getReCommentList = async (commentId, success, fail) => {
 
 export const modifyReComment = async (content, success, fail) => {
   return await api
-    .put("/api/subComment/updata", content)
+    .put("/api/subComment/update", content)
     .then(success)
     .catch(fail)
 }

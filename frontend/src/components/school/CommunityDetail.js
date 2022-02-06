@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
-import CommentContainer from "./comment/CommentContainer";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteCommunity, getCommunityDetail } from "api/community";
 import { useSelector } from "react-redux";
+import CommentList from "./comment/CommentList";
 
 const DetailContainer = styled.div`
   padding: 3rem 5rem;
@@ -126,7 +126,7 @@ const CommunityDetail = () => {
         </BoardContainer>
       )}
 
-      <CommentContainer communityId={params.communityId}/>
+      <CommentList communityId={params.communityId}/>
     </DetailContainer>
   );
 };
