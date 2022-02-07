@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import Chart from "./score/Chart";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -60,6 +61,7 @@ const Score = ({
         <Title>성적 추이</Title>
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
+      <Chart />
     </Container>
   );
 };

@@ -14,5 +14,5 @@ public interface CommunityRepository extends JpaRepository<Community, UUID>{
 
 	Optional<Community> findByUser(User user);
 	Optional<List<Community>> findBySchool(School school);
-	
+	Optional<List<Community>> findBySchoolOrderByRegTimeDesc(School school);
 }

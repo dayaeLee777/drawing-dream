@@ -3,6 +3,10 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import LeftContainer from "../todayclass/LeftContainer";
 import RightContainer from "../todayclass/RightContainer";
+import { useSelector } from "react-redux";
+import Button from "components/commons/button";
+import { useNavigate } from "react-router-dom";
+import { createOnlineClass } from "api/onlineclass";
 
 const Wrapper = styled(motion.div)`
   width: 1000px;
@@ -59,14 +63,28 @@ const TodayClassModal = ({ layoutId }) => {
     },
   ];
 
+  const { userCode } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const onClick = (event) => {
     event.stopPropagation();
+  };
+
+  const startClass = () => {
+    const courseId = "c384c386-c2a0-c38e-c28f-004cc2a7c2bc";
+    createOnlineClass({ courseId }).then((res) => {
+      console.log(res);
+      navigate(`/onlineclass/${courseId}`);
+    });
   };
 
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>
       <LeftContainer data={data} />
-      <RightContainer />
+      {userCode === "A03" && (
+        <Button onClick={startClass} name="수업 시작하기"></Button>
+      )}
+      {userCode === "A04" && <RightContainer />}
     </Wrapper>
   );
 };

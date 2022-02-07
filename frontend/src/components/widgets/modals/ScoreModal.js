@@ -1,9 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import Chart from "../score/Chart";
 const Wrapper = styled(motion.div)`
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 700px;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
@@ -41,6 +42,7 @@ const ScoreModal = ({ layoutId }) => {
       <Header>
         <Title>성적 추이</Title>
       </Header>
+      <Chart />
     </Wrapper>
   );
 };
