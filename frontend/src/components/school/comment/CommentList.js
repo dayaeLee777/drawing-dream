@@ -8,7 +8,7 @@ const Container = styled.div`
   margin-top: 2rem;
 
   .desc {
-    padding-left: 1remg;
+    padding-left: 1rem;
     color: #333333;
     font-size: 1.2rem;
   }

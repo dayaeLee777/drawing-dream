@@ -1,14 +1,17 @@
-import { getCommunityList } from "api/community";
+import { getCommunityList, getCommunityTotalCount } from "api/community";
 import Button from "components/commons/button";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CommunityItem from "./CommunityItem";
+import Pagination from "react-js-pagination";
+import 'assets/css/paging.css'
 
 const Container = styled.div`
   width: 100%;
-  padding: 2rem 5rem;
+  padding: 1rem 5rem;
   box-sizing: border-box;
+  height: 80%;
 `;
 
 const Desc = styled.div`
@@ -47,16 +50,35 @@ const StyledTh = styled.td`
   }
 `;
 
+const PageContainer = styled.div`
+  margin-top: 1rem;
+`;
+
 const CommunityList = () => {
   const Navigate = useNavigate();
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [totalItemsCount, setTotalItemsCount] = useState(0);
+  const [isTotalItemsCountLoading, setIsTotalItemsCountLoading] = useState(true);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    if (isTotalItemsCountLoading) {
+      getCommunityTotalCount()
+      .then(res => {
+        setTotalItemsCount(res.data.totalCommunity);
+        setIsTotalItemsCountLoading(false);
+      })
+    } else {
+      setIsLoading(true);
+    }
+  }, [isTotalItemsCountLoading]);
 
   // useEffect 데이터 read
   useEffect(() => {
     // console.log("community 리스트 조회");
     if (isLoading) {
-      getCommunityList().then((res) => {
+      getCommunityList(page).then((res) => {
         setData(res.data.communityGetListResponseDtoList);
         setIsLoading(false);
       });
@@ -64,78 +86,11 @@ const CommunityList = () => {
     // console.log(data);
   }, [isLoading]);
 
-  // const sampleData = [
-  //   {
-  //     id: 1,
-  //     regTime: "2022.02.04",
-  //     userName: "이학생",
-  //     hit: 23,
-  //     title: "첫번째 글",
-  //   },
-  //   {
-  //     id: 2,
-  //     regTime: "2022.02.04",
-  //     userName: "박학생",
-  //     hit: 5,
-  //     title: "두번째 글",
-  //   },
-  //   {
-  //     id: 3,
-  //     regTime: "2022.02.04",
-  //     userName: "최학생",
-  //     hit: 67,
-  //     title: "세번째 글",
-  //   },
-  //   {
-  //     id: 4,
-  //     regTime: "2022.02.04",
-  //     userName: "윤학생",
-  //     hit: 55,
-  //     title: "네번째 글",
-  //   },
-  //   {
-  //     id: 5,
-  //     regTime: "2022.02.04",
-  //     userName: "김학생",
-  //     hit: 55,
-  //     title: "네번째 글",
-  //   },
-  //   {
-  //     id: 6,
-  //     regTime: "2022.02.04",
-  //     userName: "정학생",
-  //     hit: 55,
-  //     title: "네번째 글",
-  //   },
-  //   {
-  //     id: 7,
-  //     regTime: "2022.02.04",
-  //     userName: "이학생",
-  //     hit: 55,
-  //     title: "네번째 글",
-  //   },
-  //   {
-  //     id: 8,
-  //     regTime: "2022.02.04",
-  //     userName: "장학생",
-  //     hit: 55,
-  //     title: "네번째 글",
-  //   },
-  //   {
-  //     id: 9,
-  //     regTime: "2022.02.04",
-  //     userName: "박학생",
-  //     hit: 55,
-  //     title: "네번째 글",
-  //   },
-  //   {
-  //     id: 10,
-  //     regTime: "2022.02.04",
-  //     userName: "손학생",
-  //     hit: 55,
-  //     title: "네번째 글",
-  //   },
-  // ];
+  const handlePageChange = (page) => {
+    setPage(page);
+    Navigate(`?page=${page}`);
+    setIsLoading(true);
+  };
 
   return (
     <>
@@ -169,11 +124,22 @@ const CommunityList = () => {
           <tbody>
             {data &&
               data.map((item, idx) => (
-                <CommunityItem index={idx} key={item.communityId} data={item} />
+                <CommunityItem index={totalItemsCount-((page-1)*10)-idx-1} key={item.communityId} data={item} />
               ))}
           </tbody>
         </StyledTable>
       </Container>
+      <PageContainer>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={10}
+          totalItemsCount={totalItemsCount}
+          pageRangeDisplayed={5}
+          prevPageText={"‹"}
+          nextPageText={"›"}
+          onChange={handlePageChange}
+        />
+      </PageContainer>
     </>
   );
 };

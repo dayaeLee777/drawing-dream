@@ -1,5 +1,4 @@
 import Button from "components/commons/button";
-import Input from "components/commons/input";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import "@toast-ui/editor/dist/toastui-editor.css";

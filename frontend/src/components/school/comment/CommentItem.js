@@ -138,7 +138,7 @@ const CommentItem = ({
       <Content pl={children}>
         {!commentModify.isCommentModify && (
           <>
-            <div className="userName">{data.userId}</div>
+            <div className="userName">{data.userName}</div>
             <div className="content">{data.content}</div>
             <FeatureContainer>
               <span className="regTime">{data.regTime}</span>

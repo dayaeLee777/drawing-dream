@@ -75,6 +75,7 @@ const CommunityDetail = () => {
   useEffect(() => {
     if (isLoading) {
       getCommunityDetail(params.communityId).then((res) => {
+        console.log(res);
         setData(res.data);
         setIsLoading(false);
       });
@@ -108,7 +109,7 @@ const CommunityDetail = () => {
       <TitleContainer>
         <div className="title">{data.title}</div>
         <ProfileContainer>
-          <span className="userName">{data.userId}</span>
+          <span className="userName">{data.userName}</span>
           <span className="regTime">{data.regTime}</span>
         </ProfileContainer>
         <EditContainer>
