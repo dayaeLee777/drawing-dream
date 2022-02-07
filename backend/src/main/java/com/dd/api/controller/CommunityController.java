@@ -2,6 +2,7 @@ package com.dd.api.controller;
 
 import java.util.UUID;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import com.dd.api.dto.request.CommunityUpdateRequestDto;
 import com.dd.api.dto.response.CommunityGetListResponseDto;
 import com.dd.api.dto.response.CommunityGetListWrapperResponseDto;
 import com.dd.api.dto.response.CommunityGetResponseDto;
+import com.dd.api.dto.response.TotalCommunityGetResponseDto;
 import com.dd.api.service.CommunityService;
 import com.dd.common.model.BaseResponseDto;
 
@@ -70,8 +72,8 @@ public class CommunityController {
 	@GetMapping("/list")
 	@ApiOperation(value="커뮤니티 글 목록 보기 - 글 목록 가져오기")
 	public ResponseEntity<? extends BaseResponseDto> getCommunityList(
-			@ApiIgnore @RequestHeader("Authorization") String accessToken) {
-		CommunityGetListWrapperResponseDto communityGetListWrapperResponseDto = communityService.getCommunityList(accessToken);
+			@ApiIgnore @RequestHeader("Authorization") String accessToken, Pageable pageable) {
+		CommunityGetListWrapperResponseDto communityGetListWrapperResponseDto = communityService.getCommunityList(accessToken, pageable);
 		
 		return ResponseEntity.status(200).body(CommunityGetListWrapperResponseDto.of(200, "게시글 목록을 정상적으로 불러왔습니다", communityGetListWrapperResponseDto));
 	}
@@ -85,6 +87,15 @@ public class CommunityController {
 			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "존재하지 않는 게시글입니다."));
 		
 		return ResponseEntity.status(200).body(CommunityGetResponseDto.of(200, "게시글을 정상적으로 불러왔습니다", communityGetResponseDto));
+	}
+	
+	@GetMapping("/total")
+	@ApiOperation(value="커뮤니티 글 개수 가져오기")
+	public ResponseEntity<? extends BaseResponseDto> getTotalCommunity(
+			@ApiIgnore @RequestHeader("Authorization") String accessToken) {
+		TotalCommunityGetResponseDto totalCommunityGetResponseDto = communityService.getTotalCommunity(accessToken);
+		
+		return ResponseEntity.status(200).body(TotalCommunityGetResponseDto.of(200, "게시글 개수를 정상적으로 불러왔습니다.", totalCommunityGetResponseDto));
 	}
 	
 	@DeleteMapping("/{communityId}")

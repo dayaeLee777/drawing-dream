@@ -60,8 +60,7 @@ public class CommentServiceImpl implements CommentService {
 		List<CommentGetListResponseDto> list = new ArrayList<>();
 		Community community = communityRepository.findById(communityId).get();
 		
-		for(Comment c : commentRepository.findByCommunityAndParentIsNull(community).get()) {
-			if(c.isDelYn()) continue;
+		for(Comment c : commentRepository.findByCommunityAndDelYnAndParentIsNullOrderByRegTime(community, false).get()) {
 			list.add(
 				new CommentGetListResponseDto(c.getUser().getUserName(),
 				c.getContent(), c.getRegTime(), c.getId())
