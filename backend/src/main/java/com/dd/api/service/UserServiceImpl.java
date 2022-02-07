@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
 				.phone(userRegisterRequestDto.getPhone())
 				.parentPhone(userRegisterRequestDto.getParentPhone())
 				.address(userRegisterRequestDto.getAddress())
+				.addressDetail(userRegisterRequestDto.getAddressDetail())
 				.build();
 		
 		userRepository.save(user);

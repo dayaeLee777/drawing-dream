@@ -29,14 +29,18 @@ public class ProfileResponseDto extends BaseResponseDto {
 	@ApiModelProperty(name="소속 정보 - 회원코드")
 	private Code userCode;
 	
+	@ApiModelProperty(name="파일 - 프로필 이미지")
+	private String fileName;
+	
 	@Builder
-	public ProfileResponseDto(User user, UserDepartment userDepartment) {
+	public ProfileResponseDto(User user, UserDepartment userDepartment, String fileName) {
 		this.userName = user.getUserName();
 		this.schoolName = userDepartment.getSchool().getSchoolName();
 		this.gradeCode = userDepartment.getGradeCode();
 		this.classCode = userDepartment.getClassCode();
 		this.studentNo = userDepartment.getStudentNo();
 		this.userCode = userDepartment.getUserCode();
+		this.fileName = fileName;
 	}
 	
 	public static ProfileResponseDto of(Integer statusCode, String message, ProfileResponseDto profileResponseDto) {

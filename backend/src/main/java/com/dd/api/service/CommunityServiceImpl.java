@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.CommunityRegisterRequestDto;
@@ -12,16 +14,16 @@ import com.dd.api.dto.request.CommunityUpdateRequestDto;
 import com.dd.api.dto.response.CommunityGetListResponseDto;
 import com.dd.api.dto.response.CommunityGetListWrapperResponseDto;
 import com.dd.api.dto.response.CommunityGetResponseDto;
-import com.dd.db.entity.board.Comment;
+import com.dd.api.dto.response.TotalCommunityGetResponseDto;
 import com.dd.db.entity.board.Community;
 import com.dd.db.entity.school.School;
 import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.repository.AuthRepository;
+import com.dd.db.repository.CommentRepository;
 import com.dd.db.repository.CommunityRepository;
 import com.dd.db.repository.UserDepartmentRepository;
-import com.dd.db.repository.UserRepository;
 import com.dd.security.util.JwtAuthenticationProvider;
 
 import lombok.RequiredArgsConstructor;
@@ -32,8 +34,6 @@ public class CommunityServiceImpl implements CommunityService {
 
 	private final AuthRepository authRepository;
 	
-	private final UserRepository userRepository;
-	
 	private final UserDepartmentRepository userDepartmentRepository;
 	
 	private final CommunityRepository communityRepository;
@@ -41,11 +41,9 @@ public class CommunityServiceImpl implements CommunityService {
 	private final JwtAuthenticationProvider jwtAuthenticationProvider;
 	
 	@Override
-//	public void registerCommunity(String accessToken, CommunityRegisterRequestDto communityRegisterRequestDto) {
-	public void registerCommunity(CommunityRegisterRequestDto communityRegisterRequestDto) {
-//		String token = accessToken.split(" ")[1];
-//		String loginId = jwtAuthenticationProvider.getUsername(token);
-		String loginId = "test1";
+	public void registerCommunity(String accessToken, CommunityRegisterRequestDto communityRegisterRequestDto) {
+		String token = accessToken.split(" ")[1];
+		String loginId = jwtAuthenticationProvider.getUsername(token);
 		// 게시글 등록하는 유저 정보 가져오기
 		User user = authRepository.findByLoginId(loginId).get().getUser();
 		// 유저 소속 정보 가져오기
@@ -67,11 +65,9 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-//	public boolean updateCommunity(String accessToken, CommunityUpdateRequestDto communityUpdateRequestDto) {
-	public boolean updateCommunity(CommunityUpdateRequestDto communityUpdateRequestDto) {
-//		String token = accessToken.split(" ")[1];
-//		String loginId = jwtAuthenticationProvider.getUsername(token);
-		String loginId = "test1";
+	public boolean updateCommunity(String accessToken, CommunityUpdateRequestDto communityUpdateRequestDto) {
+		String token = accessToken.split(" ")[1];
+		String loginId = jwtAuthenticationProvider.getUsername(token);
 		
 		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
 		// 수정할 Comment
@@ -87,10 +83,8 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-//	public CommunityGetListWrapperResponseDto getCommunityList(String accessToken) {
-	public CommunityGetListWrapperResponseDto getCommunityList() {
-//		String loginId = getLoginIdFromToken(accessToken);
-		String loginId = "test1";
+	public CommunityGetListWrapperResponseDto getCommunityList(String accessToken, Pageable pageable) {
+		String loginId = getLoginIdFromToken(accessToken);
 		Auth auth = authRepository.findByLoginId(loginId).get();
 		User user = auth.getUser();
 		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
@@ -98,10 +92,9 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		List<CommunityGetListResponseDto> list = new ArrayList<>();
 		
-		for(Community c : communityRepository.findBySchool(school).get()) {
-			if(c.isDelYn()) continue;
+		for(Community c : communityRepository.findBySchoolAndDelYnOrderByRegTimeDesc(school, false, pageable).get()) {
 			list.add(
-				new CommunityGetListResponseDto(c.getUser().getId(),
+				new CommunityGetListResponseDto(c.getUser().getUserName(),
 				c.getTitle(), c.getHit(), c.getRegTime(), c.getId())
 			);
 		}
@@ -110,13 +103,14 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-//	public Community getCommunity(String accessToken, UUID communityID) {
 	public CommunityGetResponseDto getCommunity(UUID communityId) {
 		Community community = communityRepository.findById(communityId).get();
+		if(community.isDelYn()) return null;
+		
 		plusCommunityHit(community);
 		
 		CommunityGetResponseDto communityGetResponseDto = 
-				new CommunityGetResponseDto(community.getUser().getId(),
+				new CommunityGetResponseDto(community.getUser().getUserName(),
 						community.getTitle(),
 						community.getContent(),
 						community.getHit(),
@@ -126,15 +120,27 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
+	public TotalCommunityGetResponseDto getTotalCommunity(String accessToken) {
+		String loginId = getLoginIdFromToken(accessToken);
+		Auth auth = authRepository.findByLoginId(loginId).get();
+		User user = auth.getUser();
+		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
+		School school = userDepartment.getSchool();
+		
+		List<Community> list = communityRepository.findBySchoolAndDelYn(school, false).get();
+		
+		return new TotalCommunityGetResponseDto(list.size());
+	}
+	
+	@Override
 	public void plusCommunityHit(Community community) {
 		community.updateHit();
 		communityRepository.save(community);
 	}
 	
 	@Override
-//	public boolean deleteCommunity(String accessToken, UUID communityId) {
-	public boolean deleteCommunity(UUID communityId) {
-		String loginId = "test";
+	public boolean deleteCommunity(String accessToken, UUID communityId) {
+		String loginId = getLoginIdFromToken(accessToken);
 		// 삭제 요청자 userId
 		UUID userId = authRepository.findByLoginId(loginId).get().getUser().getId();
 		// 삭제할 Community 객체

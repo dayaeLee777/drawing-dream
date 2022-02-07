@@ -2,6 +2,7 @@ package com.dd.api.controller;
 
 import java.util.UUID;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import com.dd.api.dto.request.CommunityUpdateRequestDto;
 import com.dd.api.dto.response.CommunityGetListResponseDto;
 import com.dd.api.dto.response.CommunityGetListWrapperResponseDto;
 import com.dd.api.dto.response.CommunityGetResponseDto;
+import com.dd.api.dto.response.TotalCommunityGetResponseDto;
 import com.dd.api.service.CommunityService;
 import com.dd.common.model.BaseResponseDto;
 
@@ -45,10 +47,9 @@ public class CommunityController {
 		@ApiResponse(code=409, message="게시글 등록에 실패했습니다.")
 	})
 	public ResponseEntity<? extends BaseResponseDto> registerCommunity(
-//			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@RequestBody @ApiParam(value="커뮤니티 게시글 등록 - 게시글 정보", required=true) CommunityRegisterRequestDto communityRegisterRequestDto) {
-//		communityService.writeArticle(accessToken, communityRegisterRequestDto);
-		communityService.registerCommunity(communityRegisterRequestDto);
+		communityService.registerCommunity(accessToken, communityRegisterRequestDto);
 		return ResponseEntity.status(201).body(BaseResponseDto.of(201, "게시글이 정상적으로 등록되었습니다."));
 	}
 	
@@ -59,10 +60,9 @@ public class CommunityController {
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다.")
 	})
 	public ResponseEntity<? extends BaseResponseDto> updateCommunity(
-//			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@RequestBody @ApiParam(value="커뮤니티 게시글 수정 - 게시글 제목, 내용", required=true) CommunityUpdateRequestDto communityUpdateRequestDto) {
-//		communityService.updateCommunity(accessToken, communityUpdaterRequestDto);
-		if(!communityService.updateCommunity(communityUpdateRequestDto)) {
+		if(!communityService.updateCommunity(accessToken, communityUpdateRequestDto)) {
 			return ResponseEntity.status(401).body(BaseResponseDto.of(401, "게시글 수정 권한이 없습니다"));
 		}
 		
@@ -71,10 +71,9 @@ public class CommunityController {
 	
 	@GetMapping("/list")
 	@ApiOperation(value="커뮤니티 글 목록 보기 - 글 목록 가져오기")
-	public ResponseEntity<? extends BaseResponseDto> getCommunityList() {
-//			@ApiIgnore @RequestHeader("Authorization") String accessToken
-//		CommunityGetListResponseDto communityGetListResponseDto = communityService.getCommunityList(accesstoken);
-		CommunityGetListWrapperResponseDto communityGetListWrapperResponseDto = communityService.getCommunityList();
+	public ResponseEntity<? extends BaseResponseDto> getCommunityList(
+			@ApiIgnore @RequestHeader("Authorization") String accessToken, Pageable pageable) {
+		CommunityGetListWrapperResponseDto communityGetListWrapperResponseDto = communityService.getCommunityList(accessToken, pageable);
 		
 		return ResponseEntity.status(200).body(CommunityGetListWrapperResponseDto.of(200, "게시글 목록을 정상적으로 불러왔습니다", communityGetListWrapperResponseDto));
 	}
@@ -82,20 +81,29 @@ public class CommunityController {
 	@GetMapping("/{communityId}")
 	@ApiOperation(value="커뮤니티 글 보기 - 글 정보 가져오기")
 	public ResponseEntity<? extends BaseResponseDto> getCommunity(
-//			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@PathVariable("communityId") @ApiParam(value="가져오려는 커뮤니티 글의 communityId", required=true) UUID communityId) {
-//		CommunityGetResponseDto communityGetResponseDto = communityService.getCommunity(accessToken, communityId);
 		CommunityGetResponseDto communityGetResponseDto = communityService.getCommunity(communityId);
+		if(communityGetResponseDto == null)
+			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "존재하지 않는 게시글입니다."));
 		
 		return ResponseEntity.status(200).body(CommunityGetResponseDto.of(200, "게시글을 정상적으로 불러왔습니다", communityGetResponseDto));
+	}
+	
+	@GetMapping("/total")
+	@ApiOperation(value="커뮤니티 글 개수 가져오기")
+	public ResponseEntity<? extends BaseResponseDto> getTotalCommunity(
+			@ApiIgnore @RequestHeader("Authorization") String accessToken) {
+		TotalCommunityGetResponseDto totalCommunityGetResponseDto = communityService.getTotalCommunity(accessToken);
+		
+		return ResponseEntity.status(200).body(TotalCommunityGetResponseDto.of(200, "게시글 개수를 정상적으로 불러왔습니다.", totalCommunityGetResponseDto));
 	}
 	
 	@DeleteMapping("/{communityId}")
 	@ApiOperation(value="커뮤니티 글 삭제")
 	public ResponseEntity<? extends BaseResponseDto> deleteCommunity(
-//			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@PathVariable("communityId") @ApiParam(value="삭제하려는 커뮤니티 글의 communityId", required=true) UUID communityId) {
-		if(!communityService.deleteCommunity(communityId)) {
+		if(!communityService.deleteCommunity(accessToken, communityId)) {
 			return ResponseEntity.status(401).body(BaseResponseDto.of(401, "삭제 권한이 없습니다."));
 		}
 		

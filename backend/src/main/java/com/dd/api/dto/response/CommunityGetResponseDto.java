@@ -14,8 +14,8 @@ import lombok.Getter;
 @ApiModel("CommunityGetResponseDto")
 public class CommunityGetResponseDto extends BaseResponseDto{
 	
-	@ApiModelProperty(name="회원 정보 - 커뮤니티 글 작성자 userId")
-	private UUID userId;
+	@ApiModelProperty(name="회원 정보 - 커뮤니티 글 작성자")
+	private String userName;
 	
 	@ApiModelProperty(name="커뮤니티 글 정보 - 제목")
 	private String title;
@@ -27,8 +27,8 @@ public class CommunityGetResponseDto extends BaseResponseDto{
 	private LocalDateTime regTime;
 	
 	@Builder
-	public CommunityGetResponseDto(UUID userId, String title, String content, int hit, LocalDateTime regTime) {
-		this.userId = userId;
+	public CommunityGetResponseDto(String userName, String title, String content, int hit, LocalDateTime regTime) {
+		this.userName = userName;
 		this.title = title;
 		this.content = content;
 		this.hit = hit;

@@ -30,23 +30,34 @@ const CloseButton = styled.div`
   align-items: center;
 `;
 
-const TimeTable = ({ setWidgetId, setIsShow }) => {
+const TimeTable = ({
+  isShow,
+  setIsShow,
+  isntShow,
+  setIsntShow,
+  widgetId,
+  setWidgetId,
+}) => {
   const close = () => {
-    setIsShow(false);
+    const newIsShow = isShow.filter((wid) => {
+      return wid !== widgetId;
+    });
+    setIsShow(newIsShow);
+    setIsntShow([...isntShow, widgetId]);
   };
   return (
     <Container
       layout
-      layoutId="M04"
+      layoutId="M07"
       whileHover={{
         scale: 1.01,
       }}
       onClick={() => {
-        setWidgetId("M04");
+        if (setWidgetId) setWidgetId("M07");
       }}
     >
       <Wrapper>
-        <Title>오늘의 공부 시간</Title>
+        <Title>시간표</Title>
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
     </Container>
