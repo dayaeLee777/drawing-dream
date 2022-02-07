@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Api(value = "공부시간 기록 API", tags = { "Study Record" })
+@CrossOrigin("*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/studyrecord")

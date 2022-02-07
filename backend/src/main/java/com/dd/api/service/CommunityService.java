@@ -20,5 +20,6 @@ public interface CommunityService {
 	boolean deleteCommunity(String accessToken, UUID communityId);
 	String getLoginIdFromToken(String accessToken);
 	TotalCommunityGetResponseDto getTotalCommunity(String accessToken);
-	CommunityGetListWrapperResponseDto getCommunityList(String accessToken, Pageable pageable);
+//	CommunityGetListWrapperResponseDto getCommunityList(String accessToken, Pageable pageable);
+	CommunityGetListWrapperResponseDto getCommunityList(String accessToken, int page);
 }
