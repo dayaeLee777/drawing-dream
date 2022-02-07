@@ -26,7 +26,6 @@ const CourseName = ({ data, now }) => {
   const common = data.subjectCode.substr(0, 1);
   const middle = data.subjectCode.substr(0, 3);
   const end = data.subjectCode;
-  console.log(common, middle, end);
   return (
     <Container now={now}>
       <div className="name">{commonCode[common][middle][end]}</div>

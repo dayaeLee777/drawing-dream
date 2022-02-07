@@ -61,7 +61,7 @@ const Widgets = () => {
         setIsLoad={setIsLoad}
       />
     ),
-    M04: <Memo key={widgets[3]} setWidgetId={setWidgetId} />,
+    M04: <Memo key={widgets[3]} setWidgetId={setWidgetId} widgetId={widgetId}/>,
     M05: <Score key={widgets[4]} setWidgetId={setWidgetId} />,
     M06: <StudyPlanner key={widgets[5]} setWidgetId={setWidgetId} />,
     M07: <TimeTable key={widgets[6]} setWidgetId={setWidgetId} />,

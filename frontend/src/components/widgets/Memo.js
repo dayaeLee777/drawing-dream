@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import MemoList from "./memo/MemoList";
+import { useEffect, useState } from "react";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -46,6 +47,12 @@ const Memo = ({
     setIsShow(newIsShow);
     setIsntShow([...isntShow, widgetId]);
   };
+  const [isListLoading, setIsListLoading] = useState(true);
+  useEffect(() => {
+    if (!isListLoading) {
+      setIsListLoading(true);
+    }
+  }, [widgetId]);
   return (
     <Container
       layout
@@ -61,7 +68,7 @@ const Memo = ({
         <Title>메모</Title>
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
-      <MemoList mod={false} />
+      <MemoList main isListLoading={isListLoading} setIsListLoading={setIsListLoading} />
     </Container>
   );
 };
