@@ -75,6 +75,7 @@ const TodayClassModal = ({ layoutId }) => {
     createOnlineClass({ courseId }).then((res) => {
       console.log(res);
       navigate(`/onlineclass/${courseId}`);
+      window.location.reload();
     });
   };
 
