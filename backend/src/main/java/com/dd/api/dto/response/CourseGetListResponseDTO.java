@@ -2,24 +2,18 @@ package com.dd.api.dto.response;
 
 import java.util.UUID;
 
-import com.dd.common.model.BaseResponseDto;
 import com.dd.db.enums.SubCode;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @ApiModel("CourseResponseDTO")
-public class CourseResponseDTO extends BaseResponseDto {
+public class CourseGetListResponseDTO {
 
 	@ApiModelProperty(name = "수업 정보 - 수업 ID")
 	UUID courseId;
@@ -30,15 +24,12 @@ public class CourseResponseDTO extends BaseResponseDto {
 	@ApiModelProperty(name = "수업 정보 - 선생님 이름")
 	String teacherName;
 
-	@ApiModelProperty(name = "수업 정보 - 온라인 수업 ID")
-	UUID onlineClassId;
-
-	public static CourseResponseDTO of(Integer statusCode, String message, CourseResponseDTO courseResponseDTO) {
-		CourseResponseDTO res = courseResponseDTO;
-		res.setStatusCode(statusCode);
-		res.setMessage(message);
-
-		return res;
+	@Builder
+	public CourseGetListResponseDTO(UUID courseId, SubCode subjectCode, String teacherName) {
+		super();
+		this.courseId = courseId;
+		this.subjectCode = subjectCode;
+		this.teacherName = teacherName;
 	}
 
 }
