@@ -94,7 +94,7 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		List<CommunityGetListResponseDto> list = new ArrayList<>();
 		
-		for(Community c : communityRepository.findBySchoolAndDelYnOrderByRegTimeDesc(school, false, PageRequest.of(page-1, 8, Sort.Direction.DESC, "regTime")).get()) {
+		for(Community c : communityRepository.findBySchoolAndDelYnOrderByRegTimeDesc(school, false, PageRequest.of(page-1, 10, Sort.Direction.DESC, "regTime")).get()) {
 			list.add(
 				new CommunityGetListResponseDto(c.getUser().getId(), c.getUser().getUserName(),
 				c.getTitle(), c.getHit(), c.getRegTime(), c.getId())
@@ -119,6 +119,7 @@ public class CommunityServiceImpl implements CommunityService {
 						community.getHit(),
 						community.getRegTime());
 		
+		System.out.println(community.getUser().getUserName());
 		return communityGetResponseDto;
 	}
 	

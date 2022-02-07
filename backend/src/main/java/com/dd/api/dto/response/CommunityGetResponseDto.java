@@ -31,6 +31,7 @@ public class CommunityGetResponseDto extends BaseResponseDto{
 	@Builder
 	public CommunityGetResponseDto(UUID userId, String userName, String title, String content, int hit, LocalDateTime regTime) {
 		this.userId = userId;
+		this.userName = userName;
 		this.title = title;
 		this.content = content;
 		this.hit = hit;
