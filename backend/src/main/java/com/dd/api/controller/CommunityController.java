@@ -2,8 +2,10 @@ package com.dd.api.controller;
 
 import java.util.UUID;
 
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,8 @@ import com.dd.api.dto.response.CommunityGetResponseDto;
 import com.dd.api.dto.response.TotalCommunityGetResponseDto;
 import com.dd.api.service.CommunityService;
 import com.dd.common.model.BaseResponseDto;
+import com.dd.db.entity.board.Community;
+import com.dd.db.repository.CommunityRepository;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,12 +36,14 @@ import lombok.RequiredArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
+@CrossOrigin("*")
 @Api(value="Community API", tags = { "Community" })
 @RequiredArgsConstructor
 @RequestMapping("/api/community")
 public class CommunityController {
 
 	private final CommunityService communityService;
+	private final CommunityRepository communityRepository;
 	
 	@PostMapping("/register")
 	@ApiOperation(value="커뮤니티 게시글 등록")
@@ -69,13 +75,15 @@ public class CommunityController {
 		return ResponseEntity.status(200).body(BaseResponseDto.of(200, "게시글이 정상적으로 수정되었습니다."));
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/list/{page}")
 	@ApiOperation(value="커뮤니티 글 목록 보기 - 글 목록 가져오기")
 	public ResponseEntity<? extends BaseResponseDto> getCommunityList(
-			@ApiIgnore @RequestHeader("Authorization") String accessToken, Pageable pageable) {
-		CommunityGetListWrapperResponseDto communityGetListWrapperResponseDto = communityService.getCommunityList(accessToken, pageable);
+			@ApiIgnore @RequestHeader("Authorization") String accessToken, @PathVariable("page") int page) {
+		
+		CommunityGetListWrapperResponseDto communityGetListWrapperResponseDto = communityService.getCommunityList(accessToken, page);
 		
 		return ResponseEntity.status(200).body(CommunityGetListWrapperResponseDto.of(200, "게시글 목록을 정상적으로 불러왔습니다", communityGetListWrapperResponseDto));
+		
 	}
 	
 	@GetMapping("/{communityId}")

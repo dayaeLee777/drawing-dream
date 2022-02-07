@@ -3,10 +3,12 @@ package com.dd.api.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.CommunityRegisterRequestDto;
@@ -83,18 +85,20 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public CommunityGetListWrapperResponseDto getCommunityList(String accessToken, Pageable pageable) {
+	public CommunityGetListWrapperResponseDto getCommunityList(String accessToken, int page) {
 		String loginId = getLoginIdFromToken(accessToken);
 		Auth auth = authRepository.findByLoginId(loginId).get();
 		User user = auth.getUser();
 		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
 		School school = userDepartment.getSchool();
 		
+		PageRequest request = PageRequest.of(page-1, 8, Sort.Direction.DESC, "regTime");
+		
 		List<CommunityGetListResponseDto> list = new ArrayList<>();
 		
-		for(Community c : communityRepository.findBySchoolAndDelYnOrderByRegTimeDesc(school, false, pageable).get()) {
+		for(Community c : communityRepository.findBySchoolAndDelYnOrderByRegTimeDesc(school, false, PageRequest.of(page-1, 2, Sort.Direction.DESC, "regTime")).get()) {
 			list.add(
-				new CommunityGetListResponseDto(c.getUser().getUserName(),
+				new CommunityGetListResponseDto(c.getUser().getId(), c.getUser().getUserName(),
 				c.getTitle(), c.getHit(), c.getRegTime(), c.getId())
 			);
 		}
@@ -110,7 +114,8 @@ public class CommunityServiceImpl implements CommunityService {
 		plusCommunityHit(community);
 		
 		CommunityGetResponseDto communityGetResponseDto = 
-				new CommunityGetResponseDto(community.getUser().getUserName(),
+				new CommunityGetResponseDto(community.getUser().getId(), 
+						community.getUser().getUserName(),
 						community.getTitle(),
 						community.getContent(),
 						community.getHit(),

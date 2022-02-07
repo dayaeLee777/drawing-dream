@@ -65,7 +65,7 @@ public class SubCommentServiceImpl implements SubCommentService {
 		
 		for(Comment c : commentRepository.findByDelYnAndParentLikeOrderByRegTime(false, comment).get()) {
 			list.add(
-				new SubCommentGetListResponseDto(c.getUser().getUserName(),
+				new SubCommentGetListResponseDto(c.getUser().getId(),c.getUser().getUserName(),
 				c.getContent(), c.getRegTime(), c.getId())
 			);
 		}
