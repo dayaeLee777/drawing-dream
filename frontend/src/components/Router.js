@@ -62,11 +62,10 @@ const AppRouter = () => {
                   <Route path="/home" element={<Home />} />
                   <Route path="/modifyprofile" element={<ModifyProfile />} />
                   <Route path="/notice" element={<Notice />} />
-                  <Route path="/school/" element={<School />} >
+                  <Route path="/school/*" element={<School />}>
                     <Route path="" element={<CommunityList />} />
                     <Route path="register" element={<CommunityRegister />} />
-                    <Route path=":communityId" element={<CommunityDetail />} />
-                    <Route path="modify/:communityId" element={<CommunityRegister modify/>} />
+                    <Route path=":communityid" element={<CommunityDetail />} />
                   </Route>
                   <Route path="/lookup" element={<LookUp />} />
                   <Route path="/myclassroom" element={<MyClassRoom />} />
