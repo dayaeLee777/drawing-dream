@@ -88,10 +88,10 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		List<CommunityGetListResponseDto> list = new ArrayList<>();
 		
-		for(Community c : communityRepository.findBySchool(school).get()) {
+		for(Community c : communityRepository.findBySchoolOrderByRegTimeDesc(school).get()) {
 			if(c.isDelYn()) continue;
 			list.add(
-				new CommunityGetListResponseDto(c.getUser().getId(),
+				new CommunityGetListResponseDto(c.getUser().getUserName(),
 				c.getTitle(), c.getHit(), c.getRegTime(), c.getId())
 			);
 		}
@@ -102,10 +102,12 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public CommunityGetResponseDto getCommunity(UUID communityId) {
 		Community community = communityRepository.findById(communityId).get();
+		if(community.isDelYn()) return null;
+		
 		plusCommunityHit(community);
 		
 		CommunityGetResponseDto communityGetResponseDto = 
-				new CommunityGetResponseDto(community.getUser().getId(),
+				new CommunityGetResponseDto(community.getUser().getUserName(),
 						community.getTitle(),
 						community.getContent(),
 						community.getHit(),

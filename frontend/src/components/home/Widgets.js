@@ -62,9 +62,9 @@ const Widgets = () => {
       />
     ),
     M04: <Memo key={widgets[3]} setWidgetId={setWidgetId} />,
-    M05: <Score key={widgets[4]} widgetId={widgets[4]} />,
-    M06: <StudyPlanner key={widgets[5]} widgetId={widgets[5]} />,
-    M07: <TimeTable key={widgets[6]} widgetId={widgets[6]} />,
+    M05: <Score key={widgets[4]} setWidgetId={setWidgetId} />,
+    M06: <StudyPlanner key={widgets[5]} setWidgetId={setWidgetId} />,
+    M07: <TimeTable key={widgets[6]} setWidgetId={setWidgetId} />,
   };
 
   const mod = {
