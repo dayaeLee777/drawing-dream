@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.CommunityRegisterRequestDto;
@@ -12,12 +14,14 @@ import com.dd.api.dto.request.CommunityUpdateRequestDto;
 import com.dd.api.dto.response.CommunityGetListResponseDto;
 import com.dd.api.dto.response.CommunityGetListWrapperResponseDto;
 import com.dd.api.dto.response.CommunityGetResponseDto;
+import com.dd.api.dto.response.TotalCommunityGetResponseDto;
 import com.dd.db.entity.board.Community;
 import com.dd.db.entity.school.School;
 import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.repository.AuthRepository;
+import com.dd.db.repository.CommentRepository;
 import com.dd.db.repository.CommunityRepository;
 import com.dd.db.repository.UserDepartmentRepository;
 import com.dd.security.util.JwtAuthenticationProvider;
@@ -79,7 +83,7 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public CommunityGetListWrapperResponseDto getCommunityList(String accessToken) {
+	public CommunityGetListWrapperResponseDto getCommunityList(String accessToken, Pageable pageable) {
 		String loginId = getLoginIdFromToken(accessToken);
 		Auth auth = authRepository.findByLoginId(loginId).get();
 		User user = auth.getUser();
@@ -88,8 +92,7 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		List<CommunityGetListResponseDto> list = new ArrayList<>();
 		
-		for(Community c : communityRepository.findBySchoolOrderByRegTimeDesc(school).get()) {
-			if(c.isDelYn()) continue;
+		for(Community c : communityRepository.findBySchoolAndDelYnOrderByRegTimeDesc(school, false, pageable).get()) {
 			list.add(
 				new CommunityGetListResponseDto(c.getUser().getUserName(),
 				c.getTitle(), c.getHit(), c.getRegTime(), c.getId())
@@ -114,6 +117,19 @@ public class CommunityServiceImpl implements CommunityService {
 						community.getRegTime());
 		
 		return communityGetResponseDto;
+	}
+	
+	@Override
+	public TotalCommunityGetResponseDto getTotalCommunity(String accessToken) {
+		String loginId = getLoginIdFromToken(accessToken);
+		Auth auth = authRepository.findByLoginId(loginId).get();
+		User user = auth.getUser();
+		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
+		School school = userDepartment.getSchool();
+		
+		List<Community> list = communityRepository.findBySchoolAndDelYn(school, false).get();
+		
+		return new TotalCommunityGetResponseDto(list.size());
 	}
 	
 	@Override

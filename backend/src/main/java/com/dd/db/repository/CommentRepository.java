@@ -11,8 +11,8 @@ import com.dd.db.entity.board.Community;
 
 public interface CommentRepository extends JpaRepository<Comment, UUID> {
 	
-	Optional<List<Comment>> findByCommunityAndParentIsNull(Community community);
-	Optional<List<Comment>> findByCommunityAndParentIsNullOrderByRegTime(Community community);
+	Optional<List<Comment>> findByCommunityAndDelYnAndParentIsNull(Community community, boolean delYn);
+	Optional<List<Comment>> findByCommunityAndDelYnAndParentIsNullOrderByRegTime(Community community, boolean delYn);
 	Optional<List<Comment>> findByParentLike(Comment parent);
-	Optional<List<Comment>> findByParentLikeOrderByRegTime(Comment parent);
+	Optional<List<Comment>> findByDelYnAndParentLikeOrderByRegTime(boolean delYn, Comment parent);
 }
