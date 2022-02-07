@@ -31,7 +31,8 @@ public class CourseController {
 
 	@ApiOperation(value = "수업 조회")
 	@GetMapping("/{courseId}")
-	public ResponseEntity<? extends BaseResponseDto> getCourse(@ApiParam(value = "수업 ID") @PathVariable UUID courseId,
+	public ResponseEntity<? extends BaseResponseDto> getCourse(
+			@ApiParam(value = "수업 ID") @PathVariable UUID courseId,
 			@ApiIgnore @RequestHeader("Authorization") String accessToken) {
 
 		System.out.println("CourseController getCourse : " + courseId);
