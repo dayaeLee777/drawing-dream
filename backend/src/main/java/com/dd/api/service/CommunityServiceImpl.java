@@ -92,11 +92,9 @@ public class CommunityServiceImpl implements CommunityService {
 		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).get();
 		School school = userDepartment.getSchool();
 		
-		PageRequest request = PageRequest.of(page-1, 8, Sort.Direction.DESC, "regTime");
-		
 		List<CommunityGetListResponseDto> list = new ArrayList<>();
 		
-		for(Community c : communityRepository.findBySchoolAndDelYnOrderByRegTimeDesc(school, false, PageRequest.of(page-1, 2, Sort.Direction.DESC, "regTime")).get()) {
+		for(Community c : communityRepository.findBySchoolAndDelYnOrderByRegTimeDesc(school, false, PageRequest.of(page-1, 8, Sort.Direction.DESC, "regTime")).get()) {
 			list.add(
 				new CommunityGetListResponseDto(c.getUser().getId(), c.getUser().getUserName(),
 				c.getTitle(), c.getHit(), c.getRegTime(), c.getId())
