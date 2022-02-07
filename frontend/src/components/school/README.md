@@ -14,6 +14,7 @@ detail: /school/:communityId
 - [x]  화면 구성
 - [x]  게시글 등록 기능 구현
 - [x]  게시글 조회 기능 구현
+- [x]  페이징
 - [x]  게시글 수정 기능 구현
 - [x]  게시글 삭제 기능 구현
 - [x]  댓글 등록 기능 구현
@@ -24,7 +25,7 @@ detail: /school/:communityId
 - [x]  대댓글 조회 기능 구현
 - [x]  대댓글 수정 기능 구현
 - [x]  대댓글 삭제 기능 구현
-- [ ]  페이징
+- [ ]  에러페이지 구성 삭제한 글에 접근한다거나 수정권한이 없는 사람이 수정하려고 할때 에러페이지 보이게
 
 ### 화면 구성
 
@@ -33,15 +34,14 @@ detail: /school/:communityId
 │ └ widgets
 │   └ school
 │     │ └ comment
-~~│     │   └ CommentContainer.js // 댓글 컨테이너~~ 삭제
+~~│     │   └ CommentContainer.js   // 댓글 컨테이너~~ 삭제
 │     │   └ CommentRegister.js    // 댓글, 대댓글 작성하는 컴포넌트
-│     │   └ CommentItem.js      // 댓글, 대댓글 항목 컴포넌트, 대댓글 리스트 포함
-│     │   └ CommentList.js      // 댓글 리스트 컴포넌트
-│     ├ CommunityDetail.js      // 게시글 내용 페이지
-│     ├ CommunityList.js        // 게시글 목록 페이지
-│     ├ CommunityRegister.js    // 게시글 등록 페이지
-│     ├ CommunityItem.js        // 게시글 목록 항목
-├ routes
+│     │   └ CommentItem.js        // 댓글, 대댓글 항목 컴포넌트, 대댓글 리스트 포함
+│     │   └ CommentList.js        // 댓글 리스트 컴포넌트
+│     ├ CommunityDetail.js        // 게시글 내용 페이지
+│     ├ CommunityList.js          // 게시글 목록 페이지
+│     ├ CommunityRegister.js      // 게시글 등록 페이지
+│     ├ CommunityItem.js          // 게시글 목록 항목├ routes
   └ School.js                   // 홈에서 보이는 우리학교보기 컴포넌트
 ```
 
@@ -102,6 +102,46 @@ detail: /school/:communityId
 
 - 내용 보기
     
+    페이징
+    
+    ```bash
+    $ npm install react-js-pagination
+    ```
+    
+    ```jsx
+    <Pagination
+      activePage={page}
+      itemsCountPerPage={10}
+      totalItemsCount={450}
+      pageRangeDisplayed={5}
+      prevPageText={"‹"}
+      nextPageText={"›"}
+      onChange={handlePageChange}
+    />
+    ```
+    
+    처음에 글 전체 갯수를 요청
+    
+    ```jsx
+    	const [isLoading, setIsLoading] = useState(false);
+      const [totalItemsCount, setTotalItemsCount] = useState(0);
+      const [isTotalItemsCountLoading, setIsTotalItemsCountLoading] = useState(true);
+    
+      useEffect(() => {
+        console.log("총 글 개수 받아오기");
+        if (isTotalItemsCountLoading) {
+          getCommunityTotalCount()
+          .then(res => {
+            console.log(res.data.totalCommunity);
+            setTotalItemsCount(res.data.totalCommunity);
+            setIsTotalItemsCountLoading(false);
+          })
+        } else {
+          setIsLoading(true);  // 글 개수를 set하고 나서 글 리스트 요청
+        }
+      }, [isTotalItemsCountLoading]);
+    ```
+    
     게시글 리스트
     
     request
@@ -147,6 +187,33 @@ detail: /school/:communityId
     };
     
     export default School;
+    ```
+    
+    ```jsx
+    const CommunityList = () => {
+      const Navigate = useNavigate();
+      const [data, setData] = useState(null);
+      const [isLoading, setIsLoading] = useState(true);
+    
+    	...
+    
+      return (
+        <>
+          <Desc>우리 학교 커뮤니티</Desc>
+          <Container>
+            <ButtonContainer>
+              <Button
+                name="글쓰기"
+                width="7rem"
+                height="2rem"
+                onClick={() => Navigate("./register")}
+              />
+            </ButtonContainer>
+    				...
+          </Container>
+        </>
+      );
+    };
     ```
     
     School.js 는 단순히 하얀색 박스만 표현하도록하고 내부를 <Outlet />을 사용하여 useNavigate를 통한 페이지 이동시 보여주는 영역 표시
@@ -201,10 +268,10 @@ detail: /school/:communityId
 ## bug
 
 - 내용 보기
-    - [ ]  url로 접속시 남의 글 수정 가능, 다른사람이 조회는 할 수 있어야 하므로 프론트에서 처리해야 될것 같음 수정하기 눌렀을때 수정하는 페이지로 이동한 userId와 작성자 userId를 비교해서 바로 에러페이지로 이동할 수 있도록
-    - [ ]  뒤로가기시 삭제한 글 다시 볼 수 있음 db에서 del_yn으로 처리해둬서 그런거 같음
-    - [ ]  뒤로가기시 삭제한 글에 댓글을 달 수 있음
+    - [x]  url로 접속시 남의 글 수정 가능, 다른사람이 조회는 할 수 있어야 하므로 프론트에서 처리해야 될것 같음 수정하기 눌렀을때 수정하는 페이지로 이동한 userId와 작성자 userId를 비교해서 바로 에러페이지로 이동할 수 있도록 `Done`
+    - [x]  뒤로가기시 삭제한 글 다시 볼 수 있음 db에서 del_yn으로 처리해둬서 그런거 같음 `Done`
+    - [x]  뒤로가기시 삭제한 글에 댓글을 달 수 있음 `Done`
     - [x]  자기가 쓴 댓글에만 수정, 삭제 버튼
-    - [ ]  게시글, 댓글 목록이 시간 순서대로 오지 않음
+    - [x]  게시글, 댓글 목록이 시간 순서대로 오지 않음 `Done`
     - [ ]  댓글 달기, 수정하기 여러 군데서 누르면 하나만 뜨게
     - [x]  게시글 수정, 댓글 달기, 수정, 삭제 시 변경된 내용 바로 반영

@@ -109,20 +109,20 @@ const CommentItem = ({
   const onDelete = () => {
     if (children) {
       deleteComment(data.commentId)
-      .then(() => {
-        alert("댓글이 삭제되었습니다.");
-      })
-      .then(() => {
-        setCommentListIsLoading(true);
-      });
+        .then(() => {
+          alert("댓글이 삭제되었습니다.");
+        })
+        .then(() => {
+          setCommentListIsLoading(true);
+        });
     } else {
       deleteReComment(data.commentId)
-      .then(() => {
-        alert("대댓글이 삭제되었습니다.");
-      })
-      .then(() => {
-        setReCommentListIsLoading(true);
-      });
+        .then(() => {
+          alert("대댓글이 삭제되었습니다.");
+        })
+        .then(() => {
+          setReCommentListIsLoading(true);
+        });
     }
   };
   const onCommentModify = () => {
@@ -167,8 +167,8 @@ const CommentItem = ({
             modify
             communityId={communityId}
             setCommentModify={setCommentModify}
-            setCommentListIsLoading = {setCommentListIsLoading}
-            setReCommentListIsLoading = {setReCommentListIsLoading}
+            setCommentListIsLoading={setCommentListIsLoading}
+            setReCommentListIsLoading={setReCommentListIsLoading}
             children={children}
           />
         )}
@@ -178,14 +178,18 @@ const CommentItem = ({
             <CommentRegister
               commentId={data.commentId}
               communityId={communityId}
-              setReCommentListIsLoading = {setIsLoading}
+              setReCommentListIsLoading={setIsLoading}
             />
           )}
       </Content>
       {children &&
         reCommentList &&
         reCommentList.map((item) => (
-          <CommentItem data={item} key={item.commentId} setReCommentListIsLoading={setIsLoading}/>
+          <CommentItem
+            data={item}
+            key={item.commentId}
+            setReCommentListIsLoading={setIsLoading}
+          />
         ))}
     </Container>
   );

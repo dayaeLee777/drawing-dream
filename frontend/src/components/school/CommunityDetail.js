@@ -74,25 +74,31 @@ const CommunityDetail = () => {
 
   useEffect(() => {
     if (isLoading) {
-      getCommunityDetail(params.communityId).then((res) => {
-        console.log(res);
-        setData(res.data);
-        setIsLoading(false);
-      });
+      getCommunityDetail(params.communityId)
+        .then((res) => {
+          console.log(res);
+          setData(res.data);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          Navigate("../");
+          return () => {
+            setIsLoading(false);
+          };
+        });
     }
   }, [isLoading]);
 
   const onDelete = () => {
-    deleteCommunity(params.communityId)
-    .then(() => {
+    deleteCommunity(params.communityId).then(() => {
       alert("글이 삭제되었습니다.");
       Navigate("../");
-    })
-  }
+    });
+  };
 
   const onModify = () => {
     Navigate(`../modify/${params.communityId}`);
-  }
+  };
 
   // const sampleData = {
   //   regTime: "2022.02.04",
@@ -115,8 +121,12 @@ const CommunityDetail = () => {
         <EditContainer>
           {userId === data.userId && (
             <>
-              <span className="edit" onClick={onModify}>수정하기</span>
-              <span className="delete" onClick={onDelete}>삭제하기</span>
+              <span className="edit" onClick={onModify}>
+                수정하기
+              </span>
+              <span className="delete" onClick={onDelete}>
+                삭제하기
+              </span>
             </>
           )}
         </EditContainer>
@@ -127,7 +137,7 @@ const CommunityDetail = () => {
         </BoardContainer>
       )}
 
-      <CommentList communityId={params.communityId}/>
+      <CommentList communityId={params.communityId} />
     </DetailContainer>
   );
 };

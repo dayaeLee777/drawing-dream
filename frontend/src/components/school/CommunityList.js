@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CommunityItem from "./CommunityItem";
 import Pagination from "react-js-pagination";
-import 'assets/css/paging.css'
+import "assets/css/paging.css";
 
 const Container = styled.div`
   width: 100%;
@@ -59,16 +59,16 @@ const CommunityList = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [totalItemsCount, setTotalItemsCount] = useState(0);
-  const [isTotalItemsCountLoading, setIsTotalItemsCountLoading] = useState(true);
+  const [isTotalItemsCountLoading, setIsTotalItemsCountLoading] =
+    useState(true);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     if (isTotalItemsCountLoading) {
-      getCommunityTotalCount()
-      .then(res => {
+      getCommunityTotalCount().then((res) => {
         setTotalItemsCount(res.data.totalCommunity);
         setIsTotalItemsCountLoading(false);
-      })
+      });
     } else {
       setIsLoading(true);
     }
@@ -124,7 +124,11 @@ const CommunityList = () => {
           <tbody>
             {data &&
               data.map((item, idx) => (
-                <CommunityItem index={totalItemsCount-((page-1)*10)-idx-1} key={item.communityId} data={item} />
+                <CommunityItem
+                  index={totalItemsCount - (page - 1) * 10 - idx - 1}
+                  key={item.communityId}
+                  data={item}
+                />
               ))}
           </tbody>
         </StyledTable>

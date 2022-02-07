@@ -5,7 +5,12 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { createRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getCommunityDetail, modifyCommunity, registerCommunity } from "api/community";
+import {
+  getCommunityDetail,
+  modifyCommunity,
+  registerCommunity,
+} from "api/community";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   padding: 3rem 2rem;
@@ -35,11 +40,12 @@ const Title = styled.div`
   margin-bottom: 2rem;
 `;
 
-const CommunityRegister = ({modify}) => {
+const CommunityRegister = ({ modify }) => {
   const Navigate = useNavigate();
   const editorRef = createRef();
   const contentEmpty = `<p><br class="ProseMirror-trailingBreak"></p>`;
   const params = useParams();
+  const { userId } = useSelector((state) => state.user);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -51,6 +57,13 @@ const CommunityRegister = ({modify}) => {
   useEffect(() => {
     if (modify && isLoading) {
       getCommunityDetail(params.communityId).then((res) => {
+        if (userId !== res.data.userId) {
+          Navigate("../");
+          alert("수정 권한이 없습니다.");
+          return () => {
+            setIsLoading(false);
+          };
+        }
         setData({
           title: res.data.title,
           content: res.data.content,
@@ -76,8 +89,11 @@ const CommunityRegister = ({modify}) => {
         modifyCommunity({
           title: data.title,
           content: editorRef.current.getInstance().getHTML(),
-          communityId: params.communityId
-        }).then(alert("글 수정에 성공하였습니다."), Navigate(`../${params.communityId}`))
+          communityId: params.communityId,
+        }).then(
+          alert("글 수정에 성공하였습니다."),
+          Navigate(`../${params.communityId}`)
+        );
       } else {
         registerCommunity({
           title: data.title,

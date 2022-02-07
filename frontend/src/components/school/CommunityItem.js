@@ -22,7 +22,7 @@ const CommunityItem = ({ data, index }) => {
   const Navigate = useNavigate();
   return (
     <StyledTr onClick={() => Navigate(`./${data.communityId}`)}>
-      <StyledTd>{index+1}</StyledTd>
+      <StyledTd>{index + 1}</StyledTd>
       <StyledTd ta="left">{data.title}</StyledTd>
       <StyledTd>{data.userName}</StyledTd>
       <StyledTd>{data.hit}</StyledTd>
