@@ -1,4 +1,8 @@
-url: /community
+url:
+root: /school
+register: /school/register
+modify: /school/modify/:communityId
+detail: /school/:communityId
 
 ## Todo
 
@@ -20,6 +24,7 @@ url: /community
 - [x]  대댓글 조회 기능 구현
 - [x]  대댓글 수정 기능 구현
 - [x]  대댓글 삭제 기능 구현
+- [ ]  페이징
 
 ### 화면 구성
 
@@ -29,8 +34,8 @@ url: /community
 │   └ school
 │     │ └ comment
 ~~│     │   └ CommentContainer.js // 댓글 컨테이너~~ 삭제
-│     │   └ CommentInsert.js    // 댓글 작성하는 컴포넌트
-│     │   └ CommentItem.js      // 댓글, 대댓글 항목 컴포넌트
+│     │   └ CommentRegister.js    // 댓글, 대댓글 작성하는 컴포넌트
+│     │   └ CommentItem.js      // 댓글, 대댓글 항목 컴포넌트, 대댓글 리스트 포함
 │     │   └ CommentList.js      // 댓글 리스트 컴포넌트
 │     ├ CommunityDetail.js      // 게시글 내용 페이지
 │     ├ CommunityList.js        // 게시글 목록 페이지
@@ -147,7 +152,7 @@ url: /community
     School.js 는 단순히 하얀색 박스만 표현하도록하고 내부를 <Outlet />을 사용하여 useNavigate를 통한 페이지 이동시 보여주는 영역 표시
     
     ```jsx
-    <Route path="/school/*" element={<School />} >
+    <Route path="/school/" element={<School />} >
       <Route path="" element={<CommunityList />} />
       <Route path="register" element={<CommunityRegister />} />
       <Route path=":communityid" element={<CommunityDetail />} />
@@ -196,7 +201,7 @@ url: /community
 ## bug
 
 - 내용 보기
-    - [ ]  url로 접속시 남의 글 수정 가능
+    - [ ]  url로 접속시 남의 글 수정 가능, 다른사람이 조회는 할 수 있어야 하므로 프론트에서 처리해야 될것 같음 수정하기 눌렀을때 수정하는 페이지로 이동한 userId와 작성자 userId를 비교해서 바로 에러페이지로 이동할 수 있도록
     - [ ]  뒤로가기시 삭제한 글 다시 볼 수 있음 db에서 del_yn으로 처리해둬서 그런거 같음
     - [ ]  뒤로가기시 삭제한 글에 댓글을 달 수 있음
     - [x]  자기가 쓴 댓글에만 수정, 삭제 버튼
