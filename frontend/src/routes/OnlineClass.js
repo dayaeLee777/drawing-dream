@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import kurentoUtils from "kurento-utils";
 import styled from "styled-components";
-import { render } from "react-dom";
 /*
  * (C) Copyright 2014 Kurento (http://kurento.org/)
  *
@@ -22,6 +21,32 @@ import { render } from "react-dom";
  *
  */
 
+const Container = styled.div`
+  margin: 4rem 10vw;
+`;
+
+const Title = styled.div`
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 2rem;
+  letter-spacing: -1px;
+`;
+
+const TeacherVideoContainer = styled.div`
+  width: 60vw;
+  height: 70vh;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const ChatContainer = styled.div`
+  width: 20rem;
+  border-radius: 10px;
+  margin-left: 5vw;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+`;
 const VideoContainer = styled.div`
   width: 500px;
   height: 500px;
@@ -36,8 +61,8 @@ const OnlineClass = () => {
   // useEffect(() => {
   let ws = new WebSocket("wss://localhost:8443/groupcall");
   let participants = {};
+  let participantCnt = 0;
   let room = roomId;
-  let showVideo;
   const { userId, userName } = useSelector((state) => state.user);
 
   const PARTICIPANT_MAIN_CLASS = "participant main";
@@ -53,8 +78,9 @@ const OnlineClass = () => {
    * @return
    */
   class Participant {
-    constructor(name) {
+    constructor(name, participantCnt) {
       this.name = name;
+      this.participantCnt = participantCnt;
       // container.className = isPresentMainParticipant()
       //   ? PARTICIPANT_CLASS
       //   : PARTICIPANT_MAIN_CLASS;
@@ -62,22 +88,28 @@ const OnlineClass = () => {
       // var span = document.createElement("span");
       var rtcPeer;
 
-      // const container = <VideoContainer></VideoContainer>;
-      // container.appendChild(span);
-      // container.onclick = switchContainerClass;
-      // document.getElementById("participants").appendChild(container);
-
-      // span.appendChild(document.createTextNode(name));
-
-      // this.getElement = function () {
-      //   return container;
-
-      var video = document.createElement("video");
-      video.id = "video-" + userId;
-      video.autoplay = true;
-      video.controls = false;
-
-      document.getElementById("participants").appendChild(video);
+      let video;
+      if (participantCnt === 0) {
+        video = document.createElement("video");
+        video.id = "video-" + userId;
+        video.autoplay = true;
+        video.controls = false;
+        video.style.borderRadius = "10px";
+        video.style.width = "100%";
+        video.style.height = "100%";
+        video.style.objectFit = "cover";
+        document.getElementById("teacher").appendChild(video);
+      } else {
+        video = document.createElement("video");
+        video.id = "video-" + userId;
+        video.autoplay = true;
+        video.controls = false;
+        video.style.width = "100%";
+        video.style.height = "100%";
+        video.style.objectFit = "cover";
+        video.style.borderRadius = "10px";
+        document.getElementById("participants").appendChild(video);
+      }
 
       this.getVideoElement = function () {
         return video;
@@ -170,9 +202,28 @@ const OnlineClass = () => {
       id: "joinRoom",
       name: userName,
       room: roomId,
+      participantCnt: participantCnt,
     };
     ws.send(JSON.stringify(message));
   };
+
+  // async function getConnectedDevices(type) {
+  //   navigator.mediaDevices
+  //     .enumerateDevices()
+  //     .then(function (devices) {
+  //       devices.forEach(function (device) {
+  //         console.log(
+  //           device.kind + ": " + device.label + " id = " + device.deviceId
+  //         );
+  //       });
+  //     })
+  //     .catch(function (err) {
+  //       console.log(err.name + ": " + err.message);
+  //     });
+  // }
+
+  // getConnectedDevices("videoinput");
+  // console.log(videoCamera);
 
   function onNewParticipant(request) {
     receiveVideo(request.name);
@@ -210,7 +261,7 @@ const OnlineClass = () => {
       },
     };
     console.log(userName + " registered in room " + room);
-    var participant = new Participant(userName);
+    var participant = new Participant(userName, participantCnt++);
     participants[userName] = participant;
     var video = participant.getVideoElement();
     console.log(video);
@@ -248,10 +299,9 @@ const OnlineClass = () => {
   }
 
   function receiveVideo(sender) {
-    var participant = new Participant(sender);
+    var participant = new Participant(sender, participantCnt);
     participants[sender] = participant;
     var video = participant.getVideoElement();
-    console.log(video);
 
     var options = {
       remoteVideo: video,
@@ -284,7 +334,14 @@ const OnlineClass = () => {
   // }, []);
   return (
     <>
-      <div id="participants"></div>
+      <Container>
+        <Title>{commonCode.G.G05.G0500}: 박선생 선생님</Title>
+        <Wrapper>
+          <TeacherVideoContainer id="teacher"></TeacherVideoContainer>
+          <ChatContainer>hi</ChatContainer>
+        </Wrapper>
+        <div id="participants"></div>
+      </Container>
     </>
   );
 };
