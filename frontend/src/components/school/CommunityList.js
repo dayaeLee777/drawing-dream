@@ -57,7 +57,7 @@ const PageContainer = styled.div`
 const CommunityList = () => {
   const Navigate = useNavigate();
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [totalItemsCount, setTotalItemsCount] = useState(0);
   const [isTotalItemsCountLoading, setIsTotalItemsCountLoading] =
     useState(true);
@@ -122,7 +122,7 @@ const CommunityList = () => {
             </tr>
           </thead>
           <tbody>
-            {data &&
+            {!isLoading && data &&
               data.map((item, idx) => (
                 <CommunityItem
                   index={totalItemsCount - (page - 1) * 10 - idx - 1}
