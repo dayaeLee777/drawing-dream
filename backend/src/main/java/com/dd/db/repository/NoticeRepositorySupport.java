@@ -7,5 +7,8 @@ import com.dd.db.entity.board.Notice;
 import com.dd.db.entity.user.User;
 
 public interface NoticeRepositorySupport {
-	public Page<Notice> findByUserinfo(User user, Pageable pageable);
+	
+	Page<Notice> findByUserinfoWithPaging(User user, Pageable pageable);
+	long countByUser(User user);
+	
 }

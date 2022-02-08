@@ -68,6 +68,10 @@ public class Notice extends BaseEntity  implements Comparable<Notice>{
 		this.noticeCode = noticeCode;
 	}
 	
+	public void plusNoticeHit() {
+		this.hit += 1;
+	}
+	
 	public void noticeByGrade(Code gradeCode) {
 		this.gradeCode = gradeCode;
 	}

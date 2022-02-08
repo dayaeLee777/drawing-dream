@@ -28,9 +28,10 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 	QNotice qNotice = QNotice.notice;
 	QUserDepartment qUserDepartment = QUserDepartment.userDepartment;
 	
-	public Page<Notice> findByUserinfo(User user, Pageable pageable) {
+	public Page<Notice> findByUserinfoWithPaging(User user, Pageable pageable) {
 		
 		List<Notice> noticeList = new ArrayList<Notice>();
+		
 		UserDepartment userDepartment = jpaQueryFactory
 				.select(qUserDepartment)
 				.from(qUserDepartment)
@@ -77,5 +78,50 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 		noticeList.addAll(noticeByClass);
 		Collections.sort(noticeList);
 		return new PageImpl<Notice>(noticeList, pageable, noticeList.size());
-  }
+	}
+	
+	public long countByUser(User user) {
+		
+		UserDepartment userDepartment = jpaQueryFactory
+				.select(qUserDepartment)
+				.from(qUserDepartment)
+				.where(
+						qUserDepartment.user.eq(user),
+						qUserDepartment.delYn.isFalse())
+				.fetchOne();
+
+		long count = 0L;
+		
+		count += jpaQueryFactory
+				.selectFrom(qNotice)
+				.where(
+						qNotice.school.eq(userDepartment.getSchool()),
+						qNotice.noticeCode.eq(Code.K01),
+						qNotice.delYn.isFalse()
+						)
+				.fetchCount();
+		
+		count += jpaQueryFactory
+				.selectFrom(qNotice)
+				.where(
+						qNotice.school.eq(userDepartment.getSchool()),
+						qNotice.noticeCode.eq(Code.K02),
+						qNotice.gradeCode.eq(userDepartment.getGradeCode()),
+						qNotice.delYn.isFalse()
+						)
+				.fetchCount();
+		
+		count +=  jpaQueryFactory
+				.selectFrom(qNotice)
+				.where(
+						qNotice.school.eq(userDepartment.getSchool()),
+						qNotice.noticeCode.eq(Code.K03),
+						qNotice.gradeCode.eq(userDepartment.getGradeCode()),
+						qNotice.classCode.eq(userDepartment.getClassCode()),
+						qNotice.delYn.isFalse()
+						)
+				.fetchCount();
+		
+		return count;
+  	}
 }

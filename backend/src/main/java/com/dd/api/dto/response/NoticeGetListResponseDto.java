@@ -2,7 +2,6 @@ package com.dd.api.dto.response;
 
 import java.util.UUID;
 
-import com.dd.common.model.BaseResponseDto;
 import com.dd.db.enums.Code;
 
 import io.swagger.annotations.ApiModel;

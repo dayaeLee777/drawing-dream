@@ -1,11 +1,8 @@
 package com.dd.api.dto.response;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.dd.common.model.BaseResponseDto;
 import com.dd.db.enums.Code;
 
 import io.swagger.annotations.ApiModel;
@@ -14,13 +11,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 @ApiModel("noticeGetResponseDto")
 public class NoticeGetResponseDto {
 
@@ -43,7 +38,7 @@ public class NoticeGetResponseDto {
 	private int hit;
 	
 	@ApiModelProperty(name="등록일시", example="2022-01-27 10:08:12")
-	private LocalDateTime regTime;
+	private String regTime;
 	
 	@ApiModelProperty(name="파일", example="orginFile, 파일 URL")
 	private Map<String, String> files;
