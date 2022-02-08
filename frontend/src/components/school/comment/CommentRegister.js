@@ -58,16 +58,17 @@ const CommentRegister = ({
   const onRegister = () => {
     if (modify) {
       if (children) {
-        modifyComment({ commentId: data.commentId, content }).then(() => {
-          setCommentModify({
-            commentId: "",
-            isCommentModify: false,
+        modifyComment({ commentId: data.commentId, content })
+          .then(() => {
+            setCommentModify({
+              commentId: "",
+              isCommentModify: false,
+            });
+          })
+          .then(() => {
+            alert("댓글이 수정되었습니다.");
+            setCommentListIsLoading(true);
           });
-        })
-        .then(() => {
-          alert("댓글이 수정되었습니다.");
-          setCommentListIsLoading(true);
-        });
       } else {
         modifyReComment({ commentId: data.commentId, content })
           .then(() => {
@@ -83,12 +84,13 @@ const CommentRegister = ({
       }
     } else {
       if (children) {
-        registerComment({ communityId: communityId, content: content })
-        .then(() => {
+        registerComment({ communityId: communityId, content: content }).then(
+          () => {
             alert("댓글이 등록되었습니다.");
             setContent("");
             setCommentListIsLoading(true);
-          });
+          }
+        );
       } else {
         registerSubComment({ communityId, content, commentId, userId })
           .then(() => {
