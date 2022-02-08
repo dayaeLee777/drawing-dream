@@ -34,7 +34,9 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 		UserDepartment userDepartment = jpaQueryFactory
 				.select(qUserDepartment)
 				.from(qUserDepartment)
-				.where(qUserDepartment.user.eq(user))
+				.where(
+						qUserDepartment.user.eq(user),
+						qUserDepartment.delYn.isFalse())
 				.fetchOne();
 		
 		List<Notice> noticeBySchool = jpaQueryFactory

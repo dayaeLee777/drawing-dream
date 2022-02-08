@@ -86,7 +86,7 @@ public class MemoServiceImpl implements MemoService {
 	public List<MemoResponseDto> getMemoList(String accessToken) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
 		List<MemoResponseDto> memoList = new ArrayList<MemoResponseDto>();
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm:ss");
 		memoRepository.findByUserIdAndDelYnOrderByRegTimeDesc(user.getId(), false).forEach(memo -> {
 			String regTime = memo.getRegTime().format(dateTimeFormatter);   
 			MemoResponseDto memoResponseDto = MemoResponseDto.builder()

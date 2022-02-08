@@ -91,7 +91,7 @@ public class NoticeController {
 	})
 	public ResponseEntity<List<NoticeGetListResponseDto>> getNoticeList(
 			@ApiIgnore @RequestHeader("Authorization") String accessToken, 
-			@PageableDefault(size = 8, sort = {"regTime"}, direction = Sort.Direction.DESC)  Pageable pagealbe ) {
+			@PageableDefault(size = 10, sort = {"regTime"}, direction = Sort.Direction.DESC)  Pageable pagealbe ) {
 		return ResponseEntity.status(200).body(noticeService.getNoticeList(accessToken, pagealbe));
 	}
 }
