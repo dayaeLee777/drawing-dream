@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import Chart from "./studyrecord/Chart";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -30,7 +31,7 @@ const CloseButton = styled.div`
   align-items: center;
 `;
 
-const StudyPlanner = ({
+const StudyRecord = ({
   isShow,
   setIsShow,
   isntShow,
@@ -60,8 +61,9 @@ const StudyPlanner = ({
         <Title>오늘의 공부 시간</Title>
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
+      <Chart />
     </Container>
   );
 };
 
-export default StudyPlanner;
+export default StudyRecord;

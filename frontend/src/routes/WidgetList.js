@@ -8,7 +8,7 @@ import CheckListModal from "components/widgets/modals/CheckListModal";
 import commonCode from "config/commonCode";
 import Widget from "components/widgets/Widget";
 import ScoreModal from "components/widgets/modals/ScoreModal";
-import StudyPlannerModal from "components/widgets/modals/StudyPlannerModal";
+import StudyRecordModal from "components/widgets/modals/StudyRecordModal";
 import TimeTableModal from "components/widgets/modals/TimeTableModal";
 
 const Container = styled.div`
@@ -72,7 +72,7 @@ const WidgetList = () => {
     ),
     M04: <MemoModal layoutId={widgetId} />,
     M05: <ScoreModal layoutId={widgetId} />,
-    M06: <StudyPlannerModal layoutId={widgetId} />,
+    M06: <StudyRecordModal layoutId={widgetId} />,
     M07: <TimeTableModal layoutId={widgetId} />,
   };
 

@@ -5,7 +5,7 @@ import TodayClassList from "./todayclass/TodayClassList";
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   background-color: ${({ theme }) => theme.widgetColor};
-  width: 50rem;
+  width: 45rem;
   height: 100%;
   max-height: 20rem;
 `;
