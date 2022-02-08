@@ -8,10 +8,11 @@ import com.dd.api.dto.request.StudyRecordUpdateRequestDto;
 import com.dd.api.dto.response.StudyRecordFinishResponseDto;
 import com.dd.api.dto.response.StudyRecordGetListWrapperResponseDto;
 import com.dd.api.dto.response.StudyRecordResponseDto;
+import com.dd.api.dto.response.StudyRecordStartResponseDto;
 import com.dd.db.entity.addon.StudyRecord;
 
 public interface StudyRecordService {
-	StudyRecord createStudyRecord(String accessToken, StudyRecordRegistRequestDto studyRecordRegistRequestDto);
+	StudyRecordStartResponseDto createStudyRecord(String accessToken, StudyRecordRegistRequestDto studyRecordRegistRequestDto);
 	StudyRecordFinishResponseDto finishStudyRecord(UUID studyRecordId);
 	StudyRecordGetListWrapperResponseDto getStudyRecordListByDate(String accessToken, LocalDate studyDate);
 	StudyRecordResponseDto getStudyRecord(UUID studyRecordId);

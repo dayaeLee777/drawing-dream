@@ -15,10 +15,15 @@ INSERT IGNORE INTO `school` (`id`, `school_code`,  `school_name`, `school_serial
 -- Dumping data for table `user`
 --
 
+INSERT IGNORE INTO `user` (`id`, `user_name`, `user_email`, `address`, `phone`, `del_yn`) VALUES 
+(_binary "]H\'H_k:^Ì¯Q}",'박선생','teacherpark@korea.kr', '서울 강남구 가로수길 9 (신사동) 싸피빌딩 207호', '01070077777',false),
+(_binary 'þvGP*G\âcjò','김선생', 'teacherkim@korea.kr', '서울 강남구 강남대로 302-2 (역삼동) 드로잉드림 1004호','01012345678',false);
 INSERT IGNORE INTO `user` (`id`, `user_name`, `user_email`, `address`, `address_detail`, `phone`, `del_yn`) VALUES 
 (_binary "]H\'H_k:^Ì¯Q}",'박선생','teacherpark@korea.kr', '서울 강남구 가로수길 9 (신사동) 싸피빌딩', '207호', '01070077777',false),
 (_binary 'þvGP*G\âcjò','김선생', 'teacherkim@korea.kr', '서울 강남구 강남대로 302-2 (역삼동) 드로잉드림', '1004호','01012345678',false);
 
+INSERT IGNORE INTO `user` (`id`, `user_name`, `user_email`, `address`, `parent_phone`, `phone`, `del_yn`) VALUES 
+(_binary 'p·\ØR ¥L3k{t\r\Þ4K','이학생','student@naver.com', '서울 강남구 역삼로2길 5 (역삼동) 드드아파트 1동 304호', '01099990000','01082828282', false);
 INSERT IGNORE INTO `user` (`id`, `user_name`, `user_email`, `address`, `address_detail`, `parent_phone`, `phone`, `del_yn`) VALUES 
 (_binary 'p·\ØR ¥L3k{t\r\Þ4K','이학생','student@naver.com', '서울 강남구 역삼로2길 5 (역삼동) 드드아파트', '1동 304호', '01099990000','01082828282', false);
 
@@ -142,4 +147,4 @@ INSERT IGNORE INTO `score` VALUES
 (_binary 'ýÓ\Ð\êG¹¾}ðbð0a',0,'E02',74,'O01','G0600','J1002',_binary 'p·\ØR ¥L3k{t\r\Þ4K');
 
 
--- Dump completed on 2022-01-29 17:08:53
+-- Dump completed on 2022-01-29 17:08:5
