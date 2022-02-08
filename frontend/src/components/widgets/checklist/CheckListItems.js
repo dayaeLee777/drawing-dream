@@ -2,7 +2,16 @@ import { getCheckList } from "api/checklist";
 import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
+import CheckListInsert from "./CheckListInsert";
 import CheckListItem from "./CheckListItem";
+
+const CheckListContainer = styled.div`
+  height: 25rem;
+  width: 80%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
 
 const CheckListItemsContainer = styled.div`
   margin: 0.5rem;
@@ -21,52 +30,42 @@ const CheckListItemsContainer = styled.div`
   }
 `;
 const NullList = styled.div`
-height: 100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const CheckListItems = ({ isLoad, setIsLoad, main }) => {
+const CheckListItems = ({ isListLoading, setIsListLoading, main }) => {
   const [list, setList] = useState(null);
   useEffect(() => {
-    getCheckList().then((res) => {
-      setList(res.data);
-    });
-    setIsLoad(false);
-  }, [isLoad]);
-  if (main) {
-    if (list && list.length > 0) {
-      return (
-        <CheckListItemsContainer>
-          {list &&
-            list
-              .slice(0, list.length < 8 ? list.length : 7)
-              .map((item) => (
-                <CheckListItem
-                  item={item}
-                  key={item.cheklistId}
-                  setIsLoad={setIsLoad}
-                  main
-                />
-              ))}
-        </CheckListItemsContainer>
-      );
-    } else {
-      return <NullList>체크리스트를 등록해주세요.</NullList>;
+    if (isListLoading) {
+      getCheckList().then((res) => {
+        setList(res.data);
+        setIsListLoading(false);
+      });
     }
-  }
+  }, [isListLoading]);
+
   return (
-    <CheckListItemsContainer>
-      {list &&
-        list.map((item) => (
-          <CheckListItem
-            item={item}
-            key={item.cheklistId}
-            setIsLoad={setIsLoad}
-          />
-        ))}
-    </CheckListItemsContainer>
+    <CheckListContainer>
+      {!main &&<CheckListInsert setIsListLoading={setIsListLoading}/>}
+      <CheckListItemsContainer>
+        {list &&
+          list.map((item) => (
+            <CheckListItem
+              item={item}
+              key={item.cheklistId}
+              setIsListLoading={setIsListLoading}
+              main={main}
+            />
+          ))}
+        {(!isListLoading && list.length===0) &&
+          <NullList>등록된 체크리스트가 없습니다.</NullList>
+        }
+      </CheckListItemsContainer>
+    </CheckListContainer>
   );
 };
 

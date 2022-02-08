@@ -46,22 +46,16 @@ const overlay = {
 
 const Widgets = () => {
   const [widgetId, setWidgetId] = useState();
-  const [isLoad, setIsLoad] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["myWidgets"]);
   const widgets = ["M01", "M02", "M03", "M04", "M05", "M06", "M07"];
 
   const wid = {
     M01: <TodayClass key={widgets[0]} setWidgetId={setWidgetId} />,
     M02: <Dday key={widgets[1]} setWidgetId={setWidgetId} />,
-    M03: (
-      <CheckList
-        key={widgets[2]}
-        setWidgetId={setWidgetId}
-        isLoad={isLoad}
-        setIsLoad={setIsLoad}
-      />
+    M03: <CheckList key={widgets[2]} setWidgetId={setWidgetId} widgetId={widgetId}/>,
+    M04: (
+      <Memo key={widgets[3]} setWidgetId={setWidgetId} widgetId={widgetId} />
     ),
-    M04: <Memo key={widgets[3]} setWidgetId={setWidgetId} widgetId={widgetId}/>,
     M05: <Score key={widgets[4]} setWidgetId={setWidgetId} />,
     M06: <StudyPlanner key={widgets[5]} setWidgetId={setWidgetId} />,
     M07: <TimeTable key={widgets[6]} setWidgetId={setWidgetId} />,
@@ -70,13 +64,7 @@ const Widgets = () => {
   const mod = {
     M01: <TodayClassModal layoutId={widgetId} />,
     M02: <DdayModal layoutId={widgetId} />,
-    M03: (
-      <CheckListModal
-        layoutId={widgetId}
-        isLoad={isLoad}
-        setIsLoad={setIsLoad}
-      />
-    ),
+    M03: <CheckListModal layoutId={widgetId} />,
     M04: <MemoModal layoutId={widgetId} />,
     M05: <ScoreModal layoutId={widgetId} />,
     M06: <StudyPlannerModal layoutId={widgetId} />,
