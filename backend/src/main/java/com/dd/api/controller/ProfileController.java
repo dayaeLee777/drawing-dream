@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dd.api.dto.response.ProfileImageGetResponseDto;
 import com.dd.api.dto.response.ProfileResponseDto;
 import com.dd.api.service.AwsS3Service;
 import com.dd.api.service.ProfileService;
@@ -56,6 +57,23 @@ public class ProfileController {
 		
 		return ResponseEntity.status(200).body(ProfileResponseDto.of(200, "회원정보를 정상적으로 불러왔습니다", profileResponseDto));
 	}
+	
+	@GetMapping("/image/{userId}")
+	@ApiOperation(value="유저 프로필 이미지 불러오기")
+	@ApiResponses({
+		@ApiResponse(code=200, message="프로필 이미지를 정상적으로 불러왔습니다."),
+		@ApiResponse(code=409, message="프로필 이미지를 불러오지 못했습니다."),
+	})
+	public ResponseEntity<? extends BaseResponseDto> getProfileImage(
+			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@PathVariable("userId") @ApiParam(value="회원의 userId", required=true) UUID userId) {
+		ProfileImageGetResponseDto profileImageGetResponseDto = profileService.getProfileImage(accessToken, userId);
+		
+		if(profileImageGetResponseDto == null)
+			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "프로필 이미지를 불러오지 못했습니다."));
+		
+		return ResponseEntity.status(200).body(ProfileImageGetResponseDto.of(200, "프로필 이미지를 정상적으로 불러왔습니다", profileImageGetResponseDto));
+	}	
 	
 	@PostMapping
 	@ApiOperation(value = "프로필 이미지 업로드")
