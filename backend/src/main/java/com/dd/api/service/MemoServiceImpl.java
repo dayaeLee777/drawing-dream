@@ -71,7 +71,7 @@ public class MemoServiceImpl implements MemoService {
 		Memo memo = memoRepository.findById(memoId).orElse(null);
 		if(memo==null)
 			return null;
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm:ss");
 		MemoResponseDto memoResponseDto = MemoResponseDto.builder()
 				.memoId(memo.getId())
 				.content(memo.getContent())

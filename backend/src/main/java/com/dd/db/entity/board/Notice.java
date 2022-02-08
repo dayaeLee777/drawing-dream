@@ -20,13 +20,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import lombok.ToString;
+@ToString
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Notice extends BaseEntity {
+public class Notice extends BaseEntity  implements Comparable<Notice>{
 	
 	private String title;
 	
@@ -68,5 +69,10 @@ public class Notice extends BaseEntity {
 	public void noticeByClass(Code classCode, Code gradeCode) {
 		this.classCode = classCode;
 		this.gradeCode = gradeCode;
+	}
+
+	@Override
+	public int compareTo(Notice o) {
+		return o.regTime.compareTo(this.regTime);
 	}
 }

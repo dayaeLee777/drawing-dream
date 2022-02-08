@@ -87,6 +87,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		List<String> fileNameList = new ArrayList<>();
 		
 		multipartFile.forEach(file -> {
+				System.out.println(file.getOriginalFilename());
 	            String fileName = createFileName(file.getOriginalFilename());
 	            ObjectMetadata objectMetadata = new ObjectMetadata();
 	            objectMetadata.setContentLength(file.getSize());
