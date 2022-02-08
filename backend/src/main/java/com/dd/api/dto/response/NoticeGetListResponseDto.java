@@ -19,7 +19,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @ApiModel("noticeGetListResponseDto")
-public class NoticeGetListResponseDto extends BaseResponseDto{
+public class NoticeGetListResponseDto {
 
 	@ApiModelProperty(name="알림장 UUID")
 	private UUID noticeId;

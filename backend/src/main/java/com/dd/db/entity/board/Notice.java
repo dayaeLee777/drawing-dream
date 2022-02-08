@@ -62,6 +62,12 @@ public class Notice extends BaseEntity  implements Comparable<Notice>{
 		this.delYn = true;
 	}
 	
+	public void updateNotice(String title, String content, Code noticeCode) {
+		this.title = title;
+		this.content = content;
+		this.noticeCode = noticeCode;
+	}
+	
 	public void noticeByGrade(Code gradeCode) {
 		this.gradeCode = gradeCode;
 	}
