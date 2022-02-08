@@ -1,67 +1,111 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { MdAdd } from "react-icons/md";
-import { registerMemo } from "api/memo";
+import { deleteMemo, getMemo, modifyMemo, registerMemo } from "api/memo";
 
 const MemoInsertContainer = styled.div`
-  display: flex;
   width: 100%;
-  textarea {
-    outline: none;
-    border: 1px solid #dca03a;
-    padding: 0.5rem;
-    font-size: 1.125rem;
-    line-height: 1.5;
-    &::placeholder {
-      color: #dee2e6;
-    }
-    flex: 1;
-  }
-
-  button {
-    background: none;
-    outline: none;
-    border: none;
-    background: #fec25c;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
+  box-sizing: border-box;
+  padding: 0rem 5rem;
+`;
+const StyledTextArea = styled.textarea`
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  resize: none;
+  height: 28rem;
+  padding: 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+`;
+const ButtonContainer = styled.div`
+  text-align: right;
+  color: #555555;
+  .complete {
+    margin-right: 2rem;
     cursor: pointer;
-    transition: 0.1s background ease-in;
-    &:hover {
-      background: #dca03a;
-    }
+  }
+  .cancle {
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+  .delete {
+    margin-right: 2rem;
+    color: red;
+    cursor: pointer;
   }
 `;
 
-const MemoInsert = ({setShowInsert }) => {
-  const [text, setText] = useState("");
-  const onChange = (e) => {
-    setText(e.target.value);
+const MemoInsert = ({ setStatus, setIsListLoading, memoId, setMemoId }) => {
+  const [content, setContent] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useState(() => {
+    if (isLoading && memoId) {
+      getMemo(memoId).then((res) => {
+        setContent(res.data.content);
+        setIsLoading(false);
+      });
+    }
+  }, [isLoading]);
+
+  const onChange = useCallback((e) => {
+    setContent(e.target.value);
+  });
+
+  const onRegister = () => {
+    const contentsReplaceNewline = () => {
+      return content.replaceAll("<br>", "\r\n");
+    };
+    setContent(contentsReplaceNewline());
+    if (!memoId) {
+      registerMemo({ content }).then(() => {
+        setContent("");
+        setIsListLoading(true);
+        setStatus("list");
+      });
+    } else {
+      modifyMemo({ content, memoId }).then(() => {
+        setIsListLoading(true);
+        setStatus("list");
+        setMemoId("");
+      });
+    }
   };
-  const onClick = () => {
-    registerMemo({ content: text }).then();
-    setShowInsert(false);
-    setText("");
+  const onCancle = () => {
+    if (memoId) {
+      setMemoId("");
+    }
+    setStatus("list");
+    setIsListLoading(true);
+  };
+  const onDelete = () => {
+    deleteMemo(memoId).then(() => {
+      setIsListLoading(true);
+      setStatus("list");
+      setMemoId("");
+    });
   };
   return (
     <MemoInsertContainer>
-      <textarea
-        placeholder="내용을 입력하세요"
-        value={text}
+      <StyledTextArea
+        placeholder="내용을 입력하세요."
+        value={content}
         onChange={onChange}
-      //   onKeyPress={(e) => {
-      //     if (e.key === "Enter") {
-      //       onClick();
-      //     }
-      //   }
-      // }
       />
-      <button onClick={onClick}>
-        <MdAdd />
-      </button>
+      <ButtonContainer>
+        {memoId && (
+          <span className="delete" onClick={onDelete}>
+            삭제
+          </span>
+        )}
+        <span className="complete" onClick={onRegister}>
+          {memoId ? "수정" : "완료"}
+        </span>
+        <span className="cancle" onClick={onCancle}>
+          취소
+        </span>
+      </ButtonContainer>
     </MemoInsertContainer>
   );
 };
