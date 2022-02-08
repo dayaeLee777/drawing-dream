@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import CheckListContent from "components/widgets/checklist/CheckListContent";
+import CheckListItems from "../checklist/CheckListItems";
 
 const Wrapper = styled(motion.div)`
   width: 600px;
@@ -35,7 +35,8 @@ const Title = styled.div`
   margin-bottom: 20px;
 `;
 
-const CheckListModal = ({ layoutId, isLoad, setIsLoad }) => {
+const CheckListModal = ({ layoutId }) => {
+  const [isListLoading, setIsListLoading] = useState(true);
   const onClick = (event) => {
     event.stopPropagation();
   };
@@ -45,7 +46,7 @@ const CheckListModal = ({ layoutId, isLoad, setIsLoad }) => {
       <Header>
         <Title>체크 리스트</Title>
       </Header>
-      <CheckListContent isLoad={isLoad} setIsLoad={setIsLoad} />
+      <CheckListItems isListLoading={isListLoading} setIsListLoading={setIsListLoading} />
     </Wrapper>
   );
 };
