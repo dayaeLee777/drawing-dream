@@ -1,4 +1,4 @@
-import { api } from "api/api";
+import { api, fileApi } from "api/api";
 import axios from "axios";
 
 export const loginUser = async (user, success, fail) => {
@@ -31,4 +31,8 @@ export const putUser = async (user, success, fail) => {
 
 export const idCheck = async (userId) => {
   return await api.get(`/api/user/idCheck/${userId}`);
+};
+
+export const profileImage = async (multipartFile, success, fail) => {
+  return await fileApi.post("/api/profile", multipartFile).then(success).catch(fail);
 };
