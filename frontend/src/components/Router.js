@@ -39,10 +39,14 @@ const AppRouter = () => {
       {isLoggedIn ? (
         <>
           <Nav />
-          {window.location.pathname === "/setting/home" ? (
+          {window.location.pathname === "/setting/home" ||
+          window.location.href.indexOf("onlineclass") > 1 ? (
             <>
               <Routes>
                 <Route path="/setting/home" element={<HomeSetting />} />
+                <Route path="/onlineclass/*" element={<OnlineClass />}>
+                  <Route path=":roomid" element={<OnlineClass />} />
+                </Route>
               </Routes>
             </>
           ) : (
@@ -62,18 +66,18 @@ const AppRouter = () => {
                   <Route path="/home" element={<Home />} />
                   <Route path="/modifyprofile" element={<ModifyProfile />} />
                   <Route path="/notice" element={<Notice />} />
-                  <Route path="/school/" element={<School />} >
+                  <Route path="/school/" element={<School />}>
                     <Route path="" element={<CommunityList />} />
                     <Route path="register" element={<CommunityRegister />} />
                     <Route path=":communityId" element={<CommunityDetail />} />
-                    <Route path="modify/:communityId" element={<CommunityRegister modify/>} />
+                    <Route
+                      path="modify/:communityId"
+                      element={<CommunityRegister modify />}
+                    />
                   </Route>
                   <Route path="/lookup" element={<LookUp />} />
                   <Route path="/myclassroom" element={<MyClassRoom />} />
                   <Route path="/widgetlist" element={<WidgetList />} />
-                  <Route path="/onlineclass/*" element={<OnlineClass />}>
-                    <Route path=":roomid" element={<OnlineClass />} />
-                  </Route>
                 </Routes>
               </Container>
               <Chat />

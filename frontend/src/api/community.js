@@ -14,8 +14,12 @@ export const modifyCommunity = async (content, success, fail) => {
     .catch(fail);
 };
 
-export const getCommunityList = async (success, fail) => {
-  return await api.get("/api/community/list").then(success).catch(fail);
+export const getCommunityTotalCount = async (success, fail) => {
+  return await api.get("/api/community/total").then(success).catch(fail);
+};
+
+export const getCommunityList = async (page, success, fail) => {
+  return await api.get(`/api/community/list/${page}`).then(success).catch(fail);
 };
 
 export const deleteCommunity = async (communityId, success, fail) => {
@@ -63,26 +67,26 @@ export const registerSubComment = async (content, success, fail) => {
   return await api
     .post("/api/subComment/register", content)
     .then(success)
-    .catch(fail)
+    .catch(fail);
 };
 
 export const getReCommentList = async (commentId, success, fail) => {
   return await api
     .get(`/api/subComment/list/${commentId}`)
     .then(success)
-    .catch(fail)
-}
+    .catch(fail);
+};
 
 export const modifyReComment = async (content, success, fail) => {
   return await api
     .put("/api/subComment/update", content)
     .then(success)
-    .catch(fail)
-}
+    .catch(fail);
+};
 
 export const deleteReComment = async (commentId, success, fail) => {
   return await api
     .delete(`/api/subComment/${commentId}`)
     .then(success)
-    .catch(fail)
-}
+    .catch(fail);
+};

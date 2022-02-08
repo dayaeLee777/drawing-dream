@@ -1,18 +1,20 @@
-import { getMemo, getMemoList } from "api/memo";
+import { getMemoList } from "api/memo";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import MemoDetail from "./MemoDetail";
 import MemoItem from "./MemoItem";
-import Button from "components/commons/button";
 
 const Container = styled.div`
-  height: 23rem;
+box-sizing: border-box;
+padding: ${props=> props.main? "0rem 1rem":"0rem 5rem"};
+  width: 100%;
+  height: 25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;
+
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -22,113 +24,41 @@ const Container = styled.div`
   }
 `;
 
-const Detail = styled.div`
-  height: 200vh;
-  width: 100%;
-`;
-
-const Register = styled.div`
-  display: flex;
+const RegisterBtn = styled.div`
+  color: #555555;
   margin-top: 3rem;
-  align-items: center;
-  justify-content: center;
 `;
 
-const MemoList = ({mod, setShowInsert}) => {
-  const [memos, setMemos] = useState([]);
-  const [memoId, setMemoId] = useState();
-  const [content, setContent] = useState();
-  const [regTime, setRegTime] = useState();
-  const [loading, setLoading] = useState(true);
 
+const MemoList = ({setStatus, isListLoading, setIsListLoading, setMemoId, main}) => {
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    getMemoList().then((response) => {
-      setMemos(response.data);
-      setLoading(false);
-      console.log(response);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (memoId) {
-      setLoading(true);
-      getMemo(memoId).then((res) => {
-        const {
-          data: { content, regTime },
-        } = res;
-        setContent(content);
-        setRegTime(regTime);
-        setLoading(false);
+    if (isListLoading) {
+      getMemoList().then((res) => {
+        setData(res.data);
+        setIsListLoading(false);
       });
     }
-  }, [memoId]);
+  }, [isListLoading]);
 
-  useEffect(() => {
-    if(loading){
-  getMemoList().then((response) => {
-    setMemos(response.data);
-    setLoading(false);
-    console.log(response);
-  });
+  const onChangeStatus = () => {
+    setStatus("register");
   }
-}, [loading]);
-
-useEffect(() => {
-getMemoList().then((response) => {
-  setMemos(response.data);
-  setLoading(false);
-  console.log(response);
-});
-}, [mod]);
-
-
-const onRegister = () => {
-  console.log("Test")
-  setShowInsert (true)
-};
 
   return (
     <>
-    <Container>
-      {loading ? (
-        <div>loading...</div>
-      ) : (
-        <>
-          {memoId ? (
-            <Detail>
-            <MemoDetail
-            content={content}
-            regTime={regTime} 
-            setMemoId={setMemoId}
-            />
-            </Detail>
-          ) : (
-            <>
-              {memos.slice(0, memos.length).map((data) => (
-                  <MemoItem
-                    setMemoId={setMemoId}
-                    memoId={data.memoId}
-                    setLoading={setLoading}
-                    key={data.memoId}
-                    data={data}
-                    mod={mod}
-                  />
-                ))}
-              </>
-          )}
-        </>
-      )}
+    <Container main={main}>
+      {!isListLoading &&
+        data &&
+        data.map((item) => <MemoItem main={main} setStatus={setStatus} key={item.memoId} setMemoId={setMemoId} data={item} />)}
+      {!isListLoading && !data &&
+        <>등록된 메모가 없습니다.</>}
     </Container>
-    
-    {loading?<div/>:(memoId?<div/>: 
-      <Register>
-        {mod?
-        <Button name="등록" onClick={onRegister}></Button>
-        :<div/>}  
-      </Register>
-    )}
-  </>
+    {!main &&
+      <RegisterBtn onClick={onChangeStatus}>새 메모 등록하기</RegisterBtn>
+    }
+    </>
   );
 };
 

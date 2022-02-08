@@ -39,8 +39,12 @@ public class CourseServiceImpl implements CourseService {
 
 		OnlineClass onlineClass = onlineClassRepository.findByCourseId(courseId).get();
 
-		return CourseResponseDTO.builder().courseId(courseId).name(course.getSubjectCode().getName())
-				.onlineClassId(onlineClass.getId()).build();
+		return CourseResponseDTO.builder()
+				.courseId(courseId)
+				.onlineClassId(onlineClass.getId())
+				.teacherName(course.getTeacher().getUserName())
+				.courseCode(course.getSubjectCode())
+				.build();
 
 	}
 
