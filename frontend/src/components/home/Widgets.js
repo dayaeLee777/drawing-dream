@@ -46,7 +46,6 @@ const overlay = {
 
 const Widgets = () => {
   const [widgetId, setWidgetId] = useState();
-  const [isLoad, setIsLoad] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["myWidgets"]);
   const widgets = ["M01", "M02", "M03", "M04", "M05", "M06", "M07"];
 
@@ -57,8 +56,7 @@ const Widgets = () => {
       <CheckList
         key={widgets[2]}
         setWidgetId={setWidgetId}
-        isLoad={isLoad}
-        setIsLoad={setIsLoad}
+        widgetId={widgetId}
       />
     ),
     M04: (
@@ -72,13 +70,7 @@ const Widgets = () => {
   const mod = {
     M01: <TodayClassModal layoutId={widgetId} />,
     M02: <DdayModal layoutId={widgetId} />,
-    M03: (
-      <CheckListModal
-        layoutId={widgetId}
-        isLoad={isLoad}
-        setIsLoad={setIsLoad}
-      />
-    ),
+    M03: <CheckListModal layoutId={widgetId} />,
     M04: <MemoModal layoutId={widgetId} />,
     M05: <ScoreModal layoutId={widgetId} />,
     M06: <StudyRecordModal layoutId={widgetId} />,

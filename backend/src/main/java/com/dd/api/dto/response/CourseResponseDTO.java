@@ -23,13 +23,15 @@ public class CourseResponseDTO extends BaseResponseDto {
 
 	@ApiModelProperty(name = "수업 정보 - 수업 ID")
 	UUID courseId;
+
+	@ApiModelProperty(name = "수업 정보 - 과목 코드")
+	SubCode subjectCode;
+
+	@ApiModelProperty(name = "수업 정보 - 선생님 이름")
+	String teacherName;
+
 	@ApiModelProperty(name = "수업 정보 - 온라인 수업 ID")
 	UUID onlineClassId;
-	
-	@ApiModelProperty(name = "수업 정보 - 담당 교사 이름")
-	String teacherName;
-	@ApiModelProperty(name = "수업 정보 - 과목 코드")
-	SubCode courseCode;
 
 	public static CourseResponseDTO of(Integer statusCode, String message, CourseResponseDTO courseResponseDTO) {
 		CourseResponseDTO res = courseResponseDTO;
@@ -38,4 +40,5 @@ public class CourseResponseDTO extends BaseResponseDto {
 
 		return res;
 	}
+
 }

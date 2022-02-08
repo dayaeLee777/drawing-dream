@@ -16,3 +16,10 @@ export const setApiHeaders = () => {
     return config;
   })
 }
+
+  export const fileApi = axios.create({
+    headers: {
+    Authorization: `Bearer ${sessionStorage.getItem("access-token") ||
+    localStorage.getItem("access-token")}`
+  }
+})

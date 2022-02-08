@@ -21,6 +21,7 @@ import com.dd.api.dto.request.StudyRecordUpdateRequestDto;
 import com.dd.api.dto.response.StudyRecordFinishResponseDto;
 import com.dd.api.dto.response.StudyRecordGetListWrapperResponseDto;
 import com.dd.api.dto.response.StudyRecordResponseDto;
+import com.dd.api.dto.response.StudyRecordStartResponseDto;
 import com.dd.api.service.StudyRecordService;
 import com.dd.common.model.BaseResponseDto;
 
@@ -48,12 +49,10 @@ public class StudyRecordController {
 		@ApiResponse(code=401, message="인증되지 않은 사용자입니다."),
 		@ApiResponse(code=409, message="공부시간 기록을 실패했습니다.")
 	})
-	public ResponseEntity<? extends BaseResponseDto> register(
+	public ResponseEntity<StudyRecordStartResponseDto> register(
 		@ApiIgnore @RequestHeader("Authorization") String accessToken,
 		@RequestBody @ApiParam(value = "공부시간기록", required = true) StudyRecordRegistRequestDto studyRecordRegistRequestDto) {
-		if(studyRecordService.createStudyRecord(accessToken, studyRecordRegistRequestDto) != null)
-			return ResponseEntity.status(200).body(BaseResponseDto.of(200, "Success"));
-		return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
+			return ResponseEntity.status(200).body(studyRecordService.createStudyRecord(accessToken, studyRecordRegistRequestDto));
 	}
 	
 	@PutMapping("/{studyRecordId}")

@@ -95,7 +95,7 @@ const StudyRecordModal = ({ layoutId }) => {
             </Back>
             <Title>공부하기</Title>
           </Header>
-          <RecordInsert />
+          <RecordInsert setIsRecord={setIsRecord} />
         </>
       ) : (
         <>

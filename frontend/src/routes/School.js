@@ -1,8 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import CommunityRegister from "components/school/CommunityRegister";
-import CommunityList from "components/school/CommunityList";
-import CommunityDetail from "components/school/CommunityDetail";
 import { Outlet } from "react-router-dom";
 
 const Container = styled.div`
@@ -21,9 +18,7 @@ const School = () => {
     <Container>
       <Outlet />
     </Container>
-  )
-
-
+  );
 };
 
 export default School;

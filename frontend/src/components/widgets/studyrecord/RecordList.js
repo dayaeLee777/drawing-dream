@@ -1,4 +1,5 @@
-import React from "react";
+import { getRecordList } from "api/studyrecode";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Record from "./Record";
 
@@ -20,14 +21,34 @@ const RecordStartBox = styled.div`
 `;
 
 const RecordList = ({ setIsRecord }) => {
+  const [records, setRecords] = useState([]);
   const openRecord = () => {
     setIsRecord(true);
     console.log("Hi");
   };
+
+  useEffect(() => {
+    const date = new Date();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    month = month >= 10 ? month : "0" + month;
+    day = day >= 10 ? day : "0" + day;
+    const studyDate = date.getFullYear() + "-" + month + "-" + day;
+
+    getRecordList(studyDate).then((res) => {
+      console.log(res);
+      setRecords(res.data.studyRecordResponseDtoList);
+    });
+  }, []);
   return (
     <Container>
-      <Record />
-      <Record />
+      {records.map(
+        (record) =>
+          record.endTime !== null && (
+            <Record key={record.studyRecordId} data={record} />
+          )
+      )}
       <RecordStartBox onClick={openRecord}>+</RecordStartBox>
     </Container>
   );
