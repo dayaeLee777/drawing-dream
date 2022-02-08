@@ -37,7 +37,7 @@ public class CourseController {
 		CourseResponseDTO courseResponseDTO = courseService.getCourse(courseId);
 
 		if (courseResponseDTO == null)
-			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "수업 조회 실패"));
+			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 
 		return ResponseEntity.ok(CourseResponseDTO.of(200, "Success", courseResponseDTO));
 
@@ -52,7 +52,7 @@ public class CourseController {
 		CourseGetListWrapperResponseDTO courseGetListWrapperResponseDTO = courseService.getCourseList();
 
 		if (courseGetListWrapperResponseDTO == null)
-			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "수업 조회 실패"));
+			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));
 
 		return ResponseEntity.ok(CourseGetListWrapperResponseDTO.of(200, "Success", courseGetListWrapperResponseDTO));
 
