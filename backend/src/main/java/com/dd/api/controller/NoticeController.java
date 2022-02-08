@@ -44,8 +44,8 @@ public class NoticeController {
 	})
 	public ResponseEntity<? extends BaseResponseDto> regist(
 		@ApiIgnore @RequestHeader("Authorization") String accessToken, 
-		@ApiParam(value="파일(여러 파일 업로드 가능)", required = true) @RequestPart List<MultipartFile> multipartFile,
-		@RequestBody @ApiParam(value = "등록할 알림장", required = true) NoticeRegisterRequestDto noticeRegisterRequestDto){
+		@ApiParam(value="파일(여러 파일 업로드 가능)") List<MultipartFile> multipartFile,
+		@ApiParam(value = "등록할 알림장", required = true) NoticeRegisterRequestDto noticeRegisterRequestDto){
 		
 		int result = noticeService.registerNotice(accessToken, multipartFile, noticeRegisterRequestDto);
 		

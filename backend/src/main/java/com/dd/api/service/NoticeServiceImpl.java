@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dd.api.dto.request.NoticeRegisterRequestDto;
+import com.dd.api.dto.response.NoticeGetResponseDto;
 import com.dd.db.entity.board.Notice;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
@@ -34,6 +35,8 @@ public class NoticeServiceImpl implements NoticeService {
 	@Transactional
 	@Override
 	public int registerNotice(String accessToken, List<MultipartFile> multipartFile, NoticeRegisterRequestDto noticeRegisterRequestDto) {
+//		public int registerNotice(String accessToken, MultipartFile multipartFile, NoticeRegisterRequestDto noticeRegisterRequestDto) {
+//		public int registerNotice(String accessToken, NoticeRegisterRequestDto noticeRegisterRequestDto) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
@@ -43,20 +46,29 @@ public class NoticeServiceImpl implements NoticeService {
 		if(userDepartment.getUserCode() == Code.A04)
 			return 408;
 		
+		Code noticeCode = noticeRegisterRequestDto.getNoticeCode();
+		
 		Notice notice = Notice.builder()
 				.title(noticeRegisterRequestDto.getTitle())
 				.content(noticeRegisterRequestDto.getContent())
 				.hit(0)
 				.regTime(currentDateTime)
-				.noticeCode(noticeRegisterRequestDto.getNoticeCode())
-				.gradeCode(userDepartment.getGradeCode())
-				.classCode(userDepartment.getClassCode())
+				.noticeCode(noticeCode)
 				.school(userDepartment.getSchool())
 				.user(user)
 				.build();
 		
+		Code gradeCode = userDepartment.getGradeCode();
+		Code classCode = userDepartment.getClassCode();
+		
+		if(noticeRegisterRequestDto.getNoticeCode() == Code.K02)
+			notice.noticeByGrade(gradeCode);
+		else if(noticeRegisterRequestDto.getNoticeCode() == Code.K03)
+			notice.noticeByClass(classCode, gradeCode);
+		
 		noticeRepository.save(notice);
 
+//		awsS3Service.uploadFile(user, notice, noticeRegisterRequestDto.getMultipartFile());
 		awsS3Service.uploadFile(user, notice, multipartFile);
 		
 		return 200;
@@ -70,8 +82,14 @@ public class NoticeServiceImpl implements NoticeService {
 			return null;
 		
 		notice.deleteNotice();
-		awsS3Service.deleteFile(notice);
+		awsS3Service.deleteNoticeFile(notice);
 		return noticeRepository.save(notice);
+	}
+
+	@Override
+	public List<NoticeGetResponseDto> getNoticeList(String accessToken) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

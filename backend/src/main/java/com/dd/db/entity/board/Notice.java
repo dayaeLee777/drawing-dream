@@ -60,4 +60,13 @@ public class Notice extends BaseEntity {
 	public void deleteNotice() {
 		this.delYn = true;
 	}
+	
+	public void noticeByGrade(Code gradeCode) {
+		this.gradeCode = gradeCode;
+	}
+	
+	public void noticeByClass(Code classCode, Code gradeCode) {
+		this.classCode = classCode;
+		this.gradeCode = gradeCode;
+	}
 }

@@ -58,6 +58,31 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     
 	@Transactional
 	@Override
+	public List<String> uploadFile(String accessToken, List<MultipartFile> multipartFile) {
+		User user = jwtTokenService.convertTokenToUser(accessToken);
+		
+		List<String> fileNameList = new ArrayList<>();
+		
+		multipartFile.forEach(file -> {
+	            String fileName = createFileName(file.getOriginalFilename());
+	            ObjectMetadata objectMetadata = new ObjectMetadata();
+	            objectMetadata.setContentLength(file.getSize());
+	            objectMetadata.setContentType(file.getContentType());
+
+	            try(InputStream inputStream = file.getInputStream()) {
+	                amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
+	                        .withCannedAcl(CannedAccessControlList.PublicRead));
+	            } catch(IOException e) {
+	                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+	            }
+	            
+	            fileNameList.add(fileName);
+	        });
+		return fileNameList;
+	}
+	
+	@Transactional
+	@Override
 	public List<String> uploadFile(User user, Notice notice, List<MultipartFile> multipartFile) {
 		List<String> fileNameList = new ArrayList<>();
 		
@@ -87,10 +112,38 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	        });
 		return fileNameList;
 	}
+	
+	@Transactional
+	@Override
+	public String uploadFile(User user, Notice notice, MultipartFile file) {
+		
+	            String fileName = createFileName(file.getOriginalFilename());
+	            ObjectMetadata objectMetadata = new ObjectMetadata();
+	            objectMetadata.setContentLength(file.getSize());
+	            objectMetadata.setContentType(file.getContentType());
+
+	            try(InputStream inputStream = file.getInputStream()) {
+	                amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
+	                        .withCannedAcl(CannedAccessControlList.PublicRead));
+	            } catch(IOException e) {
+	                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+	            }
+	            
+	            NoticeFile noticefile = NoticeFile.builder()
+	            		.newFileName(fileName)
+	            		.originFileName(file.getOriginalFilename())
+	            		.user(user)
+	            		.notice(notice)
+	            		.build();
+
+	            noticeFileRepository.save(noticefile);
+
+		return fileName;
+	}
 
 	@Transactional
 	@Override
-	public void deleteFile(Notice notice) {
+	public void deleteNoticeFile(Notice notice) {
 		NoticeFile noticeFile = noticeFileRepository.findByNotice(notice).orElse(null);
 		if(noticeFile == null)
 			return;
@@ -101,7 +154,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 //		Files deleteFile = fileRepository.findByNewFileName(fileName).get();
 //		fileRepository.delete(deleteFile);
 	}
-
+	
 	@Override
 	public String createFileName(String fileName) {
 		return UUID.randomUUID().toString().concat(getFileExtension(fileName));
@@ -168,9 +221,9 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		    		.user(user)
 		    		.build();
         } else {
+//        	amazonS3.deleteObject(new DeleteObjectRequest(bucket, profileImg.getNewFileName()));
         	profileImg.updateImg(multipartFile.getOriginalFilename(), fileName);
         }
-        
         profileImgRepository.save(profileImg);
         
 		return fileName;

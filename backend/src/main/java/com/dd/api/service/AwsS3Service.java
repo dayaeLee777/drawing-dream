@@ -11,9 +11,11 @@ import com.dd.db.entity.user.User;
 
 public interface AwsS3Service {
 	
+	List<String> uploadFile(String accessToken,  List<MultipartFile> multipartFile);
 	List<String> uploadFile(User user, Notice notice, List<MultipartFile> multipartFile);
+	String uploadFile(User user, Notice notice, MultipartFile multipartFile);
 	String uploadProfileImg(String accessToken, MultipartFile multipartFile);
-	void deleteFile(Notice notice);
+	void deleteNoticeFile(Notice notice);
 	String createFileName(String fileName);
 	String getFileExtension(String fileName); 
 	FilesResponseDto getObject(String storedFileName) throws IOException;
