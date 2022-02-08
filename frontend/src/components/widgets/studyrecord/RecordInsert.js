@@ -65,7 +65,7 @@ const ButtonContainer = styled.div`
   justify-content: space-around;
 `;
 
-const RecordInsert = ({ setIsRecord }) => {
+const RecordInsert = ({ setIsListLoading, setIsRecord }) => {
   const [isStart, setIsStart] = useState(false);
   const [title, setTitle] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -93,6 +93,7 @@ const RecordInsert = ({ setIsRecord }) => {
 
   const realEnd = () => {
     endRecord(recordId).then((res) => {
+      setIsListLoading(true);
       console.log(res);
       setIsRecord(false);
     });
@@ -117,7 +118,7 @@ const RecordInsert = ({ setIsRecord }) => {
       )}
       {isStart && (
         <>
-          <Desc>영어 공부 중...</Desc>
+          <Desc>{title} 공부 중...</Desc>
           <Timer>00:00:00</Timer>
         </>
       )}

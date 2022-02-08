@@ -20,33 +20,21 @@ const RecordStartBox = styled.div`
   color: #fec25c;
 `;
 
-const RecordList = ({ setIsRecord }) => {
-  const [records, setRecords] = useState([]);
+const RecordList = ({ setIsListLoading, setIsRecord, records }) => {
   const openRecord = () => {
     setIsRecord(true);
-    console.log("Hi");
   };
 
-  useEffect(() => {
-    const date = new Date();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-
-    month = month >= 10 ? month : "0" + month;
-    day = day >= 10 ? day : "0" + day;
-    const studyDate = date.getFullYear() + "-" + month + "-" + day;
-
-    getRecordList(studyDate).then((res) => {
-      console.log(res);
-      setRecords(res.data.studyRecordResponseDtoList);
-    });
-  }, []);
   return (
     <Container>
       {records.map(
         (record) =>
           record.endTime !== null && (
-            <Record key={record.studyRecordId} data={record} />
+            <Record
+              setIsListLoading={setIsListLoading}
+              key={record.studyRecordId}
+              data={record}
+            />
           )
       )}
       <RecordStartBox onClick={openRecord}>+</RecordStartBox>

@@ -11,3 +11,7 @@ export const endRecord = async (studyRecordId) => {
 export const getRecordList = async (studyDate) => {
   return await api.get(`/api/studyrecord/list/${studyDate}`);
 };
+
+export const deleteRecord = async (studyRecordId) => {
+  return await api.put(`/api/studyrecord/delete/${studyRecordId}`);
+};

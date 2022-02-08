@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import Chart from "../studyrecord/Chart";
 import RecordList from "../studyrecord/RecordList";
 import RecordInsert from "../studyrecord/RecordInsert";
+import { getRecordList } from "api/studyrecode";
 
 const Wrapper = styled(motion.div)`
   width: 70rem;
@@ -78,9 +79,34 @@ const Total = styled.div`
 `;
 const StudyRecordModal = ({ layoutId }) => {
   const [isRecord, setIsRecord] = useState(false);
+  const [records, setRecords] = useState([]);
+  const [total, setTotal] = useState("");
+  const [isListLoading, setIsListLoading] = useState(true);
+
+  const date = new Date();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+
+  month = month >= 10 ? month : "0" + month;
+  day = day >= 10 ? day : "0" + day;
+  const studyDate = date.getFullYear() + "-" + month + "-" + day;
+
   const onClick = (event) => {
     event.stopPropagation();
   };
+
+  useEffect(() => {
+    console.log(isListLoading);
+    if (isListLoading) {
+      getRecordList(studyDate).then((res) => {
+        console.log(res);
+        setRecords(res.data.studyRecordResponseDtoList);
+        setTotal(res.data.totalStudyRecord);
+        setIsListLoading(false);
+      });
+    }
+  }, [isListLoading]);
+
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>
       {isRecord ? (
@@ -95,7 +121,10 @@ const StudyRecordModal = ({ layoutId }) => {
             </Back>
             <Title>공부하기</Title>
           </Header>
-          <RecordInsert setIsRecord={setIsRecord} />
+          <RecordInsert
+            setIsListLoading={setIsListLoading}
+            setIsRecord={setIsRecord}
+          />
         </>
       ) : (
         <>
@@ -108,10 +137,16 @@ const StudyRecordModal = ({ layoutId }) => {
             </ChartContainer>
             <TotalContainer>
               <Desc>오늘 공부한 시간</Desc>
-              <Total>6H 20M</Total>
+              <Total>
+                {total.slice(0, 2)}H {total.slice(3, 5)}M
+              </Total>
             </TotalContainer>
           </Content>
-          <RecordList setIsRecord={setIsRecord} />
+          <RecordList
+            setIsListLoading={setIsListLoading}
+            records={records}
+            setIsRecord={setIsRecord}
+          />
         </>
       )}
     </Wrapper>
