@@ -19,5 +19,6 @@ public interface AwsS3Service {
 	String createFileName(String fileName);
 	String getFileExtension(String fileName); 
 	FilesResponseDto getObject(String storedFileName) throws IOException;
-	public String getThumbnailPath(User user);
+	String getThumbnailPath(User user);
+	String getFilePath(String newFileName);
 }

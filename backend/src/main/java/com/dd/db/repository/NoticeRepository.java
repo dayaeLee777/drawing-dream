@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.dd.db.entity.board.Notice;
 
 public interface NoticeRepository extends JpaRepository<Notice, UUID>, NoticeRepositorySupport {
-//	Page<Notice> findByUserinfo(User user, Pageable pageable);
 }

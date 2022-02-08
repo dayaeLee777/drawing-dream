@@ -3,7 +3,9 @@ package com.dd.api.service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -17,10 +19,12 @@ import com.dd.api.dto.request.NoticeRegisterRequestDto;
 import com.dd.api.dto.request.NoticeUpdateRequestDto;
 import com.dd.api.dto.response.NoticeGetListResponseDto;
 import com.dd.api.dto.response.NoticeGetResponseDto;
+import com.dd.api.dto.response.TotalNoticeGetResponseDto;
 import com.dd.db.entity.board.Notice;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
 import com.dd.db.enums.Code;
+import com.dd.db.repository.NoticeFileRepository;
 import com.dd.db.repository.NoticeRepository;
 import com.dd.db.repository.UserDepartmentRepository;
 
@@ -35,6 +39,8 @@ public class NoticeServiceImpl implements NoticeService {
 	private final JwtTokenService jwtTokenService;
 	
 	private final UserDepartmentRepository userDepartmentRepository;
+	
+	private final NoticeFileRepository noticeFileRepository;
 	
 	private final AwsS3Service awsS3Service;
 	
@@ -94,7 +100,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public List<NoticeGetListResponseDto> getNoticeList(String accessToken, Pageable pageable) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
-		Page<Notice> noticeList = noticeRepository.findByUserinfo(user, pageable);
+		Page<Notice> noticeList = noticeRepository.findByUserinfoWithPaging(user, pageable);
 		List<NoticeGetListResponseDto> noticeResponseList = new ArrayList<NoticeGetListResponseDto>();
 			
 		noticeList.forEach(notice -> {
@@ -131,20 +137,43 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public NoticeGetResponseDto getNotice(UUID noticeId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void plusNoticeHit(Notice notice) {
-		// TODO Auto-generated method stub
+		Notice notice = noticeRepository.findById(noticeId).orElse(null);
+		if(notice == null)
+			return null;
 		
+		String userName = notice.getUser().getUserName();
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm:ss");
+		Map<String, String> files = new HashMap<String, String>();
+		
+		noticeFileRepository.findByNotice(notice).forEach(noticeFile -> {
+			String fileUrl = awsS3Service.getFilePath(noticeFile.getNewFileName()); 
+			files.put(noticeFile.getOriginFileName(), fileUrl);
+		});
+		
+		notice.plusNoticeHit();
+		
+		NoticeGetResponseDto noticeGetResponseDto = NoticeGetResponseDto.builder()
+				.noticeId(notice.getId())
+				.userName(userName)
+				.title(notice.getTitle())
+				.content(notice.getContent())
+				.noticeCode(notice.getNoticeCode())
+				.hit(notice.getHit())
+				.regTime(notice.getRegTime().format(dateTimeFormatter))
+				.files(files)
+				.build();
+		
+		return noticeGetResponseDto;
 	}
 
+
 	@Override
-	public int getTotalCount(String accessToken) {
-		// TODO Auto-generated method stub
-		return 0;
+	public TotalNoticeGetResponseDto getTotalCount(String accessToken) {
+		User user = jwtTokenService.convertTokenToUser(accessToken);
+		TotalNoticeGetResponseDto totalNoticeGetResponseDto = TotalNoticeGetResponseDto.builder()
+				.totalNoticeCount(noticeRepository.countByUser(user))
+				.build();
+		return totalNoticeGetResponseDto;
 	}
 
 	@Override

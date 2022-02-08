@@ -20,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -29,11 +28,9 @@ import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
 import com.dd.api.dto.response.FilesResponseDto;
 import com.dd.db.entity.board.Notice;
-import com.dd.db.entity.files.Files;
 import com.dd.db.entity.files.NoticeFile;
 import com.dd.db.entity.files.ProfileImg;
 import com.dd.db.entity.user.User;
-import com.dd.db.repository.FileRepository;
 import com.dd.db.repository.NoticeFileRepository;
 import com.dd.db.repository.ProfileImgRepository;
 
@@ -59,8 +56,6 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	@Transactional
 	@Override
 	public List<String> uploadFile(String accessToken, List<MultipartFile> multipartFile) {
-		User user = jwtTokenService.convertTokenToUser(accessToken);
-		
 		List<String> fileNameList = new ArrayList<>();
 		
 		multipartFile.forEach(file -> {
@@ -185,6 +180,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		return filesResponseDto;
 	}
 	
+	@Transactional
 	@Override
 	public String getThumbnailPath(User user) {
 		ProfileImg profileImg = profileImgRepository.findByUser(user).orElse(null);
@@ -193,6 +189,12 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		else
 			return amazonS3Client.getResourceUrl(bucket, profileImg.getNewFileName());
     }
+	
+	@Transactional
+	@Override
+	public String getFilePath(String newFileName) {
+		return amazonS3Client.getResourceUrl(bucket, newFileName);
+	}
 
 	@Transactional
 	@Override

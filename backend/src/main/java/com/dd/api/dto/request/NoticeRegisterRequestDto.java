@@ -1,11 +1,5 @@
 package com.dd.api.dto.request;
 
-import java.util.List;
-
-import javax.persistence.Lob;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import com.dd.db.enums.Code;
 
 import io.swagger.annotations.ApiModel;
@@ -31,8 +25,5 @@ public class NoticeRegisterRequestDto {
 
 	@ApiModelProperty(name="알림장 코드", example = "전체-K01, 학년-K02, 반-K03")
 	private Code noticeCode;
-	
-//	@ApiModelProperty(name="알림장 첨부파일")
-//	private List<MultipartFile> multipartFile;
 	
 }
