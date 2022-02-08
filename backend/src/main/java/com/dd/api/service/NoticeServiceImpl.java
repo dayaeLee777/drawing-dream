@@ -75,7 +75,9 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		if(noticeRegisterRequestDto.getNoticeCode() == Code.K02)
 			notice.noticeByGrade(gradeCode);
-		else if(noticeRegisterRequestDto.getNoticeCode() == Code.K03)
+		else if(noticeRegisterRequestDto.getNoticeCode() == Code.K03 ||
+				noticeRegisterRequestDto.getNoticeCode() == Code.K04 || 
+				noticeRegisterRequestDto.getNoticeCode() == Code.K05)
 			notice.noticeByClass(classCode, gradeCode);
 		noticeRepository.save(notice);
 
@@ -113,10 +115,16 @@ public class NoticeServiceImpl implements NoticeService {
 				String gradeString = notice.getGradeCode().getName();
 				noticeCodeString = gradeString;
 				}
-			else if(notice.getNoticeCode() == Code.K03) {
+			else if(notice.getNoticeCode() == Code.K03 ) {
 				String gradeString = notice.getGradeCode().getName();
 				String classString = notice.getClassCode().getName();
 				noticeCodeString = gradeString.concat(" ").concat(classString);
+			}
+			else if(notice.getNoticeCode() == Code.K04 ) {
+				noticeCodeString = Code.K04.getName();
+			}
+			else if(notice.getNoticeCode() == Code.K05 ) {
+				noticeCodeString = Code.K05.getName();
 			}
 			DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			
@@ -197,7 +205,9 @@ public class NoticeServiceImpl implements NoticeService {
 			notice.noticeByClass(null, null);
 		else if(noticeUpdateRequestDto.getNoticeCode() == Code.K02)
 			notice.noticeByGrade(userDepartment.getGradeCode());
-		else if(noticeUpdateRequestDto.getNoticeCode() == Code.K03)
+		else if(noticeUpdateRequestDto.getNoticeCode() == Code.K03 ||
+				noticeUpdateRequestDto.getNoticeCode() == Code.K04 || 
+				noticeUpdateRequestDto.getNoticeCode() == Code.K05)
 			notice.noticeByClass(userDepartment.getClassCode(), userDepartment.getGradeCode());
 		
 		awsS3Service.deleteNoticeFile(notice);

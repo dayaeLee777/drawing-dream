@@ -1,6 +1,7 @@
 package com.dd.db.repository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -62,13 +63,13 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 						)
 				.fetch();
 		noticeList.addAll(noticeByGrade);
-		
+		List<Code> classCode = Arrays.asList(Code.K03, Code.K04, Code.K05);
 		List<Notice> noticeByClass = jpaQueryFactory
 				.select(qNotice)
 				.from(qNotice)
 				.where(
 						qNotice.school.eq(userDepartment.getSchool()),
-						qNotice.noticeCode.eq(Code.K03),
+						qNotice.noticeCode.in(classCode),
 						qNotice.gradeCode.eq(userDepartment.getGradeCode()),
 						qNotice.classCode.eq(userDepartment.getClassCode()),
 						qNotice.delYn.isFalse()
@@ -110,12 +111,12 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 						qNotice.delYn.isFalse()
 						)
 				.fetchCount();
-		
+		List<Code> classCode = Arrays.asList(Code.K03, Code.K04, Code.K05);
 		count +=  jpaQueryFactory
 				.selectFrom(qNotice)
 				.where(
 						qNotice.school.eq(userDepartment.getSchool()),
-						qNotice.noticeCode.eq(Code.K03),
+						qNotice.noticeCode.in(classCode),
 						qNotice.gradeCode.eq(userDepartment.getGradeCode()),
 						qNotice.classCode.eq(userDepartment.getClassCode()),
 						qNotice.delYn.isFalse()
