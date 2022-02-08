@@ -11,10 +11,10 @@ import MemoModal from "components/widgets/modals/MemoModal";
 import DdayModal from "components/widgets/modals/DdayModal";
 import CheckListModal from "components/widgets/modals/CheckListModal";
 import ScoreModal from "components/widgets/modals/ScoreModal";
-import StudyPlannerModal from "components/widgets/modals/StudyPlannerModal";
+import StudyRecordModal from "components/widgets/modals/StudyRecordModal";
 import TimeTableModal from "components/widgets/modals/TimeTableModal";
 import Score from "components/widgets/Score";
-import StudyPlanner from "components/widgets/StudyPlanner";
+import StudyRecord from "components/widgets/StudyRecord";
 import TimeTable from "components/widgets/TimeTable";
 
 const Container = styled.div`
@@ -52,12 +52,18 @@ const Widgets = () => {
   const wid = {
     M01: <TodayClass key={widgets[0]} setWidgetId={setWidgetId} />,
     M02: <Dday key={widgets[1]} setWidgetId={setWidgetId} />,
-    M03: <CheckList key={widgets[2]} setWidgetId={setWidgetId} widgetId={widgetId}/>,
+    M03: (
+      <CheckList
+        key={widgets[2]}
+        setWidgetId={setWidgetId}
+        widgetId={widgetId}
+      />
+    ),
     M04: (
       <Memo key={widgets[3]} setWidgetId={setWidgetId} widgetId={widgetId} />
     ),
     M05: <Score key={widgets[4]} setWidgetId={setWidgetId} />,
-    M06: <StudyPlanner key={widgets[5]} setWidgetId={setWidgetId} />,
+    M06: <StudyRecord key={widgets[5]} setWidgetId={setWidgetId} />,
     M07: <TimeTable key={widgets[6]} setWidgetId={setWidgetId} />,
   };
 
@@ -67,7 +73,7 @@ const Widgets = () => {
     M03: <CheckListModal layoutId={widgetId} />,
     M04: <MemoModal layoutId={widgetId} />,
     M05: <ScoreModal layoutId={widgetId} />,
-    M06: <StudyPlannerModal layoutId={widgetId} />,
+    M06: <StudyRecordModal layoutId={widgetId} />,
     M07: <TimeTableModal layoutId={widgetId} />,
   };
 
