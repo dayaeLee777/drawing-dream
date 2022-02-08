@@ -83,6 +83,8 @@ public enum Code {
 	K01("전체",true),
 	K02("학년",true),
 	K03("반",true),
+	K04("조회",true),
+	K05("종례",true),
 	L01("고민",false),
 	L02("유머",false),
 	L03("자유",false),
