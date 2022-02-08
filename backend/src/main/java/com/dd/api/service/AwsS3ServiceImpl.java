@@ -84,6 +84,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	@Transactional
 	@Override
 	public List<String> uploadFile(User user, Notice notice, List<MultipartFile> multipartFile) {
+		
 		List<String> fileNameList = new ArrayList<>();
 		
 		multipartFile.forEach(file -> {
@@ -145,15 +146,11 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	@Transactional
 	@Override
 	public void deleteNoticeFile(Notice notice) {
-		NoticeFile noticeFile = noticeFileRepository.findByNotice(notice).orElse(null);
-		if(noticeFile == null)
-			return;
+		List<NoticeFile> noticeFiles = noticeFileRepository.findByNotice(notice);
 		
-		String fileName = noticeFile.getNewFileName();
-		amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
-		noticeFileRepository.delete(noticeFile);
-//		Files deleteFile = fileRepository.findByNewFileName(fileName).get();
-//		fileRepository.delete(deleteFile);
+		noticeFiles.forEach(noticeFile -> {
+			noticeFileRepository.delete(noticeFile);
+		});
 	}
 	
 	@Override

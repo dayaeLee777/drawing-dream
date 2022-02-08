@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dd.api.dto.request.NoticeRegisterRequestDto;
+import com.dd.api.dto.request.NoticeUpdateRequestDto;
 import com.dd.api.dto.response.NoticeGetListResponseDto;
+import com.dd.api.dto.response.NoticeGetResponseDto;
 import com.dd.db.entity.board.Notice;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
@@ -69,11 +71,10 @@ public class NoticeServiceImpl implements NoticeService {
 			notice.noticeByGrade(gradeCode);
 		else if(noticeRegisterRequestDto.getNoticeCode() == Code.K03)
 			notice.noticeByClass(classCode, gradeCode);
-		System.out.println(noticeRegisterRequestDto);
 		noticeRepository.save(notice);
 
-//		awsS3Service.uploadFile(user, notice, noticeRegisterRequestDto.getMultipartFile());
-		awsS3Service.uploadFile(user, notice, multipartFile);
+		if(multipartFile != null)
+			awsS3Service.uploadFile(user, notice, multipartFile);
 		
 		return 200;
 	}
@@ -95,7 +96,7 @@ public class NoticeServiceImpl implements NoticeService {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
 		Page<Notice> noticeList = noticeRepository.findByUserinfo(user, pageable);
 		List<NoticeGetListResponseDto> noticeResponseList = new ArrayList<NoticeGetListResponseDto>();
-		
+			
 		noticeList.forEach(notice -> {
 			
 			String noticeCodeString = "";
@@ -126,6 +127,56 @@ public class NoticeServiceImpl implements NoticeService {
 			noticeResponseList.add(noticeGetListResponseDto);
 		});
 		return noticeResponseList;
+	}
+
+	@Override
+	public NoticeGetResponseDto getNotice(UUID noticeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void plusNoticeHit(Notice notice) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTotalCount(String accessToken) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Notice updateNotice(String accessToken, List<MultipartFile> multipartFile, NoticeUpdateRequestDto noticeUpdateRequestDto) {
+		User user = jwtTokenService.convertTokenToUser(accessToken);
+		
+		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).orElse(null);
+		if(userDepartment == null)
+			return null;
+		
+		Notice notice = noticeRepository.findById(noticeUpdateRequestDto.getNoticeId()).orElse(null);
+		if(notice == null)
+			return null;
+		
+		notice.updateNotice(
+				noticeUpdateRequestDto.getTitle(),
+				noticeUpdateRequestDto.getContent(), 
+				noticeUpdateRequestDto.getNoticeCode());
+		
+		if(noticeUpdateRequestDto.getNoticeCode() == Code.K01)
+			notice.noticeByClass(null, null);
+		else if(noticeUpdateRequestDto.getNoticeCode() == Code.K02)
+			notice.noticeByGrade(userDepartment.getGradeCode());
+		else if(noticeUpdateRequestDto.getNoticeCode() == Code.K03)
+			notice.noticeByClass(userDepartment.getClassCode(), userDepartment.getGradeCode());
+		
+		awsS3Service.deleteNoticeFile(notice);
+		
+		if(multipartFile != null)
+			awsS3Service.uploadFile(user, notice, multipartFile);
+		
+		return noticeRepository.save(notice);
 	}
 	
 
