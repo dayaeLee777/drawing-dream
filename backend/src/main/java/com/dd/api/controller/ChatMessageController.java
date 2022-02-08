@@ -3,6 +3,7 @@ package com.dd.api.controller;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.ChatMessageRequestDTO;
@@ -11,6 +12,7 @@ import com.dd.api.service.ChatMessageService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@CrossOrigin("*")
 @RequiredArgsConstructor
 public class ChatMessageController {
 

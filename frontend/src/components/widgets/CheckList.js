@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import CheckListItems from "components/widgets/checklist/CheckListItems";
+import { useEffect, useState } from "react";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -25,6 +26,9 @@ const CloseButton = styled.div`
 `;
 
 const Content = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-left: 5rem;
   padding-right: 5rem;
   height: 85%;
@@ -37,8 +41,6 @@ const CheckList = ({
   setIsShow,
   isntShow,
   setIsntShow,
-  isLoad,
-  setIsLoad,
 }) => {
   const close = () => {
     const newIsShow = isShow.filter((wid) => {
@@ -47,6 +49,12 @@ const CheckList = ({
     setIsShow(newIsShow);
     setIsntShow([...isntShow, widgetId]);
   };
+  const [isListLoading, setIsListLoading] = useState(true);
+  useEffect(() => {
+    if (!isListLoading) {
+      setIsListLoading(true);
+    }
+  }, [widgetId]);
   return (
     <Container
       layout
@@ -63,7 +71,11 @@ const CheckList = ({
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
       <Content>
-        <CheckListItems isLoad={isLoad} setIsLoad={setIsLoad} main />
+        <CheckListItems
+          main
+          isListLoading={isListLoading}
+          setIsListLoading={setIsListLoading}
+        />
       </Content>
     </Container>
   );

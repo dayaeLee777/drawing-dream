@@ -3,6 +3,7 @@ package com.dd.api.controller;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
+@CrossOrigin("*")
 @Api(value="Comment API", tags= {"subComment"})
 @RequiredArgsConstructor
 @RequestMapping("/api/subComment")

@@ -11,7 +11,6 @@ const Container = styled.div`
 `;
 
 const LeftContainer = (props) => {
-  console.log(props.data);
   return (
     <Container>
       <TodayClass data={props.data} />

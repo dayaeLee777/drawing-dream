@@ -36,7 +36,7 @@ public class Score extends BaseEntity {
 	private SubCode subjectCode;
 	
 	@Enumerated(EnumType.STRING)
-	private Code semestertCode;
+	private Code semesterCode;
 	
 	private float score;
 	

@@ -5,16 +5,18 @@ import styled from "styled-components";
 import MemoList from "../memo/MemoList";
 import MemoInsert from "../memo/MemoInsert";
 
-
 const Wrapper = styled(motion.div)`
   width: 600px;
   height: 600px;
+
   background-color: rgba(255, 255, 255, 1);
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
   background-color: white;
-  display: grid;
-  grid-template-rows: 1fr 3fr 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  letter-spacing: -1px;
 `;
 const Header = styled.div`
   display: flex;
@@ -22,7 +24,8 @@ const Header = styled.div`
   align-items: center;
   width: 60%;
   height: fit-content;
-  margin: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 `;
 
 const Title = styled.div`
@@ -35,38 +38,32 @@ const Title = styled.div`
 `;
 
 const MemoModal = ({ layoutId }) => {
-  const [memos, setMemos] = useState([]);
-  const [showInsert, setShowInsert] = useState(false);
-
-  useEffect(() => {
-    getMemoList().then((response) => {
-      setMemos(response.data);
-      console.log(response);
-    });
-  }, []);
+  const [status, setStatus] = useState("list");
+  const [isListLoading, setIsListLoading] = useState(true);
+  const [memoId, setMemoId] = useState("");
 
   const onClick = (event) => {
     event.stopPropagation();
   };
-  console.log("showInsert")
-  console.log(showInsert)
 
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>
       <Header>
         <Title>메모</Title>
       </Header>
-
-      {showInsert ?
-        <MemoInsert
-          setShowInsert={setShowInsert}
-        /> :
-      <div>
-      <MemoList
-        setShowInsert={setShowInsert}
-       mod = {true}
-      />
-      </div>
+      {status === "list" && (
+        <MemoList
+          setMemoId={setMemoId}
+          setStatus={setStatus}
+          isListLoading={isListLoading}
+          setIsListLoading={setIsListLoading}
+        />
+      )}
+      {status === "register" && (
+        <MemoInsert setStatus={setStatus} setIsListLoading={setIsListLoading} />
+      )}
+      {status === "modify" && 
+        <MemoInsert setStatus={setStatus} setIsListLoading={setIsListLoading} memoId={memoId} setMemoId={setMemoId}/>
       }
     </Wrapper>
   );
