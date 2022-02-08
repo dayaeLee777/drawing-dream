@@ -36,15 +36,19 @@ const CheckListInsertContainer = styled.div`
   }
 `;
 
-const CheckListInsert = ({ setIsLoad }) => {
+const CheckListInsert = ({ setIsListLoading }) => {
   const [text, setText] = useState("");
   const onChange = (e) => {
     setText(e.target.value);
   };
   const onClick = () => {
-    registerCheckList({ content: text }).then(setIsLoad(true));
-    setText("");
+    registerCheckList({ content: text })
+    .then(() => {
+      setIsListLoading(true);
+      setText("");
+    });
   };
+  
   return (
     <CheckListInsertContainer>
       <input

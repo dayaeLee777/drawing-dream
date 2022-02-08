@@ -28,6 +28,13 @@ const RegisterBtn = styled.div`
   color: #555555;
   margin-top: 3rem;
 `;
+const NullList = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 
 const MemoList = ({setStatus, isListLoading, setIsListLoading, setMemoId, main}) => {
@@ -52,8 +59,8 @@ const MemoList = ({setStatus, isListLoading, setIsListLoading, setMemoId, main})
       {!isListLoading &&
         data &&
         data.map((item) => <MemoItem main={main} setStatus={setStatus} key={item.memoId} setMemoId={setMemoId} data={item} />)}
-      {!isListLoading && !data &&
-        <>등록된 메모가 없습니다.</>}
+      {!isListLoading && data.length===0 &&
+        <NullList>등록된 메모가 없습니다.</NullList>}
     </Container>
     {!main &&
       <RegisterBtn onClick={onChangeStatus}>새 메모 등록하기</RegisterBtn>
