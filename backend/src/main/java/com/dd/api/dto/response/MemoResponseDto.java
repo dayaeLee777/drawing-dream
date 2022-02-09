@@ -1,6 +1,5 @@
 package com.dd.api.dto.response;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import io.swagger.annotations.ApiModel;
@@ -27,6 +26,5 @@ public class MemoResponseDto {
 	
 	@ApiModelProperty(name="등록일시", example="2022-01-27 10:08:12")
 	String regTime;
-//	LocalDateTime regTime;
 	
 }

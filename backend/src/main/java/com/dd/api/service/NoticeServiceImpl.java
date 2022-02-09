@@ -97,6 +97,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeRepository.save(notice);
 	}
 
+	@Transactional
 	@Override
 	public List<NoticeGetListResponseDto> getNoticeList(String accessToken, Pageable pageable) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
@@ -141,6 +142,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeResponseList;
 	}
 
+	@Transactional
 	@Override
 	public NoticeGetResponseDto getNotice(UUID noticeId) {
 		Notice notice = noticeRepository.findById(noticeId).orElse(null);
@@ -174,6 +176,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 
+	@Transactional
 	@Override
 	public TotalNoticeGetResponseDto getTotalCount(String accessToken) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
@@ -183,6 +186,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return totalNoticeGetResponseDto;
 	}
 
+	@Transactional
 	@Override
 	public Notice updateNotice(String accessToken, List<MultipartFile> multipartFile, NoticeUpdateRequestDto noticeUpdateRequestDto) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
