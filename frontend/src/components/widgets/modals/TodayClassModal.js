@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Button from "components/commons/button";
 import { useNavigate } from "react-router-dom";
 import { createOnlineClass } from "api/onlineclass";
+import { createChatRoom } from "api/chat";
 
 const Wrapper = styled(motion.div)`
   width: 1000px;
@@ -72,8 +73,10 @@ const TodayClassModal = ({ layoutId }) => {
 
   const startClass = () => {
     const courseId = "c384c386-c2a0-c38e-c28f-004cc2a7c2bc";
+    // createChatRoom({ name: courseId, userList: [] }).then((res) => {
+    //   console.log(res);
+    // });
     createOnlineClass({ courseId }).then((res) => {
-      console.log(res);
       navigate(`/onlineclass/${courseId}`);
       window.location.reload();
     });
