@@ -95,19 +95,20 @@ const onFileUpload = (e) => {
   getDept(state.user.userId).then(
     (res) => (
       setImage(res.data.fileName)),
-      setIsLoading(true)
+      setIsLoading(true),
+      window.location.reload(),
       )
-}  
+}
     const onClick = () => {
     navigate("/lookup");
   };
 
   useEffect(() => {
     if(isLoading){
-      getDept(state.user.userId).then(
-        (res) => (
+      getDept(state.user.userId)
+      .then((res) => (
+          setIsLoading(false),
           setImage(res.data.fileName)),
-          setIsLoading(false)
           )
     }
   },[isLoading])
@@ -116,7 +117,7 @@ const onFileUpload = (e) => {
     <Container>
       <Wrapper>
         <ProfileImage>
-          <label for="file-input">
+          <label htmlFor="file-input">
             {image?
             <Image src={image} alt="이미지를 찾을 수 없습니다."/>:
             <Image src={profileImg} alt="이미지를 찾을 수 없습니다."/>
