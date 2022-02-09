@@ -3,9 +3,6 @@ package com.dd.api.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +42,6 @@ public class NoticeController {
 	private final NoticeService noticeService;
 	
 	@PostMapping(consumes = {"multipart/form-data"})
-//	(consumes = { MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE })
 	@ApiOperation(value = "알림장 등록하기", notes="<strong>선생님이 작성한 알림장을 등록한다.</strong>")
 	@ApiResponses({
 		@ApiResponse(code=201, message="알림장이 정상적으로 등록되었습니다."),
@@ -77,7 +73,7 @@ public class NoticeController {
 		return ResponseEntity.status(200).body(noticeService.getTotalCount(accessToken));
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/list/{pageNumber}")
 	@ApiOperation(value = "알림장 목록 불러오기", notes="<strong>로그인한 유저에게 해당하는 알림장을 불러온다.</strong>")
 	@ApiResponses({
 		@ApiResponse(code=201, message="알림장 목록을 정상적으로 조회하였습니다."),
@@ -86,8 +82,8 @@ public class NoticeController {
 	})
 	public ResponseEntity<List<NoticeGetListResponseDto>> getNoticeList(
 			@ApiIgnore @RequestHeader("Authorization") String accessToken, 
-			@PageableDefault(size = 10, sort = {"regTime"}, direction = Sort.Direction.DESC)  Pageable pagealbe ) {
-		return ResponseEntity.status(200).body(noticeService.getNoticeList(accessToken, pagealbe));
+			@PathVariable("pageNumber") int pageNumber) {
+		return ResponseEntity.status(200).body(noticeService.getNoticeList(accessToken, pageNumber));
 	}
 	
 	@GetMapping("/{noticeId}")

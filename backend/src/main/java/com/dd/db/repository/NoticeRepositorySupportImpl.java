@@ -2,7 +2,6 @@ package com.dd.db.repository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -31,8 +30,6 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 	
 	public Page<Notice> findByUserinfoWithPaging(User user, Pageable pageable) {
 		
-		List<Notice> noticeList = new ArrayList<Notice>();
-		
 		UserDepartment userDepartment = jpaQueryFactory
 				.select(qUserDepartment)
 				.from(qUserDepartment)
@@ -41,18 +38,23 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 						qUserDepartment.delYn.isFalse())
 				.fetchOne();
 		
-		List<Notice> noticeBySchool = jpaQueryFactory
+		List<Code> classCode = Arrays.asList(Code.K03, Code.K04, Code.K05);
+		
+		List<Notice> uuidAll = new ArrayList<Notice>();
+		
+		List<Notice> uuidBySchool= jpaQueryFactory
 				.select(qNotice)
 				.from(qNotice)
 				.where(
+						
 						qNotice.school.eq(userDepartment.getSchool()),
 						qNotice.noticeCode.eq(Code.K01),
 						qNotice.delYn.isFalse()
 						)
 				.fetch();
-		noticeList.addAll(noticeBySchool);
+		uuidAll.addAll(uuidBySchool);
 		
-		List<Notice> noticeByGrade = jpaQueryFactory
+		List<Notice> uuidByGrade= jpaQueryFactory
 				.select(qNotice)
 				.from(qNotice)
 				.where(
@@ -62,9 +64,9 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 						qNotice.delYn.isFalse()
 						)
 				.fetch();
-		noticeList.addAll(noticeByGrade);
-		List<Code> classCode = Arrays.asList(Code.K03, Code.K04, Code.K05);
-		List<Notice> noticeByClass = jpaQueryFactory
+		uuidAll.addAll(uuidByGrade);
+		
+		List<Notice> uuidByClass= jpaQueryFactory
 				.select(qNotice)
 				.from(qNotice)
 				.where(
@@ -75,10 +77,21 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 						qNotice.delYn.isFalse()
 						)
 				.fetch();
+		uuidAll.addAll(uuidByClass);	   
 		
-		noticeList.addAll(noticeByClass);
-		Collections.sort(noticeList);
-		return new PageImpl<Notice>(noticeList, pageable, noticeList.size());
+		List<Notice> notices = jpaQueryFactory
+				.select(qNotice)
+				.from(qNotice)
+				.where(
+						qNotice.delYn.isFalse(),
+						qNotice.school.eq(userDepartment.getSchool()),
+						qNotice.in(uuidAll))
+				.orderBy(qNotice.regTime.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+				.fetch();
+		
+		return new PageImpl<Notice>(notices, pageable, notices.size());
 	}
 	
 	public long countByUser(User user) {
