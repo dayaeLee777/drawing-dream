@@ -12,15 +12,12 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @ApiModel("ChatMessageRequestDTO")
-public class ChatMessageRequestDTO {
+public class ChatMessageVideoRequestDTO {
 
 	@ApiModelProperty(name = "메시지 내용", example = "안녕")
 	private String content;
 
-	@ApiModelProperty(name = "채팅방 UUID", example = "00000000-0000-0000-0000-00000000")
-	private UUID roomId;
-
-	@ApiModelProperty(name = "상대방 UUID", example = "00000000-0000-0000-0000-00000000")
-	private UUID userId;
+	@ApiModelProperty(name = "수업 UUID", example = "00000000-0000-0000-0000-00000000")
+	private UUID courseId;
 
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dd.api.dto.request.ChatMessageRequestDTO;
+import com.dd.api.dto.request.ChatMessageVideoRequestDTO;
 import com.dd.api.service.ChatMessageService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,23 +24,36 @@ public class ChatMessageController {
 
 	// 채팅방 입장
 	@MessageMapping("/chat/enter")
-	public void enterChat(ChatMessageRequestDTO message, @Header("Authorization") String token) throws Exception {
+	public void enterChat(ChatMessageRequestDTO message, @Header("Authorization") String accessToken) throws Exception {
 
 		System.out.println("ChatMessageController enterChat : " + message);
 
-		template.convertAndSend("/topic/room/" + message.getRoomId(),
-				chatMessageService.sendMessage(message, token, true));
+		template.convertAndSend("/topic/room/" + message.getUserId(),
+				chatMessageService.enterRoom(message, accessToken));
 
 	}
 
 	// 메시지 전송
-	@MessageMapping("/chat/room")
-	public void sendMessage(ChatMessageRequestDTO message, @Header("Authorization") String token) throws Exception {
+	@MessageMapping("/chat/one")
+	public void sendMessage(ChatMessageRequestDTO message, @Header("Authorization") String accessToken)
+			throws Exception {
 
 		System.out.println("ChatMessageController sendMessage : " + message);
 
-		template.convertAndSend("/topic/room/" + message.getRoomId(),
-				chatMessageService.sendMessage(message, token, false));
+		template.convertAndSend("/topic/one/" + message.getUserId(),
+				chatMessageService.sendMessage(message, accessToken));
+
+	}
+
+	// 메시지 전송
+	@MessageMapping("/chat/video")
+	public void sendMessageInVideoRoom(ChatMessageVideoRequestDTO message, @Header("Authorization") String accessToken)
+			throws Exception {
+
+		System.out.println("ChatMessageController sendMessageVideoRoom : " + message);
+
+		template.convertAndSend("/topic/video/" + message.getCourseId(),
+				chatMessageService.sendMessageVideoRoom(message, accessToken));
 
 	}
 

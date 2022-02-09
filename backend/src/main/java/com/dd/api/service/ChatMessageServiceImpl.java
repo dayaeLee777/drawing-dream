@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.request.ChatMessageRequestDTO;
+import com.dd.api.dto.request.ChatMessageVideoRequestDTO;
 import com.dd.api.dto.response.ChatMessageResponseDTO;
 import com.dd.db.entity.chat.ChatMessage;
 import com.dd.db.entity.chat.ChatRoom;
@@ -50,19 +51,37 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 
 	@Transactional
 	@Override
-	public ChatMessageResponseDTO sendMessage(ChatMessageRequestDTO message, String token, boolean isEnter)
-			throws Exception {
+	public ChatMessageResponseDTO enterRoom(ChatMessageRequestDTO message, String accessToken) throws Exception {
 
-		User writer = authRepository.findUserByLoginId(jwtAuthenticationProvider.getUsername(token.substring(7)))
+		User writer = authRepository.findUserByLoginId(jwtAuthenticationProvider.getUsername(accessToken.substring(7)))
 				.orElseThrow(() -> new Exception("일치하는 회원이 없습니다."));
 
-		// 채팅방 입장 시
-		if (isEnter)
-			return ChatMessageResponseDTO.builder().content(writer.getUserName() + " 님이 채팅방에 입장하였습니다.")
-					.sendTime(LocalDateTime.now()).userId(writer.getId()).userName(writer.getUserName()).build();
+		return ChatMessageResponseDTO.builder().content(writer.getUserName() + " 님이 채팅방에 입장하였습니다.")
+				.sendTime(LocalDateTime.now()).userId(writer.getId()).userName(writer.getUserName()).build();
+
+	}
+
+	@Transactional
+	@Override
+	public ChatMessageResponseDTO sendMessage(ChatMessageRequestDTO message, String accessToken) throws Exception {
+
+		User writer = authRepository.findUserByLoginId(jwtAuthenticationProvider.getUsername(accessToken.substring(7)))
+				.orElseThrow(() -> new Exception("일치하는 회원이 없습니다."));
 
 		// 메시지 전송
 		save(message, writer.getId());
+
+		return ChatMessageResponseDTO.builder().content(message.getContent()).sendTime(LocalDateTime.now())
+				.userId(writer.getId()).userName(writer.getUserName()).build();
+
+	}
+
+	@Override
+	public ChatMessageResponseDTO sendMessageVideoRoom(ChatMessageVideoRequestDTO message, String accessToken)
+			throws Exception {
+
+		User writer = authRepository.findUserByLoginId(jwtAuthenticationProvider.getUsername(accessToken.substring(7)))
+				.orElseThrow(() -> new Exception("일치하는 회원이 없습니다."));
 
 		return ChatMessageResponseDTO.builder().content(message.getContent()).sendTime(LocalDateTime.now())
 				.userId(writer.getId()).userName(writer.getUserName()).build();
