@@ -131,22 +131,26 @@ const StudyRecordModal = ({ layoutId }) => {
           <Header>
             <Title>오늘의 공부 시간</Title>
           </Header>
-          <Content>
-            <ChartContainer>
-              <Chart />
-            </ChartContainer>
-            <TotalContainer>
-              <Desc>오늘 공부한 시간</Desc>
-              <Total>
-                {total.slice(0, 2)}H {total.slice(3, 5)}M
-              </Total>
-            </TotalContainer>
-          </Content>
-          <RecordList
-            setIsListLoading={setIsListLoading}
-            records={records}
-            setIsRecord={setIsRecord}
-          />
+          {!isListLoading && (
+            <>
+              <Content>
+                <ChartContainer>
+                  <Chart records={records} />
+                </ChartContainer>
+                <TotalContainer>
+                  <Desc>오늘 공부한 시간</Desc>
+                  <Total>
+                    {total.slice(0, 2)}H {total.slice(3, 5)}M
+                  </Total>
+                </TotalContainer>
+              </Content>
+              <RecordList
+                setIsListLoading={setIsListLoading}
+                records={records}
+                setIsRecord={setIsRecord}
+              />
+            </>
+          )}
         </>
       )}
     </Wrapper>
