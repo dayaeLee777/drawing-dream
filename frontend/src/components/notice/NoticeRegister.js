@@ -8,6 +8,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getNoticeDetail, modifyNotice, registerNotice } from "api/notice";
 import commonCode from "config/commonCode";
+import Dropzone from "react-dropzone";
+import { FileIcon, defaultStyles } from "react-file-icon";
 
 const Container = styled.div`
   padding: 3rem 2rem 0 2rem;
@@ -52,8 +54,38 @@ const Title = styled.div`
 
 const FileContainer = styled.div`
   margin-top: 1rem;
-  height: 7rem;
-  background-color: yellow;
+  /* background-color: yellow; */
+
+  .dropzone {
+    text-align: center;
+    padding: 20px;
+    border: 3px dashed #eeeeee;
+    background-color: #fafafa;
+    color: #bdbdbd;
+  }
+
+  .files {
+    margin-top: 0.5rem;
+    display: flex;
+    padding: 0rem 0.5rem;
+    
+    .file {
+      display: flex;
+      border-radius: 5px;
+      border: 1px solid #e4e4e4;
+      padding: 0.2rem 0.4rem;
+      margin-right: 0.5rem;
+      .icon {
+        width: 0.7rem;
+        margin-right: 0.3rem;
+      }
+      .desc {
+        font-size: 0.9rem;
+        color: #666666;
+      }
+    }
+  }
+
 `;
 
 const NoticeRegister = ({ modify }) => {
@@ -108,6 +140,7 @@ const NoticeRegister = ({ modify }) => {
   };
 
   const onRegister = () => {
+    console.log(data);
     if (
       data.title &&
       editorRef.current.getInstance().getHTML() !== contentEmpty &&
@@ -173,6 +206,21 @@ const NoticeRegister = ({ modify }) => {
     Navigate(url);
   };
 
+  const handleDrop = (acceptedFiles) => {
+    setData({
+      ...data,
+      files: acceptedFiles.map((file) => file),
+    });
+    console.log(data);
+  };
+
+  const makeExtension = (fileName) => {
+    let fileLength = fileName.length;
+    let fileDot = fileName.lastIndexOf(".");
+    let fileExtension = fileName.substring(fileDot + 1, fileLength).toLowerCase();
+    return fileExtension;
+  }
+
   return (
     <Container>
       {modify ? <Title>글 수정하기</Title> : <Title>글쓰기</Title>}
@@ -212,7 +260,30 @@ const NoticeRegister = ({ modify }) => {
         />
       )}
       <FileContainer>
-        <input type="file" name="file" onChange={onChange} multiple />
+        <Dropzone onDrop={handleDrop} className="dropzone">
+          {({ getRootProps, getInputProps }) => (
+            <div {...getRootProps({ className: "dropzone" })}>
+              <input {...getInputProps()} />
+              <p>첨부할 파일을 클릭 또는 드래그하여 올려주세요.</p>
+            </div>
+          )}
+        </Dropzone>
+        {data.files &&
+          <div className="files">
+            {data.files.map((file) => (
+              <>
+                <div className="file" key={file.name}>
+                  <div className="icon">
+                    <FileIcon extension={ makeExtension(file.name) } {...defaultStyles[makeExtension(file.name)]} />
+                  </div>
+                  <div className="desc">
+                    {file.name}
+                  </div>
+                </div>
+              </>
+              ))}
+          </div>
+        }
       </FileContainer>
       <BtnContainer>
         <Button

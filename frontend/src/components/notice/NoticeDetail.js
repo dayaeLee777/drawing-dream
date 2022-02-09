@@ -3,10 +3,10 @@ import styled from "styled-components";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteCommunity, getCommunityDetail } from "api/community";
 import { useSelector } from "react-redux";
 import { deleteNotice, getNoticeDetail } from "api/notice";
 import commonCode from "config/commonCode";
+import { FileIcon, defaultStyles } from "react-file-icon";
 
 const DetailContainer = styled.div`
   padding: 3rem 5rem;
@@ -72,18 +72,25 @@ const FileContainer = styled.div`
     padding: 0.5rem 2.5rem;
     border: 1px solid #dadde6;
     border-radius: 5px;
-  }
-  .file {
-    font-size: 0.8rem;
-    color: #828282;
-    margin: 0.4rem 0;
-    cursor: pointer;
-    display: block;
-    background-color: white;
-    border: none;
 
-    &:hover {
-      color: #444444;
+    .fileItem {
+      display: flex;
+      height: 1.5rem;
+      align-items: center;
+      .icon {
+          width: 1rem;
+          margin-right: 0.2rem;
+        }
+      .file {
+        cursor: pointer;
+        display: block;
+        background-color: white;
+        border: none;
+        color: #555555;
+        &:hover {
+          color: #000000;
+        }
+      }
     }
   }
 `;
@@ -106,6 +113,7 @@ const NoticeDetail = () => {
     if (isLoading) {
       getNoticeDetail(params.noticeId)
         .then((res) => {
+          console.log(res);
           setData(res.data);
           setIsLoading(false);
         })
@@ -131,7 +139,16 @@ const NoticeDetail = () => {
 
   const onDownload = (e) => {
     window.open(e.target.value);
-  }
+  };
+
+  const makeExtension = (fileName) => {
+    let fileLength = fileName.length;
+    let fileDot = fileName.lastIndexOf(".");
+    let fileExtension = fileName
+      .substring(fileDot + 1, fileLength)
+      .toLowerCase();
+    return fileExtension;
+  };
 
   // const sampleData = {
   //   regTime: "2022.02.04",
@@ -183,11 +200,25 @@ const NoticeDetail = () => {
       <FileContainer>
         <div className="desc">첨부파일</div>
         <div className="fileList">
-          {data.files &&
+          {!isLoading &&
+            data.files &&
             Object.entries(data.files).map((item) => (
-              <button className="file" key={item[1]} onClick={onDownload} value={item[1]}>
-                {item[0]}
-              </button>
+              <div className="fileItem">
+                <div className="icon" value={item[1]}>
+                  <FileIcon
+                    extension={makeExtension(item[0])}
+                    {...defaultStyles[makeExtension(item[0])]}
+                  />
+                </div>
+                <button
+                  className="file"
+                  key={item[1]}
+                  onClick={onDownload}
+                  value={item[1]}
+                >
+                  {item[0]}
+                </button>
+              </div>
             ))}
         </div>
       </FileContainer>

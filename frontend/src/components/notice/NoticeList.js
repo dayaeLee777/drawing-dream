@@ -79,7 +79,6 @@ const NoticeList = () => {
     // console.log("community 리스트 조회");
     if (isLoading) {
       getNoticeList(page).then((res) => {
-        console.log(res);
         setData(res.data);
         setIsLoading(false);
       });
