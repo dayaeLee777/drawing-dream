@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Chart from "./studyrecord/Chart";
+import { useEffect, useState } from "react";
+import { getRecordList } from "api/studyrecode";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -46,6 +48,25 @@ const StudyRecord = ({
     setIsShow(newIsShow);
     setIsntShow([...isntShow, widgetId]);
   };
+
+  const [records, setRecords] = useState([]);
+  const [isListLoading, setIsListLoading] = useState(true);
+  const date = new Date();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+
+  month = month >= 10 ? month : "0" + month;
+  day = day >= 10 ? day : "0" + day;
+  const studyDate = date.getFullYear() + "-" + month + "-" + day;
+
+  useEffect(() => {
+    if (isListLoading) {
+      getRecordList(studyDate).then((res) => {
+        setRecords(res.data.studyRecordResponseDtoList);
+        setIsListLoading(false);
+      });
+    }
+  }, [isListLoading]);
   return (
     <Container
       layout
@@ -61,7 +82,7 @@ const StudyRecord = ({
         <Title>오늘의 공부 시간</Title>
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
-      <Chart />
+      {!isListLoading && <Chart records={records} />}
     </Container>
   );
 };
