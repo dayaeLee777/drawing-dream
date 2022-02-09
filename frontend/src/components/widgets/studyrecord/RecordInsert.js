@@ -70,6 +70,8 @@ const RecordInsert = ({ setIsListLoading, setIsRecord }) => {
   const [title, setTitle] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [recordId, setRecordId] = useState("");
+  const [timer, setTimer] = useState("");
+
   const onChange = (event) => {
     const {
       target: { value },
@@ -85,6 +87,37 @@ const RecordInsert = ({ setIsListLoading, setIsRecord }) => {
       setIsStart(true);
       setRecordId(res.data.studyRecordId);
     });
+    let time = 0;
+    let min = 0,
+      hour = 0,
+      sec = 0;
+    let th = 0,
+      tm = 0,
+      ts = 0;
+
+    setInterval(function () {
+      time++;
+
+      min = Math.floor(time / 60);
+      hour = Math.floor(min / 60);
+      sec = time % 60;
+      min = min % 60;
+
+      th = hour;
+      tm = min;
+      ts = sec;
+      if (th < 10) {
+        th = "0" + hour;
+      }
+      if (tm < 10) {
+        tm = "0" + min;
+      }
+      if (ts < 10) {
+        ts = "0" + sec;
+      }
+
+      setTimer(th + ":" + tm + ":" + ts);
+    }, 1000);
   };
 
   const end = () => {
@@ -119,7 +152,7 @@ const RecordInsert = ({ setIsListLoading, setIsRecord }) => {
       {isStart && (
         <>
           <Desc>{title} 공부 중...</Desc>
-          <Timer>00:00:00</Timer>
+          <Timer>{timer}</Timer>
         </>
       )}
 
