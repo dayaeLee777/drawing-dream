@@ -3,7 +3,6 @@ package com.dd.api.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,16 +25,17 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Api(value = "메모 위젯 API", tags = { "Memo" })
 @CrossOrigin("*")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/memo")
 public class MemoController {
 
-	@Autowired
-	MemoService memoService;
+	private final MemoService memoService;
 	
 	@PostMapping
 	@ApiOperation(value = "메모 등록하기", notes="<strong>로그인한 회원이 작성한 메모를 등록한다.</strong><br/>")
