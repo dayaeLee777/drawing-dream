@@ -5,7 +5,8 @@ import { Viewer } from "@toast-ui/react-editor";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteCommunity, getCommunityDetail } from "api/community";
 import { useSelector } from "react-redux";
-import CommentList from "./comment/CommentList";
+import { deleteNotice, getNoticeDetail } from "api/notice";
+import commonCode from "config/commonCode";
 
 const DetailContainer = styled.div`
   padding: 3rem 5rem;
@@ -57,8 +58,37 @@ const EditContainer = styled.div`
     cursor: pointer;
   }
 `;
+const FileContainer = styled.div`
+  height: 5rem;
+  /* background-color: #facead; */
+  margin-top: 2rem;
 
-const CommunityDetail = () => {
+  .desc {
+    font-size: 1.2rem;
+    padding-left: 0.5rem;
+  }
+  .fileList {
+    margin-top: 1rem;
+    padding: 0.5rem 2.5rem;
+    border: 1px solid #dadde6;
+    border-radius: 5px;
+  }
+  .file {
+    font-size: 0.8rem;
+    color: #828282;
+    margin: 0.4rem 0;
+    cursor: pointer;
+    display: block;
+    background-color: white;
+    border: none;
+
+    &:hover {
+      color: #444444;
+    }
+  }
+`;
+
+const NoticeDetail = () => {
   const params = useParams();
   const Navigate = useNavigate();
 
@@ -67,16 +97,15 @@ const CommunityDetail = () => {
     userId: "",
     content: "",
     hit: "",
-    title: "",
+    noticeCode: "",
+    files: null,
   });
   const [isLoading, setIsLoading] = useState(true);
-  const { userId } = useSelector((state) => state.user);
-
+  const { userId, gradeCode, classCode } = useSelector((state) => state.user);
   useEffect(() => {
     if (isLoading) {
-      getCommunityDetail(params.communityId)
+      getNoticeDetail(params.noticeId)
         .then((res) => {
-          console.log(res);
           setData(res.data);
           setIsLoading(false);
         })
@@ -90,15 +119,19 @@ const CommunityDetail = () => {
   }, [isLoading]);
 
   const onDelete = () => {
-    deleteCommunity(params.communityId).then(() => {
+    deleteNotice(params.noticeId).then(() => {
       alert("글이 삭제되었습니다.");
       Navigate("../");
     });
   };
 
   const onModify = () => {
-    Navigate(`../modify/${params.communityId}`);
+    Navigate(`../modify/${params.noticeId}`);
   };
+
+  const onDownload = (e) => {
+    window.open(e.target.value);
+  }
 
   // const sampleData = {
   //   regTime: "2022.02.04",
@@ -113,7 +146,18 @@ const CommunityDetail = () => {
   return (
     <DetailContainer>
       <TitleContainer>
-        <div className="title">{data.title}</div>
+        <div className="title">
+          {data.noticeCode === "K01" ? (
+            <>[전체] </>
+          ) : data.noticeCode === "K02" ? (
+            <>[{commonCode.E[gradeCode]}] </>
+          ) : (
+            <>
+              [{commonCode.E[gradeCode]} {commonCode.F[classCode]}]
+            </>
+          )}
+          {data.title}
+        </div>
         <ProfileContainer>
           <span className="userName">{data.userName}</span>
           <span className="regTime">{data.regTime}</span>
@@ -136,10 +180,19 @@ const CommunityDetail = () => {
           <Viewer initialValue={`${data.content}`} />
         </BoardContainer>
       )}
-
-      <CommentList communityId={params.communityId} />
+      <FileContainer>
+        <div className="desc">첨부파일</div>
+        <div className="fileList">
+          {data.files &&
+            Object.entries(data.files).map((item) => (
+              <button className="file" key={item[1]} onClick={onDownload} value={item[1]}>
+                {item[0]}
+              </button>
+            ))}
+        </div>
+      </FileContainer>
     </DetailContainer>
   );
 };
 
-export default CommunityDetail;
+export default NoticeDetail;

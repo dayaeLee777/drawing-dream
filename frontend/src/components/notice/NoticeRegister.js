@@ -5,24 +5,34 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { createRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  getCommunityDetail,
-  modifyCommunity,
-  registerCommunity,
-} from "api/community";
 import { useSelector } from "react-redux";
+import { getNoticeDetail, modifyNotice, registerNotice } from "api/notice";
+import commonCode from "config/commonCode";
 
 const Container = styled.div`
-  padding: 3rem 2rem;
+  padding: 3rem 2rem 0 2rem;
 `;
 
-const StyledInput = styled.input`
+const InputContainer = styled.div`
+  display: flex;
   width: 100%;
   box-sizing: border-box;
-  border: none;
   border-top: 1px solid #dadde6;
-  font-size: 1.2rem;
-  padding: 1rem 0.5rem;
+
+  select {
+    width: 10rem;
+    border: none;
+    padding: 1rem 0.5rem;
+    font-size: 1rem;
+    /* border-right: 1px solid #dadde6; */
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    padding: 1rem 0.5rem;
+    font-size: 1.2rem;
+  }
 `;
 
 const BtnContainer = styled.div`
@@ -37,7 +47,13 @@ const Title = styled.div`
   text-align: center;
   font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+`;
+
+const FileContainer = styled.div`
+  margin-top: 1rem;
+  height: 7rem;
+  background-color: yellow;
 `;
 
 const NoticeRegister = ({ modify }) => {
@@ -52,11 +68,13 @@ const NoticeRegister = ({ modify }) => {
   const [data, setData] = useState({
     title: "",
     content: "",
+    noticeCode: "",
+    files: null,
   });
 
   useEffect(() => {
     if (modify && isLoading) {
-      getCommunityDetail(params.communityId).then((res) => {
+      getNoticeDetail(params.noticeId).then((res) => {
         if (userId !== res.data.userId) {
           Navigate("../");
           alert("수정 권한이 없습니다.");
@@ -67,6 +85,8 @@ const NoticeRegister = ({ modify }) => {
         setData({
           title: res.data.title,
           content: res.data.content,
+          noticeCode: res.data.noticeCode,
+          // files: res.data.files
         });
         setIsLoading(false);
       });
@@ -74,34 +94,77 @@ const NoticeRegister = ({ modify }) => {
   }, [isLoading]);
 
   const onChange = (e) => {
-    setData({
-      ...data,
-      title: e.target.value,
-    });
+    if (e.target.name === "file") {
+      setData({
+        ...data,
+        files: e.target.files,
+      });
+    } else {
+      setData({
+        ...data,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const onRegister = () => {
     if (
       data.title &&
-      editorRef.current.getInstance().getHTML() !== contentEmpty
+      editorRef.current.getInstance().getHTML() !== contentEmpty &&
+      data.noticeCode
     ) {
       if (modify) {
-        modifyCommunity({
-          title: data.title,
-          content: editorRef.current.getInstance().getHTML(),
-          communityId: params.communityId,
-        }).then(
+        let formData = new FormData();
+        if (data.files) {
+          for (let i = 0; i < data.files.length; i++) {
+            formData.append("multipartFile", data.files[i]);
+          }
+        }
+        formData.append(
+          "noticeUpdateRequestDto",
+          new Blob(
+            [
+              JSON.stringify({
+                title: data.title,
+                content: editorRef.current.getInstance().getHTML(),
+                noticeCode: data.noticeCode,
+                noticeId: params.noticeId,
+              }),
+            ],
+            { type: "application/json" }
+          )
+        );
+        modifyNotice(formData).then(
           alert("글 수정에 성공하였습니다."),
-          Navigate(`../${params.communityId}`)
+          Navigate(`../${params.noticeId}`)
         );
       } else {
-        registerCommunity({
-          title: data.title,
-          content: editorRef.current.getInstance().getHTML(),
-        }).then(alert("글 등록에 성공하였습니다."), Navigate("../"));
+        let formData = new FormData();
+        if (data.files) {
+          for (let i = 0; i < data.files.length; i++) {
+            formData.append("multipartFile", data.files[i]);
+          }
+        }
+        formData.append(
+          "noticeRegisterRequestDto",
+          new Blob(
+            [
+              JSON.stringify({
+                title: data.title,
+                content: editorRef.current.getInstance().getHTML(),
+                noticeCode: data.noticeCode,
+              }),
+            ],
+            { type: "application/json" }
+          )
+        );
+        registerNotice(formData).then(
+          alert("글 등록에 성공하였습니다."),
+          Navigate("../")
+        );
       }
     } else {
-      alert("제목과 내용을 모두 작성해주세요.");
+      alert("제목과 내용, 구분을 모두 작성해주세요.");
     }
   };
 
@@ -113,23 +176,44 @@ const NoticeRegister = ({ modify }) => {
   return (
     <Container>
       {modify ? <Title>글 수정하기</Title> : <Title>글쓰기</Title>}
-      <StyledInput
-        onChange={onChange}
-        value={data.title}
-        name="title"
-        placeholder="제목을 입력하세요."
-      />
+      <InputContainer>
+        {(!modify || !isLoading) && (
+          <select
+            name="noticeCode"
+            defaultValue={data.noticeCode ? data.noticeCode : "default"}
+            onChange={onChange}
+          >
+            <option value="default" disabled hidden>
+              구분
+            </option>
+            {Object.entries(commonCode.K).map(([key, value]) => (
+              <option key={key} value={key}>
+                {value}
+              </option>
+            ))}
+          </select>
+        )}
+        <input
+          onChange={onChange}
+          value={data.title}
+          name="title"
+          placeholder="제목을 입력하세요."
+        />
+      </InputContainer>
       {(!modify || !isLoading) && (
         <Editor
           name="content"
           initialValue={data.content}
           previewStyle="tab"
-          height="500px"
+          height="400px"
           initialEditType="wysiwyg"
           useCommandShortcut={true}
           ref={editorRef}
         />
       )}
+      <FileContainer>
+        <input type="file" name="file" onChange={onChange} multiple />
+      </FileContainer>
       <BtnContainer>
         <Button
           name={modify ? "수정하기" : "글쓰기"}

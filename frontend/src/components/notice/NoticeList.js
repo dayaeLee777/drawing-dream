@@ -1,4 +1,3 @@
-import { getCommunityList, getCommunityTotalCount } from "api/community";
 import Button from "components/commons/button";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +5,7 @@ import styled from "styled-components";
 import CommunityItem from "./NoticeItem";
 import Pagination from "react-js-pagination";
 import "assets/css/paging.css";
+import { getNoticeList, getNoticeTotalCount } from "api/notice";
 
 const Container = styled.div`
   width: 100%;
@@ -57,16 +57,16 @@ const PageContainer = styled.div`
 const NoticeList = () => {
   const Navigate = useNavigate();
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [totalItemsCount, setTotalItemsCount] = useState(0);
   const [isTotalItemsCountLoading, setIsTotalItemsCountLoading] =
     useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     if (isTotalItemsCountLoading) {
-      getCommunityTotalCount().then((res) => {
-        setTotalItemsCount(res.data.totalCommunity);
+      getNoticeTotalCount().then((res) => {
+        setTotalItemsCount(res.data.totalNoticeCount);
         setIsTotalItemsCountLoading(false);
       });
     } else {
@@ -78,8 +78,9 @@ const NoticeList = () => {
   useEffect(() => {
     // console.log("community 리스트 조회");
     if (isLoading) {
-      getCommunityList(page).then((res) => {
-        setData(res.data.communityGetListResponseDtoList);
+      getNoticeList(page).then((res) => {
+        console.log(res);
+        setData(res.data);
         setIsLoading(false);
       });
     }
@@ -87,7 +88,7 @@ const NoticeList = () => {
   }, [isLoading]);
 
   const handlePageChange = (page) => {
-    setPage(page);
+    setPage(page-1);
     Navigate(`?page=${page}`);
     setIsLoading(true);
   };
@@ -107,14 +108,16 @@ const NoticeList = () => {
         <StyledTable>
           <colgroup>
             <StyledCol width="7%"></StyledCol>
-            <StyledCol width="58%"></StyledCol>
+            <StyledCol width="15%"></StyledCol>
+            <StyledCol width="42%"></StyledCol>
             <StyledCol width="13%"></StyledCol>
             <StyledCol width="7%"></StyledCol>
-            <StyledCol width="15%"></StyledCol>
+            <StyledCol width="16%"></StyledCol>
           </colgroup>
           <thead>
             <tr>
               <StyledTh>글번호</StyledTh>
+              <StyledTh>구분</StyledTh>
               <StyledTh>제목</StyledTh>
               <StyledTh>작성자</StyledTh>
               <StyledTh>조회수</StyledTh>
@@ -125,8 +128,8 @@ const NoticeList = () => {
             {data &&
               data.map((item, idx) => (
                 <CommunityItem
-                  index={totalItemsCount - (page - 1) * 10 - idx - 1}
-                  key={item.communityId}
+                  index={totalItemsCount - (page) * 10 - idx - 1}
+                  key={item.noticeId}
                   data={item}
                 />
               ))}
@@ -135,7 +138,7 @@ const NoticeList = () => {
       </Container>
       <PageContainer>
         <Pagination
-          activePage={page}
+          activePage={page+1}
           itemsCountPerPage={10}
           totalItemsCount={totalItemsCount}
           pageRangeDisplayed={5}
