@@ -47,8 +47,6 @@ public class NoticeServiceImpl implements NoticeService {
 	@Transactional
 	@Override
 	public int registerNotice(String accessToken, List<MultipartFile> multipartFile, NoticeRegisterRequestDto noticeRegisterRequestDto) {
-//		public int registerNotice(String accessToken, MultipartFile multipartFile, NoticeRegisterRequestDto noticeRegisterRequestDto) {
-//		public int registerNotice(String accessToken, NoticeRegisterRequestDto noticeRegisterRequestDto) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
@@ -99,6 +97,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeRepository.save(notice);
 	}
 
+	@Transactional
 	@Override
 	public List<NoticeGetListResponseDto> getNoticeList(String accessToken, Pageable pageable) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
@@ -143,13 +142,14 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeResponseList;
 	}
 
+	@Transactional
 	@Override
 	public NoticeGetResponseDto getNotice(UUID noticeId) {
 		Notice notice = noticeRepository.findById(noticeId).orElse(null);
 		if(notice == null)
 			return null;
 		
-		String userName = notice.getUser().getUserName();
+		User user = notice.getUser();
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm:ss");
 		Map<String, String> files = new HashMap<String, String>();
 		
@@ -162,7 +162,8 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		NoticeGetResponseDto noticeGetResponseDto = NoticeGetResponseDto.builder()
 				.noticeId(notice.getId())
-				.userName(userName)
+				.userId(user.getId())
+				.userName(user.getUserName())
 				.title(notice.getTitle())
 				.content(notice.getContent())
 				.noticeCode(notice.getNoticeCode())
@@ -175,6 +176,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 
+	@Transactional
 	@Override
 	public TotalNoticeGetResponseDto getTotalCount(String accessToken) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
@@ -184,6 +186,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return totalNoticeGetResponseDto;
 	}
 
+	@Transactional
 	@Override
 	public Notice updateNotice(String accessToken, List<MultipartFile> multipartFile, NoticeUpdateRequestDto noticeUpdateRequestDto) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);

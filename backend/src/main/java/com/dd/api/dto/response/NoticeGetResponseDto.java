@@ -22,6 +22,9 @@ public class NoticeGetResponseDto {
 	@ApiModelProperty(name="알림장 UUID")
 	private UUID noticeId;
 	
+	@ApiModelProperty(name="작성자 UUID")
+	private UUID userId;
+	
 	@ApiModelProperty(name="작성자 이름")
 	private String userName;
 	
