@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import kurentoUtils from "kurento-utils";
 import styled from "styled-components";
+import Chat from "components/onlineclass/Chat";
 /*
  * (C) Copyright 2014 Kurento (http://kurento.org/)
  *
@@ -41,19 +42,11 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const ChatContainer = styled.div`
-  width: 20rem;
-  border-radius: 10px;
-  margin-left: 5vw;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-`;
-const VideoContainer = styled.div`
-  width: 500px;
-  height: 500px;
-`;
-const Video = styled.video`
-  width: 100%;
-  height: 100%;
+const ParticipantVideoContainer = styled.div`
+  width: 12vw;
+  height: 15vh;
+  display: flex;
+  margin-top: 2rem;
 `;
 
 const OnlineClass = () => {
@@ -64,7 +57,6 @@ const OnlineClass = () => {
   let participantCnt = 0;
   let room = roomId;
   const { userId, userName } = useSelector((state) => state.user);
-
   const PARTICIPANT_MAIN_CLASS = "participant main";
   const PARTICIPANT_CLASS = "participant";
 
@@ -338,9 +330,9 @@ const OnlineClass = () => {
         <Title>{commonCode.G.G05.G0500}: 박선생 선생님</Title>
         <Wrapper>
           <TeacherVideoContainer id="teacher"></TeacherVideoContainer>
-          <ChatContainer>hi</ChatContainer>
+          <Chat />
         </Wrapper>
-        <div id="participants"></div>
+        <ParticipantVideoContainer id="participants"></ParticipantVideoContainer>
       </Container>
     </>
   );

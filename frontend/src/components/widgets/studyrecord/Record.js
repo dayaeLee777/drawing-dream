@@ -50,8 +50,8 @@ const Record = ({ setIsListLoading, data }) => {
     <Container>
       <Title>{data.title}</Title>
       <Delete onClick={del}>X</Delete>
-      <Time>시작: {data.startTime.slice(11, 16)}</Time>
-      <Time>종료: {data.endTime.slice(11, 16)}</Time>
+      <Time>시작 {data.startTime.slice(11, 16)}</Time>
+      <Time>종료 {data.endTime.slice(11, 16)}</Time>
       <Total>
         {data.durationTime.slice(0, 2)}H {data.durationTime.slice(3, 5)}M
       </Total>

@@ -1,19 +1,73 @@
 import ApexCharts from "react-apexcharts";
 import commonCode from "config/commonCode";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   width: 80%;
   height: 100%;
 `;
-const Chart = () => {
+
+const Chart = ({ records }) => {
+  // const [isListLoading, setIsListLoading] = useState(true);
+  const [times, setTimes] = useState([
+    { x: "9", y: 0 },
+    { x: "10", y: 0 },
+    { x: "11", y: 0 },
+    { x: "12", y: 0 },
+    { x: "13", y: 0 },
+    { x: "14", y: 0 },
+    { x: "15", y: 0 },
+    { x: "16", y: 0 },
+    { x: "17", y: 0 },
+    { x: "18", y: 0 },
+    { x: "19", y: 0 },
+    { x: "20", y: 0 },
+    { x: "21", y: 0 },
+    { x: "22", y: 0 },
+  ]);
+
+  useEffect(() => {
+    let newTimes = [...times];
+    records.map((record) => {
+      if (record.endTime !== null) {
+        let startTime = record.startTime.slice(11, 13);
+        let startMin = parseInt(record.startTime.slice(14, 16));
+        let hour = record.durationTime.slice(0, 2);
+        let min = record.durationTime.slice(3, 5);
+        let totalMin = parseInt(hour) * 2 + parseInt(min);
+        for (let i in times) {
+          if (times[i].x === startTime) {
+            if (totalMin + startMin + times[i].y > 60) {
+              newTimes[parseInt(startTime) - 9] = {
+                x: startTime,
+                y: 60 - (times[i].y + startMin),
+              };
+              setTimes(newTimes);
+              totalMin -= 60 - (times[i].y + startMin);
+            } else {
+              newTimes[parseInt(startTime) - 9] = {
+                x: startTime,
+                y: parseInt(min) + times[i].y,
+              };
+              setTimes(newTimes);
+            }
+          }
+          if (totalMin >= 61) {
+            startTime++;
+            startMin = 0;
+          }
+        }
+      }
+    });
+  }, []);
   return (
     <Container>
       <ApexCharts
         type="bar"
         series={[
           {
-            data: [60, 50, 30, 0, 0, 30, 50, 60, 30, 20],
+            data: times,
           },
         ]}
         options={{
@@ -62,6 +116,12 @@ const Chart = () => {
               // "3",
               // "4",
             ],
+          },
+          yaxis: {
+            max: 60,
+          },
+          fill: {
+            colors: "#fec25c",
           },
         }}
       />

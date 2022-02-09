@@ -11,7 +11,7 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -99,9 +99,11 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Transactional
 	@Override
-	public List<NoticeGetListResponseDto> getNoticeList(String accessToken, Pageable pageable) {
+	public List<NoticeGetListResponseDto> getNoticeList(String accessToken, int pageNumber) {
+		
 		User user = jwtTokenService.convertTokenToUser(accessToken);
-		Page<Notice> noticeList = noticeRepository.findByUserinfoWithPaging(user, pageable);
+		
+		Page<Notice> noticeList = noticeRepository.findByUserinfoWithPaging(user, PageRequest.of(pageNumber, 10));
 		List<NoticeGetListResponseDto> noticeResponseList = new ArrayList<NoticeGetListResponseDto>();
 			
 		noticeList.forEach(notice -> {

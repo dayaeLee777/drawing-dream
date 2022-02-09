@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import Period from "../timetable/Period";
 
 const Wrapper = styled(motion.div)`
   width: 600px;
@@ -12,8 +13,6 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-around; */
-  /* letter-spacing: -1px; */
 `;
 const Header = styled.div`
   display: flex;
@@ -32,6 +31,8 @@ const Title = styled.div`
   align-items: end;
   margin-bottom: 20px;
 `;
+
+
 const TimeTableModal = ({ layoutId }) => {
   const onClick = (event) => {
     event.stopPropagation();
@@ -41,6 +42,7 @@ const TimeTableModal = ({ layoutId }) => {
       <Header>
         <Title>시간표</Title>
       </Header>
+      <Period />
     </Wrapper>
   );
 };
