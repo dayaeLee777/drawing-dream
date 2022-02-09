@@ -51,6 +51,7 @@ const StudyRecord = ({
 
   const [records, setRecords] = useState([]);
   const [isListLoading, setIsListLoading] = useState(true);
+
   const date = new Date();
   let month = date.getMonth() + 1;
   let day = date.getDate();
