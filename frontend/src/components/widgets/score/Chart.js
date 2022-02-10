@@ -1,6 +1,9 @@
 import ApexCharts from "react-apexcharts";
 import commonCode from "config/commonCode";
 import styled from "styled-components";
+import { getScore } from "api/score";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Container = styled.div`
   width: 80%;
@@ -8,14 +11,41 @@ const Container = styled.div`
 `;
 
 const Chart = () => {
+  const [data, setData] = useState([]);
+  const [avg, setAvg] = useState([]);
+  const [record, setRecord] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  useEffect(() => {
+    getScore().then((res) => {
+      const score = res.data.scoreGetResponseDtoList;
+      setData(score);
+      let idx = 0;
+      for(idx; idx < score.length; idx++) {
+        console.log(score[idx].gradeCode)
+        const _grade = (score[idx].gradeCode.substring(2,3) - 1)
+        const _class = (score[idx].testCode.substring(4,5) - 1)
+        console.log(record[_grade * 4 + _class])
+        const temp = record.concat();
+        console.log(temp)
+        record[_grade * 4 + _class].push(record[_grade * 4 + _class] + score[idx].score)
+      }
+    }
+    );
+  }, []);
+
+  const onClick = () => {
+    console.log(data)
+    console.log(record)
+  };
+
   return (
     <Container>
+      <div onClick={onClick}>가나다</div>
       <ApexCharts
         type="bar"
         series={[
           {
             name: "평균",
-            data: [100, 89, 93, 76, 80, 78],
+            data: [100, 89, 93, 76, 80, 78, 40, 56],
           },
         ]}
         options={{
@@ -42,11 +72,21 @@ const Chart = () => {
           xaxis: {
             categories: [
               [commonCode.E.E01, commonCode.J.J10.J1001],
-              ["1학년 1학기", "기말고사"],
-              ["1학년 2학기", "중간고사"],
-              ["1학년 2학기", "기말고사"],
-              ["2학년 1학기", "중간고사"],
-              ["2학년 2학기", "기말고사"],
+              [commonCode.E.E01, commonCode.J.J10.J1002],
+              [commonCode.E.E01, commonCode.J.J10.J1003],
+              [commonCode.E.E01, commonCode.J.J10.J1004],
+              [commonCode.E.E02, commonCode.J.J10.J1001],
+              [commonCode.E.E02, commonCode.J.J10.J1002],
+              [commonCode.E.E02, commonCode.J.J10.J1003],
+              [commonCode.E.E02, commonCode.J.J10.J1004],
+              // ["1학년 1학기", "중간고사"],
+              // ["1학년 1학기", "기말고사"],
+              // ["1학년 2학기", "중간고사"],
+              // ["1학년 2학기", "기말고사"],
+              // ["2학년 1학기", "중간고사"],
+              // ["2학년 1학기", "기말고사"],
+              // ["2학년 2학기", "중간고사"],
+              // ["2학년 2학기", "기말고사"],
             ],
           },
           labels: {
