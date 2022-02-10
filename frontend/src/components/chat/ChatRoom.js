@@ -157,15 +157,22 @@ const ChatForm = styled.form`
   }
 `;
 
-const ChatRoom = ({ roomId, users, chatClose }) => {
+const ChatRoom = ({
+  contents,
+  setContents,
+  message,
+  setMessage,
+  roomId,
+  users,
+  chatClose,
+  memberId,
+}) => {
+  const [chatMove, setChatMove] = useState(false);
+  // const [contents, setContents] = useState([]);
+  // const [message, setMessage] = useState("");
+  const { userName, userId } = useSelector((state) => state.user);
   let sockJS = new SockJS("http://localhost:8080/ws-dd");
   let client = Stomp.over(sockJS);
-  const [chatMove, setChatMove] = useState(false);
-  const [contents, setContents] = useState([]);
-  const [message, setMessage] = useState("");
-  const [headers, setHeaders] = useState({});
-  const { userName, userId } = useSelector((state) => state.user);
-
   const onCloseChat = (e) => {
     console.log("e.target: ", e.target);
     console.log("e.tarcurrentTargetget: ", e.currentTarget);
@@ -189,9 +196,9 @@ const ChatRoom = ({ roomId, users, chatClose }) => {
     sessionStorage.getItem("access-token") ||
     localStorage.getItem("access-token");
 
-  const header = {
-    Authorization: `Bearer ${token}`,
-  };
+  // const header = {
+  //   Authorization: `Bearer ${token}`,
+  // };
   useEffect(() => {
     // setHeaders({
     //   Authorization: `Bearer ${token}`,
@@ -199,38 +206,35 @@ const ChatRoom = ({ roomId, users, chatClose }) => {
 
     // console.log(headers);
     console.log(client);
-    client.connect(
-      {
-        Authorization: `Bearer ${token}`,
-      },
-      (frame) => {
-        console.log("STOMP Connection");
-        client.subscribe(`/topic/room/${roomId}`, (response) => {
-          setContents((prev) => [...prev, JSON.parse(response.body)]);
-          console.log(contents);
-        });
-        client.send(
-          "/app/chat/enter",
-          {
-            Authorization: `Bearer ${token}`,
-          },
-          JSON.stringify({ roomId })
-        );
-      }
-    );
-
+    // client.connect(
+    //   {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   (frame) => {
+    //     console.log("STOMP Connection");
+    client.subscribe(`/topic/room/${memberId}`, (response) => {
+      setContents((prev) => [...prev, JSON.parse(response.body)]);
+      console.log(contents);
+    });
+    // client.send(
+    //   "/app/chat/one",
+    //   {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   JSON.stringify({ roomId })
+    // );
     return () => client.disconnect();
   }, []);
 
   const onClick = (event) => {
     event.preventDefault();
-    console.log(client);
+    // console.log(client);
     client.send(
-      "/app/chat/room",
+      "/app/chat/one",
       {
         Authorization: `Bearer ${token}`,
       },
-      JSON.stringify({ roomId, content: message })
+      JSON.stringify({ roomId, userId, content: message })
     );
     setMessage("");
   };
