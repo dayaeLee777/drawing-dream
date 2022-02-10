@@ -15,10 +15,15 @@ import com.dd.db.entity.board.Notice;
 public interface NoticeService {
 
 	int registerNotice(String accessToken, List<MultipartFile> multipartFile, NoticeRegisterRequestDto noticeRegisterRequestDto);
+	
 	List<NoticeGetListResponseDto> getNoticeList(String accessToken, int pageNumber);
+	
 	NoticeGetResponseDto getNotice(UUID noticeId);
+	
 	TotalNoticeGetResponseDto getTotalCount(String accessToken);
+	
 	Notice updateNotice(String accessToken, List<MultipartFile> multipartFile, NoticeUpdateRequestDto noticeUpdateRequestDto);
+	
 	Notice deleteNotice(UUID noticeId);
 	
 }

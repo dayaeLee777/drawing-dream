@@ -20,6 +20,8 @@ public class CalendarGetListResponseDto {
 	private UUID calendarId;
 	@ApiModelProperty(name="학사일정 - 학사일정 코드")
 	private Code calendarCode;
+	@ApiModelProperty(name="학사일정 - 학사일정 코드")
+	private Code gradeCode;
 	@ApiModelProperty(name="학사일정 - 시험 코드")
 	private SubCode testCode;
 	@ApiModelProperty(name="학사일정 - 시작 날짜")
@@ -28,9 +30,10 @@ public class CalendarGetListResponseDto {
 	private LocalDate endDate;
 	
 	@Builder
-	public CalendarGetListResponseDto(UUID calendarId, Code calendarCode, SubCode testCode, LocalDate startDate, LocalDate endDate) {
+	public CalendarGetListResponseDto(UUID calendarId, Code calendarCode, Code gradeCode, SubCode testCode, LocalDate startDate, LocalDate endDate) {
 		this.calendarId   = calendarId;
 		this.calendarCode = calendarCode;
+		this.gradeCode    = gradeCode;
 		this.testCode     = testCode;
 		this.startDate    = startDate;
 		this.endDate      = endDate;

@@ -39,9 +39,7 @@ public class QNotice extends EntityPathBase<Notice> {
 
     public final EnumPath<com.dd.db.enums.Code> noticeCode = createEnum("noticeCode", com.dd.db.enums.Code.class);
 
-    public final NumberPath<Integer> noticeNo = createNumber("noticeNo", Integer.class);
-
-    public final DateTimePath<java.util.Date> regTime = createDateTime("regTime", java.util.Date.class);
+    public final DateTimePath<java.time.LocalDateTime> regTime = createDateTime("regTime", java.time.LocalDateTime.class);
 
     public final com.dd.db.entity.school.QSchool school;
 

@@ -3,9 +3,12 @@ import styled from "styled-components";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteCommunity, getCommunityDetail } from "api/community";
 import { useSelector } from "react-redux";
-import CommentList from "./comment/CommentList";
+import { deleteNotice, getNoticeDetail } from "api/notice";
+import commonCode from "config/commonCode";
+import { FileIcon, defaultStyles } from "react-file-icon";
+import { getProfileImg } from "api/user";
+import blankProfile from "assets/img/blank-profile.png";
 
 const DetailContainer = styled.div`
   padding: 3rem 5rem;
@@ -31,6 +34,15 @@ const ProfileContainer = styled.div`
   padding-left: 0.5rem;
   margin-top: 1rem;
   color: #787878;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 45px;
+    margin-right: 0.5rem;
+  }
 
   .userName {
     font-size: 1rem;
@@ -57,8 +69,44 @@ const EditContainer = styled.div`
     cursor: pointer;
   }
 `;
+const FileContainer = styled.div`
+  height: 5rem;
+  /* background-color: #facead; */
+  margin-top: 2rem;
 
-const CommunityDetail = () => {
+  .desc {
+    font-size: 1.2rem;
+    padding-left: 0.5rem;
+  }
+  .fileList {
+    margin-top: 1rem;
+    padding: 0.5rem 2.5rem;
+    border: 1px solid #dadde6;
+    border-radius: 5px;
+
+    .fileItem {
+      display: flex;
+      height: 1.5rem;
+      align-items: center;
+      .icon {
+        width: 1rem;
+        margin-right: 0.2rem;
+      }
+      .file {
+        cursor: pointer;
+        display: block;
+        background-color: white;
+        border: none;
+        color: #555555;
+        &:hover {
+          color: #000000;
+        }
+      }
+    }
+  }
+`;
+
+const NoticeDetail = () => {
   const params = useParams();
   const Navigate = useNavigate();
 
@@ -67,18 +115,26 @@ const CommunityDetail = () => {
     userId: "",
     content: "",
     hit: "",
-    title: "",
+    noticeCode: "",
+    files: null,
   });
   const [isLoading, setIsLoading] = useState(true);
-  const { userId } = useSelector((state) => state.user);
+  const { userId, gradeCode, classCode } = useSelector((state) => state.user);
+  const [profileUrl, setProfileUrl] = useState("");
 
   useEffect(() => {
+    let noticeUserId = "";
     if (isLoading) {
-      getCommunityDetail(params.communityId)
+      getNoticeDetail(params.noticeId)
         .then((res) => {
-          console.log(res);
+          noticeUserId = res.data.userId;
           setData(res.data);
-          setIsLoading(false);
+        })
+        .then(() => {
+          getProfileImg(noticeUserId).then((res) => {
+            setProfileUrl(res.data.fileName);
+            setIsLoading(false);
+          });
         })
         .catch(() => {
           Navigate("../");
@@ -90,14 +146,27 @@ const CommunityDetail = () => {
   }, [isLoading]);
 
   const onDelete = () => {
-    deleteCommunity(params.communityId).then(() => {
+    deleteNotice(params.noticeId).then(() => {
       alert("글이 삭제되었습니다.");
       Navigate("../");
     });
   };
 
   const onModify = () => {
-    Navigate(`../modify/${params.communityId}`);
+    Navigate(`../modify/${params.noticeId}`);
+  };
+
+  const onDownload = (e) => {
+    window.open(e.target.value);
+  };
+
+  const makeExtension = (fileName) => {
+    let fileLength = fileName.length;
+    let fileDot = fileName.lastIndexOf(".");
+    let fileExtension = fileName
+      .substring(fileDot + 1, fileLength)
+      .toLowerCase();
+    return fileExtension;
   };
 
   // const sampleData = {
@@ -113,8 +182,25 @@ const CommunityDetail = () => {
   return (
     <DetailContainer>
       <TitleContainer>
-        <div className="title">{data.title}</div>
+        <div className="title">
+          {data.noticeCode === "K01" ? (
+            <>[전체] </>
+          ) : data.noticeCode === "K02" ? (
+            <>[{commonCode.E[gradeCode]}] </>
+          ) : (
+            <>
+              [{commonCode.E[gradeCode]} {commonCode.F[classCode]}]
+            </>
+          )}
+          {data.title}
+        </div>
         <ProfileContainer>
+          {!isLoading && (
+            <img
+              src={profileUrl ? profileUrl : blankProfile}
+              alt="프로필이미지"
+            />
+          )}
           <span className="userName">{data.userName}</span>
           <span className="regTime">{data.regTime}</span>
         </ProfileContainer>
@@ -136,10 +222,33 @@ const CommunityDetail = () => {
           <Viewer initialValue={`${data.content}`} />
         </BoardContainer>
       )}
-
-      <CommentList communityId={params.communityId} />
+      <FileContainer>
+        <div className="desc">첨부파일</div>
+        <div className="fileList">
+          {!isLoading &&
+            data.files &&
+            Object.entries(data.files).map((item) => (
+              <div className="fileItem">
+                <div className="icon" value={item[1]}>
+                  <FileIcon
+                    extension={makeExtension(item[0])}
+                    {...defaultStyles[makeExtension(item[0])]}
+                  />
+                </div>
+                <button
+                  className="file"
+                  key={item[1]}
+                  onClick={onDownload}
+                  value={item[1]}
+                >
+                  {item[0]}
+                </button>
+              </div>
+            ))}
+        </div>
+      </FileContainer>
     </DetailContainer>
   );
 };
 
-export default CommunityDetail;
+export default NoticeDetail;

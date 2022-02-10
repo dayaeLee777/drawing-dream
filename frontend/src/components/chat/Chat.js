@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ChatList from "./ChatList";
-import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCommentDots,
+  faCircle,
+  faBell,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   position: fixed;
@@ -18,24 +25,76 @@ const Container = styled.div`
   font-size: 2.3rem;
   /* box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6),
     0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); */
-  svg {
+  .fa-comment-dots {
     filter: drop-shadow(6px 6px 5px #a8a8a8);
+  }
+  .fa-bell {
+    position: absolute;
+    right: -10px;
+    top: 20px;
+    content: attr(data-count);
+    font-size: 40%;
+    padding: 0.6em;
+    border-radius: 999px;
+    line-height: 0.75em;
+    color: white;
+    background: rgba(255, 0, 0, 0.85);
+    text-align: center;
+    min-width: 2em;
+    font-weight: bold;
   }
 `;
 
 const Chat = () => {
   const [chatOpen, setChatOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [contents, setContents] = useState([]);
+  const [isNew, setIsNew] = useState(false);
+  const { userName, userId } = useSelector((state) => state.user);
+
+  let sockJS = new SockJS("http://localhost:8080/ws-dd");
+  let client = Stomp.over(sockJS);
+  const token =
+    sessionStorage.getItem("access-token") ||
+    localStorage.getItem("access-token");
+  useEffect(() => {
+    client.connect(
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      (frame) => {
+        console.log("STOMP Connection");
+        client.subscribe(`/topic/one/${userId}`, (response) => {
+          setContents((prev) => [...prev, JSON.parse(response.body)]);
+          console.log(response);
+          setIsNew(true);
+        });
+      }
+    );
+
+    return () => client.disconnect();
+  }, []);
   const chatClose = () => {
     setChatOpen(!chatOpen);
+    setIsNew(false);
   };
 
   return (
     <>
       <Container onClick={chatClose}>
         <FontAwesomeIcon icon={faCommentDots} size="2x" />
+        {isNew && !chatOpen && <FontAwesomeIcon icon={faBell} size="2x" />}
       </Container>
 
-      {chatOpen && <ChatList chatClose={chatClose}></ChatList>}
+      {chatOpen && (
+        <ChatList
+          message={message}
+          setMessage={setMessage}
+          contents={contents}
+          setContents={setContents}
+          chatClose={chatClose}
+        ></ChatList>
+      )}
     </>
   );
 };

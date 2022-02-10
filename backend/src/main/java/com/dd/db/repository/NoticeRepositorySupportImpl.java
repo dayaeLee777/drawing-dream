@@ -1,8 +1,10 @@
 package com.dd.db.repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -138,4 +140,27 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 		
 		return count;
   	}
+
+	@Override
+	public Optional<Notice> findMeetingNotice(LocalDateTime regStartDate, LocalDateTime regEndDate, Code meetingCode, UserDepartment userDepartment) {
+		
+		Optional<Notice> notice = Optional.ofNullable(jpaQueryFactory
+				.select(qNotice)
+				.from(qNotice)
+				.where(
+						qNotice.regTime.between(regStartDate, regEndDate),
+						qNotice.noticeCode.eq(meetingCode),
+						qNotice.school.eq(userDepartment.getSchool()),
+						qNotice.delYn.isFalse(),
+						qNotice.gradeCode.eq(userDepartment.getGradeCode()),
+						qNotice.classCode.eq(userDepartment.getClassCode())
+						)
+				.orderBy(qNotice.regTime.desc())
+				.limit(1)
+				.fetchOne());	
+		
+		return notice;
+	}
+
+
 }

@@ -93,7 +93,7 @@ const ChatLogs = styled.div`
 `;
 
 const List = styled.div`
-  cursor: pointer;
+  /* cursor: pointer; */
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
 `;
@@ -148,10 +148,17 @@ const ChatInput = styled.div`
   overflow: hidden;
 `;
 
-const ChatList = ({ chatClose }) => {
+const ChatList = ({
+  contents,
+  setContents,
+  message,
+  setMessage,
+  chatClose,
+}) => {
   const [rooms, setRooms] = useState([]);
   const [roomId, setRoomId] = useState("");
   const [users, setUsers] = useState([]);
+  const [memberId, setMemberId] = useState("");
   const { userName, userId } = useSelector((state) => state.user);
   const onCloseChat = (e) => {
     console.log("e.target: ", e.target);
@@ -173,8 +180,15 @@ const ChatList = ({ chatClose }) => {
       {roomId && (
         <ChatRoom
           roomId={roomId}
+          setRoomId={setRoomId}
           users={users}
+          memberId={memberId}
           chatClose={chatClose}
+          message={message}
+          setMessage={setMessage}
+          contents={contents}
+          setContents={setContents}
+          key={roomId}
         ></ChatRoom>
       )}
       <ChatBox style={roomId ? { display: "none" } : {}}>
@@ -192,10 +206,15 @@ const ChatList = ({ chatClose }) => {
                 {rooms.map((room) => (
                   <List
                     key={room.roomId}
-                    // onClick={chatMo(room.roomId)}
-                    onClick={() => (
-                      setRoomId(room.roomId), setUsers(room.users)
-                    )}
+                    onClick={() => {
+                      setRoomId(room.roomId);
+                      setUsers(room.users);
+                      room.users.map((user) => {
+                        if (user.userId !== userId) {
+                          setMemberId(user.userId);
+                        }
+                      });
+                    }}
                   >
                     <Image src={profileImg}></Image>
                     <Middle>
@@ -204,7 +223,7 @@ const ChatList = ({ chatClose }) => {
                           <>{user.userId !== userId && <>{user.userName}</>}</>
                         ))}
                       </Name>
-                      <Content>{room.rooName}</Content>
+                      <Content>{room.roomName}</Content>
                     </Middle>
                     <Date>오전 10:41</Date>
                   </List>
