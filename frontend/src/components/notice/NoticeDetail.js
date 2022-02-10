@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { deleteNotice, getNoticeDetail } from "api/notice";
 import commonCode from "config/commonCode";
 import { FileIcon, defaultStyles } from "react-file-icon";
+import { getProfileImg } from "api/user";
+import blankProfile from "assets/img/blank-profile.png";
 
 const DetailContainer = styled.div`
   padding: 3rem 5rem;
@@ -32,6 +34,15 @@ const ProfileContainer = styled.div`
   padding-left: 0.5rem;
   margin-top: 1rem;
   color: #787878;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 45px;
+    margin-right: 0.5rem;
+  }
 
   .userName {
     font-size: 1rem;
@@ -78,9 +89,9 @@ const FileContainer = styled.div`
       height: 1.5rem;
       align-items: center;
       .icon {
-          width: 1rem;
-          margin-right: 0.2rem;
-        }
+        width: 1rem;
+        margin-right: 0.2rem;
+      }
       .file {
         cursor: pointer;
         display: block;
@@ -109,13 +120,21 @@ const NoticeDetail = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
   const { userId, gradeCode, classCode } = useSelector((state) => state.user);
+  const [profileUrl, setProfileUrl] = useState("");
+
   useEffect(() => {
+    let noticeUserId = "";
     if (isLoading) {
       getNoticeDetail(params.noticeId)
         .then((res) => {
-          console.log(res);
+          noticeUserId = res.data.userId;
           setData(res.data);
-          setIsLoading(false);
+        })
+        .then(() => {
+          getProfileImg(noticeUserId).then((res) => {
+            setProfileUrl(res.data.fileName);
+            setIsLoading(false);
+          });
         })
         .catch(() => {
           Navigate("../");
@@ -176,6 +195,12 @@ const NoticeDetail = () => {
           {data.title}
         </div>
         <ProfileContainer>
+          {!isLoading && (
+            <img
+              src={profileUrl ? profileUrl : blankProfile}
+              alt="프로필이미지"
+            />
+          )}
           <span className="userName">{data.userName}</span>
           <span className="regTime">{data.regTime}</span>
         </ProfileContainer>
