@@ -3,6 +3,9 @@ import styled from "styled-components";
 import ChatList from "./ChatList";
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   position: fixed;
@@ -25,6 +28,37 @@ const Container = styled.div`
 
 const Chat = () => {
   const [chatOpen, setChatOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [contents, setContents] = useState([]);
+  const { userName, userId } = useSelector((state) => state.user);
+  let sockJS = new SockJS("http://localhost:8080/ws-dd");
+  let client = Stomp.over(sockJS);
+  const token =
+    sessionStorage.getItem("access-token") ||
+    localStorage.getItem("access-token");
+  useEffect(() => {
+    client.connect(
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      (frame) => {
+        console.log("STOMP Connection");
+        client.subscribe(`/topic/one/${userId}`, (response) => {
+          setContents((prev) => [...prev, JSON.parse(response.body)]);
+          console.log(response);
+        });
+        // client.send(
+        //   "/app/chat/enter",
+        //   {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        //   JSON.stringify({ roomId })
+        // );
+      }
+    );
+
+    return () => client.disconnect();
+  }, []);
   const chatClose = () => {
     setChatOpen(!chatOpen);
   };
@@ -35,7 +69,15 @@ const Chat = () => {
         <FontAwesomeIcon icon={faCommentDots} size="2x" />
       </Container>
 
-      {chatOpen && <ChatList chatClose={chatClose}></ChatList>}
+      {chatOpen && (
+        <ChatList
+          message={message}
+          setMessage={setMessage}
+          contents={contents}
+          setContents={setContents}
+          chatClose={chatClose}
+        ></ChatList>
+      )}
     </>
   );
 };

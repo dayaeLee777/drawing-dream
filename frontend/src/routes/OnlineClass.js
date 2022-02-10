@@ -330,7 +330,7 @@ const OnlineClass = () => {
         <Title>{commonCode.G.G05.G0500}: 박선생 선생님</Title>
         <Wrapper>
           <TeacherVideoContainer id="teacher"></TeacherVideoContainer>
-          <Chat />
+          <Chat courseId={roomId} />
         </Wrapper>
         <ParticipantVideoContainer id="participants"></ParticipantVideoContainer>
       </Container>
