@@ -3,10 +3,12 @@ import {
   deleteReComment,
   getReCommentList,
 } from "api/community";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CommentRegister from "./CommentRegister";
+import blankProfile from "assets/img/blank-profile.png";
+import { getProfileImg } from "api/user";
 
 const Container = styled.div`
   font-size: 1rem;
@@ -17,13 +19,20 @@ const Container = styled.div`
     margin-top: 0.5rem;
   }
   border-top: 1px solid #e2e2e2;
-
   margin-top: 1rem;
   padding-top: 1rem;
+  display: flex;
+  box-sizing: border-box;
+`;
+const ProfileImg = styled.img`
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 45px;
+  margin-right: 0.7rem;
 `;
 
 const Content = styled.div`
-  padding-left: ${(props) => (props.pl ? "1rem" : "5rem")};
+  padding-left: ${(props) => (props.pl ? "0rem" : "3rem")};
 `;
 
 const FeatureContainer = styled.div`
@@ -49,6 +58,16 @@ const CommentItem = ({
   setReCommentListIsLoading,
 }) => {
   const { userId } = useSelector((state) => state.user);
+  const [profileUrl, setProfileUrl] = useState("");
+  const [isProfile, setIsProfile] = useState(true);
+  useEffect(() => {
+    if (isProfile) {
+      getProfileImg(data.userId).then((res) => {
+        setProfileUrl(res.data.fileName);
+        setIsProfile(false);
+      });
+    }
+  }, []);
   // 대댓글 관련
   const [reCommentList, setReCommentList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -134,31 +153,36 @@ const CommentItem = ({
   // Click event END
 
   return (
-    <Container>
+    <>
       <Content pl={children}>
         {!commentModify.isCommentModify && (
-          <>
-            <div className="userName">{data.userName}</div>
-            <div className="content">{data.content}</div>
-            <FeatureContainer>
-              <span className="regTime">{data.regTime}</span>
-              {children && (
-                <span className="reCommentBtn" onClick={onReCommentRegister}>
-                  답글달기
-                </span>
-              )}
-              {data.userId === userId && (
-                <>
-                  <span className="reCommentBtn" onClick={onCommentModify}>
-                    수정하기
+          <Container>
+            <div>
+              <ProfileImg src={profileUrl ? profileUrl : blankProfile} />
+            </div>
+            <div>
+              <div className="userName">{data.userName}</div>
+              <div className="content">{data.content}</div>
+              <FeatureContainer>
+                <span className="regTime">{data.regTime}</span>
+                {children && (
+                  <span className="reCommentBtn" onClick={onReCommentRegister}>
+                    답글달기
                   </span>
-                  <span className="reCommentBtn" onClick={onDelete}>
-                    삭제하기
-                  </span>
-                </>
-              )}
-            </FeatureContainer>
-          </>
+                )}
+                {data.userId === userId && (
+                  <>
+                    <span className="reCommentBtn" onClick={onCommentModify}>
+                      수정하기
+                    </span>
+                    <span className="reCommentBtn" onClick={onDelete}>
+                      삭제하기
+                    </span>
+                  </>
+                )}
+              </FeatureContainer>
+            </div>
+          </Container>
         )}
         {/* 수정하기 누르면 나오는 입력 창 */}
         {commentModify.isCommentModify && (
@@ -191,7 +215,7 @@ const CommentItem = ({
             setReCommentListIsLoading={setIsLoading}
           />
         ))}
-    </Container>
+    </>
   );
 };
 
