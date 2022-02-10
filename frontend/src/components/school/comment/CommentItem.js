@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CommentRegister from "./CommentRegister";
 import blankProfile from "assets/img/blank-profile.png";
+import { getProfileImg } from "api/user";
 
 const Container = styled.div`
   font-size: 1rem;
@@ -24,7 +25,8 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 const ProfileImg = styled.img`
-  width: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 45px;
   margin-right: 0.7rem;
 `;
@@ -56,6 +58,16 @@ const CommentItem = ({
   setReCommentListIsLoading,
 }) => {
   const { userId } = useSelector((state) => state.user);
+  const [profileUrl, setProfileUrl] = useState("");
+  const [isProfile, setIsProfile] = useState(true);
+  useEffect(() => {
+    if (isProfile) {
+      getProfileImg(data.userId).then((res) => {
+        setProfileUrl(res.data.fileName);
+        setIsProfile(false);
+      });
+    }
+  }, []);
   // 대댓글 관련
   const [reCommentList, setReCommentList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -145,31 +157,31 @@ const CommentItem = ({
       <Content pl={children}>
         {!commentModify.isCommentModify && (
           <Container>
-          <div>
-            <ProfileImg src={blankProfile} />
-          </div>
-          <div>
-            <div className="userName">{data.userName}</div>
-            <div className="content">{data.content}</div>
-            <FeatureContainer>
-              <span className="regTime">{data.regTime}</span>
-              {children && (
-                <span className="reCommentBtn" onClick={onReCommentRegister}>
-                  답글달기
-                </span>
-              )}
-              {data.userId === userId && (
-                <>
-                  <span className="reCommentBtn" onClick={onCommentModify}>
-                    수정하기
+            <div>
+              <ProfileImg src={profileUrl ? profileUrl : blankProfile} />
+            </div>
+            <div>
+              <div className="userName">{data.userName}</div>
+              <div className="content">{data.content}</div>
+              <FeatureContainer>
+                <span className="regTime">{data.regTime}</span>
+                {children && (
+                  <span className="reCommentBtn" onClick={onReCommentRegister}>
+                    답글달기
                   </span>
-                  <span className="reCommentBtn" onClick={onDelete}>
-                    삭제하기
-                  </span>
-                </>
-              )}
-            </FeatureContainer>
-          </div>
+                )}
+                {data.userId === userId && (
+                  <>
+                    <span className="reCommentBtn" onClick={onCommentModify}>
+                      수정하기
+                    </span>
+                    <span className="reCommentBtn" onClick={onDelete}>
+                      삭제하기
+                    </span>
+                  </>
+                )}
+              </FeatureContainer>
+            </div>
           </Container>
         )}
         {/* 수정하기 누르면 나오는 입력 창 */}
