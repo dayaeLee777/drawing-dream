@@ -6,7 +6,7 @@ const READ_TIMETABLE_FAIL = "TIEMTABLE/READ_TIMETABLE_FAIL";
 export const readTimeTable = () => async (dispatch) => {
   getTimeTable()
     .then((res) => {
-      console.log(res.data.timeTableGetListResponseDTOs);
+      // console.log(res.data.timeTableGetListResponseDTOs);
       dispatch({
         type: READ_TIMETABLE_SUCCESS,
         data: res.data.timeTableGetListResponseDTOs,
