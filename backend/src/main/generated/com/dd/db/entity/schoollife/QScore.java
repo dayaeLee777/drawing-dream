@@ -33,7 +33,7 @@ public class QScore extends EntityPathBase<Score> {
 
     public final NumberPath<Float> score = createNumber("score", Float.class);
 
-    public final EnumPath<com.dd.db.enums.Code> semestertCode = createEnum("semestertCode", com.dd.db.enums.Code.class);
+    public final EnumPath<com.dd.db.enums.Code> semesterCode = createEnum("semesterCode", com.dd.db.enums.Code.class);
 
     public final EnumPath<com.dd.db.enums.SubCode> subjectCode = createEnum("subjectCode", com.dd.db.enums.SubCode.class);
 
