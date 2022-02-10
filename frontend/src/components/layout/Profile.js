@@ -77,54 +77,58 @@ const Profile = () => {
   const [image, setImage] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
-const formData = new FormData();
-const onFileUpload = (e) => {
-  let file_kind = e.target.value.lastIndexOf('.');
-  let file_name = e.target.value.substring(file_kind+1,e.length);
-  let file_type = file_name.toLowerCase();
-  let check_file_type=new Array();
-  check_file_type=['jpg','gif','png','jpeg'];
- 
-  if(check_file_type.indexOf(file_type)==-1){
-   alert('이미지 파일만 선택할 수 있습니다.');
-   return false;
-  }
+  const formData = new FormData();
+  const onFileUpload = (e) => {
+    let file_kind = e.target.value.lastIndexOf('.');
+    let file_name = e.target.value.substring(file_kind + 1, e.length);
+    let file_type = file_name.toLowerCase();
+    let check_file_type = new Array();
+    check_file_type = ['jpg', 'gif', 'png', 'jpeg'];
 
-  formData.append("multipartFile", e.target.files[0]);
-  profileImage(formData)
-  getDept(state.user.userId).then(
-    (res) => (
-      setImage(res.data.fileName)),
-      setIsLoading(true),
-      window.location.reload(),
-      )
-}
-    const onClick = () => {
+    if (check_file_type.indexOf(file_type) == -1) {
+      alert('이미지 파일만 선택할 수 있습니다.');
+      return false;
+    }
+
+    formData.append("multipartFile", e.target.files[0]);
+    profileImage(formData).then(() => {
+      setIsLoading(true);
+    })
+    // getDept(state.user.userId).then(
+    //   (res) => (
+    //     setImage(res.data.fileName)),
+    //   window.location.reload(),
+    //   setIsLoading(true),
+    // )
+    // setIsLoading(true);
+  }
+  const onClick = () => {
     navigate("/lookup");
   };
 
   useEffect(() => {
-    if(isLoading){
+    if (isLoading) {
       getDept(state.user.userId)
-      .then((res) => (
-          setIsLoading(false),
+        .then((res) => (
           setImage(res.data.fileName)),
-          )
+          setIsLoading(false),
+          // window.location.reload()
+        )
     }
-  },[isLoading])
+  }, [isLoading])
 
   return (
     <Container>
       <Wrapper>
         <ProfileImage>
           <label htmlFor="file-input">
-            {image?
-            <Image src={image} alt="이미지를 찾을 수 없습니다."/>:
-            <Image src={profileImg} alt="이미지를 찾을 수 없습니다."/>
+            {image ?
+              <Image src={image} alt="이미지를 찾을 수 없습니다." /> :
+              <Image src={profileImg} alt="이미지를 찾을 수 없습니다." />
             }
             <Edit src={edit} />
           </label>
-          <input id="file-input" type="file" accept="image/gif, image/jpeg, image/png, image/jpg" onChange={onFileUpload}/>
+          <input id="file-input" type="file" accept="image/gif, image/jpeg, image/png, image/jpg" onChange={onFileUpload} />
         </ProfileImage>
         <TextContainer>
           <Name>{userName}</Name>
