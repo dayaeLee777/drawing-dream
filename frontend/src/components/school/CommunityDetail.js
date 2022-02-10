@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteCommunity, getCommunityDetail } from "api/community";
 import { useSelector } from "react-redux";
 import CommentList from "./comment/CommentList";
+import { getProfileImg } from "api/user";
+import blankProfile from "assets/img/blank-profile.png";
 
 const DetailContainer = styled.div`
   padding: 3rem 5rem;
@@ -31,6 +33,15 @@ const ProfileContainer = styled.div`
   padding-left: 0.5rem;
   margin-top: 1rem;
   color: #787878;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 45px;
+    margin-right: 0.5rem;
+  }
 
   .userName {
     font-size: 1rem;
@@ -61,24 +72,30 @@ const EditContainer = styled.div`
 const CommunityDetail = () => {
   const params = useParams();
   const Navigate = useNavigate();
-
+  const [profileUrl, setProfileUrl] = useState("");
   const [data, setData] = useState({
     title: "",
     userId: "",
     content: "",
     hit: "",
-    title: "",
   });
   const [isLoading, setIsLoading] = useState(true);
   const { userId } = useSelector((state) => state.user);
 
   useEffect(() => {
+    let communityUserId = "";
     if (isLoading) {
       getCommunityDetail(params.communityId)
         .then((res) => {
-          console.log(res);
           setData(res.data);
-          setIsLoading(false);
+          communityUserId = res.data.userId;
+        })
+        .then(() => {
+          console.log(communityUserId);
+          getProfileImg(communityUserId).then((res) => {
+            setProfileUrl(res.data.fileName);
+            setIsLoading(false);
+          });
         })
         .catch(() => {
           Navigate("../");
@@ -115,8 +132,16 @@ const CommunityDetail = () => {
       <TitleContainer>
         <div className="title">{data.title}</div>
         <ProfileContainer>
-          <span className="userName">{data.userName}</span>
-          <span className="regTime">{data.regTime}</span>
+          {!isLoading && (
+            <img
+              src={profileUrl ? profileUrl : blankProfile}
+              alt="프로필이미지"
+            />
+          )}
+          <>
+            <span className="userName">{data.userName}</span>
+            <span className="regTime">{data.regTime}</span>
+          </>
         </ProfileContainer>
         <EditContainer>
           {userId === data.userId && (
