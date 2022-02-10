@@ -6,12 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.dd.api.dto.response.ProfileImageGetResponseDto;
 import com.dd.api.dto.response.ProfileResponseDto;
-import com.dd.db.entity.files.ProfileImg;
-import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.entity.user.UserDepartment;
-import com.dd.db.repository.AuthRepository;
-import com.dd.db.repository.ProfileImgRepository;
 import com.dd.db.repository.UserDepartmentRepository;
 import com.dd.db.repository.UserRepository;
 import com.dd.security.util.JwtAuthenticationProvider;
@@ -22,13 +18,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class ProfileServiceImpl implements ProfileService {
 	
-	private final AuthRepository authRepository;
-	
 	private final UserRepository userRepository;
 	
 	private final UserDepartmentRepository userDepartmentRepository;
-	
-	private final ProfileImgRepository profileImgRepository;
 	
 	private final AwsS3Service awsS3Service;
 	
@@ -47,13 +39,12 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 	
 	@Override
-	public ProfileImageGetResponseDto getProfileImage(String accessToken, UUID userId) {
-		String loginId = getLoginIdFromToken(accessToken);
+	public ProfileImageGetResponseDto getProfileImage(UUID userId) {
 		
-		Auth auth = authRepository.findByLoginId(loginId).get();
-		if(auth == null) return null;
+		User user = userRepository.findById(userId).orElse(null);
 		
-		User user = auth.getUser();
+		if(user == null) return null;
+		
 		String fileName = awsS3Service.getThumbnailPath(user);
 		
 		return new ProfileImageGetResponseDto(fileName);
