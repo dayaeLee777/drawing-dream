@@ -140,7 +140,6 @@ const NoticeRegister = ({ modify }) => {
   };
 
   const onRegister = () => {
-    console.log(data);
     if (
       data.title &&
       editorRef.current.getInstance().getHTML() !== contentEmpty &&
@@ -191,10 +190,10 @@ const NoticeRegister = ({ modify }) => {
             { type: "application/json" }
           )
         );
-        registerNotice(formData).then(
-          alert("글 등록에 성공하였습니다."),
-          Navigate("../")
-        );
+        registerNotice(formData).then(() => {
+          alert("글 등록에 성공하였습니다.");
+          Navigate("../");
+        });
       }
     } else {
       alert("제목과 내용, 구분을 모두 작성해주세요.");
@@ -211,7 +210,6 @@ const NoticeRegister = ({ modify }) => {
       ...data,
       files: acceptedFiles.map((file) => file),
     });
-    console.log(data);
   };
 
   const makeExtension = (fileName) => {
@@ -271,8 +269,8 @@ const NoticeRegister = ({ modify }) => {
         {data.files &&
           <div className="files">
             {data.files.map((file) => (
-              <>
-                <div className="file" key={file.name}>
+              <div key={file.name}>
+                <div className="file">
                   <div className="icon">
                     <FileIcon extension={ makeExtension(file.name) } {...defaultStyles[makeExtension(file.name)]} />
                   </div>
@@ -280,7 +278,7 @@ const NoticeRegister = ({ modify }) => {
                     {file.name}
                   </div>
                 </div>
-              </>
+              </div>
               ))}
           </div>
         }

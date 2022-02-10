@@ -23,6 +23,7 @@ const BoardContainer = styled.div`
   padding: 0 3rem;
   border-radius: 5px;
   margin-top: 0.5rem;
+  min-height: 20rem;
 `;
 const TitleContainer = styled.div`
   .title {
@@ -228,7 +229,7 @@ const NoticeDetail = () => {
           {!isLoading &&
             data.files &&
             Object.entries(data.files).map((item) => (
-              <div className="fileItem">
+              <div className="fileItem" key={item[1]}>
                 <div className="icon" value={item[1]}>
                   <FileIcon
                     extension={makeExtension(item[0])}
@@ -237,7 +238,6 @@ const NoticeDetail = () => {
                 </div>
                 <button
                   className="file"
-                  key={item[1]}
                   onClick={onDownload}
                   value={item[1]}
                 >
