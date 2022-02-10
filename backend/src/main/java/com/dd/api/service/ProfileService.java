@@ -11,6 +11,6 @@ public interface ProfileService {
 
 	String getLoginIdFromToken(String accessToken);
 
-	ProfileImageGetResponseDto getProfileImage(String accessToken, UUID userId);
+	ProfileImageGetResponseDto getProfileImage(UUID userId);
 
 }

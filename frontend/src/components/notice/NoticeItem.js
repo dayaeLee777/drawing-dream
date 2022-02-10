@@ -21,8 +21,9 @@ const StyledTd = styled.td`
 const CommunityItem = ({ data, index }) => {
   const Navigate = useNavigate();
   return (
-    <StyledTr onClick={() => Navigate(`./${data.communityId}`)}>
+    <StyledTr onClick={() => Navigate(`./${data.noticeId}`)}>
       <StyledTd>{index + 1}</StyledTd>
+      <StyledTd>{data.noticeCodeString}</StyledTd>
       <StyledTd ta="left">{data.title}</StyledTd>
       <StyledTd>{data.userName}</StyledTd>
       <StyledTd>{data.hit}</StyledTd>

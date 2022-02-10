@@ -152,7 +152,7 @@ public class NoticeServiceImpl implements NoticeService {
 			return null;
 		
 		User user = notice.getUser();
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm:ss");
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd KK:mm:ss");
 		Map<String, String> files = new HashMap<String, String>();
 		
 		noticeFileRepository.findByNotice(notice).forEach(noticeFile -> {

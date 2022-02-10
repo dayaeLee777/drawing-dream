@@ -28,6 +28,8 @@ public class QTimeTable extends EntityPathBase<TimeTable> {
 
     public final EnumPath<com.dd.db.enums.Code> dayCode = createEnum("dayCode", com.dd.db.enums.Code.class);
 
+    public final BooleanPath delYn = createBoolean("delYn");
+
     //inherited
     public final ComparablePath<java.util.UUID> id = _super.id;
 

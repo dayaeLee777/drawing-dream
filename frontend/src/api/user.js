@@ -34,5 +34,12 @@ export const idCheck = async (userId) => {
 };
 
 export const profileImage = async (multipartFile, success, fail) => {
-  return await fileApi.post("/api/profile", multipartFile).then(success).catch(fail);
+  return await fileApi
+    .post("/api/profile", multipartFile)
+    .then(success)
+    .catch(fail);
+};
+
+export const getProfileImg = async (userId, success, fail) => {
+  return await api.get(`api/profile/image/${userId}`).then(success).catch(fail);
 };

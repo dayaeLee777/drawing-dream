@@ -5,6 +5,8 @@ import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createChatRoom } from "api/chat";
 import { useSelector } from "react-redux";
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
 
 const Container = styled(motion.div)`
   /* width: 10rem; */
@@ -39,7 +41,12 @@ const Name = styled.div`
 const CreateChat = styled.div``;
 
 const Member = ({ member }) => {
-  // console.log(data);
+  let sockJS = new SockJS("http://localhost:8080/ws-dd");
+  let client = Stomp.over(sockJS);
+  const token =
+    sessionStorage.getItem("access-token") ||
+    localStorage.getItem("access-token");
+
   const { userName, userId } = useSelector((state) => state.user);
   const createChat = () => {
     createChatRoom({
@@ -51,6 +58,26 @@ const Member = ({ member }) => {
       ],
     }).then((res) => {
       console.log(res);
+      // client.disconnect();
+      // client.connect(
+      //   {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   (frame) => {
+      //     console.log("STOMP Connection");
+      // client.subscribe(`/topic/one/${member.userId}`, (response) => {
+      //   // setContents((prev) => [...prev, JSON.parse(response.body)]);
+      //   console.log(response);
+      // });
+      // client.send(
+      //   "/app/chat/enter",
+      //   {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   JSON.stringify({ roomId })
+      // );
+      //   }
+      // );
     });
   };
   return (

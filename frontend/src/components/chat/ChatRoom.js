@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
@@ -7,6 +7,7 @@ import ChatList from "components/chat/ChatList";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import { useSelector } from "react-redux";
+import { getChatList } from "api/chat";
 
 const ChatBox = styled.div`
   display: block;
@@ -157,25 +158,31 @@ const ChatForm = styled.form`
   }
 `;
 
-const ChatRoom = ({ roomId, users, chatClose }) => {
+const ChatRoom = ({
+  contents,
+  setContents,
+  message,
+  setMessage,
+  roomId,
+  setRoomId,
+  users,
+  chatClose,
+  memberId,
+}) => {
+  const [chatMove, setChatMove] = useState(false);
+  const messageBoxRef = useRef();
+  const { userName, userId } = useSelector((state) => state.user);
   let sockJS = new SockJS("http://localhost:8080/ws-dd");
   let client = Stomp.over(sockJS);
-  const [chatMove, setChatMove] = useState(false);
-  const [contents, setContents] = useState([]);
-  const [message, setMessage] = useState("");
-  const [headers, setHeaders] = useState({});
-  const { userName, userId } = useSelector((state) => state.user);
 
-  const onCloseChat = (e) => {
-    console.log("e.target: ", e.target);
-    console.log("e.tarcurrentTargetget: ", e.currentTarget);
-    if (e.target === e.currentTarget) {
-      chatClose();
+  const scrollToBottom = () => {
+    if (messageBoxRef.current) {
+      messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
     }
   };
 
-  const chatMo = () => {
-    setChatMove(!chatMove);
+  const back = () => {
+    setRoomId();
   };
 
   const onChange = (event) => {
@@ -189,48 +196,37 @@ const ChatRoom = ({ roomId, users, chatClose }) => {
     sessionStorage.getItem("access-token") ||
     localStorage.getItem("access-token");
 
-  const header = {
-    Authorization: `Bearer ${token}`,
-  };
   useEffect(() => {
-    // setHeaders({
-    //   Authorization: `Bearer ${token}`,
-    // });
-
-    // console.log(headers);
-    console.log(client);
-    client.connect(
-      {
-        Authorization: `Bearer ${token}`,
-      },
-      (frame) => {
-        console.log("STOMP Connection");
-        client.subscribe(`/topic/room/${roomId}`, (response) => {
-          setContents((prev) => [...prev, JSON.parse(response.body)]);
-          console.log(contents);
-        });
-        client.send(
-          "/app/chat/enter",
-          {
-            Authorization: `Bearer ${token}`,
-          },
-          JSON.stringify({ roomId })
-        );
-      }
-    );
-
-    return () => client.disconnect();
+    getChatList(roomId).then((res) => {
+      setContents(res.data.messages);
+      client.connect(
+        {
+          Authorization: `Bearer ${token}`,
+        },
+        (frame) => {
+          console.log("STOMP Connection");
+          console.log(memberId);
+          client.subscribe(`/topic/one/${memberId}`, (response) => {
+            console.log(response);
+            setContents((prev) => [...prev, JSON.parse(response.body)]);
+          });
+        }
+      );
+    });
   }, []);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [contents]);
 
   const onClick = (event) => {
     event.preventDefault();
-    console.log(client);
     client.send(
-      "/app/chat/room",
+      "/app/chat/one",
       {
         Authorization: `Bearer ${token}`,
       },
-      JSON.stringify({ roomId, content: message })
+      JSON.stringify({ roomId, userId: memberId, content: message })
     );
     setMessage("");
   };
@@ -239,7 +235,7 @@ const ChatRoom = ({ roomId, users, chatClose }) => {
     <>
       <ChatBox style={chatMove ? { display: "none" } : {}}>
         <ChatBoxHeader>
-          <Arrow onClick={chatMo}>←</Arrow>
+          <Arrow onClick={back}>←</Arrow>
           <Subject>
             {users.map((user) => (
               <>{user.userName !== userName && <>{user.userName}</>}</>
@@ -251,7 +247,7 @@ const ChatRoom = ({ roomId, users, chatClose }) => {
         </ChatBoxHeader>
         <ChatBoxBody>
           <ChatBoxOverlay />
-          <ChatLogs>
+          <ChatLogs ref={messageBoxRef}>
             {contents.map((content, index) => (
               <>
                 {content.userId === userId ? (
@@ -262,6 +258,7 @@ const ChatRoom = ({ roomId, users, chatClose }) => {
               </>
             ))}
           </ChatLogs>
+          {/* <div ref={messageRef} /> */}
         </ChatBoxBody>
         <ChatInput>
           <ChatForm>
