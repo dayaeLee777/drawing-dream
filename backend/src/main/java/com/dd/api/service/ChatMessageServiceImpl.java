@@ -76,6 +76,7 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 
 	}
 
+	@Transactional
 	@Override
 	public ChatMessageResponseDTO sendMessageVideoRoom(ChatMessageVideoRequestDTO message, String accessToken)
 			throws Exception {
@@ -90,10 +91,10 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 
 	@Transactional
 	@Override
-	public List<ChatMessageResponseDTO> findMessages(UUID roomId) {
+	public List<ChatMessageResponseDTO> findAllMessages(ChatRoom chatRoom) {
 
 		// 1. roomId 가지고 메시지 불러오기
-		List<ChatMessage> chatMessageList = chatMessageRepository.findByRoomId(roomId).get();
+		List<ChatMessage> chatMessageList = chatMessageRepository.findAllMessages(chatRoom).get();
 		System.out.println("findMessages : chatMessage - " + chatMessageList.toString());
 
 		// 2. Response 에 메시지 담기
@@ -103,6 +104,21 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 						.userId(message.getWriter().getId()).userName(message.getWriter().getUserName()).build()));
 
 		return messages;
+
+	}
+
+	@Transactional
+	@Override
+	public ChatMessageResponseDTO findLastMessage(ChatRoom chatRoom) {
+
+		ChatMessage chatMessage = chatMessageRepository.findLastMessage(chatRoom).get();
+		System.out.println("findMessage : chatMessage - " + chatMessage.toString());
+
+		ChatMessageResponseDTO message = ChatMessageResponseDTO.builder().content(chatMessage.getContent())
+				.sendTime(chatMessage.getSendTime()).userId(chatMessage.getWriter().getId())
+				.userName(chatMessage.getWriter().getUserName()).build();
+
+		return message;
 
 	}
 

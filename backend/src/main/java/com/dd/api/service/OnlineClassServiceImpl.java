@@ -10,7 +10,6 @@ import com.dd.api.dto.request.OnlineClassRegisterRequestDTO;
 import com.dd.api.dto.response.OnlineClassResponseDTO;
 import com.dd.db.entity.onlineclass.Course;
 import com.dd.db.entity.onlineclass.OnlineClass;
-import com.dd.db.entity.user.User;
 import com.dd.db.repository.CourseRepository;
 import com.dd.db.repository.OnlineClassRepository;
 
@@ -24,17 +23,10 @@ public class OnlineClassServiceImpl implements OnlineClassService {
 
 	private final OnlineClassRepository onlineClassRepository;
 
-	private final JwtTokenService jwtTokenService;
-
 	@Transactional
 	@Override
 	public OnlineClassResponseDTO createClass(OnlineClassRegisterRequestDTO onlineClassRegisterRequestDTO,
 			String accessToken) {
-
-		User user = jwtTokenService.convertTokenToUser(accessToken);
-
-		if (user == null)
-			return null;
 
 		Course course = courseRepository.findById(onlineClassRegisterRequestDTO.getCourseId()).get();
 
@@ -48,12 +40,10 @@ public class OnlineClassServiceImpl implements OnlineClassService {
 	@Override
 	public int deleteClass(UUID classId, String accessToken) {
 
-		if (jwtTokenService.convertTokenToUser(accessToken) == null)
-			return 0;
-
 		onlineClassRepository.deleteById(classId);
 
-		return 1;
+		return onlineClassRepository.findById(classId).isPresent() ? 0 : 1;
+
 	}
 
 }
