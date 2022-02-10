@@ -65,9 +65,8 @@ public class ProfileController {
 		@ApiResponse(code=409, message="프로필 이미지를 불러오지 못했습니다."),
 	})
 	public ResponseEntity<? extends BaseResponseDto> getProfileImage(
-			@ApiIgnore @RequestHeader("Authorization") String accessToken,
 			@PathVariable("userId") @ApiParam(value="회원의 userId", required=true) UUID userId) {
-		ProfileImageGetResponseDto profileImageGetResponseDto = profileService.getProfileImage(accessToken, userId);
+		ProfileImageGetResponseDto profileImageGetResponseDto = profileService.getProfileImage(userId);
 		
 		if(profileImageGetResponseDto == null)
 			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "프로필 이미지를 불러오지 못했습니다."));
