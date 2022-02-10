@@ -1,6 +1,6 @@
 package com.dd.db.entity.board;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,30 +10,24 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.dd.db.entity.BaseEntity;
 import com.dd.db.entity.school.School;
-import com.dd.db.entity.user.Auth;
 import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.ToString;
+@ToString
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Notice extends BaseEntity {
-	
-	private int noticeNo;
+public class Notice extends BaseEntity  implements Comparable<Notice>{
 	
 	private String title;
 	
@@ -42,8 +36,7 @@ public class Notice extends BaseEntity {
 	
 	private int hit;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date regTime;
+	private LocalDateTime regTime;
 	
 	@Enumerated(EnumType.STRING)
 	private Code noticeCode;
@@ -65,4 +58,31 @@ public class Notice extends BaseEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	public void deleteNotice() {
+		this.delYn = true;
+	}
+	
+	public void updateNotice(String title, String content, Code noticeCode) {
+		this.title = title;
+		this.content = content;
+		this.noticeCode = noticeCode;
+	}
+	
+	public void plusNoticeHit() {
+		this.hit += 1;
+	}
+	
+	public void noticeByGrade(Code gradeCode) {
+		this.gradeCode = gradeCode;
+	}
+	
+	public void noticeByClass(Code classCode, Code gradeCode) {
+		this.classCode = classCode;
+		this.gradeCode = gradeCode;
+	}
+
+	@Override
+	public int compareTo(Notice o) {
+		return o.regTime.compareTo(this.regTime);
+	}
 }

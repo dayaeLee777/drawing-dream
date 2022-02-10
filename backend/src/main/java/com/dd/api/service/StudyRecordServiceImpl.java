@@ -17,6 +17,7 @@ import com.dd.api.dto.request.StudyRecordUpdateRequestDto;
 import com.dd.api.dto.response.StudyRecordFinishResponseDto;
 import com.dd.api.dto.response.StudyRecordGetListWrapperResponseDto;
 import com.dd.api.dto.response.StudyRecordResponseDto;
+import com.dd.api.dto.response.StudyRecordStartResponseDto;
 import com.dd.db.entity.addon.StudyRecord;
 import com.dd.db.entity.user.User;
 import com.dd.db.repository.StudyRecordRepository;
@@ -33,7 +34,7 @@ public class StudyRecordServiceImpl implements StudyRecordService {
 	
 	@Transactional
 	@Override
-	public StudyRecord createStudyRecord(String accessToken, StudyRecordRegistRequestDto studyRecordRegistRequestDto) {
+	public StudyRecordStartResponseDto createStudyRecord(String accessToken, StudyRecordRegistRequestDto studyRecordRegistRequestDto) {
 		User user = jwtTokenService.convertTokenToUser(accessToken);
 		LocalDate studyDate = LocalDate.now();
 		LocalDateTime startTime =  LocalDateTime.now();
@@ -45,7 +46,12 @@ public class StudyRecordServiceImpl implements StudyRecordService {
 				.user(user)
 				.build();
 		
-		return studyRecordRepository.save(studyRecord);
+		StudyRecord studyRecordResult = studyRecordRepository.save(studyRecord);
+		StudyRecordStartResponseDto studyRecordStartResponseDto = StudyRecordStartResponseDto.builder()
+				.studyRecordId(studyRecordResult.getId())
+				.build();
+		
+		return studyRecordStartResponseDto;
 	}
 
 	@Transactional

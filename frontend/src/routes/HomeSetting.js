@@ -8,7 +8,7 @@ import Memo from "components/widgets/Memo";
 import TodayClass from "components/widgets/TodayClass";
 import { useCookies } from "react-cookie";
 import Score from "components/widgets/Score";
-import StudyPlanner from "components/widgets/StudyPlanner";
+import StudyRecord from "components/widgets/StudyRecord";
 import TimeTable from "components/widgets/TimeTable";
 
 const Container = styled.div`
@@ -155,7 +155,7 @@ const HomeSetting = () => {
       />
     ),
     M06: (
-      <StudyPlanner
+      <StudyRecord
         key={widgets[5]}
         widgetId={widgets[5]}
         isShow={isShow}

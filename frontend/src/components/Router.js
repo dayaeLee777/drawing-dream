@@ -24,6 +24,9 @@ import CommunityRegister from "./school/CommunityRegister";
 import CommunityList from "./school/CommunityList";
 import CommunityDetail from "./school/CommunityDetail";
 import OnlineClass from "routes/OnlineClass";
+import NoticeRegister from "./notice/NoticeRegister";
+import NoticeList from "./notice/NoticeList";
+import NoticeDetail from "./notice/NoticeDetail";
 
 const Container = styled.div`
   display: grid;
@@ -65,7 +68,15 @@ const AppRouter = () => {
                   />
                   <Route path="/home" element={<Home />} />
                   <Route path="/modifyprofile" element={<ModifyProfile />} />
-                  <Route path="/notice" element={<Notice />} />
+                  <Route path="/notice" element={<Notice />}>
+                    <Route path="" element={<NoticeList />} />
+                    <Route path="register" element={<NoticeRegister />} />
+                    <Route path=":noticeId" element={<NoticeDetail />} />
+                    <Route
+                      path="modify/:noticeId"
+                      element={<NoticeRegister modify />}
+                    />
+                  </Route>
                   <Route path="/school/" element={<School />}>
                     <Route path="" element={<CommunityList />} />
                     <Route path="register" element={<CommunityRegister />} />

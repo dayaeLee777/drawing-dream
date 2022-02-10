@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import Period from "./timetable/Period";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -60,6 +61,7 @@ const TimeTable = ({
         <Title>시간표</Title>
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
+      <Period />
     </Container>
   );
 };

@@ -17,7 +17,10 @@ public class ChatMessageRequestDTO {
 	@ApiModelProperty(name = "메시지 내용", example = "안녕")
 	private String content;
 
-	@ApiModelProperty(name = "채팅방 uuid", example = "00000000-0000-0000-0000-00000000")
+	@ApiModelProperty(name = "채팅방 UUID", example = "00000000-0000-0000-0000-00000000")
 	private UUID roomId;
+
+	@ApiModelProperty(name = "상대방 UUID", example = "00000000-0000-0000-0000-00000000")
+	private UUID userId;
 
 }

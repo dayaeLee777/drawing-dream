@@ -1,10 +1,13 @@
 import Button from "components/commons/button";
 import styled from "styled-components";
 import profileImg from "assets/img/profile.png";
-import hand from "assets/img/waving-hand.png";
+import edit from "assets/img/pngegg.png";
 import { useSelector } from "react-redux";
 import commonCode from "config/commonCode";
 import { useNavigate } from "react-router-dom";
+import { profileImage } from "api/user";
+import { getDept } from "api/user";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -21,11 +24,34 @@ const Wrapper = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+  button{
+    cursor: pointer;
+  }
+`;
+
+const ProfileImage = styled.div`
+  position: relative;
+  top: 1rem;
+  input{
+    display: none;
+  }
 `;
 
 const Image = styled.img`
+  display: inline;
+  border-radius: 4rem;
+  height: 8rem;
   width: 8rem;
-  padding-left: 2rem;
+  margin-left: 2rem;
+  cursor: pointer;
+`;
+
+const Edit = styled.img`
+  position: relative;
+  top: -2rem;
+  left: 8rem;
+  background-color: white;
+  cursor: pointer;
 `;
 
 const TextContainer = styled.div`
@@ -47,13 +73,59 @@ const Profile = () => {
   const navigate = useNavigate();
   const { userName, schoolName, gradeCode, classCode, userCode, isAttend } =
     useSelector((state) => state.user);
-  const onClick = () => {
+  const state = useSelector((state) => state);
+  const [image, setImage] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+const formData = new FormData();
+const onFileUpload = (e) => {
+  let file_kind = e.target.value.lastIndexOf('.');
+  let file_name = e.target.value.substring(file_kind+1,e.length);
+  let file_type = file_name.toLowerCase();
+  let check_file_type=new Array();
+  check_file_type=['jpg','gif','png','jpeg'];
+ 
+  if(check_file_type.indexOf(file_type)==-1){
+   alert('이미지 파일만 선택할 수 있습니다.');
+   return false;
+  }
+
+  formData.append("multipartFile", e.target.files[0]);
+  profileImage(formData)
+  getDept(state.user.userId).then(
+    (res) => (
+      setImage(res.data.fileName)),
+      setIsLoading(true),
+      window.location.reload(),
+      )
+}
+    const onClick = () => {
     navigate("/lookup");
   };
+
+  useEffect(() => {
+    if(isLoading){
+      getDept(state.user.userId)
+      .then((res) => (
+          setIsLoading(false),
+          setImage(res.data.fileName)),
+          )
+    }
+  },[isLoading])
+
   return (
     <Container>
       <Wrapper>
-        <Image src={profileImg}></Image>
+        <ProfileImage>
+          <label htmlFor="file-input">
+            {image?
+            <Image src={image} alt="이미지를 찾을 수 없습니다."/>:
+            <Image src={profileImg} alt="이미지를 찾을 수 없습니다."/>
+            }
+            <Edit src={edit} />
+          </label>
+          <input id="file-input" type="file" accept="image/gif, image/jpeg, image/png, image/jpg" onChange={onFileUpload}/>
+        </ProfileImage>
         <TextContainer>
           <Name>{userName}</Name>
           <Info>{schoolName}</Info>

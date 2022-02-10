@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,7 +60,11 @@ public class FileController {
 	})
 	public ResponseEntity<List<String>> upload(
 		@ApiIgnore @RequestHeader("Authorization") String accessToken, 
-			@ApiParam(value="파일들(여러 파일 업로드 가능)", required = true) @RequestPart List<MultipartFile> multipartFile) {
+			@ApiParam(value="파일들(여러 파일 업로드 가능)", required = true) @RequestPart(required = false) List<MultipartFile> multipartFile) {
+		multipartFile.forEach(i->{
+			
+			System.out.println(i);
+		});
 		return ResponseEntity.status(200).body(awsS3Service.uploadFile(accessToken, multipartFile));
 	}
 }

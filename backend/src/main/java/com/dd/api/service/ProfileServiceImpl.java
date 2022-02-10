@@ -43,8 +43,6 @@ public class ProfileServiceImpl implements ProfileService {
 				-> new IllegalArgumentException("해당 유저가 없습니다. id = + userId"));
 		
 		String fileName = awsS3Service.getThumbnailPath(user);
-		System.out.println("파일ㄴㅔㅔㅔㅔㅔㅔ임");
-		System.out.println(fileName);
 		return new ProfileResponseDto(user, userDepartment, fileName);
 	}
 	
@@ -53,15 +51,12 @@ public class ProfileServiceImpl implements ProfileService {
 		String loginId = getLoginIdFromToken(accessToken);
 		
 		Auth auth = authRepository.findByLoginId(loginId).get();
+		if(auth == null) return null;
+		
 		User user = auth.getUser();
+		String fileName = awsS3Service.getThumbnailPath(user);
 		
-		if(user == null) return null;
-		
-		ProfileImg pImg = profileImgRepository.findByUser(user).get();
-		
-		if(pImg == null) return null;
-		
-		return new ProfileImageGetResponseDto(pImg.getNewFileName());
+		return new ProfileImageGetResponseDto(fileName);
 	}
 	
 	@Override
