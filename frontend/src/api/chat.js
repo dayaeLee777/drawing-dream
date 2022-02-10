@@ -7,3 +7,7 @@ export const getRooms = async (success, fail) => {
 export const createChatRoom = async (params, success, fail) => {
   return await api.post("/api/chat/room", params).then(success).catch(fail);
 };
+
+export const getChatList = async (roomId, success, fail) => {
+  return await api.get(`/api/chat/room/${roomId}`).then(success).catch(fail);
+};

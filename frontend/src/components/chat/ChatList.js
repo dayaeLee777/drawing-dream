@@ -175,22 +175,12 @@ const ChatList = ({
     });
   }, []);
 
-  // const move = (room) => {
-  //   console.log(room);
-  //   setRoomId(room.roomId);
-  //   setUsers(room.users);
-  //   room.users.map((user) => {
-  //     if (user.userId !== userId) {
-  //       setMemberId(user.userId);
-  //     }
-  //   });
-  // };
-
   return (
     <>
       {roomId && (
         <ChatRoom
           roomId={roomId}
+          setRoomId={setRoomId}
           users={users}
           memberId={memberId}
           chatClose={chatClose}
