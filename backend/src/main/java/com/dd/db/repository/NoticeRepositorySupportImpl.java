@@ -151,6 +151,7 @@ public class NoticeRepositorySupportImpl implements NoticeRepositorySupport {
 						qNotice.regTime.between(regStartDate, regEndDate),
 						qNotice.noticeCode.eq(meetingCode),
 						qNotice.school.eq(userDepartment.getSchool()),
+						qNotice.delYn.isFalse(),
 						qNotice.gradeCode.eq(userDepartment.getGradeCode()),
 						qNotice.classCode.eq(userDepartment.getClassCode())
 						)
