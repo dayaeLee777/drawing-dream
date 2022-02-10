@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,7 +61,7 @@ public class ChatRoomController {
 
 	}
 
-	@ApiOperation(value = "내 채팅방 전체 조회")
+	@ApiOperation(value = "채팅방 전체 조회")
 	@GetMapping("/all")
 	public ResponseEntity<? extends BaseResponseDto> getAllRooms(
 			@ApiIgnore @RequestHeader("Authorization") String accessToken) {
@@ -75,7 +76,7 @@ public class ChatRoomController {
 	}
 
 	@ApiOperation(value = "채팅방 인원 추가")
-	@GetMapping("/add/{roomId}")
+	@PutMapping("/add/{roomId}")
 	public ResponseEntity<? extends BaseResponseDto> addUser(@ApiParam(value = "채팅방 ID") @PathVariable UUID roomId,
 			@ApiParam(value = "채팅방에 추가할 유저") @RequestBody ChatRoomUserRequestDTO chatRoomUserRequestDTO) {
 
@@ -88,7 +89,7 @@ public class ChatRoomController {
 	}
 
 	@ApiOperation(value = "채팅방 나가기")
-	@GetMapping("/leave/{roomId}")
+	@PutMapping("/leave/{roomId}")
 	public ResponseEntity<? extends BaseResponseDto> leaveRoom(@ApiParam(value = "채팅방 ID") @PathVariable UUID roomId,
 			@ApiIgnore @RequestHeader("Authorization") String accessToken) {
 

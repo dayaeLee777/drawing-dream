@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.dd.api.dto.request.ChatMessageRequestDTO;
 import com.dd.api.dto.request.ChatMessageVideoRequestDTO;
 import com.dd.api.dto.response.ChatMessageResponseDTO;
+import com.dd.db.entity.chat.ChatRoom;
 
 public interface ChatMessageService {
 
@@ -15,8 +16,11 @@ public interface ChatMessageService {
 
 	ChatMessageResponseDTO sendMessage(ChatMessageRequestDTO message, String accessToken) throws Exception;
 
-	ChatMessageResponseDTO sendMessageVideoRoom(ChatMessageVideoRequestDTO message, String accessToken) throws Exception;
+	ChatMessageResponseDTO sendMessageVideoRoom(ChatMessageVideoRequestDTO message, String accessToken)
+			throws Exception;
 
-	List<ChatMessageResponseDTO> findMessages(UUID roomId);
+	List<ChatMessageResponseDTO> findAllMessages(ChatRoom chatRoom);
+
+	ChatMessageResponseDTO findLastMessage(ChatRoom chatRoom);
 
 }
