@@ -471,7 +471,13 @@ const SignUp = () => {
             <div className="desc">
               이용약관동의<div className="star">*</div>
             </div>
-            <div className="content" onClick={() => setIsModalOpen(true)}>
+            <div
+              className="content"
+              onClick={() => {
+                setAgreement(false);
+                setIsModalOpen(true);
+              }}
+            >
               <MdOutlineCheckCircleOutline
                 className={agreement ? "checked" : "unChecked"}
               />
