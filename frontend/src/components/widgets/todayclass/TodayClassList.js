@@ -17,7 +17,7 @@ const TodayClassList = (props) => {
   const [nowPeriod, setNowPeriod] = useState(0);
   useEffect(() => {
     const today = new Date();
-    today.setHours(today.getHours() - 5); // 테스트용
+    today.setHours(today.getHours() - 7); // 테스트용
     const time =
       today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 

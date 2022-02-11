@@ -44,8 +44,8 @@ const overlay = {
   exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
 };
 
-const Widgets = () => {
-  const [widgetId, setWidgetId] = useState();
+const Widgets = ({ widgetId, setWidgetId }) => {
+  // const [widgetId, setWidgetId] = useState();
   const [cookies, setCookie, removeCookie] = useCookies(["myWidgets"]);
   const widgets = ["M01", "M02", "M03", "M04", "M05", "M06", "M07"];
 

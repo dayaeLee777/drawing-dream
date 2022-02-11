@@ -90,7 +90,7 @@ const TodayClassModal = ({ layoutId }) => {
   };
 
   const startClass = () => {
-    const courseId = "c3b26552-154c-724b-c2ad-c29c16c297c3";
+    const courseId = "c2964246-c2b5-07c3-934f-c39ac2b24f47";
     createOnlineClass({ courseId }).then((res) => {
       console.log(res);
       navigate(`/onlineclass/${courseId}`);
@@ -101,26 +101,39 @@ const TodayClassModal = ({ layoutId }) => {
   const { period } = useSelector((state) => state.timetable);
   const [nowPeriod, setNowPeriod] = useState();
   const [courseInfo, setCourseInfo] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [courseId, setCourseId] = useState("");
+
   console.log(todayData);
   useEffect(() => {
     if (todayData.length > 0) {
       const today = new Date();
-      today.setHours(today.getHours() - 5); // 테스트용
+      today.setHours(today.getHours() - 7); // 테스트용
       // today.setMinutes(today.getMinutes() - 30);
       const time =
         today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      let courseId;
       period.map((per) => {
+        // console.log(time);
+        // console.log(per.startTime < time, per.startTime);
+        // console.log(per.endTime > time, per.endTime);
         if (per.startTime < time && per.endTime > time) {
           setNowPeriod(per.periodCode);
-          courseId = todayData[per.periodCode.slice(2, 3) - 1].courseId;
+          console.log(per.periodCode);
+          setCourseId(todayData[per.periodCode.slice(2, 3) - 1].courseId);
         }
       });
-      getCouresInfo(courseId).then((res) => {
-        setCourseInfo(res.data);
-      });
     }
-  }, []);
+    setIsLoading(false);
+    if (!isLoading && nowPeriod) {
+      getCouresInfo(courseId)
+        .then((res) => {
+          setCourseInfo(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [isLoading]);
 
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>

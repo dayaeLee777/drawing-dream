@@ -37,11 +37,6 @@ const RightContainer = ({ courseInfo }) => {
   const navigate = useNavigate();
   console.log(courseInfo);
   const startClass = () => {
-    // const courseId = "c384c386-c2a0-c38e-c28f-004cc2a7c2bc";
-    // createOnlineClass({ courseId }).then((res) => {
-    //   console.log(res);
-    //   window.location.reload();
-    // });
     navigate(`/onlineclass/${courseInfo.courseId}`);
     window.location.reload();
   };
