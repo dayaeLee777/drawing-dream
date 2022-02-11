@@ -32,7 +32,7 @@ public class CourseServiceImpl implements CourseService {
 		if (course == null)
 			return null;
 
-		OnlineClass onlineClass = onlineClassRepository.findByCourseId(courseId).orElse(null);
+		OnlineClass onlineClass = onlineClassRepository.findByCourseIdAndDelYn(courseId, false).orElse(null);
 
 		if (onlineClass == null) return CourseResponseDTO.builder()
 														.courseId(courseId)
