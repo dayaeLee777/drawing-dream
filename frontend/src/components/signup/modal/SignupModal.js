@@ -34,6 +34,11 @@ const Container = styled.div`
         color: #fec25c;
         margin-right: 0.2rem;
       }
+      .requier {
+        margin-left: 0.3rem;
+        color: #fec25c;
+        font-size: 0.9rem;
+      }
     }
     .articles {
       margin-top: 1rem;
@@ -125,7 +130,7 @@ const SignudivModal = ({ setIsModalOpen, setAgreement }) => {
           <MdOutlineCheckCircleOutline
             className={isChecked[0] && isChecked[1] ? "checked" : "unChecked"}
           />
-          전체 동의합니다.
+          전체 동의
         </div>
       </div>
       <div className="content">
@@ -133,7 +138,7 @@ const SignudivModal = ({ setIsModalOpen, setAgreement }) => {
           <MdOutlineCheckCircleOutline
             className={isChecked[0] ? "checked" : "unChecked"}
           />
-          드로잉 드림 이용약관 동의
+          드로잉 드림 이용약관 동의 <div className="requier"> (필수)</div>
         </div>
         <div className="articles">
           <div class="article">
@@ -548,7 +553,7 @@ const SignudivModal = ({ setIsModalOpen, setAgreement }) => {
           <MdOutlineCheckCircleOutline
             className={isChecked[1] ? "checked" : "unChecked"}
           />
-          드로잉 드림 개인정보이용 동의
+          드로잉 드림 개인정보이용 동의 <div className="requier"> (필수)</div>
         </div>
         <div className="articles">
           <div class="article">
