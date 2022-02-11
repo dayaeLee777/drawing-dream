@@ -1,6 +1,8 @@
 import commonCode from "config/commonCode";
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import Button from "components/commons/button";
 
 const Contanier = styled.div`
   border: 4px solid #f5bd5c;
@@ -32,9 +34,22 @@ const InfoContainer = styled.div`
   margin-bottom: 0.75rem;
 `;
 
+const ClassFile = styled.div`
+  div {
+    display: inline-block;
+    margin-right: 1rem;
+    width: 6rem;
+    /* ... 으로 만들어 주는 코드 */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+`;
+
 const CourseInfoDetail = ({ data }) => {
   const preiodCode = data.periodCode;
   const courseCode = data.courseCode;
+  const { userCode } = useSelector((state) => state.user);
   return (
     <Contanier>
       <div className="preiod">
@@ -57,7 +72,13 @@ const CourseInfoDetail = ({ data }) => {
       </InfoContainer>
       <InfoContainer>
         <div className="desc">수업 자료</div>
-        <div className="content">2020진로탐색</div>
+        {userCode === "A03" && (
+        <ClassFile>
+          <div className="content">2020진로탐색</div>
+          <Button name="자료 올리기" />
+        </ClassFile>
+        )}
+        {userCode === "A04" && (<div className="content">2020진로탐색</div>)}
       </InfoContainer>
       <InfoContainer>
         <div className="desc">다시 보기</div>
