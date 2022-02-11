@@ -8,6 +8,7 @@ import Button from "components/commons/button";
 import { useNavigate } from "react-router-dom";
 import { createOnlineClass } from "api/onlineclass";
 import { createChatRoom } from "api/chat";
+import teacher2 from "assets/img/teacher2.png";
 
 const Wrapper = styled(motion.div)`
   width: 1000px;
@@ -22,6 +23,21 @@ const Wrapper = styled(motion.div)`
   align-items: center;
   letter-spacing: -1px;
   box-sizing: border-box;
+`;
+
+const Right = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img{
+    width: 100%;
+  }
+
+  button{
+    width:  14rem;
+    height: 2.5rem;
+    margin-top: 2rem;
+  }
 `;
 
 const TodayClassModal = ({ layoutId }) => {
@@ -87,7 +103,10 @@ const TodayClassModal = ({ layoutId }) => {
     <Wrapper onClick={onClick} layoutId={layoutId}>
       <LeftContainer data={todayData} />
       {userCode === "A03" && (
-        <Button onClick={startClass} name="수업 시작하기"></Button>
+        <Right>     
+          <img src={teacher2} alt="캐릭터" />
+          <Button onClick={startClass} name="수업 시작하기"></Button>
+        </Right>
       )}
       {userCode === "A04" && <RightContainer />}
     </Wrapper>
