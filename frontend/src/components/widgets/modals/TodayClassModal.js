@@ -65,6 +65,7 @@ const TodayClassModal = ({ layoutId }) => {
   ];
 
   const { userCode } = useSelector((state) => state.user);
+  const { todayData } = useSelector((state) => state.timetable);
   const navigate = useNavigate();
 
   const onClick = (event) => {
@@ -84,7 +85,7 @@ const TodayClassModal = ({ layoutId }) => {
 
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>
-      <LeftContainer data={data} />
+      <LeftContainer data={todayData} />
       {userCode === "A03" && (
         <Button onClick={startClass} name="수업 시작하기"></Button>
       )}

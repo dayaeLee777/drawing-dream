@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CourseInfo from "./CourseInfo";
-import TodayClass from "./TodayClassContainer";
+import TodayClassContainer from "./TodayClassContainer";
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const Container = styled.div`
 const LeftContainer = (props) => {
   return (
     <Container>
-      <TodayClass data={props.data} />
+      <TodayClassContainer data={props.data} />
       <CourseInfo data={props.data} />
     </Container>
   );
