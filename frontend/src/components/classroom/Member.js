@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import profileImg from "assets/img/profile.png";
+import blankProfileImg from "assets/img/profile.png";
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createChatRoom } from "api/chat";
 import { useSelector } from "react-redux";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
+import { useCallback, useEffect, useState } from "react";
+import { getProfileImg } from "api/user";
 
 const Container = styled(motion.div)`
   /* width: 10rem; */
@@ -15,10 +17,11 @@ const Container = styled(motion.div)`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 const Img = styled.img`
+  border-radius: 45px;
   width: 50%;
 `;
 
@@ -46,8 +49,13 @@ const Member = ({ member }) => {
   const token =
     sessionStorage.getItem("access-token") ||
     localStorage.getItem("access-token");
-
   const { userName, userId } = useSelector((state) => state.user);
+  const [profileImg, setProfileImg] = useState("");
+
+  useEffect(() => {
+    getProfileImg(member.userId).then((res) => setProfileImg(res.data.fileName));
+  }, [profileImg]);
+
   const createChat = () => {
     createChatRoom({
       name: userName + ", " + member.userName,
@@ -86,7 +94,7 @@ const Member = ({ member }) => {
         scale: 1.1,
       }}
     >
-      <Img src={profileImg} />
+      <Img src={profileImg ? profileImg : blankProfileImg} />
       <Wrapper>
         <Name>{member.userName}</Name>
         <CreateChat onClick={createChat}>
