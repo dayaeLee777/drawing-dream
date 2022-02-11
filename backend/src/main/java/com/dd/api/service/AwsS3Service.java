@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dd.api.dto.response.FilesResponseDto;
 import com.dd.db.entity.board.Notice;
+import com.dd.db.entity.onlineclass.OnlineClass;
 import com.dd.db.entity.user.User;
 
 public interface AwsS3Service {
@@ -21,4 +22,5 @@ public interface AwsS3Service {
 	FilesResponseDto getObject(String storedFileName) throws IOException;
 	String getThumbnailPath(User user);
 	String getFilePath(String newFileName);
+	List<String> uploadFile(User user, OnlineClass onlineClass, List<MultipartFile> multipartFile);
 }

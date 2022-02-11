@@ -10,5 +10,6 @@ import com.dd.db.entity.onlineclass.OnlineClass;
 public interface OnlineClassRepository extends JpaRepository<OnlineClass, UUID> {
 
 	Optional<OnlineClass> findByCourseId(UUID courseId);
+	Optional<OnlineClass> findByCourseIdAndDelYn(UUID courseId, boolean delYn);
 
 }
