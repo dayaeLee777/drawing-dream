@@ -11,6 +11,9 @@ import { signUp } from "api/user";
 import { ReactNewWindowStyles } from "react-new-window-styles";
 import InputContainer from "components/commons/inputContainer";
 import commonCode from "config/commonCode";
+import { MdOutlineCheckCircleOutline } from "react-icons/md";
+import { motion } from "framer-motion";
+import SignupModal from "components/signup/modal/SignupModal";
 
 const Container = styled.div`
   display: flex;
@@ -58,6 +61,25 @@ const Wrapper = styled.div`
       font-size: 1.5rem;
     }
   }
+  .content {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .unChecked {
+      font-size: 1.7rem;
+      color: #e2e2e2;
+      margin-right: 0.5rem;
+    }
+    .checked {
+      font-size: 1.7rem;
+      color: #fec25c;
+      margin-right: 0.5rem;
+    }
+    .text {
+      color: #666666;
+    }
+  }
 `;
 const SelectBox = styled.select`
   width: 4rem;
@@ -67,8 +89,24 @@ const SelectBox = styled.select`
   margin-right: 1rem;
 `;
 
+const Overlay = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
 const SignUp = () => {
   const Navigate = useNavigate();
+
+  // 약관동의 모달 열기
+  const [isModalOpen, setIsModalOpen] = useState(null);
 
   // 주소 찾기, 학교 찾기 새 창열기
   const [isPostCodeOpen, setIsPostCodeOpen] = useState(false);
@@ -105,6 +143,7 @@ const SignUp = () => {
     studentNo: "",
   });
   // USER INFO END
+  const [agreement, setAgreement] = useState(false);
 
   // VALIDATION STATE
   const [valids, setValids] = useState({
@@ -176,44 +215,47 @@ const SignUp = () => {
 
   // 회원 가입 요청
   const onSubmit = async () => {
-    console.log(inputs);
-    if (
-      validId &&
-      validName &&
-      validEmail &&
-      validPassword &&
-      equelPassword &&
-      schoolCode &&
-      gradeCode &&
-      classCode &&
-      studentNo
-    ) {
-      try {
-        const user = {
-          address: address,
-          addressDetail: addressDetail,
-          classCode: classCode,
-          gradeCode: gradeCode,
-          loginId: userId,
-          parentPhone: parentPhoneNumber,
-          password: password,
-          phone: phoneNumber,
-          schoolName: schoolName,
-          schoolSerialNo: schoolCode,
-          studentNo: studentNo,
-          userEmail: email,
-          userName: userName,
-        };
-
-        signUp(user).then((res) => {
-          if (res.status === 201) {
-            alert("회원가입에 성공하였습니다.");
-            Navigate("/signin");
-          }
-        });
-      } catch (e) {}
+    if (!agreement) {
+      alert("이용약관에 동의하여 주세요.");
     } else {
-      alert("필수 입력 항목을 확인해주세요.");
+      if (
+        validId &&
+        validName &&
+        validEmail &&
+        validPassword &&
+        equelPassword &&
+        schoolCode &&
+        gradeCode &&
+        classCode &&
+        studentNo
+      ) {
+        try {
+          const user = {
+            address: address,
+            addressDetail: addressDetail,
+            classCode: classCode,
+            gradeCode: gradeCode,
+            loginId: userId,
+            parentPhone: parentPhoneNumber,
+            password: password,
+            phone: phoneNumber,
+            schoolName: schoolName,
+            schoolSerialNo: schoolCode,
+            studentNo: studentNo,
+            userEmail: email,
+            userName: userName,
+          };
+
+          signUp(user).then((res) => {
+            if (res.status === 201) {
+              alert("회원가입에 성공하였습니다.");
+              Navigate("/signin");
+            }
+          });
+        } catch (e) {}
+      } else {
+        alert("필수 입력 항목을 확인해주세요.");
+      }
     }
   };
   // 회원가입 요청 END
@@ -222,8 +264,28 @@ const SignUp = () => {
     Navigate("../");
   };
 
+  const overlay = {
+    hidden: { backgroundColor: "rgba(0, 0, 0, 0)" },
+    visible: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+    exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
+  };
+
   return (
     <Container>
+      {isModalOpen && (
+        <Overlay
+          variants={overlay}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          onClick={() => setIsModalOpen(null)}
+        >
+          <SignupModal
+            setIsModalOpen={setIsModalOpen}
+            setAgreement={setAgreement}
+          />
+        </Overlay>
+      )}
       {isPostCodeOpen && (
         <ReactNewWindowStyles
           title="주소찾기"
@@ -402,6 +464,27 @@ const SignUp = () => {
               width="3rem"
               height="2rem"
             />
+          </Wrapper>
+        </InputBlock>
+        <InputBlock>
+          <Wrapper>
+            <div className="desc">
+              이용약관동의<div className="star">*</div>
+            </div>
+            <div
+              className="content"
+              onClick={() => {
+                setAgreement(false);
+                setIsModalOpen(true);
+              }}
+            >
+              <MdOutlineCheckCircleOutline
+                className={agreement ? "checked" : "unChecked"}
+              />
+              <div className="text">
+                필수 이용약관을 모두 확인하였으며, 동의합니다.
+              </div>
+            </div>
           </Wrapper>
         </InputBlock>
         <InputBlock>
