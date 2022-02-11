@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import kurentoUtils from "kurento-utils";
 import styled from "styled-components";
 import Chat from "components/onlineclass/Chat";
+import { getCouresInfo } from "api/course";
 /*
  * (C) Copyright 2014 Kurento (http://kurento.org/)
  *
@@ -61,6 +62,13 @@ const OnlineClass = () => {
   const PARTICIPANT_CLASS = "participant";
 
   const [teacherVideo, setTecherVideo] = useState(false);
+  const [courseInfo, setCourseInfo] = useState();
+  useEffect(() => {
+    getCouresInfo(roomId).then((res) => {
+      setCourseInfo(res.data);
+    });
+  }, []);
+
   /**
    * Creates a video element for a new participant
    *
@@ -327,7 +335,16 @@ const OnlineClass = () => {
   return (
     <>
       <Container>
-        <Title>{commonCode.G.G05.G0500}: 박선생 선생님</Title>
+        {courseInfo && (
+          <Title>
+            {
+              commonCode[courseInfo.subjectCode.substr(0, 1)][
+                courseInfo.subjectCode.substr(0, 3)
+              ][courseInfo.subjectCode]
+            }
+            : {courseInfo.teacherName} 선생님
+          </Title>
+        )}
         <Wrapper>
           <TeacherVideoContainer id="teacher"></TeacherVideoContainer>
           <Chat courseId={roomId} />

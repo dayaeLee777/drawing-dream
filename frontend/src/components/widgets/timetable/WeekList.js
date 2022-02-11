@@ -274,10 +274,12 @@ const WeekList = ({ widget }) => {
       {Object.entries(commonCode.H).map(([key, value]) => (
         <Period key={key} className={key === today ? "Today" : ""}>
           <Day>{value.substring(0, 1)}</Day>
-          <DayList
-            widget={widget}
-            data={data.filter((period) => period.dayCode === key)}
-          />
+          {data && (
+            <DayList
+              widget={widget}
+              data={data.filter((period) => period.dayCode === key)}
+            />
+          )}
         </Period>
       ))}
     </Container>

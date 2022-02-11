@@ -17,25 +17,12 @@ const TodayClassList = (props) => {
   const [nowPeriod, setNowPeriod] = useState(0);
   useEffect(() => {
     const today = new Date();
-    // const date =
-    //   today.getFullYear() +
-    //   "/" +
-    //   (today.getMonth() + 1) +
-    //   "/" +
-    //   today.getDate() +
-    //   "/";
+    today.setHours(today.getHours() - 5); // 테스트용
     const time =
       today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
     period.map((per) => {
-      // console.log(date + per.startTime);
-      // console.log(date + time);
-      // console.log(per.startTime, per.endTime, time);
-      // if (per.endTime > time) {
-      //   console.log(per.periodCode);
-      // }
       if (per.startTime < time && per.endTime > time) {
-        // console.log(per.periodCode.slice(2, 3));
         setNowPeriod(per.periodCode.slice(2, 3));
       }
     });
