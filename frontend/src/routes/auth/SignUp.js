@@ -218,6 +218,10 @@ const SignUp = () => {
   };
   // 회원가입 요청 END
 
+  const onCancle = () => {
+    Navigate("../");
+  };
+
   return (
     <Container>
       {isPostCodeOpen && (
@@ -353,11 +357,14 @@ const SignUp = () => {
               <option value="default" disabled hidden>
                 선택
               </option>
-              {Object.entries(commonCode.E).map(([key, value]) => (
-                <option key={key} value={key}>
-                  {value}
-                </option>
-              ))}
+              {Object.entries(commonCode.E).map(
+                ([key, value]) =>
+                  key !== "E00" && (
+                    <option key={key} value={key}>
+                      {value}
+                    </option>
+                  )
+              )}
             </SelectBox>
           </Wrapper>
 
@@ -373,11 +380,14 @@ const SignUp = () => {
               <option value="default" disabled hidden>
                 선택
               </option>
-              {Object.entries(commonCode.F).map(([key, value]) => (
-                <option key={key} value={key}>
-                  {value}
-                </option>
-              ))}
+              {Object.entries(commonCode.F).map(
+                ([key, value]) =>
+                  key !== "F00" && (
+                    <option key={key} value={key}>
+                      {value}
+                    </option>
+                  )
+              )}
             </SelectBox>
           </Wrapper>
 
@@ -408,6 +418,7 @@ const SignUp = () => {
             bc="#C4C4C4"
             height="3rem"
             hoverColor="#a2a2a2"
+            onClick={onCancle}
           />
         </InputBlock>
       </MainContainer>
