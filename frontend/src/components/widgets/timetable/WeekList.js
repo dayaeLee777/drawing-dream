@@ -248,34 +248,31 @@ const WeekList = () => {
       periodCode: "I06",
       semesterCode: "O01",
     },
-  ]
+  ];
 
   // sampleData 등록
   for (let data of sampleData) {
     registerTimeTable(data);
-  }
-  */
+  } */
 
-  const { data } = useSelector((state) => state.timetable);
+  const { data, todayData } = useSelector((state) => state.timetable);
   // console.log(data);
   // console.log(data.filter((period) => period.dayCode === "H01"));
-
   return (
     <Container>
       <Period>
         <Day />
         <Class>
-          {Object.entries(commonCode.I).map(([key, value]) => (
-            (key !== "I00") && <section key={key}>{value}</section>
-          ))}
+          {Object.entries(commonCode.I).map(
+            ([key, value]) =>
+              key !== "I00" && <section key={key}>{value}</section>
+          )}
         </Class>
       </Period>
       {Object.entries(commonCode.H).map(([key, value]) => (
-        <Period key={key} className={key==="H02"? "Today":""}>
+        <Period key={key} className={key === "H02" ? "Today" : ""}>
           <Day>{value.substring(0, 1)}</Day>
-          <DayList
-            data={data.filter((period) => period.dayCode === key)}
-          />
+          <DayList data={data.filter((period) => period.dayCode === key)} />
         </Period>
       ))}
     </Container>
