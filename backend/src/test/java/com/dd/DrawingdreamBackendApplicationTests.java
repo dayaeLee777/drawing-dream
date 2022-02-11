@@ -1,7 +1,7 @@
 package com.dd;
 
 import java.text.ParseException;
-import java.util.UUID;
+import java.time.LocalTime;
 
 import javax.transaction.Transactional;
 
@@ -11,9 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.dd.api.service.AttendanceService;
-import com.dd.db.entity.user.User;
+import com.dd.db.entity.school.Period;
+import com.dd.db.entity.school.School;
+import com.dd.db.enums.Code;
 import com.dd.db.repository.AttendanceRepository;
 import com.dd.db.repository.AuthRepository;
+import com.dd.db.repository.PeriodRepository;
 import com.dd.db.repository.SchoolRepository;
 import com.dd.db.repository.StudyRecordRepository;
 import com.dd.db.repository.UserDepartmentRepository;
@@ -44,6 +47,9 @@ class DrawingdreamBackendApplicationTests {
 	@Autowired
 	StudyRecordRepository studyRecordRepository;
 	
+	@Autowired
+	PeriodRepository periodRepository;
+	
 	@Test
 	@Rollback(value = false)
 	void contextLoads() throws ParseException {
@@ -51,15 +57,35 @@ class DrawingdreamBackendApplicationTests {
 //		user.setUser_name("싸피");
 //		userRepository.save(user);
 //		
-		studyRecordRepository.findAll().forEach(i ->{
-			System.out.println(i.getId());
-		});
+//		studyRecordRepository.findAll().forEach(i ->{
+//			System.out.println(i.getId());
+//		});
 //		Auth auth = new Auth();
 //		auth.setUser(user);
 //		auth.setLoginId("ssafy");
 //		authRepository.save(auth);
 		
-//		Auth authTest = authRepository.findByLoginId("ssafy").get();
+//		User user = authRepository.findByLoginId("student01").get().getUser();
+		School school = schoolRepository.findBySchoolSerialNo("7091444").get();
+		
+		Period period1 = Period.builder()
+				.startTime(LocalTime.of(16, 15))
+				.endTime(LocalTime.of(17, 0))
+				.school(school)
+				.periodCode(Code.I08)
+				.build();
+		
+		periodRepository.save(period1);
+		
+		Period period2 = Period.builder()
+				.startTime(LocalTime.of(17, 10))
+				.endTime(LocalTime.of(17, 55))
+				.school(school)
+				.periodCode(Code.I09)
+				.build();
+
+		periodRepository.save(period2);
+		
 //		System.out.println(authTest);
 		
 //		UserDepartment userDepartment = new UserDepartment();
