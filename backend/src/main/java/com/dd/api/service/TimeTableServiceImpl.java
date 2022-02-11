@@ -32,11 +32,13 @@ public class TimeTableServiceImpl implements TimeTableService {
 
 	@Transactional
 	@Override
-	public TimeTableGetListWrapperResponseDTO getAll() {
+	public TimeTableGetListWrapperResponseDTO getAll(String accessToken) {
 
+		User user = jwtTokenService.convertTokenToUser(accessToken);
+		
 		List<TimeTableGetListResponseDTO> timeTableGetListResponseDTOs = new ArrayList<>();
 
-		timeTableRepository.findBydelYnOrderByDayCodeAscPeriodCodeAsc(false).forEach(timeTable -> {
+		timeTableRepository.findByUserAndDelYnOrderByDayCodeAscPeriodCodeAsc(user, false).forEach(timeTable -> {
 			TimeTableGetListResponseDTO timeTableGetListResponseDTO = TimeTableGetListResponseDTO.builder()
 																								.timeTableId(timeTable.getId())
 																								.dayCode(timeTable.getDayCode())
@@ -73,9 +75,11 @@ public class TimeTableServiceImpl implements TimeTableService {
 
 	@Transactional
 	@Override
-	public TimeTableResponseDTO get(UUID timeTableId) {
+	public TimeTableResponseDTO get(String accessToken, UUID timeTableId) {
 
-		TimeTable timeTable = timeTableRepository.findById(timeTableId).orElse(null);
+		User user = jwtTokenService.convertTokenToUser(accessToken);
+		
+		TimeTable timeTable = timeTableRepository.findByIdAndUser(timeTableId, user).orElse(null);
 
 		if (timeTable == null || timeTable.isDelYn())
 			return null;
