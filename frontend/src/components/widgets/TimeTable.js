@@ -61,7 +61,7 @@ const TimeTable = ({
         <Title>시간표</Title>
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
-      <WeekList />
+      <WeekList widget />
     </Container>
   );
 };

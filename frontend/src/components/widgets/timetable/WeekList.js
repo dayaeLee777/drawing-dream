@@ -60,7 +60,7 @@ export const Class = styled.section`
   }
 `;
 
-const WeekList = () => {
+const WeekList = ({ widget }) => {
   /*
   const sampleData = [
     // 월요일
@@ -255,7 +255,7 @@ const WeekList = () => {
     registerTimeTable(data);
   } */
 
-  const { data, todayData } = useSelector((state) => state.timetable);
+  const { data, today } = useSelector((state) => state.timetable);
   // console.log(data);
   // console.log(data.filter((period) => period.dayCode === "H01"));
   return (
@@ -265,14 +265,19 @@ const WeekList = () => {
         <Class>
           {Object.entries(commonCode.I).map(
             ([key, value]) =>
-              key !== "I00" && <section key={key}>{value}</section>
+              key !== "I00" &&
+              (!widget || key !== "I08") &&
+              (!widget || key !== "I09") && <section key={key}>{value}</section>
           )}
         </Class>
       </Period>
       {Object.entries(commonCode.H).map(([key, value]) => (
-        <Period key={key} className={key === "H02" ? "Today" : ""}>
+        <Period key={key} className={key === today ? "Today" : ""}>
           <Day>{value.substring(0, 1)}</Day>
-          <DayList data={data.filter((period) => period.dayCode === key)} />
+          <DayList
+            widget={widget}
+            data={data.filter((period) => period.dayCode === key)}
+          />
         </Period>
       ))}
     </Container>
