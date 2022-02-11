@@ -42,9 +42,10 @@ public class TimeTableController {
 			@ApiResponse(code = 401, message = "인증되지 않은 사용자 입니다."),
 			@ApiResponse(code = 409, message = "전체 시간표 조회에 실패했습니다.") })
 	@GetMapping
-	public ResponseEntity<? extends BaseResponseDto> getTimeTable() {
+	public ResponseEntity<? extends BaseResponseDto> getTimeTable(
+			@ApiIgnore @RequestHeader("Authorization") String accessToken) {
 
-		TimeTableGetListWrapperResponseDTO timeTableGetListWrapperResponseDTO = timeTableService.getAll();
+		TimeTableGetListWrapperResponseDTO timeTableGetListWrapperResponseDTO = timeTableService.getAll(accessToken);
 
 		return ResponseEntity
 				.ok(TimeTableGetListWrapperResponseDTO.of(200, "Success", timeTableGetListWrapperResponseDTO));
@@ -71,9 +72,11 @@ public class TimeTableController {
 			@ApiResponse(code = 401, message = "인증되지 않은 사용자 입니다."),
 			@ApiResponse(code = 409, message = "시간표 조회에 실패했습니다.") })
 	@GetMapping("/{timeTableId}")
-	public ResponseEntity<? extends BaseResponseDto> getTimeTableOne(@PathVariable UUID timeTableId) {
+	public ResponseEntity<? extends BaseResponseDto> getTimeTableOne(
+			@ApiIgnore @RequestHeader("Authorization") String accessToken,
+			@PathVariable UUID timeTableId) {
 
-		TimeTableResponseDTO timeTableResponseDTO = timeTableService.get(timeTableId);
+		TimeTableResponseDTO timeTableResponseDTO = timeTableService.get(accessToken, timeTableId);
 
 		if (timeTableResponseDTO == null)
 			return ResponseEntity.status(409).body(BaseResponseDto.of(409, "Fail"));

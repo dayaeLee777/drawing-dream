@@ -10,14 +10,14 @@ import com.dd.db.entity.schoollife.TimeTable;
 
 public interface TimeTableService {
 
-	TimeTableGetListWrapperResponseDTO getAll();
-
 	TimeTable register(String accessToken, TimeTableRegisterRequestDTO timeTableRegisterRequestDTO);
 
-	TimeTableResponseDTO get(UUID timeTableId);
+	TimeTableResponseDTO get(String accessToken, UUID timeTableId);
 
 	TimeTable modify(String accessToken, TimeTableUpdateRequestDTO timeTableUpdateRequestDTO);
 
 	TimeTable delete(String accessToken, UUID timeTableId);
+
+	TimeTableGetListWrapperResponseDTO getAll(String accessToken);
 
 }
