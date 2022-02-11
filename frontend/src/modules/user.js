@@ -5,6 +5,8 @@ const LOGIN_SUCCESS = "USER/LOGIN_SUCCESS";
 const LOGIN_FAIL = "USER/LOGIN_FAIL";
 const LOGOUT_SUCCESS = "USER/LOGOUT_SUCCESS";
 const ATTEND_SUCCESS = "USER/ATTEND_SUCCESS";
+const UPDATE_SUCCESS = "USER/UPDATE_SUCCESS";
+const UPDATE_FAIL = "USER/UPDATE_FAIL";
 
 export const login = (user, isChecked) => async (dispatch) => {
   loginUser(user)
@@ -18,8 +20,8 @@ export const login = (user, isChecked) => async (dispatch) => {
         }
 
         const userId = response.data.userId;
-        setApiHeaders()
-        setFileApiHeaders()
+        setApiHeaders();
+        setFileApiHeaders();
 
         getDept(userId).then((response) => {
           dispatch({
@@ -34,6 +36,23 @@ export const login = (user, isChecked) => async (dispatch) => {
       console.log(error);
       dispatch({
         type: LOGIN_FAIL,
+        error: true,
+      });
+    });
+};
+
+export const updateUserInfo = (userId) => async (dispatch) => {
+  getDept(userId)
+    .then((res) => {
+      dispatch({
+        type: UPDATE_SUCCESS,
+        userId: userId,
+        data: res.data,
+      });
+    })
+    .catch((e) => {
+      dispatch({
+        type: UPDATE_FAIL,
         error: true,
       });
     });
@@ -115,6 +134,17 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isAttend: true,
+      };
+    }
+
+    case UPDATE_SUCCESS: {
+      return {
+        ...state,
+        schoolName: action.data.schoolName,
+        gradeCode: action.data.gradeCode,
+        classCode: action.data.classCode,
+        studentNo: action.data.studentNo,
+        userCode: action.data.userCode,
       };
     }
     default:
