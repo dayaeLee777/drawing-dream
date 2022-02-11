@@ -4,7 +4,7 @@ import CourseName from "./CourseName";
 import TodayClassList from "./TodayClassList";
 
 const Container = styled.div`
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   .title {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;

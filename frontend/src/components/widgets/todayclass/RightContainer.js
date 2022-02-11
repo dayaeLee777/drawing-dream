@@ -24,34 +24,52 @@ const Container = styled.div`
   }
 `;
 
-const RightContainer = () => {
+const Notice = styled.div`
+  width: 100%;
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 1.1rem;
+`;
+
+const RightContainer = ({ courseInfo }) => {
   const navigate = useNavigate();
+  console.log(courseInfo);
   const startClass = () => {
-    const courseId = "c384c386-c2a0-c38e-c28f-004cc2a7c2bc";
-    createOnlineClass({ courseId }).then((res) => {
-      console.log(res);
-      navigate(`/onlineclass/${courseId}`);
-      window.location.reload();
-    });
+    navigate(`/onlineclass/${courseInfo.courseId}`);
+    window.location.reload();
   };
   return (
-    <Container>
-      <img src={character} alt="캐릭터" />
-      <div>
-        <div className="text">
-          <span className="time">5분 </span>
-          뒤에 수업 시작이야!
-        </div>
-        <div className="text">같이 들어가자!</div>
-      </div>
-      <Button
-        onClick={startClass}
-        name="지금 들어가기"
-        mt="1.5rem"
-        width="14rem"
-        height="2.5rem"
-      />
-    </Container>
+    <>
+      <Container>
+        <img src={character} alt="캐릭터" />
+        {courseInfo.onlineClassId ? (
+          <>
+            <div>
+              <div className="text">
+                <span className="time">5분 </span>
+                뒤에 수업 시작이야!
+              </div>
+              <div className="text">같이 들어가자!</div>
+            </div>
+            <Button
+              onClick={startClass}
+              name="지금 들어가기"
+              mt="1.5rem"
+              width="14rem"
+              height="2.5rem"
+            />
+          </>
+        ) : (
+          <Notice>
+            아직 수업이 개설되지 않았습니다. <br />
+            선생님께서 수업을 개설할 때까지 <br />
+            조금만 기다려 주세요!
+          </Notice>
+        )}
+      </Container>
+    </>
   );
 };
 
