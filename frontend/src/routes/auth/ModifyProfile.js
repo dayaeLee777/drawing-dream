@@ -2,16 +2,15 @@ import Button from "components/commons/button";
 import Input from "components/commons/input";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import blankProfile from "assets/img/blank-profile.png";
 import PostCode from "components/signup/postcode/FindPostCode";
 import { getUser, putUser } from "api/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import validationCheck from "components/signup/validationCheck";
 import commonCode from "config/commonCode";
 import InputContainer from "components/commons/inputContainer";
 import { ReactNewWindowStyles } from "react-new-window-styles";
-import SchoolCode from "components/signup/school/SchoolCode";
 import { useNavigate } from "react-router-dom";
+import { updateUserInfo } from "modules/user";
 
 const FormContainer = styled.div`
   /* width: 50rem;
@@ -69,6 +68,7 @@ const ModifyProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [inputs, setInputs] = useState();
   const state = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const Navigate = useNavigate();
 
@@ -154,18 +154,27 @@ const ModifyProfile = () => {
           studentNo: inputs.studentNo,
         };
         console.log(user);
-        putUser(user).then((res) => {
-          if (res.status === 200) {
-            alert("프로필 수정을 성공하였습니다.");
-            Navigate("/home");
-          }
-        });
+        putUser(user)
+          .then((res) => {
+            if (res.status === 200) {
+              alert("프로필 수정을 성공하였습니다.");
+              Navigate("/home");
+            }
+          })
+          .then(() => {
+            dispatch(updateUserInfo(state.userId));
+          });
       } catch (e) {}
     } else {
       alert("필수 입력 항목을 확인해주세요.");
     }
-    // 회원가입 요청 END
+    // 프로필 수정 요청 END
   };
+
+  const onCancle = () => {
+    Navigate("../");
+  };
+
   return (
     <>
       {!isLoading && (
@@ -239,11 +248,14 @@ const ModifyProfile = () => {
                   <option value="default" disabled hidden>
                     선택
                   </option>
-                  {Object.entries(commonCode.E).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {value}
-                    </option>
-                  ))}
+                  {Object.entries(commonCode.E).map(
+                    ([key, value]) =>
+                      key !== "E00" && (
+                        <option key={key} value={key}>
+                          {value}
+                        </option>
+                      )
+                  )}
                 </SelectBox>
               </Wrapper>
 
@@ -259,11 +271,14 @@ const ModifyProfile = () => {
                   <option value="default" disabled hidden>
                     선택
                   </option>
-                  {Object.entries(commonCode.F).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {value}
-                    </option>
-                  ))}
+                  {Object.entries(commonCode.F).map(
+                    ([key, value]) =>
+                      key !== "F00" && (
+                        <option key={key} value={key}>
+                          {value}
+                        </option>
+                      )
+                  )}
                 </SelectBox>
               </Wrapper>
 
@@ -295,6 +310,7 @@ const ModifyProfile = () => {
               bc="#C4C4C4"
               height="3rem"
               hoverColor="#a2a2a2"
+              onClick={onCancle}
             />
           </InputBlock>
         </FormContainer>
