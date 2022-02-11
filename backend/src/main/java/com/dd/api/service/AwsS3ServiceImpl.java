@@ -29,9 +29,12 @@ import com.amazonaws.util.IOUtils;
 import com.dd.api.dto.response.FilesResponseDto;
 import com.dd.db.entity.board.Notice;
 import com.dd.db.entity.files.NoticeFile;
+import com.dd.db.entity.files.OnlineClassFile;
 import com.dd.db.entity.files.ProfileImg;
+import com.dd.db.entity.onlineclass.OnlineClass;
 import com.dd.db.entity.user.User;
 import com.dd.db.repository.NoticeFileRepository;
+import com.dd.db.repository.OnlineClassFileRepository;
 import com.dd.db.repository.ProfileImgRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -50,6 +53,8 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	private final ProfileImgRepository profileImgRepository;
 
 	private final NoticeFileRepository noticeFileRepository;
+	
+	private final OnlineClassFileRepository onlineClassFileRepository;
 
 	private final JwtTokenService jwtTokenService;
     
@@ -109,6 +114,42 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	        });
 		return fileNameList;
 	}
+	
+	@Transactional
+	@Override
+	public List<String> uploadFile(User user, OnlineClass onlineClass, List<MultipartFile> multipartFile) {
+		
+		List<String> fileNameList = new ArrayList<>();
+		
+		multipartFile.forEach(file -> {
+				System.out.println(file.getOriginalFilename());
+	            String fileName = createFileName(file.getOriginalFilename());
+	            ObjectMetadata objectMetadata = new ObjectMetadata();
+	            objectMetadata.setContentLength(file.getSize());
+	            objectMetadata.setContentType(file.getContentType());
+
+	            try(InputStream inputStream = file.getInputStream()) {
+	                amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
+	                        .withCannedAcl(CannedAccessControlList.PublicRead));
+	            } catch(IOException e) {
+	                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+	            }
+	            
+	            OnlineClassFile onlineClassFile = OnlineClassFile.builder()
+	            		.newFileName(fileName)
+	            		.originFileName(file.getOriginalFilename())
+	            		.user(user)
+	            		.onlineClass(onlineClass)
+	            		.build();
+
+	            onlineClassFileRepository.save(onlineClassFile);
+
+	            fileNameList.add(fileName);
+	        });
+		
+		return fileNameList;
+	}
+	
 	
 	@Transactional
 	@Override
