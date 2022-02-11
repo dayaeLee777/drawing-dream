@@ -34,7 +34,7 @@ const InfoContainer = styled.div`
 
 const CourseInfoDetail = ({ data }) => {
   const preiodCode = data.periodCode;
-  const subjectCode = data.subjectCode;
+  const courseCode = data.courseCode;
   return (
     <Contanier>
       <div className="preiod">
@@ -42,8 +42,8 @@ const CourseInfoDetail = ({ data }) => {
       </div>
       <div className="name">
         {
-          commonCode[subjectCode.substr(0, 1)][subjectCode.substr(0, 3)][
-            subjectCode
+          commonCode[courseCode.substr(0, 1)][courseCode.substr(0, 3)][
+            courseCode
           ]
         }
       </div>
