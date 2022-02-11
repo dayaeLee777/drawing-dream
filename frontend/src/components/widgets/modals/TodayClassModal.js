@@ -90,7 +90,7 @@ const TodayClassModal = ({ layoutId }) => {
   };
 
   const startClass = () => {
-    const courseId = "c2964246-c2b5-07c3-934f-c39ac2b24f47";
+    const courseId = "594364c3-b1c2-bec3-9a4d-6dc29dc3b5c2";
     createOnlineClass({ courseId }).then((res) => {
       console.log(res);
       navigate(`/onlineclass/${courseId}`);
@@ -108,7 +108,7 @@ const TodayClassModal = ({ layoutId }) => {
   useEffect(() => {
     if (todayData.length > 0) {
       const today = new Date();
-      today.setHours(today.getHours() - 7); // 테스트용
+      today.setHours(today.getHours() - 11); // 테스트용
       // today.setMinutes(today.getMinutes() - 30);
       const time =
         today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
