@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import Period from "./timetable/Period";
 import WeekList from "./timetable/WeekList";
 
 const Container = styled(motion.div)`

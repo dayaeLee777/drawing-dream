@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import Period from "../timetable/Period";
 import WeekList from "../timetable/WeekList";
 
 const Wrapper = styled(motion.div)`
@@ -33,7 +32,6 @@ const Title = styled.div`
   align-items: end;
   margin-bottom: 20px;
 `;
-
 
 const TimeTableModal = ({ layoutId }) => {
   const onClick = (event) => {
