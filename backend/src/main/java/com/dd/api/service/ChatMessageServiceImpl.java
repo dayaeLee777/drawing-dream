@@ -111,8 +111,10 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 	@Override
 	public ChatMessageResponseDTO findLastMessage(ChatRoom chatRoom) {
 
-		ChatMessage chatMessage = chatMessageRepository.findLastMessage(chatRoom).get();
-		System.out.println("findMessage : chatMessage - " + chatMessage.toString());
+		ChatMessage chatMessage = chatMessageRepository.findLastMessage(chatRoom).orElse(null);
+
+		if (chatMessage == null)
+			return null;
 
 		ChatMessageResponseDTO message = ChatMessageResponseDTO.builder().content(chatMessage.getContent())
 				.sendTime(chatMessage.getSendTime()).userId(chatMessage.getWriter().getId())
