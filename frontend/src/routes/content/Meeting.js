@@ -2,7 +2,7 @@ import Button from "components/commons/button";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import board from "assets/img/board.png";
-import AttendanceModal from "../components/attendance/AttendanceModal";
+import AttendanceModal from "../../components/attendance/AttendanceModal";
 import { motion } from "framer-motion";
 import { attend } from "api/attendance";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,7 @@ const Board = styled.div`
   background-image: url(${board});
   background-repeat: no-repeat;
   background-size: 100%;
-  width: 50vw;
+  width: 100%;
 `;
 
 const ContentContainer = styled.div`
