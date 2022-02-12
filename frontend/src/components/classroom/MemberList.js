@@ -7,8 +7,6 @@ const Container = styled.div`
   grid-template-columns: repeat(5, 1fr);
   margin: 2rem 4rem;
   grid-gap: 2rem;
-  /* justify-content: center;
-  align-items: center; */
 `;
 const MemberList = ({ data }) => {
   return (

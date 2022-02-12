@@ -16,10 +16,6 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.widgetColor};
 `;
 
-// const Desc = styled.div`
-//   width: 90%;
-// `;
-
 const Title = styled.div`
   font-size: 1.8rem;
   margin: 3rem 0;

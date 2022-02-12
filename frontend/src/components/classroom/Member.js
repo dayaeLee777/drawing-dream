@@ -4,11 +4,11 @@ import blankProfileImg from "assets/img/profile.png";
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createChatRoom } from "api/chat";
-import { useSelector } from "react-redux";
-import SockJS from "sockjs-client";
-import Stomp from "stompjs";
-import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { getProfileImg } from "api/user";
+
+import { closeChat, openChat } from "modules/chat";
 
 const Container = styled(motion.div)`
   /* width: 10rem; */
@@ -44,16 +44,15 @@ const Name = styled.div`
 const CreateChat = styled.div``;
 
 const Member = ({ member }) => {
-  let sockJS = new SockJS("http://localhost:8080/ws-dd");
-  let client = Stomp.over(sockJS);
-  const token =
-    sessionStorage.getItem("access-token") ||
-    localStorage.getItem("access-token");
   const { userName, userId } = useSelector((state) => state.user);
   const [profileImg, setProfileImg] = useState("");
-
+  const [roomId, setRoomId] = useState("");
+  const { isOpenChat } = useSelector((state) => state.chat);
+  const dispatch = useDispatch();
   useEffect(() => {
-    getProfileImg(member.userId).then((res) => setProfileImg(res.data.fileName));
+    getProfileImg(member.userId).then((res) =>
+      setProfileImg(res.data.fileName)
+    );
   }, [profileImg]);
 
   const createChat = () => {
@@ -66,42 +65,26 @@ const Member = ({ member }) => {
       ],
     }).then((res) => {
       console.log(res);
-      // client.disconnect();
-      // client.connect(
-      //   {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      //   (frame) => {
-      //     console.log("STOMP Connection");
-      // client.subscribe(`/topic/one/${member.userId}`, (response) => {
-      //   // setContents((prev) => [...prev, JSON.parse(response.body)]);
-      //   console.log(response);
-      // });
-      // client.send(
-      //   "/app/chat/enter",
-      //   {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      //   JSON.stringify({ roomId })
-      // );
-      //   }
-      // );
+      setRoomId(res.data.roomId);
+      dispatch(openChat());
     });
   };
   return (
-    <Container
-      whileHover={{
-        scale: 1.1,
-      }}
-    >
-      <Img src={profileImg ? profileImg : blankProfileImg} />
-      <Wrapper>
-        <Name>{member.userName}</Name>
-        <CreateChat onClick={createChat}>
-          <FontAwesomeIcon icon={faCommentDots} size="lg" />
-        </CreateChat>
-      </Wrapper>
-    </Container>
+    <>
+      <Container
+        whileHover={{
+          scale: 1.1,
+        }}
+      >
+        <Img src={profileImg ? profileImg : blankProfileImg} />
+        <Wrapper>
+          <Name>{member.userName}</Name>
+          <CreateChat onClick={createChat}>
+            <FontAwesomeIcon icon={faCommentDots} size="lg" />
+          </CreateChat>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 

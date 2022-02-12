@@ -9,7 +9,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { closeChat, openChat } from "modules/chat";
 
 const Container = styled.div`
   position: fixed;
@@ -46,11 +47,13 @@ const Container = styled.div`
 `;
 
 const Chat = () => {
-  const [chatOpen, setChatOpen] = useState(false);
+  // const [chatOpen, setChatOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [contents, setContents] = useState([]);
   const [isNew, setIsNew] = useState(false);
   const { userName, userId } = useSelector((state) => state.user);
+  const { isOpenChat } = useSelector((state) => state.chat);
+  const dispatch = useDispatch();
 
   let sockJS = new SockJS("http://localhost:8080/ws-dd");
   let client = Stomp.over(sockJS);
@@ -75,7 +78,11 @@ const Chat = () => {
     return () => client.disconnect();
   }, []);
   const chatClose = () => {
-    setChatOpen(!chatOpen);
+    if (isOpenChat) {
+      dispatch(closeChat());
+    } else {
+      dispatch(openChat());
+    }
     setIsNew(false);
   };
 
@@ -83,10 +90,10 @@ const Chat = () => {
     <>
       <Container onClick={chatClose}>
         <FontAwesomeIcon icon={faCommentDots} size="2x" />
-        {isNew && !chatOpen && <FontAwesomeIcon icon={faBell} size="2x" />}
+        {isNew && !isOpenChat && <FontAwesomeIcon icon={faBell} size="2x" />}
       </Container>
 
-      {chatOpen && (
+      {isOpenChat && (
         <ChatList
           message={message}
           setMessage={setMessage}
