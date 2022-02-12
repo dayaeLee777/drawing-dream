@@ -12,7 +12,7 @@ import SignUp from "routes/auth/SignUp";
 import Home from "routes/Home";
 import Notice from "routes/Notice";
 import School from "routes/School";
-import LookUp from "routes/LookUp";
+import Meeting from "routes/Meeting";
 import Layout from "components/layout/SideLayout";
 import Nav from "components/layout/Nav";
 import styled from "styled-components";
@@ -86,7 +86,7 @@ const AppRouter = () => {
                       element={<CommunityRegister modify />}
                     />
                   </Route>
-                  <Route path="/lookup" element={<LookUp />} />
+                  <Route path="/meeting" element={<Meeting />} />
                   <Route path="/myclassroom" element={<MyClassRoom />} />
                   <Route path="/widgetlist" element={<WidgetList />} />
                 </Routes>
