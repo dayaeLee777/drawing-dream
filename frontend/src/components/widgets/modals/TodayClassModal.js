@@ -10,6 +10,7 @@ import { createOnlineClass } from "api/onlineclass";
 import { createChatRoom } from "api/chat";
 import teacher2 from "assets/img/teacher2.png";
 import { getCouresInfo } from "api/course";
+import { getNowPeriod } from "../todayclass/time";
 
 const Wrapper = styled(motion.div)`
   width: 1000px;
@@ -83,6 +84,11 @@ const TodayClassModal = ({ layoutId }) => {
 
   const { userCode } = useSelector((state) => state.user);
   const { todayData } = useSelector((state) => state.timetable);
+  const { period } = useSelector((state) => state.timetable);
+  const [nowPeriod, setNowPeriod] = useState();
+  const [courseInfo, setCourseInfo] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [courseId, setCourseId] = useState("");
   const navigate = useNavigate();
 
   const onClick = (event) => {
@@ -90,38 +96,25 @@ const TodayClassModal = ({ layoutId }) => {
   };
 
   const startClass = () => {
-    const courseId = "594364c3-b1c2-bec3-9a4d-6dc29dc3b5c2";
-    createOnlineClass({ courseId }).then((res) => {
-      console.log(res);
-      navigate(`/onlineclass/${courseId}`);
-      window.location.reload();
+    getCouresInfo(courseId).then((res) => {
+      if (res.data.onlineClassId) {
+        navigate(`/onlineclass/${courseId}`);
+        window.location.reload();
+      } else {
+        createOnlineClass({ courseId }).then((res) => {
+          navigate(`/onlineclass/${courseId}`);
+          window.location.reload();
+        });
+      }
     });
   };
-
-  const { period } = useSelector((state) => state.timetable);
-  const [nowPeriod, setNowPeriod] = useState();
-  const [courseInfo, setCourseInfo] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [courseId, setCourseId] = useState("");
 
   console.log(todayData);
   useEffect(() => {
     if (todayData.length > 0) {
-      const today = new Date();
-      today.setHours(today.getHours() - 11); // 테스트용
-      // today.setMinutes(today.getMinutes() - 30);
-      const time =
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      period.map((per) => {
-        // console.log(time);
-        // console.log(per.startTime < time, per.startTime);
-        // console.log(per.endTime > time, per.endTime);
-        if (per.startTime < time && per.endTime > time) {
-          setNowPeriod(per.periodCode);
-          console.log(per.periodCode);
-          setCourseId(todayData[per.periodCode.slice(2, 3) - 1].courseId);
-        }
-      });
+      const periodCode = getNowPeriod(period);
+      setNowPeriod(periodCode);
+      setCourseId(todayData[periodCode.slice(2, 3) - 1].courseId);
     }
     setIsLoading(false);
     if (!isLoading && nowPeriod) {

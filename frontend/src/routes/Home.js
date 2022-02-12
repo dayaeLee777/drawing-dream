@@ -1,6 +1,7 @@
 import { getCouresInfo } from "api/course";
 import Widgets from "components/home/Widgets";
 import TodayClassModal from "components/widgets/modals/TodayClassModal";
+import { getNowPeriod, setNowPeriod } from "components/widgets/todayclass/time";
 import { motion } from "framer-motion";
 import { readTimeTable } from "modules/timetable";
 import React, { useEffect, useState } from "react";
@@ -41,27 +42,35 @@ const Home = () => {
         if (userCode === "A04") {
           interval = setInterval(() => {
             if (todayData.length > 0) {
-              const today = new Date();
-              today.setHours(today.getHours() - 11); // 테스트용
-              // today.setMinutes(today.getMinutes - 30);
-              const time =
-                today.getHours() +
-                ":" +
-                today.getMinutes() +
-                ":" +
-                today.getSeconds();
-              console.log(time);
-              period.map((per) => {
-                if (per.startTime < time && per.endTime > time) {
-                  const courseId =
-                    todayData[per.periodCode.slice(2, 3) - 1].courseId;
-                  console.log(courseId);
-                  getCouresInfo(courseId).then((res) => {
-                    console.log(isShow);
-                    if (res.data.onlineClassId) {
-                      setIsShow(true);
-                    }
-                  });
+              // const today = new Date();
+              // today.setHours(today.getHours() - 4); // 테스트용
+              // // today.setMinutes(today.getMinutes - 30);
+              // const time =
+              //   today.getHours() +
+              //   ":" +
+              //   today.getMinutes() +
+              //   ":" +
+              //   today.getSeconds();
+              // console.log(time);
+              // period.map((per) => {
+              //   if (per.startTime < time && per.endTime > time) {
+              //     const courseId =
+              //       todayData[per.periodCode.slice(2, 3) - 1].courseId;
+              //     console.log(courseId);
+              //     getCouresInfo(courseId).then((res) => {
+              //       console.log(isShow);
+              //       if (res.data.onlineClassId) {
+              //         setIsShow(true);
+              //       }
+              //     });
+              //   }
+              // });
+              const periodCode = getNowPeriod(period);
+              const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
+              getCouresInfo(courseId).then((res) => {
+                console.log(isShow);
+                if (res.data.onlineClassId) {
+                  setIsShow(true);
                 }
               });
             }
@@ -79,17 +88,21 @@ const Home = () => {
   };
   return (
     <>
-      <Widgets widgetId={widgetId} setWidgetId={setWidgetId} />
-      {isShow && (
-        <Overlay
-          variants={overlay}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          onClick={onClick}
-        >
-          <TodayClassModal layoutId={"M01"} />
-        </Overlay>
+      {!isLoading && (
+        <>
+          <Widgets widgetId={widgetId} setWidgetId={setWidgetId} />
+          {isShow && (
+            <Overlay
+              variants={overlay}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              onClick={onClick}
+            >
+              <TodayClassModal layoutId={"M01"} />
+            </Overlay>
+          )}
+        </>
       )}
     </>
   );
