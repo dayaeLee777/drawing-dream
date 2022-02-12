@@ -10,15 +10,11 @@ import ModifyProfile from "routes/auth/ModifyProfile";
 import SignIn from "routes/auth/SignIn";
 import SignUp from "routes/auth/SignUp";
 import Home from "routes/Home";
-import Notice from "routes/Notice";
-import School from "routes/School";
-import Meeting from "routes/Meeting";
-import Layout from "components/layout/SideLayout";
-import Nav from "components/layout/Nav";
-import styled from "styled-components";
-import Chat from "./chat/Chat";
-import MyClassRoom from "routes/MyClassRoom";
-import WidgetList from "routes/WidgetList";
+import Notice from "routes/content/Notice";
+import School from "routes/content/School";
+import Meeting from "routes/content/Meeting";
+import MyClassRoom from "routes/content/MyClassRoom";
+import WidgetList from "routes/content/WidgetList";
 import HomeSetting from "routes/HomeSetting";
 import CommunityRegister from "./school/CommunityRegister";
 import CommunityList from "./school/CommunityList";
@@ -27,13 +23,8 @@ import OnlineClass from "routes/OnlineClass";
 import NoticeRegister from "./notice/NoticeRegister";
 import NoticeList from "./notice/NoticeList";
 import NoticeDetail from "./notice/NoticeDetail";
-
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 0fr 2fr;
-  grid-gap: 2rem;
-  margin: 0 10vw;
-`;
+import Widget from "routes/content/Widget";
+import HomeOther from "routes/HomeOther";
 
 const AppRouter = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
@@ -41,12 +32,9 @@ const AppRouter = () => {
     <Router>
       {isLoggedIn ? (
         <>
-          <Nav />
-          {window.location.pathname === "/setting/home" ||
-          window.location.href.indexOf("onlineclass") > 1 ? (
+          {window.location.href.indexOf("onlineclass") > 1 ? (
             <>
               <Routes>
-                <Route path="/setting/home" element={<HomeSetting />} />
                 <Route path="/onlineclass/*" element={<OnlineClass />}>
                   <Route path=":roomid" element={<OnlineClass />} />
                 </Route>
@@ -54,21 +42,14 @@ const AppRouter = () => {
             </>
           ) : (
             <>
-              <Container>
-                <Layout />
-                <Routes>
-                  <Route path="/" element={<Navigate replace to="/home" />} />
-                  <Route
-                    path="/signin"
-                    element={<Navigate replace to="/home" />}
-                  />
-                  <Route
-                    path="/signup"
-                    element={<Navigate replace to="/home" />}
-                  />
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/modifyprofile" element={<ModifyProfile />} />
-                  <Route path="/notice" element={<Notice />}>
+              <Routes>
+                <Route path="/setting" element={<HomeOther />}>
+                  <Route path="home" element={<HomeSetting />} />
+                </Route>
+                <Route path="/" element={<Home />}>
+                  <Route path="home" element={<Widget />} />
+                  <Route path="modifyprofile" element={<ModifyProfile />} />
+                  <Route path="notice" element={<Notice />}>
                     <Route path="" element={<NoticeList />} />
                     <Route path="register" element={<NoticeRegister />} />
                     <Route path=":noticeId" element={<NoticeDetail />} />
@@ -77,7 +58,7 @@ const AppRouter = () => {
                       element={<NoticeRegister modify />}
                     />
                   </Route>
-                  <Route path="/school/" element={<School />}>
+                  <Route path="school/" element={<School />}>
                     <Route path="" element={<CommunityList />} />
                     <Route path="register" element={<CommunityRegister />} />
                     <Route path=":communityId" element={<CommunityDetail />} />
@@ -86,12 +67,20 @@ const AppRouter = () => {
                       element={<CommunityRegister modify />}
                     />
                   </Route>
-                  <Route path="/meeting" element={<Meeting />} />
-                  <Route path="/myclassroom" element={<MyClassRoom />} />
-                  <Route path="/widgetlist" element={<WidgetList />} />
-                </Routes>
-              </Container>
-              <Chat />
+                  <Route path="myclassroom" element={<MyClassRoom />} />
+                  <Route path="widgetlist" element={<WidgetList />} />
+                  <Route path="meeting" element={<Meeting />} />
+                </Route>
+                <Route path="/" element={<Navigate replace to="/home" />} />
+                <Route
+                  path="/signin"
+                  element={<Navigate replace to="/home" />}
+                />
+                <Route
+                  path="/signup"
+                  element={<Navigate replace to="/home" />}
+                />
+              </Routes>
             </>
           )}
         </>
