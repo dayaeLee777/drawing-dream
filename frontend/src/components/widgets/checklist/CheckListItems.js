@@ -50,7 +50,7 @@ const CheckListItems = ({ isListLoading, setIsListLoading, main }) => {
 
   return (
     <CheckListContainer>
-      {!main &&<CheckListInsert setIsListLoading={setIsListLoading}/>}
+      {!main && <CheckListInsert setIsListLoading={setIsListLoading} />}
       <CheckListItemsContainer>
         {list &&
           list.map((item) => (
@@ -61,9 +61,9 @@ const CheckListItems = ({ isListLoading, setIsListLoading, main }) => {
               main={main}
             />
           ))}
-        {(!isListLoading && list.length===0) &&
+        {!isListLoading && list.length === 0 && (
           <NullList>등록된 체크리스트가 없습니다.</NullList>
-        }
+        )}
       </CheckListItemsContainer>
     </CheckListContainer>
   );
