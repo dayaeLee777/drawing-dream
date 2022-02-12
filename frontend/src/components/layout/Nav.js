@@ -75,7 +75,6 @@ const Nav = () => {
       <Item
         onClick={() => {
           navigate("/home");
-          window.location.reload();
         }}
       >
         <Logo src={logo}></Logo>
@@ -90,7 +89,6 @@ const Nav = () => {
             <DropDownItem
               onClick={() => {
                 navigate("/setting/home");
-                window.location.reload();
               }}
             >
               홈 화면 설정
