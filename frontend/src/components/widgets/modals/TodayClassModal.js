@@ -96,10 +96,16 @@ const TodayClassModal = ({ layoutId }) => {
   };
 
   const startClass = () => {
-    createOnlineClass({ courseId }).then((res) => {
-      console.log(res);
-      navigate(`/onlineclass/${courseId}`);
-      window.location.reload();
+    getCouresInfo(courseId).then((res) => {
+      if (res.data.onlineClassId) {
+        navigate(`/onlineclass/${courseId}`);
+        window.location.reload();
+      } else {
+        createOnlineClass({ courseId }).then((res) => {
+          navigate(`/onlineclass/${courseId}`);
+          window.location.reload();
+        });
+      }
     });
   };
 
