@@ -66,7 +66,7 @@ const Member = ({ member }) => {
     }).then((res) => {
       console.log(res);
       setRoomId(res.data.roomId);
-      dispatch(openChat());
+      dispatch(openChat(res.data.roomId));
     });
   };
   return (
