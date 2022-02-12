@@ -67,13 +67,16 @@ const overlay = {
   exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
 };
 
-const Modal = ({ setModalOpen }) => {
+const Modal = ({ date }) => {
   const navigate = useNavigate();
 
   return (
     <ModalContainer>
       <Subject>출석 완료!</Subject>
-      <Content>2022년 1월 6일 출석되었습니다.</Content>
+      <Content>
+        {date.slice(0, 4)}년 {date.slice(5, 7)}월 {date.slice(8, 10)}일
+        출석되었습니다.
+      </Content>
       <Button onClick={() => navigate("/home")} name="메인으로 돌아가기" />
     </ModalContainer>
   );

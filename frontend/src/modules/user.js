@@ -1,4 +1,5 @@
 import { setApiHeaders, setFileApiHeaders } from "api/api";
+import { checkAttend } from "api/attendance";
 import { loginUser, getDept } from "api/user";
 
 const LOGIN_SUCCESS = "USER/LOGIN_SUCCESS";
@@ -24,6 +25,11 @@ export const login = (user, isChecked) => async (dispatch) => {
         setFileApiHeaders();
 
         getDept(userId).then((response) => {
+          // checkAttend(userId).then((response) => {
+          //   if (response > 0) {
+
+          //   }
+          // })
           dispatch({
             type: LOGIN_SUCCESS,
             userId: userId,
@@ -71,24 +77,6 @@ export const attendance = () => {
     type: ATTEND_SUCCESS,
   };
 };
-
-// const token =
-//   sessionStorage.getItem("access-token") ||
-//   localStorage.getItem("access-token");
-
-// const initialState = token
-//   ? { isLoggedIn: true, userId: "", userName: "", schoolName: "", error: false }
-//   : {
-//       isLoggedIn: false,
-//       userId: "",
-//       userName: "",
-//       schoolName: "",
-//       gradeCode: "",
-//       classCode: "",
-//       studentNo: "",
-//       userCode: "",
-//       error: false,
-//     };
 
 const initialState = {
   isLoggedIn: false,
