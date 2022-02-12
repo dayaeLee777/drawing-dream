@@ -25,6 +25,7 @@ import NoticeList from "./notice/NoticeList";
 import NoticeDetail from "./notice/NoticeDetail";
 import Widget from "routes/content/Widget";
 import HomeOther from "routes/HomeOther";
+import ModifyPassword from "routes/auth/ModifyPassword";
 
 const AppRouter = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
@@ -43,12 +44,13 @@ const AppRouter = () => {
           ) : (
             <>
               <Routes>
-                <Route path="/setting" element={<HomeOther />}>
+                <Route path="setting" element={<HomeOther />}>
                   <Route path="home" element={<HomeSetting />} />
                 </Route>
-                <Route path="/" element={<Home />}>
+                <Route path="" element={<Home />}>
                   <Route path="home" element={<Widget />} />
                   <Route path="modifyprofile" element={<ModifyProfile />} />
+                  <Route path="modifypassword" element={<ModifyPassword />} />
                   <Route path="notice" element={<Notice />}>
                     <Route path="" element={<NoticeList />} />
                     <Route path="register" element={<NoticeRegister />} />
@@ -58,7 +60,7 @@ const AppRouter = () => {
                       element={<NoticeRegister modify />}
                     />
                   </Route>
-                  <Route path="school/" element={<School />}>
+                  <Route path="school" element={<School />}>
                     <Route path="" element={<CommunityList />} />
                     <Route path="register" element={<CommunityRegister />} />
                     <Route path=":communityId" element={<CommunityDetail />} />
@@ -71,13 +73,13 @@ const AppRouter = () => {
                   <Route path="widgetlist" element={<WidgetList />} />
                   <Route path="meeting" element={<Meeting />} />
                 </Route>
-                <Route path="/" element={<Navigate replace to="/home" />} />
+                <Route path="" element={<Navigate replace to="/home" />} />
                 <Route
-                  path="/signin"
+                  path="signin"
                   element={<Navigate replace to="/home" />}
                 />
                 <Route
-                  path="/signup"
+                  path="signup"
                   element={<Navigate replace to="/home" />}
                 />
               </Routes>
