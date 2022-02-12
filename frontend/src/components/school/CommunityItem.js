@@ -20,13 +20,14 @@ const StyledTd = styled.td`
 
 const CommunityItem = ({ data, index }) => {
   const Navigate = useNavigate();
+  let time = data.regTime.split(" ")[0];
   return (
     <StyledTr onClick={() => Navigate(`./${data.communityId}`)}>
       <StyledTd>{index + 1}</StyledTd>
       <StyledTd ta="left">{data.title}</StyledTd>
       <StyledTd>{data.userName}</StyledTd>
       <StyledTd>{data.hit}</StyledTd>
-      <StyledTd>{data.regTime}</StyledTd>
+      <StyledTd>{time}</StyledTd>
     </StyledTr>
   );
 };
