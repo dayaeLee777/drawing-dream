@@ -72,13 +72,8 @@ const EditContainer = styled.div`
 const CommunityDetail = () => {
   const params = useParams();
   const Navigate = useNavigate();
-  const [profileUrl, setProfileUrl] = useState("");
-  const [data, setData] = useState({
-    title: "",
-    userId: "",
-    content: "",
-    hit: "",
-  });
+  const [profileUrl, setProfileUrl] = useState();
+  const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { userId } = useSelector((state) => state.user);
 
@@ -126,36 +121,41 @@ const CommunityDetail = () => {
   //   hit: 23,
   //   title: "첫번째 글",
   // };
-
+  let time;
+  let timeArr;
+  if (!isLoading) {
+    timeArr = data.regTime.split(" ");
+    time = timeArr[0] + " " + timeArr[1].split(".")[0];
+  }
   return (
     <DetailContainer>
-      <TitleContainer>
-        <div className="title">{data.title}</div>
-        <ProfileContainer>
-          {!isLoading && (
+      {!isLoading && (
+        <TitleContainer>
+          <div className="title">{data.title}</div>
+          <ProfileContainer>
             <img
               src={profileUrl ? profileUrl : blankProfile}
               alt="프로필이미지"
             />
-          )}
-          <>
-            <span className="userName">{data.userName}</span>
-            <span className="regTime">{data.regTime}</span>
-          </>
-        </ProfileContainer>
-        <EditContainer>
-          {userId === data.userId && (
             <>
-              <span className="edit" onClick={onModify}>
-                수정하기
-              </span>
-              <span className="delete" onClick={onDelete}>
-                삭제하기
-              </span>
+              <span className="userName">{data.userName}</span>
+              <span className="regTime">{time}</span>
             </>
-          )}
-        </EditContainer>
-      </TitleContainer>
+          </ProfileContainer>
+          <EditContainer>
+            {userId === data.userId && (
+              <>
+                <span className="edit" onClick={onModify}>
+                  수정하기
+                </span>
+                <span className="delete" onClick={onDelete}>
+                  삭제하기
+                </span>
+              </>
+            )}
+          </EditContainer>
+        </TitleContainer>
+      )}
       {!isLoading && (
         <BoardContainer>
           <Viewer initialValue={`${data.content}`} />
