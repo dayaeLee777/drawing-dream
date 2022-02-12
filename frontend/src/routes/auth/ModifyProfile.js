@@ -76,7 +76,6 @@ const ModifyProfile = () => {
     if (isLoading) {
       getUser(state.userId).then(
         (res) => (
-          console.log(res),
           setInputs({
             ...inputs,
             address: res.data.address,
@@ -153,7 +152,6 @@ const ModifyProfile = () => {
           classCode: inputs.classCode,
           studentNo: inputs.studentNo,
         };
-        console.log(user);
         putUser(user)
           .then((res) => {
             if (res.status === 200) {
@@ -233,6 +231,7 @@ const ModifyProfile = () => {
               onChange={onChange}
               name="addressDetail"
               width="25rem"
+              value={inputs.addressDetail}
             />
 
             <InputBlock>
