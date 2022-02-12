@@ -305,14 +305,10 @@ const OnlineClass = () => {
     sendMessage({
       id: "leaveRoom",
     });
-
     for (var key in participants) {
       participants[key].dispose();
     }
-
     navigate("/home");
-    window.location.reload();
-
     ws.close();
   }
 
