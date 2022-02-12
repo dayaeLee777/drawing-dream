@@ -6,7 +6,7 @@ public interface MyClassService {
 
 	MyClassGetListWrapperResponseDto getMyClassList(String accessToken);
 //	MyClassGetListWrapperResponseDto getMyClassList();
-	
+
 	String getLoginIdFromToken(String accessToken);
 
 }

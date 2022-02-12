@@ -14,9 +14,12 @@ import com.dd.db.enums.Code;
 
 @Repository
 public interface UserDepartmentRepository extends JpaRepository<UserDepartment, UUID> {
-	
+
 	Optional<UserDepartment> findByUserId(UUID userId);
+
 	Optional<UserDepartment> findByUser(User user);
-	Optional<List<UserDepartment>> findBySchoolAndGradeCodeAndClassCode(School school, Code gradeCode, Code classCode);
+
+	Optional<List<UserDepartment>> findBySchoolAndGradeCodeAndClassCodeOrderByUserCodeAscStudentNo(School school, Code gradeCode,
+			Code classCode);
 
 }
