@@ -42,29 +42,6 @@ const Home = () => {
         if (userCode === "A04") {
           interval = setInterval(() => {
             if (todayData.length > 0) {
-              // const today = new Date();
-              // today.setHours(today.getHours() - 4); // 테스트용
-              // // today.setMinutes(today.getMinutes - 30);
-              // const time =
-              //   today.getHours() +
-              //   ":" +
-              //   today.getMinutes() +
-              //   ":" +
-              //   today.getSeconds();
-              // console.log(time);
-              // period.map((per) => {
-              //   if (per.startTime < time && per.endTime > time) {
-              //     const courseId =
-              //       todayData[per.periodCode.slice(2, 3) - 1].courseId;
-              //     console.log(courseId);
-              //     getCouresInfo(courseId).then((res) => {
-              //       console.log(isShow);
-              //       if (res.data.onlineClassId) {
-              //         setIsShow(true);
-              //       }
-              //     });
-              //   }
-              // });
               const periodCode = getNowPeriod(period);
               const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
               getCouresInfo(courseId).then((res) => {

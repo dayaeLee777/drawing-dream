@@ -128,24 +128,12 @@ const Date = styled.div`
   font-size: 0.8rem;
 `;
 
-const ChatInput = styled.div`
-  background: #f4f7f9;
-  width: 81%;
-  position: relative;
-  height: 47px;
-  padding-top: 10px;
-  padding-right: 50px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  border: none;
-  resize: none;
-  outline: none;
-  border: 1px solid #ccc;
-  color: #888;
-  border-top: none;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  overflow: hidden;
+const Info = styled.div`
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.6;
 `;
 
 const ChatList = ({
@@ -160,13 +148,6 @@ const ChatList = ({
   const [users, setUsers] = useState([]);
   const [memberId, setMemberId] = useState("");
   const { userName, userId } = useSelector((state) => state.user);
-  const onCloseChat = (e) => {
-    console.log("e.target: ", e.target);
-    console.log("e.tarcurrentTargetget: ", e.currentTarget);
-    if (e.target === e.currentTarget) {
-      chatClose();
-    }
-  };
 
   useEffect(() => {
     getRooms().then((res) => {
@@ -201,7 +182,7 @@ const ChatList = ({
         <ChatBoxBody>
           <ChatBoxOverlay />
           <ChatLogs>
-            {rooms ? (
+            {rooms.length > 0 ? (
               <>
                 {rooms.map((room) => (
                   <List
@@ -230,10 +211,10 @@ const ChatList = ({
                 ))}
               </>
             ) : (
-              <div>
-                현재 진행 중인 채팅이 없습니다. 우리 반 보기에서 채팅을
-                시작하세요!
-              </div>
+              <Info>
+                현재 진행 중인 채팅이 없습니다. <br />
+                우리 반 보기에서 친구들과 채팅을 시작하세요!
+              </Info>
             )}
           </ChatLogs>
         </ChatBoxBody>
