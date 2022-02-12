@@ -83,8 +83,7 @@ const TodayClassModal = ({ layoutId }) => {
   ];
 
   const { userCode } = useSelector((state) => state.user);
-  const { todayData } = useSelector((state) => state.timetable);
-  const { period } = useSelector((state) => state.timetable);
+  const { todayData, period } = useSelector((state) => state.timetable);
   const [nowPeriod, setNowPeriod] = useState();
   const [courseInfo, setCourseInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -114,7 +113,9 @@ const TodayClassModal = ({ layoutId }) => {
     if (todayData.length > 0) {
       const periodCode = getNowPeriod(period);
       setNowPeriod(periodCode);
-      setCourseId(todayData[periodCode.slice(2, 3) - 1].courseId);
+      todayData.map((data) => {
+        if (data.periodCode === periodCode) setCourseId(data.courseId);
+      });
     }
     setIsLoading(false);
     if (!isLoading && nowPeriod) {

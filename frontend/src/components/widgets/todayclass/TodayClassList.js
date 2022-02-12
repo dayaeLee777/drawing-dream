@@ -29,7 +29,7 @@ const TodayClassList = (props) => {
           <CourseName
             key={idx}
             data={course}
-            now={idx === nowPeriod - 1 ? true : false}
+            now={course.periodCode.slice(2, 3) === nowPeriod ? true : false}
           />
         ))}
     </ListContainer>
