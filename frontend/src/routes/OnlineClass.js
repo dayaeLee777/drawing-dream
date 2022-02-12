@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import kurentoUtils from "kurento-utils";
 import styled from "styled-components";
 import Chat from "components/onlineclass/Chat";
+import { getCouresInfo } from "api/course";
 /*
  * (C) Copyright 2014 Kurento (http://kurento.org/)
  *
@@ -61,6 +62,17 @@ const OnlineClass = () => {
   const PARTICIPANT_CLASS = "participant";
 
   const [teacherVideo, setTecherVideo] = useState(false);
+  const [courseInfo, setCourseInfo] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    if (isLoading) {
+      getCouresInfo(roomId).then((res) => {
+        setCourseInfo(res.data);
+        setIsLoading(false);
+      });
+    }
+  }, []);
+
   /**
    * Creates a video element for a new participant
    *
@@ -69,265 +81,281 @@ const OnlineClass = () => {
    *                        The tag of the new element will be 'video<name>'
    * @return
    */
-  class Participant {
-    constructor(name, participantCnt) {
-      this.name = name;
-      this.participantCnt = participantCnt;
-      // container.className = isPresentMainParticipant()
-      //   ? PARTICIPANT_CLASS
-      //   : PARTICIPANT_MAIN_CLASS;
-      // container.id = name;
-      // var span = document.createElement("span");
-      var rtcPeer;
+  if (!isLoading) {
+    class Participant {
+      constructor(name, participantCnt) {
+        this.name = name;
+        this.participantCnt = participantCnt;
+        // container.className = isPresentMainParticipant()
+        //   ? PARTICIPANT_CLASS
+        //   : PARTICIPANT_MAIN_CLASS;
+        // container.id = name;
+        // var span = document.createElement("span");
+        var rtcPeer;
 
-      let video;
-      if (participantCnt === 0) {
-        video = document.createElement("video");
-        video.id = "video-" + userId;
-        video.autoplay = true;
-        video.controls = false;
-        video.style.borderRadius = "10px";
-        video.style.width = "100%";
-        video.style.height = "100%";
-        video.style.objectFit = "cover";
-        document.getElementById("teacher").appendChild(video);
-      } else {
-        video = document.createElement("video");
-        video.id = "video-" + userId;
-        video.autoplay = true;
-        video.controls = false;
-        video.style.width = "100%";
-        video.style.height = "100%";
-        video.style.objectFit = "cover";
-        video.style.borderRadius = "10px";
-        document.getElementById("participants").appendChild(video);
-      }
+        let video;
+        if (participantCnt === 0) {
+          // console.log("hi");
+          video = document.createElement("video");
+          video.id = "video-" + userId;
+          video.autoplay = true;
+          video.controls = false;
+          video.style.borderRadius = "10px";
+          video.style.width = "100%";
+          video.style.height = "100%";
+          video.style.objectFit = "cover";
+          document.getElementById("teacher").appendChild(video);
+        } else {
+          video = document.createElement("video");
+          video.id = "video-" + userId;
+          video.autoplay = true;
+          video.controls = false;
+          video.style.width = "100%";
+          video.style.height = "100%";
+          video.style.objectFit = "cover";
+          video.style.borderRadius = "10px";
+          document.getElementById("participants").appendChild(video);
+        }
 
-      this.getVideoElement = function () {
-        return video;
-      };
-
-      // function switchContainerClass() {
-      //   if (container.className === PARTICIPANT_CLASS) {
-      //     var elements = Array.prototype.slice.call(
-      //       document.getElementsByClassName(PARTICIPANT_MAIN_CLASS)
-      //     );
-      //     elements.forEach(function (item) {
-      //       item.className = PARTICIPANT_CLASS;
-      //     });
-
-      //     container.className = PARTICIPANT_MAIN_CLASS;
-      //   } else {
-      //     container.className = PARTICIPANT_CLASS;
-      //   }
-      // }
-
-      // function isPresentMainParticipant() {
-      //   return (
-      //     document.getElementsByClassName(PARTICIPANT_MAIN_CLASS).length != 0
-      //   );
-      // }
-
-      this.offerToReceiveVideo = function (error, offerSdp, wp) {
-        if (error) return console.error("sdp offer error");
-        console.log("Invoking SDP offer callback function");
-        var msg = { id: "receiveVideoFrom", sender: name, sdpOffer: offerSdp };
-        sendMessage(msg);
-      };
-
-      this.onIceCandidate = function (candidate, wp) {
-        console.log("Local candidate" + JSON.stringify(candidate));
-
-        var message = {
-          id: "onIceCandidate",
-          candidate: candidate,
-          name: name,
+        this.getVideoElement = function () {
+          return video;
         };
-        sendMessage(message);
-      };
 
-      // Object.defineProperty(this, "rtcPeer", { writable: true });
+        // function switchContainerClass() {
+        //   if (container.className === PARTICIPANT_CLASS) {
+        //     var elements = Array.prototype.slice.call(
+        //       document.getElementsByClassName(PARTICIPANT_MAIN_CLASS)
+        //     );
+        //     elements.forEach(function (item) {
+        //       item.className = PARTICIPANT_CLASS;
+        //     });
 
-      this.dispose = function () {
-        console.log("Disposing participant " + this.name);
-        this.rtcPeer.dispose();
-        // container.parentNode.removeChild(container);
-      };
+        //     container.className = PARTICIPANT_MAIN_CLASS;
+        //   } else {
+        //     container.className = PARTICIPANT_CLASS;
+        //   }
+        // }
+
+        // function isPresentMainParticipant() {
+        //   return (
+        //     document.getElementsByClassName(PARTICIPANT_MAIN_CLASS).length != 0
+        //   );
+        // }
+
+        this.offerToReceiveVideo = function (error, offerSdp, wp) {
+          if (error) return console.error("sdp offer error");
+          console.log("Invoking SDP offer callback function");
+          var msg = {
+            id: "receiveVideoFrom",
+            sender: name,
+            sdpOffer: offerSdp,
+          };
+          sendMessage(msg);
+        };
+
+        this.onIceCandidate = function (candidate, wp) {
+          console.log("Local candidate" + JSON.stringify(candidate));
+
+          var message = {
+            id: "onIceCandidate",
+            candidate: candidate,
+            name: name,
+          };
+          sendMessage(message);
+        };
+
+        // Object.defineProperty(this, "rtcPeer", { writable: true });
+
+        this.dispose = function () {
+          console.log("Disposing participant " + this.name);
+          this.rtcPeer.dispose();
+          // container.parentNode.removeChild(container);
+        };
+      }
     }
-  }
 
-  ws.onmessage = function (message) {
-    var parsedMessage = JSON.parse(message.data);
-    console.info("Received message: " + message.data);
+    ws.onmessage = function (message) {
+      var parsedMessage = JSON.parse(message.data);
+      console.info("Received message: " + message.data);
 
-    switch (parsedMessage.id) {
-      case "existingParticipants":
-        onExistingParticipants(parsedMessage);
-        break;
-      case "newParticipantArrived":
-        onNewParticipant(parsedMessage);
-        break;
-      case "participantLeft":
-        onParticipantLeft(parsedMessage);
-        break;
-      case "receiveVideoAnswer":
-        receiveVideoResponse(parsedMessage);
-        break;
-      case "iceCandidate":
-        participants[parsedMessage.name].rtcPeer.addIceCandidate(
-          parsedMessage.candidate,
-          function (error) {
-            if (error) {
-              console.error("Error adding candidate: " + error);
-              return;
+      switch (parsedMessage.id) {
+        case "existingParticipants":
+          onExistingParticipants(parsedMessage);
+          break;
+        case "newParticipantArrived":
+          onNewParticipant(parsedMessage);
+          break;
+        case "participantLeft":
+          onParticipantLeft(parsedMessage);
+          break;
+        case "receiveVideoAnswer":
+          receiveVideoResponse(parsedMessage);
+          break;
+        case "iceCandidate":
+          participants[parsedMessage.name].rtcPeer.addIceCandidate(
+            parsedMessage.candidate,
+            function (error) {
+              if (error) {
+                console.error("Error adding candidate: " + error);
+                return;
+              }
             }
-          }
-        );
-        break;
-      default:
-        console.error("Unrecognized message", parsedMessage);
-    }
-  };
-
-  ws.onopen = () => {
-    const message = {
-      id: "joinRoom",
-      name: userName,
-      room: roomId,
-      participantCnt: participantCnt,
-    };
-    ws.send(JSON.stringify(message));
-  };
-
-  // async function getConnectedDevices(type) {
-  //   navigator.mediaDevices
-  //     .enumerateDevices()
-  //     .then(function (devices) {
-  //       devices.forEach(function (device) {
-  //         console.log(
-  //           device.kind + ": " + device.label + " id = " + device.deviceId
-  //         );
-  //       });
-  //     })
-  //     .catch(function (err) {
-  //       console.log(err.name + ": " + err.message);
-  //     });
-  // }
-
-  // getConnectedDevices("videoinput");
-  // console.log(videoCamera);
-
-  function onNewParticipant(request) {
-    receiveVideo(request.name);
-  }
-
-  function receiveVideoResponse(result) {
-    participants[result.name].rtcPeer.processAnswer(
-      result.sdpAnswer,
-      function (error) {
-        if (error) return console.error(error);
+          );
+          break;
+        default:
+          console.error("Unrecognized message", parsedMessage);
       }
-    );
-  }
+    };
 
-  // function callResponse(message) {
-  //   if (message.response != "accepted") {
-  //     console.info("Call not accepted by peer. Closing call");
-  //     stop();
-  //   } else {
-  //     webRtcPeer.processAnswer(message.sdpAnswer, function (error) {
-  //       if (error) return console.error(error);
-  //     });
-  //   }
-  // }
+    ws.onopen = () => {
+      const message = {
+        id: "joinRoom",
+        name: userName,
+        room: roomId,
+        participantCnt: participantCnt,
+      };
+      ws.send(JSON.stringify(message));
+    };
 
-  function onExistingParticipants(msg) {
-    var constraints = {
-      audio: true,
-      video: {
-        mandatory: {
-          maxWidth: 320,
-          maxFrameRate: 15,
-          minFrameRate: 15,
+    // async function getConnectedDevices(type) {
+    //   navigator.mediaDevices
+    //     .enumerateDevices()
+    //     .then(function (devices) {
+    //       devices.forEach(function (device) {
+    //         console.log(
+    //           device.kind + ": " + device.label + " id = " + device.deviceId
+    //         );
+    //       });
+    //     })
+    //     .catch(function (err) {
+    //       console.log(err.name + ": " + err.message);
+    //     });
+    // }
+
+    // getConnectedDevices("videoinput");
+    // console.log(videoCamera);
+
+    function onNewParticipant(request) {
+      receiveVideo(request.name);
+    }
+
+    function receiveVideoResponse(result) {
+      participants[result.name].rtcPeer.processAnswer(
+        result.sdpAnswer,
+        function (error) {
+          if (error) return console.error(error);
+        }
+      );
+    }
+
+    // function callResponse(message) {
+    //   if (message.response != "accepted") {
+    //     console.info("Call not accepted by peer. Closing call");
+    //     stop();
+    //   } else {
+    //     webRtcPeer.processAnswer(message.sdpAnswer, function (error) {
+    //       if (error) return console.error(error);
+    //     });
+    //   }
+    // }
+
+    function onExistingParticipants(msg) {
+      var constraints = {
+        audio: true,
+        video: {
+          mandatory: {
+            maxWidth: 320,
+            maxFrameRate: 15,
+            minFrameRate: 15,
+          },
         },
-      },
-    };
-    console.log(userName + " registered in room " + room);
-    var participant = new Participant(userName, participantCnt++);
-    participants[userName] = participant;
-    var video = participant.getVideoElement();
-    console.log(video);
-    var options = {
-      localVideo: video,
-      mediaConstraints: constraints,
-      onicecandidate: participant.onIceCandidate.bind(participant),
-    };
-    participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
-      options,
-      function (error) {
-        if (error) {
-          return console.error(error);
+      };
+      console.log(userName + " registered in room " + room);
+      var participant = new Participant(userName, participantCnt++);
+      participants[userName] = participant;
+      var video = participant.getVideoElement();
+      console.log(video);
+      var options = {
+        localVideo: video,
+        mediaConstraints: constraints,
+        onicecandidate: participant.onIceCandidate.bind(participant),
+      };
+      participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
+        options,
+        function (error) {
+          if (error) {
+            return console.error(error);
+          }
+          this.generateOffer(participant.offerToReceiveVideo.bind(participant));
         }
-        this.generateOffer(participant.offerToReceiveVideo.bind(participant));
-      }
-    );
+      );
 
-    msg.data.forEach(receiveVideo);
-  }
-
-  function leaveRoom() {
-    sendMessage({
-      id: "leaveRoom",
-    });
-
-    for (var key in participants) {
-      participants[key].dispose();
+      msg.data.forEach(receiveVideo);
     }
 
-    document.getElementById("join").style.display = "block";
-    document.getElementById("room").style.display = "none";
+    function leaveRoom() {
+      sendMessage({
+        id: "leaveRoom",
+      });
 
-    ws.close();
-  }
-
-  function receiveVideo(sender) {
-    var participant = new Participant(sender, participantCnt);
-    participants[sender] = participant;
-    var video = participant.getVideoElement();
-
-    var options = {
-      remoteVideo: video,
-      onicecandidate: participant.onIceCandidate.bind(participant),
-    };
-
-    participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(
-      options,
-      function (error) {
-        if (error) {
-          return console.error(error);
-        }
-        this.generateOffer(participant.offerToReceiveVideo.bind(participant));
+      for (var key in participants) {
+        participants[key].dispose();
       }
-    );
-  }
 
-  function onParticipantLeft(request) {
-    console.log("Participant " + request.name + " left");
-    var participant = participants[request.name];
-    participant.dispose();
-    delete participants[request.name];
-  }
+      document.getElementById("join").style.display = "block";
+      document.getElementById("room").style.display = "none";
 
-  function sendMessage(message) {
-    var jsonMessage = JSON.stringify(message);
-    console.log("Sending message: " + jsonMessage);
-    ws.send(jsonMessage);
+      ws.close();
+    }
+
+    function receiveVideo(sender) {
+      var participant = new Participant(sender, participantCnt);
+      participants[sender] = participant;
+      var video = participant.getVideoElement();
+
+      var options = {
+        remoteVideo: video,
+        onicecandidate: participant.onIceCandidate.bind(participant),
+      };
+
+      participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(
+        options,
+        function (error) {
+          if (error) {
+            return console.error(error);
+          }
+          this.generateOffer(participant.offerToReceiveVideo.bind(participant));
+        }
+      );
+    }
+
+    function onParticipantLeft(request) {
+      console.log("Participant " + request.name + " left");
+      var participant = participants[request.name];
+      participant.dispose();
+      delete participants[request.name];
+    }
+
+    function sendMessage(message) {
+      var jsonMessage = JSON.stringify(message);
+      console.log("Sending message: " + jsonMessage);
+      ws.send(jsonMessage);
+    }
   }
   // }, []);
   return (
     <>
       <Container>
-        <Title>{commonCode.G.G05.G0500}: 박선생 선생님</Title>
+        {courseInfo && (
+          <Title>
+            {
+              commonCode[courseInfo.subjectCode.substr(0, 1)][
+                courseInfo.subjectCode.substr(0, 3)
+              ][courseInfo.subjectCode]
+            }
+            : {courseInfo.teacherName} 선생님
+          </Title>
+        )}
         <Wrapper>
           <TeacherVideoContainer id="teacher"></TeacherVideoContainer>
           <Chat courseId={roomId} />

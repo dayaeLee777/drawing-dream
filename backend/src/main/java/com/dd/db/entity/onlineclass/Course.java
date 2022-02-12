@@ -33,5 +33,11 @@ public class Course extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User teacher;
+	
+	@Column(name = "online_class_exists_yn", columnDefinition = "BOOLEAN DEFAULT false")
+	private boolean onlineClassExistsYn;
 
+	public void updateOnlineClass(boolean onlineClassExistsYn) {
+		this.onlineClassExistsYn = onlineClassExistsYn;
+	}
 }

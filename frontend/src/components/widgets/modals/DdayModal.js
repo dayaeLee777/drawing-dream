@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Calendar from "@toast-ui/react-calendar";
 import "tui-calendar/dist/tui-calendar.css";
 import commonCode from "config/commonCode";
+import { getCalendar } from "api/calendar";
 
 const Wrapper = styled(motion.div)`
   width: 800px;
@@ -40,12 +41,12 @@ const Content = styled.div`
   height: 80%;
 `;
 const DdayModal = ({ layoutId }) => {
+  const [data, setData] = useState([]);
   const onClick = (event) => {
     event.stopPropagation();
   };
 
   const date1 = new Date("2022-02-02");
-  console.log(date1.toString);
   const testData = [
     {
       calendarId: "3bc288c2-b9c3-92c2-b9c3-8d47c2acc2ae",
@@ -71,11 +72,26 @@ const DdayModal = ({ layoutId }) => {
     },
   ];
 
+  useEffect(() => {
+    getCalendar().then((res) => {
+      setData(res.data.calendarGetListResponseDtoList);
+    });
+  }, []);
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>
       <Header>
         <Title>D-DAY</Title>
       </Header>
+      <button
+        type="button"
+        className="btn btn-default btn-sm move-day"
+        data-action="move-next"
+      >
+        <i
+          className="calendar-icon ic-arrow-line-right"
+          data-action="move-next"
+        ></i>
+      </button>
       <Content>
         <Calendar height="400px" view="month" schedules={testData} />
       </Content>

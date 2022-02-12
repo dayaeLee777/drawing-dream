@@ -1,9 +1,6 @@
 import { api, fileApi } from "api/api";
 
 export const registerNotice = async (content, success, fail) => {
-  for (let file of content.entries()) {
-    console.log(file[0], file[1]);
-  }
   return await fileApi
     .post("/api/notice", content)
     .then(success)

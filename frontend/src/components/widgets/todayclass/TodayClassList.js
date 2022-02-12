@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CourseName from "./CourseName";
 
@@ -12,11 +13,30 @@ const ListContainer = styled.div`
 
 const TodayClassList = (props) => {
   const data = props.data;
+  const { period } = useSelector((state) => state.timetable);
+  const [nowPeriod, setNowPeriod] = useState(0);
+  useEffect(() => {
+    const today = new Date();
+    today.setHours(today.getHours() - 11); // 테스트용
+    const time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+    period.map((per) => {
+      if (per.startTime < time && per.endTime > time) {
+        setNowPeriod(per.periodCode.slice(2, 3));
+      }
+    });
+  }, []);
   return (
     <ListContainer>
-      {data.map((course, idx) => (
-        <CourseName key={idx} data={course} now={idx === 0 ? true : false} />
-      ))}
+      {data &&
+        data.map((course, idx) => (
+          <CourseName
+            key={idx}
+            data={course}
+            now={idx === nowPeriod - 1 ? true : false}
+          />
+        ))}
     </ListContainer>
   );
 };

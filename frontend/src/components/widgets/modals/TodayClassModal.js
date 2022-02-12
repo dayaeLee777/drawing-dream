@@ -8,10 +8,12 @@ import Button from "components/commons/button";
 import { useNavigate } from "react-router-dom";
 import { createOnlineClass } from "api/onlineclass";
 import { createChatRoom } from "api/chat";
+import teacher2 from "assets/img/teacher2.png";
+import { getCouresInfo } from "api/course";
 
 const Wrapper = styled(motion.div)`
   width: 1000px;
-  height: 650px;
+  height: 700px;
   padding: 2rem 3rem;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 40px;
@@ -22,6 +24,21 @@ const Wrapper = styled(motion.div)`
   align-items: center;
   letter-spacing: -1px;
   box-sizing: border-box;
+`;
+
+const Right = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 100%;
+  }
+
+  button {
+    width: 14rem;
+    height: 2.5rem;
+    margin-top: 2rem;
+  }
 `;
 
 const TodayClassModal = ({ layoutId }) => {
@@ -65,6 +82,7 @@ const TodayClassModal = ({ layoutId }) => {
   ];
 
   const { userCode } = useSelector((state) => state.user);
+  const { todayData } = useSelector((state) => state.timetable);
   const navigate = useNavigate();
 
   const onClick = (event) => {
@@ -72,23 +90,69 @@ const TodayClassModal = ({ layoutId }) => {
   };
 
   const startClass = () => {
-    const courseId = "c384c386-c2a0-c38e-c28f-004cc2a7c2bc";
-    // createChatRoom({ name: courseId, userList: [] }).then((res) => {
-    //   console.log(res);
-    // });
+    const courseId = "594364c3-b1c2-bec3-9a4d-6dc29dc3b5c2";
     createOnlineClass({ courseId }).then((res) => {
+      console.log(res);
       navigate(`/onlineclass/${courseId}`);
       window.location.reload();
     });
   };
 
+  const { period } = useSelector((state) => state.timetable);
+  const [nowPeriod, setNowPeriod] = useState();
+  const [courseInfo, setCourseInfo] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [courseId, setCourseId] = useState("");
+
+  console.log(todayData);
+  useEffect(() => {
+    if (todayData.length > 0) {
+      const today = new Date();
+      today.setHours(today.getHours() - 11); // 테스트용
+      // today.setMinutes(today.getMinutes() - 30);
+      const time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      period.map((per) => {
+        // console.log(time);
+        // console.log(per.startTime < time, per.startTime);
+        // console.log(per.endTime > time, per.endTime);
+        if (per.startTime < time && per.endTime > time) {
+          setNowPeriod(per.periodCode);
+          console.log(per.periodCode);
+          setCourseId(todayData[per.periodCode.slice(2, 3) - 1].courseId);
+        }
+      });
+    }
+    setIsLoading(false);
+    if (!isLoading && nowPeriod) {
+      getCouresInfo(courseId)
+        .then((res) => {
+          setCourseInfo(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [isLoading]);
+
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>
-      <LeftContainer data={data} />
-      {userCode === "A03" && (
-        <Button onClick={startClass} name="수업 시작하기"></Button>
+      {nowPeriod && courseInfo && (
+        <LeftContainer
+          courseInfo={courseInfo}
+          period={nowPeriod}
+          data={todayData}
+        />
       )}
-      {userCode === "A04" && <RightContainer />}
+      {userCode === "A03" && (
+        <Right>
+          <img src={teacher2} alt="캐릭터" />
+          <Button onClick={startClass} name="수업 시작하기"></Button>
+        </Right>
+      )}
+      {userCode === "A04" && courseInfo && (
+        <RightContainer courseInfo={courseInfo} />
+      )}
     </Wrapper>
   );
 };

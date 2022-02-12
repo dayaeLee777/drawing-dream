@@ -44,13 +44,13 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public ChatRoomGetListWrapperResponseDTO findAllRooms(String accessToken) {
 
 		User me = jwtTokenService.convertTokenToUser(accessToken);
-		System.out.println("me: " + me.getId());
 
 		// 내 채팅방
 		List<ChatRoom> chatRoomList = userChatRoomJoinRepository.findByUserId(me.getId()).get();
 		System.out.println("findAllRooms : chatRoomList - " + chatRoomList.toString());
 
 		List<ChatRoomGetListResponseDTO> rooms = new ArrayList<>();
+
 		chatRoomList.forEach(room -> {
 			// 채팅방 참여 인원
 			List<User> userList = userChatRoomJoinRepository.findByRoomId(room.getId()).get();
@@ -60,8 +60,10 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 			userList.forEach(user -> users
 					.add(ChatRoomUserResponseDTO.builder().userId(user.getId()).userName(user.getUserName()).build()));
 
-			rooms.add(ChatRoomGetListResponseDTO.builder().roomId(room.getId()).roomName(room.getName()).users(users)
-					.build());
+			ChatMessageResponseDTO chatMessageResponseDTO = chatMessageService.findLastMessage(room);
+
+			rooms.add(ChatRoomGetListResponseDTO.builder().roomId(room.getId()).roomName(room.getName())
+					.message(chatMessageResponseDTO).users(users).build());
 		});
 
 		return ChatRoomGetListWrapperResponseDTO.builder().rooms(rooms).build();
@@ -73,7 +75,8 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public ChatRoomWithMessageResponseDTO findByRoomId(UUID roomId) {
 
 		// 채팅방 전체 메시지
-		List<ChatMessageResponseDTO> messages = chatMessageService.findMessages(roomId);
+		List<ChatMessageResponseDTO> messages = chatMessageService
+				.findAllMessages(chatRoomRepository.findById(roomId).get());
 
 		// 채팅방 참여 인원
 		List<User> userList = userChatRoomJoinRepository.findByRoomId(roomId).get();
@@ -120,7 +123,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 				// 내 채팅방과 겹치고 인원이 두 명이라면
 				if (myRooms.contains(oRoom) && oRoom.getHeadCount() == 2) {
 					System.out.println("채팅방 이미 존재");
-					
+
 					users.add(ChatRoomUserResponseDTO.builder().userId(opponent.getId())
 							.userName(opponent.getUserName()).build());
 					users.add(ChatRoomUserResponseDTO.builder().userId(me.getId()).userName(me.getUserName()).build());

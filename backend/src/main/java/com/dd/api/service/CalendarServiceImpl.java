@@ -52,10 +52,12 @@ public class CalendarServiceImpl implements CalendarService{
 			if( c.getGradeCode() != gradeCode && c.getGradeCode() != Code.E00) continue;
 			
 			list.add(
-				new CalendarGetListResponseDto(c.getId(), c.getGradeCode(), c.getTestCode(), 
+				new CalendarGetListResponseDto(c.getId(), c.getCalendarCode(), c.getGradeCode(), c.getTestCode(), 
 						c.getStartDate(), c.getEndDate())
 			);
 		}
+		
+		if(list.size() == 0) return null;
 		
 		return new CalendarGetListWrapperResponseDto(list);
 	}
@@ -73,7 +75,7 @@ public class CalendarServiceImpl implements CalendarService{
 		
 		for(Calendar c : calendarRepository.findBySchoolAndDelYnOrderByStartDate(school, false).get()) {
 			list.add(
-				new CalendarGetListResponseDto(c.getId(), c.getGradeCode(), c.getTestCode(), 
+				new CalendarGetListResponseDto(c.getId(), c.getCalendarCode(), c.getGradeCode(), c.getTestCode(), 
 						c.getStartDate(), c.getEndDate())
 			);
 		}

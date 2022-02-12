@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import CourseInfo from "./CourseInfo";
-import TodayClass from "./TodayClassContainer";
+import TodayClassContainer from "./TodayClassContainer";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -11,10 +12,11 @@ const Container = styled.div`
 `;
 
 const LeftContainer = (props) => {
+  const { userCode } = useSelector((state) => state.user);
   return (
     <Container>
-      <TodayClass data={props.data} />
-      <CourseInfo data={props.data} />
+      {userCode === "A04" && <TodayClassContainer data={props.data} />}
+      <CourseInfo period={props.period} courseInfo={props.courseInfo} />
     </Container>
   );
 };

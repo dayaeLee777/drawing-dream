@@ -6,6 +6,7 @@ import CommunityItem from "./NoticeItem";
 import Pagination from "react-js-pagination";
 import "assets/css/paging.css";
 import { getNoticeList, getNoticeTotalCount } from "api/notice";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   width: 100%;
@@ -62,6 +63,7 @@ const NoticeList = () => {
   const [isTotalItemsCountLoading, setIsTotalItemsCountLoading] =
     useState(true);
   const [page, setPage] = useState(0);
+  const {userCode} = useSelector(state => state.user);
 
   useEffect(() => {
     if (isTotalItemsCountLoading) {
@@ -97,12 +99,12 @@ const NoticeList = () => {
       <Desc>알림장</Desc>
       <Container>
         <ButtonContainer>
-          <Button
+          {userCode !== "A04" && <Button
             name="글쓰기"
             width="7rem"
             height="2rem"
             onClick={() => Navigate("./register")}
-          />
+          />}
         </ButtonContainer>
         <StyledTable>
           <colgroup>
@@ -124,7 +126,7 @@ const NoticeList = () => {
             </tr>
           </thead>
           <tbody>
-            {data &&
+            {data && !isLoading &&
               data.map((item, idx) => (
                 <CommunityItem
                   index={totalItemsCount - (page) * 10 - idx - 1}

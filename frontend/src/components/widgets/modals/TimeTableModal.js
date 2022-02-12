@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import Period from "../timetable/Period";
+import WeekList from "../timetable/WeekList";
 
 const Wrapper = styled(motion.div)`
   width: 600px;
@@ -13,6 +13,7 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2rem;
 `;
 const Header = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ const Header = styled.div`
   align-items: center;
   width: 60%;
   height: fit-content;
-  margin: 2rem;
+  margin-bottom: 1rem;
 `;
 
 const Title = styled.div`
@@ -32,7 +33,6 @@ const Title = styled.div`
   margin-bottom: 20px;
 `;
 
-
 const TimeTableModal = ({ layoutId }) => {
   const onClick = (event) => {
     event.stopPropagation();
@@ -42,7 +42,7 @@ const TimeTableModal = ({ layoutId }) => {
       <Header>
         <Title>시간표</Title>
       </Header>
-      <Period />
+      <WeekList />
     </Wrapper>
   );
 };
