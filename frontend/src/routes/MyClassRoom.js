@@ -37,8 +37,6 @@ const Line = styled.div`
 `;
 
 const MyClassRoom = () => {
-  // const { gradeCode, classCode } = useSelector((state) => state.user);
-  // useSelector((state) => state.user);
   const [data, setData] = useState([]);
 
   useEffect(() => {

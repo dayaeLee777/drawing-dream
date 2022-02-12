@@ -45,7 +45,6 @@ const Home = () => {
               const periodCode = getNowPeriod(period);
               const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
               getCouresInfo(courseId).then((res) => {
-                console.log(isShow);
                 if (res.data.onlineClassId) {
                   setIsShow(true);
                 }

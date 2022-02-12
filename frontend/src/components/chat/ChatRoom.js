@@ -6,8 +6,9 @@ import profileImg from "assets/img/profile.png";
 import ChatList from "components/chat/ChatList";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getChatList } from "api/chat";
+import { openChatList } from "modules/chat";
 
 const ChatBox = styled.div`
   display: block;
@@ -19,7 +20,7 @@ const ChatBox = styled.div`
   max-width: 85vw;
   max-height: 100vh;
   border-radius: 5px;
-  box-shadow: 0px 5px 35px 9px #ccc;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 
 const ChatBoxHeader = styled.div`
@@ -172,6 +173,7 @@ const ChatRoom = ({
   const [chatMove, setChatMove] = useState(false);
   const messageBoxRef = useRef();
   const { userName, userId } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   let sockJS = new SockJS("http://localhost:8080/ws-dd");
   let client = Stomp.over(sockJS);
 
@@ -182,7 +184,7 @@ const ChatRoom = ({
   };
 
   const back = () => {
-    setRoomId();
+    dispatch(openChatList());
   };
 
   const onChange = (event) => {
@@ -237,8 +239,10 @@ const ChatRoom = ({
         <ChatBoxHeader>
           <Arrow onClick={back}>←</Arrow>
           <Subject>
-            {users.map((user) => (
-              <>{user.userName !== userName && <>{user.userName}</>}</>
+            {users.map((user, index) => (
+              <div key={index}>
+                {user.userName !== userName && <>{user.userName}</>}
+              </div>
             ))}
           </Subject>
           <ChatBoxToggle onClick={chatClose}>
@@ -249,16 +253,15 @@ const ChatRoom = ({
           <ChatBoxOverlay />
           <ChatLogs ref={messageBoxRef}>
             {contents.map((content, index) => (
-              <>
+              <div key={index}>
                 {content.userId === userId ? (
-                  <Me key={index}>{content.content}</Me>
+                  <Me>{content.content}</Me>
                 ) : (
-                  <You key={index}>{content.content}</You>
+                  <You>{content.content}</You>
                 )}
-              </>
+              </div>
             ))}
           </ChatLogs>
-          {/* <div ref={messageRef} /> */}
         </ChatBoxBody>
         <ChatInput>
           <ChatForm>
