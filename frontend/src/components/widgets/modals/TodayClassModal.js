@@ -98,11 +98,9 @@ const TodayClassModal = ({ layoutId }) => {
     getCouresInfo(courseId).then((res) => {
       if (res.data.onlineClassId) {
         navigate(`/onlineclass/${courseId}`);
-        window.location.reload();
       } else {
         createOnlineClass({ courseId }).then((res) => {
           navigate(`/onlineclass/${courseId}`);
-          window.location.reload();
         });
       }
     });
