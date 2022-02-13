@@ -122,7 +122,6 @@ const Meeting = () => {
     };
     if (isLoading) {
       getMeeting(params).then((res) => {
-        console.log(res.data);
         setData(res.data);
         setIsLoading(false);
       });
