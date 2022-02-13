@@ -42,9 +42,13 @@ const Title = styled.div`
   letter-spacing: -1px;
 `;
 
+const ControlContainer = styled.div``;
 const TeacherVideoContainer = styled.div`
   width: 60vw;
   height: 70vh;
+  video::-webkit-media-controls-timeline {
+    display: none;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -58,12 +62,17 @@ const ParticipantVideoContainer = styled.div`
   margin-top: 2rem;
 `;
 
+const userName = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 5rem;
+`;
+
 const OnlineClass = () => {
   const roomId = useParams().roomid;
   // useEffect(() => {
   let ws = new WebSocket("wss://localhost:8443/groupcall");
   let participants = {};
-  let participantCnt = 0;
   let room = roomId;
   const { userId, userName, userCode } = useSelector((state) => state.user);
   const PARTICIPANT_MAIN_CLASS = "participant main";
@@ -72,11 +81,13 @@ const OnlineClass = () => {
   const [teacherVideo, setTecherVideo] = useState(false);
   const [courseInfo, setCourseInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [showVideo, setShowVideo] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoading) {
       getCouresInfo(roomId).then((res) => {
+        // console.log(res);
         setCourseInfo(res.data);
         setIsLoading(false);
       });
@@ -92,9 +103,8 @@ const OnlineClass = () => {
    * @return
    */
   class Participant {
-    constructor(name, participantCnt) {
+    constructor(name) {
       this.name = name;
-      this.participantCnt = participantCnt;
       // container.className = isPresentMainParticipant()
       //   ? PARTICIPANT_CLASS
       //   : PARTICIPANT_MAIN_CLASS;
@@ -103,10 +113,10 @@ const OnlineClass = () => {
       var rtcPeer;
 
       let video;
-      if (participantCnt === 0) {
+      if (name === courseInfo.teacherName) {
         // console.log("hi");
         video = document.createElement("video");
-        video.id = "video-" + userId;
+        video.id = "video-" + name;
         video.autoplay = true;
         video.controls = false;
         video.style.borderRadius = "10px";
@@ -116,7 +126,7 @@ const OnlineClass = () => {
         document.getElementById("teacher").appendChild(video);
       } else {
         video = document.createElement("video");
-        video.id = "video-" + userId;
+        video.id = "video-" + name;
         video.autoplay = true;
         video.controls = false;
         video.style.width = "100%";
@@ -221,7 +231,6 @@ const OnlineClass = () => {
         id: "joinRoom",
         name: userName,
         room: roomId,
-        participantCnt: participantCnt,
       };
       ws.send(JSON.stringify(message));
     };
@@ -279,7 +288,7 @@ const OnlineClass = () => {
       },
     };
     console.log(userName + " registered in room " + room);
-    var participant = new Participant(userName, participantCnt++);
+    var participant = new Participant(userName);
     participants[userName] = participant;
     var video = participant.getVideoElement();
     console.log(video);
@@ -305,19 +314,15 @@ const OnlineClass = () => {
     sendMessage({
       id: "leaveRoom",
     });
-
     for (var key in participants) {
       participants[key].dispose();
     }
-
     navigate("/home");
-    window.location.reload();
-
     ws.close();
   }
 
   function receiveVideo(sender) {
-    var participant = new Participant(sender, participantCnt);
+    var participant = new Participant(sender);
     participants[sender] = participant;
     var video = participant.getVideoElement();
 
@@ -358,6 +363,17 @@ const OnlineClass = () => {
     leaveRoom();
   };
 
+  const vidOnOff = () => {
+    let myVideo = document.getElementById("video-" + userName);
+    if (isShow) {
+      myVideo.pause();
+      setIsShow(false);
+    } else {
+      myVideo.play();
+      setIsShow(true);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -372,6 +388,9 @@ const OnlineClass = () => {
               : {courseInfo.teacherName} 선생님
             </Title>
           )}
+          <ControlContainer>
+            <button onClick={vidOnOff}>비디오 중지</button>
+          </ControlContainer>
           {userCode === "A03" ? (
             <Button
               onClick={deleteRoom}
