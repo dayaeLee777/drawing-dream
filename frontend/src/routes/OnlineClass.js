@@ -365,12 +365,12 @@ const OnlineClass = () => {
 
   const vidOnOff = () => {
     let myVideo = document.getElementById("video-" + userName);
-    if (isShow) {
+    if (showVideo) {
       myVideo.pause();
-      setIsShow(false);
+      setShowVideo(false);
     } else {
       myVideo.play();
-      setIsShow(true);
+      setShowVideo(true);
     }
   };
 
