@@ -45,8 +45,6 @@ const DdayModal = ({ layoutId }) => {
   const onClick = (event) => {
     event.stopPropagation();
   };
-
-  const date1 = new Date("2022-02-02");
   const testData = [
     {
       calendarId: "3bc288c2-b9c3-92c2-b9c3-8d47c2acc2ae",
@@ -73,8 +71,24 @@ const DdayModal = ({ layoutId }) => {
   ];
 
   useEffect(() => {
-    getCalendar().then((res) => {
-      setData(res.data.calendarGetListResponseDtoList);
+    getCalendar().then((response) => {
+      const res = response.data.calendarGetListResponseDtoList;
+      res.map((cal) => {
+        setData((prev) => [
+          ...prev,
+          {
+            calendarId: cal.calendarId,
+            category: "allday",
+            isVisible: true,
+            isPending: false,
+            title: commonCode.J[cal.calendarCode],
+            id: cal.calendarId,
+            body: "테스트입니다",
+            start: cal.startDate,
+            end: cal.endDate,
+          },
+        ]);
+      });
     });
   }, []);
   return (
@@ -93,7 +107,7 @@ const DdayModal = ({ layoutId }) => {
         ></i>
       </button>
       <Content>
-        <Calendar height="400px" view="month" schedules={testData} />
+        <Calendar height="400px" view="month" schedules={data} />
       </Content>
     </Wrapper>
   );
