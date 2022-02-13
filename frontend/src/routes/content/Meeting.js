@@ -89,6 +89,7 @@ const Meeting = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [data, setData] = useState();
   const [date, setDate] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const { isAttend } = useSelector((state) => state.user);
   const attendToday = () => {
     console.log(modalOpen);
@@ -119,16 +120,20 @@ const Meeting = () => {
       }`,
       meetingCode: "K04",
     };
-    getMeeting(params).then((res) => {
-      setData(res.data);
-    });
+    if (isLoading) {
+      getMeeting(params).then((res) => {
+        console.log(res.data);
+        setData(res.data);
+        setIsLoading(false);
+      });
+    }
   }, []);
 
   return (
     <>
       <Board>
         <ContentContainer>
-          {data ? (
+          {!isLoading && data.noticeId ? (
             <>
               <InnerContainer>
                 <Arrow>←</Arrow>
