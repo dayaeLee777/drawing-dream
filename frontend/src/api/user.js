@@ -43,3 +43,11 @@ export const profileImage = async (multipartFile, success, fail) => {
 export const getProfileImg = async (userId, success, fail) => {
   return await api.get(`api/profile/image/${userId}`).then(success).catch(fail);
 };
+
+export const passwordCheck = async (password) => {
+  return await api.post("/api/user/password", password);
+};
+
+export const modifyPassword = async (password) => {
+  return await api.put("/api/user/password", password);
+};

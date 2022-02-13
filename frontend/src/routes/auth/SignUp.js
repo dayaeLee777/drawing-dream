@@ -150,7 +150,7 @@ const SignUp = () => {
     validId: false,
     validName: false,
     validPassword: false,
-    equelPassword: false,
+    equalPassword: false,
     validEmail: false,
   });
   // VALIDATION END
@@ -160,7 +160,7 @@ const SignUp = () => {
     idErrMsg: "",
     nameErrMsg: "",
     passwordErrMsg: "",
-    equelPasswordErrMsg: "",
+    equalPasswordErrMsg: "",
     emailErrMsg: "",
   });
   // ERROR MSG END
@@ -181,14 +181,14 @@ const SignUp = () => {
     studentNo,
   } = inputs;
 
-  const { validId, validName, validPassword, equelPassword, validEmail } =
+  const { validId, validName, validPassword, equalPassword, validEmail } =
     valids;
 
   const {
     idErrMsg,
     nameErrMsg,
     passwordErrMsg,
-    equelPasswordErrMsg,
+    equalPasswordErrMsg,
     emailErrMsg,
   } = errors;
 
@@ -223,7 +223,7 @@ const SignUp = () => {
         validName &&
         validEmail &&
         validPassword &&
-        equelPassword &&
+        equalPassword &&
         schoolCode &&
         gradeCode &&
         classCode &&
@@ -346,8 +346,8 @@ const SignUp = () => {
           star
           onChange={onChange}
           name="passwordConfirm"
-          isValid={equelPassword}
-          errMsg={equelPasswordErrMsg}
+          isValid={equalPassword}
+          errMsg={equalPasswordErrMsg}
         />
         <InputBlock>
           <InputContainer

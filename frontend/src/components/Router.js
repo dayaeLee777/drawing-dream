@@ -32,57 +32,42 @@ const AppRouter = () => {
     <Router>
       {isLoggedIn ? (
         <>
-          {window.location.href.indexOf("onlineclass") > 1 ? (
-            <>
-              <Routes>
-                <Route path="/onlineclass/*" element={<OnlineClass />}>
-                  <Route path=":roomid" element={<OnlineClass />} />
-                </Route>
-              </Routes>
-            </>
-          ) : (
-            <>
-              <Routes>
-                <Route path="/setting" element={<HomeOther />}>
-                  <Route path="home" element={<HomeSetting />} />
-                </Route>
-                <Route path="/" element={<Home />}>
-                  <Route path="home" element={<Widget />} />
-                  <Route path="modifyprofile" element={<ModifyProfile />} />
-                  <Route path="notice" element={<Notice />}>
-                    <Route path="" element={<NoticeList />} />
-                    <Route path="register" element={<NoticeRegister />} />
-                    <Route path=":noticeId" element={<NoticeDetail />} />
-                    <Route
-                      path="modify/:noticeId"
-                      element={<NoticeRegister modify />}
-                    />
-                  </Route>
-                  <Route path="school/" element={<School />}>
-                    <Route path="" element={<CommunityList />} />
-                    <Route path="register" element={<CommunityRegister />} />
-                    <Route path=":communityId" element={<CommunityDetail />} />
-                    <Route
-                      path="modify/:communityId"
-                      element={<CommunityRegister modify />}
-                    />
-                  </Route>
-                  <Route path="myclassroom" element={<MyClassRoom />} />
-                  <Route path="widgetlist" element={<WidgetList />} />
-                  <Route path="meeting" element={<Meeting />} />
-                </Route>
-                <Route path="/" element={<Navigate replace to="/home" />} />
+          <Routes>
+            <Route path="/onlineclass/*" element={<OnlineClass />}>
+              <Route path=":roomid" element={<OnlineClass />} />
+            </Route>
+            <Route path="/setting" element={<HomeOther />}>
+              <Route path="home" element={<HomeSetting />} />
+            </Route>
+            <Route path="/" element={<Home />}>
+              <Route path="home" element={<Widget />} />
+              <Route path="modifyprofile" element={<ModifyProfile />} />
+              <Route path="notice" element={<Notice />}>
+                <Route path="" element={<NoticeList />} />
+                <Route path="register" element={<NoticeRegister />} />
+                <Route path=":noticeId" element={<NoticeDetail />} />
                 <Route
-                  path="/signin"
-                  element={<Navigate replace to="/home" />}
+                  path="modify/:noticeId"
+                  element={<NoticeRegister modify />}
                 />
+              </Route>
+              <Route path="school/" element={<School />}>
+                <Route path="" element={<CommunityList />} />
+                <Route path="register" element={<CommunityRegister />} />
+                <Route path=":communityId" element={<CommunityDetail />} />
                 <Route
-                  path="/signup"
-                  element={<Navigate replace to="/home" />}
+                  path="modify/:communityId"
+                  element={<CommunityRegister modify />}
                 />
-              </Routes>
-            </>
-          )}
+              </Route>
+              <Route path="myclassroom" element={<MyClassRoom />} />
+              <Route path="widgetlist" element={<WidgetList />} />
+              <Route path="meeting" element={<Meeting />} />
+            </Route>
+            <Route path="/" element={<Navigate replace to="/home" />} />
+            <Route path="/signin" element={<Navigate replace to="/home" />} />
+            <Route path="/signup" element={<Navigate replace to="/home" />} />
+          </Routes>
         </>
       ) : (
         <>
