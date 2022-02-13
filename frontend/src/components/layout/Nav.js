@@ -96,6 +96,9 @@ const Nav = () => {
             <DropDownItem onClick={() => navigate("/modifyprofile")}>
               프로필 수정
             </DropDownItem>
+            <DropDownItem onClick={() => navigate("/modifypassword")}>
+              비밀번호 변경
+            </DropDownItem>
             {isDarkMode ? (
               <DropDownItem onClick={() => dispatch(ligthTheme())}>
                 다크모드 off

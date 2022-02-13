@@ -6,6 +6,7 @@ import ValidContainer from "./validContainer";
 const InputBlock = styled.div`
   display: flex;
   margin-bottom: 1rem;
+  margin-top: ${(props) => (props.mt ? props.mt : "")};
   .type {
     width: 8rem;
     height: 2rem;
@@ -23,7 +24,7 @@ const InputBlock = styled.div`
 
 const InputContainer = (props) => {
   return (
-    <InputBlock>
+    <InputBlock mt={props.mt}>
       <div className="type">
         {props.desc}
         {props.star && <div className="star">*</div>}
