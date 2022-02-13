@@ -196,15 +196,6 @@ const CommentItem = ({
             children={children}
           />
         )}
-        {/* 댓글 달기 눌렀을 때 해당 컴포넌트의 commentId와 기존에 props로 넘겨받은 commentId가 일치하고 isReCommend가 true 일 때만 댓글을 입력할 수 있는 register가 랜더링 */}
-        {reCommentRegister.commentId === data.commentId &&
-          reCommentRegister.isReComment && (
-            <CommentRegister
-              commentId={data.commentId}
-              communityId={communityId}
-              setReCommentListIsLoading={setIsLoading}
-            />
-          )}
       </Content>
       {children &&
         reCommentList &&
@@ -215,6 +206,16 @@ const CommentItem = ({
             setReCommentListIsLoading={setIsLoading}
           />
         ))}
+      {/* 댓글 달기 눌렀을 때 해당 컴포넌트의 commentId와 기존에 props로 넘겨받은 commentId가 일치하고 isReCommend가 true 일 때만 댓글을 입력할 수 있는 register가 랜더링 */}
+      {reCommentRegister.isReComment && (
+        <CommentRegister
+          commentId={data.commentId}
+          communityId={communityId}
+          setReCommentListIsLoading={setIsLoading}
+          setReCommentRegister={setReCommentRegister}
+          ml="3rem"
+        />
+      )}
     </>
   );
 };

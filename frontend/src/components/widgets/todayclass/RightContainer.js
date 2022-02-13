@@ -38,7 +38,6 @@ const RightContainer = ({ courseInfo }) => {
   console.log(courseInfo);
   const startClass = () => {
     navigate(`/onlineclass/${courseInfo.courseId}`);
-    window.location.reload();
   };
   return (
     <>
