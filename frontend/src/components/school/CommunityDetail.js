@@ -22,6 +22,7 @@ const BoardContainer = styled.div`
   padding: 0 3rem;
   border-radius: 5px;
   margin-top: 0.5rem;
+  min-height: 20rem;
 `;
 const TitleContainer = styled.div`
   .title {

@@ -122,7 +122,9 @@ const CommunityList = () => {
             </tr>
           </thead>
           <tbody>
-            {!isLoading && data &&
+            {!isTotalItemsCountLoading &&
+              !isLoading &&
+              data &&
               data.map((item, idx) => (
                 <CommunityItem
                   index={totalItemsCount - (page - 1) * 10 - idx - 1}
