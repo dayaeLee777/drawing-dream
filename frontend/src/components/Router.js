@@ -25,6 +25,7 @@ import NoticeList from "./notice/NoticeList";
 import NoticeDetail from "./notice/NoticeDetail";
 import Widget from "routes/content/Widget";
 import HomeOther from "routes/HomeOther";
+import ModifyPassword from "routes/auth/ModifyPassword";
 
 const AppRouter = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
@@ -42,6 +43,7 @@ const AppRouter = () => {
             <Route path="/" element={<Home />}>
               <Route path="home" element={<Widget />} />
               <Route path="modifyprofile" element={<ModifyProfile />} />
+              <Route path="modifypassword" element={<ModifyPassword />} />
               <Route path="notice" element={<Notice />}>
                 <Route path="" element={<NoticeList />} />
                 <Route path="register" element={<NoticeRegister />} />
@@ -51,7 +53,7 @@ const AppRouter = () => {
                   element={<NoticeRegister modify />}
                 />
               </Route>
-              <Route path="school/" element={<School />}>
+              <Route path="school" element={<School />}>
                 <Route path="" element={<CommunityList />} />
                 <Route path="register" element={<CommunityRegister />} />
                 <Route path=":communityId" element={<CommunityDetail />} />
