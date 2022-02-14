@@ -107,7 +107,7 @@ const DdayModal = ({ layoutId }) => {
         ></i>
       </button>
       <Content>
-        <Calendar height="400px" view="month" schedules={data} />
+        <Calendar height="603px" view="month" schedules={data} />
       </Content>
     </Wrapper>
   );
