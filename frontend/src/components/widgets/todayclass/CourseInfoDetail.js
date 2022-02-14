@@ -122,24 +122,32 @@ const CourseInfoDetail = ({
   files,
   setFiles,
   courseId,
+  openCourse,
 }) => {
-  const periodIndex = periodCode.slice(2, 3);
-  const subjectCode = courseInfo.subjectCode;
+  const periodIndex = periodCode ? periodCode.slice(2, 3) : null;
+  const subjectCode = courseInfo ? courseInfo.subjectCode : null;
   const { userCode } = useSelector((state) => state.user);
   const { period } = useSelector((state) => state.timetable);
   const [isLoading, setIsLoading] = useState(true);
   const [filesUrl, setFilesUrl] = useState();
 
+  // 수업 자료 조회
   useEffect(() => {
-    if (isLoading) {
+    if (
+      isLoading &&
+      courseId &&
+      userCode === "A04" &&
+      courseInfo.onlineClassId
+    ) {
       getOnlineClass(courseId).then((res) => {
-        console.log(res);
         setFilesUrl(res.data.files);
         setIsLoading(false);
       });
     }
-  }, [isLoading]);
+  }, [isLoading, openCourse]);
+  // 수업 자료 조회 END
 
+  // 파일 이미지 만들기 위한 확장자 생성 코드
   const makeExtension = (fileName) => {
     let fileLength = fileName.length;
     let fileDot = fileName.lastIndexOf(".");
@@ -148,6 +156,7 @@ const CourseInfoDetail = ({
       .toLowerCase();
     return fileExtension;
   };
+  // END
   const handleDrop = (acceptedFiles) => {
     setFiles(acceptedFiles.map((file) => file));
   };
@@ -251,7 +260,10 @@ const CourseInfoDetail = ({
       <Contanier>
         <NullSubject>
           <>
-            {commonCode[periodCode.substr(0, 1)][periodCode]} 수업이 없습니다.
+            {periodCode
+              ? commonCode[periodCode.substr(0, 1)][periodCode]
+              : "현재는"}
+            수업이 없습니다.
           </>
         </NullSubject>
       </Contanier>

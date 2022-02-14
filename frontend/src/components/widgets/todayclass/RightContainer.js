@@ -41,7 +41,7 @@ const RightContainer = ({ courseInfo }) => {
     <>
       <Container>
         <img src={character} alt="캐릭터" />
-        {courseInfo.onlineClassId ? (
+        {courseInfo && courseInfo.onlineClassId ? (
           <>
             <div>
               <div className="text">
