@@ -13,6 +13,7 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.ContainerColor};
   margin-bottom: 5rem;
   padding-bottom: 3rem;
+  height: 80vh;
 `;
 
 const Notice = () => {
