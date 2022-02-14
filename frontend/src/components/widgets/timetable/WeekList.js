@@ -53,10 +53,9 @@ export const Class = styled.section`
   }
 
   section {
-    border: 1px solid white;
-    box-shadow: 0px 4px 4px 2px white;
+    border: ${({ theme }) => theme.timetableBorder};
     border-radius: 2px 22px;
-    background-color: white;
+    background-color: ${({ theme }) => theme.widgetColor};
   }
 `;
 
