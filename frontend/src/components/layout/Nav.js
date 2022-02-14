@@ -24,6 +24,7 @@ const Item = styled.div`
 `;
 
 const Logo = styled.img`
+  cursor: pointer;
   width: 5rem;
 `;
 
