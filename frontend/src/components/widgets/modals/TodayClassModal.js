@@ -32,6 +32,7 @@ const Right = styled.div`
   align-items: center;
   img {
     width: 100%;
+    margin: 10px 20px -40px;
   }
 
   button {

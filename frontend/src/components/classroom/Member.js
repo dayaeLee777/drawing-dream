@@ -13,7 +13,7 @@ import { closeChat, openChat } from "modules/chat";
 const Container = styled(motion.div)`
   width: 160px;
   height: 160px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgb(50 50 50) 0px 2px 8px 0px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,9 @@ const Name = styled.div`
   margin-right: 2rem;
 `;
 
-const CreateChat = styled.div``;
+const CreateChat = styled.div`
+cursor: pointer;
+`;
 
 const Member = ({ member }) => {
   const { userName, userId } = useSelector((state) => state.user);

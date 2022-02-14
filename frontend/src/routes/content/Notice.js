@@ -10,7 +10,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${({ theme }) => theme.widgetColor};
+  background-color: ${({ theme }) => theme.ContainerColor};
+  margin-bottom: 5rem;
+  padding-bottom: 3rem;
 `;
 
 const Notice = () => {

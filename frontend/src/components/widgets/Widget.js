@@ -11,6 +11,7 @@ const Container = styled(motion.div)`
   border-radius: 10px;
   margin: 1rem;
   background-color: ${({ theme }) => theme.widgetColor};
+  cursor: pointer;
 `;
 
 const Name = styled.div`
