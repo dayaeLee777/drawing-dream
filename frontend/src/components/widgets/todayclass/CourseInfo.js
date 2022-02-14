@@ -17,6 +17,9 @@ const CourseInfo = (props) => {
       <CourseInfoDetail
         periodCode={props.period}
         courseInfo={props.courseInfo}
+        files={props.files}
+        setFiles={props.setFiles}
+        courseId={props.courseId}
       />
     </Container>
   );

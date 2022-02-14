@@ -43,51 +43,13 @@ const Right = styled.div`
 `;
 
 const TodayClassModal = ({ layoutId }) => {
-  /////////////testdata//////////////
-  const data = [
-    {
-      dayCode: "H01",
-      periodCode: "I01",
-      subjectCode: "G0100",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I02",
-      subjectCode: "G0200",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I03",
-      subjectCode: "G0300",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I04",
-      subjectCode: "G0400",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I05",
-      subjectCode: "G0500",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I06",
-      subjectCode: "G0600",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I07",
-      subjectCode: "G0700",
-    },
-  ];
-
   const { userCode } = useSelector((state) => state.user);
   const { todayData, period } = useSelector((state) => state.timetable);
   const [nowPeriod, setNowPeriod] = useState();
   const [courseInfo, setCourseInfo] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [courseId, setCourseId] = useState("");
+  const [files, setFiles] = useState();
   const navigate = useNavigate();
 
   const onClick = (event) => {
@@ -95,18 +57,35 @@ const TodayClassModal = ({ layoutId }) => {
   };
 
   const startClass = () => {
+    console.log(courseId);
+    let formData = new FormData();
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append("multipartFile", files[i]);
+      }
+    }
+    formData.append(
+      "onlineClassRegisterRequestDTO",
+      new Blob(
+        [
+          JSON.stringify({
+            courseId,
+          }),
+        ],
+        { type: "application/json" }
+      )
+    );
     getCouresInfo(courseId).then((res) => {
       if (res.data.onlineClassId) {
         navigate(`/onlineclass/${courseId}`);
       } else {
-        createOnlineClass({ courseId }).then((res) => {
+        createOnlineClass(formData).then((res) => {
           navigate(`/onlineclass/${courseId}`);
         });
       }
     });
   };
 
-  console.log(todayData);
   useEffect(() => {
     if (todayData.length > 0) {
       const periodCode = getNowPeriod(period);
@@ -115,11 +94,15 @@ const TodayClassModal = ({ layoutId }) => {
         if (data.periodCode === periodCode) setCourseId(data.courseId);
       });
     }
-    setIsLoading(false);
-    if (!isLoading && nowPeriod) {
+    setIsLoading(true);
+  }, []);
+
+  useEffect(() => {
+    if (isLoading && nowPeriod) {
       getCouresInfo(courseId)
         .then((res) => {
           setCourseInfo(res.data);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -134,6 +117,10 @@ const TodayClassModal = ({ layoutId }) => {
           courseInfo={courseInfo}
           period={nowPeriod}
           data={todayData}
+          setFiles={setFiles}
+          files={files}
+          setIsLoading={setIsLoading}
+          courseId={courseId}
         />
       )}
       {userCode === "A03" && (
