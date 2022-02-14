@@ -5,10 +5,9 @@ import { useSelector } from "react-redux";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  background-color: ${({ theme }) => theme.widgetColor};
-  width: 45rem;
-  height: 100%;
+  background-color: ${({ theme }) => theme.ContainerColor};
   max-height: 20rem;
+  border-radius: 10px;
 `;
 
 const Wrapper = styled.div`

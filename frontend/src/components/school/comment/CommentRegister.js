@@ -27,10 +27,19 @@ const StyledTextArea = styled.textarea`
   height: 5rem;
   border: none;
   resize: none;
+  background-color: ${({ theme }) => theme.ContainerColor};
+  border: 1px solid #dadde6;
+  &::placeholder{
+    color: white;
+  }
 `;
 
 const BtnContainer = styled.div`
   display: flex;
+  button{
+    margin-top: 2rem;
+    margin-left: auto;
+  }
 `;
 
 const CommentRegister = ({

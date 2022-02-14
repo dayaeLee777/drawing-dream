@@ -20,6 +20,7 @@ const Container = styled.div`
   align-items: center;
   margin-bottom: 5rem;
   background-color: ${({ theme }) => theme.ContainerColor};
+  height: 80vh;
 `;
 
 const Desc = styled.div`
