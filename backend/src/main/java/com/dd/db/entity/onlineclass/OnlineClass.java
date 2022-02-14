@@ -14,8 +14,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,10 +31,10 @@ public class OnlineClass extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_id")
 	private Course course;
-	
-	@Column(name="del_yn", columnDefinition="BOOLEAN DEFAULT false")
+
+	@Column(name = "del_yn", columnDefinition = "BOOLEAN DEFAULT false")
 	private boolean delYn;
-	
+
 	public void update(boolean delYn) {
 		this.delYn = delYn;
 	}
