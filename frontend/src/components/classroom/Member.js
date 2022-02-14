@@ -42,7 +42,9 @@ const Name = styled.div`
   margin-right: 2rem;
 `;
 
-const CreateChat = styled.div``;
+const CreateChat = styled.div`
+cursor: pointer;
+`;
 
 const Member = ({ member }) => {
   const { userName, userId } = useSelector((state) => state.user);
