@@ -19,6 +19,7 @@ const Container = styled(motion.div)`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  background-color: ${({ theme }) => theme.widgetColor};
 `;
 const Img = styled.img`
   border-radius: 45px;
