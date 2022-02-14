@@ -122,7 +122,6 @@ const CourseInfoDetail = ({
   files,
   setFiles,
   courseId,
-  openCourse,
 }) => {
   const periodIndex = periodCode ? periodCode.slice(2, 3) : null;
   const subjectCode = courseInfo ? courseInfo.subjectCode : null;
@@ -130,8 +129,8 @@ const CourseInfoDetail = ({
   const { period } = useSelector((state) => state.timetable);
   const [isLoading, setIsLoading] = useState(true);
   const [filesUrl, setFilesUrl] = useState();
-
   // 수업 자료 조회
+
   useEffect(() => {
     if (
       isLoading &&
@@ -141,10 +140,11 @@ const CourseInfoDetail = ({
     ) {
       getOnlineClass(courseId).then((res) => {
         setFilesUrl(res.data.files);
+        // console.log(res.data.files);
         setIsLoading(false);
       });
     }
-  }, [isLoading, openCourse]);
+  }, [isLoading]);
   // 수업 자료 조회 END
 
   // 파일 이미지 만들기 위한 확장자 생성 코드
@@ -191,11 +191,11 @@ const CourseInfoDetail = ({
             </InfoContainer>
             <InfoContainer>
               <div className="desc">수업 자료</div>
-              {userCode === "A04" && !filesUrl && (
+              {!isLoading && userCode === "A04" && !filesUrl && (
                 <div className="content">등록된 파일이 없습니다.</div>
               )}
             </InfoContainer>
-            {userCode === "A04" && filesUrl && (
+            {!isLoading && userCode === "A04" && filesUrl && (
               <Files>
                 {!isLoading &&
                   filesUrl &&
