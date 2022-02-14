@@ -4,7 +4,7 @@ const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 5rem;
-  border: 1px solid #828282;
+  border: ${({ theme }) => theme.memoBorder};
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -26,7 +26,7 @@ const Container = styled.div`
   .regTime {
     margin-top: 1rem;
     font-size: 0.8rem;
-    color: #777777;
+    color: ${({ theme }) => theme.memoColor};
   }
 `;
 
