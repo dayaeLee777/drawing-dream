@@ -6,7 +6,9 @@ const Container = styled.div`
   width: 4rem;
   height: 4rem;
   border: none;
-  background-color: ${(props) => (props.now ? "#ffffff" : "#ffffff")};
+  /* background-color: ${(props) => (props.now ? "#ffffff" : "#ffffff")}; */
+  background-color: ${({ theme }) => theme.classColor};
+
   border-radius: 20px;
   box-shadow: ${(props) =>
     props.now
