@@ -29,6 +29,7 @@ const Period = styled.div`
     }
     div {
       background-color: #fec25c;
+      color: black;
     }
   }
 `;
@@ -46,10 +47,10 @@ export const Class = styled.section`
   grid-gap: 1.3rem;
 
   div {
-    border: 1px solid #f2f2f2;
+    border: 1px solid #f2f2f280;
     box-shadow: 0px 4px 4px 2px rgb(0 0 0 / 10%);
     border-radius: 2px 22px;
-    background-color: #f2f2f2;
+    background-color:  ${({ theme }) => theme.timetableColor};
   }
 
   section {
