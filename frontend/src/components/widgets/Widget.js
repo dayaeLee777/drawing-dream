@@ -10,6 +10,7 @@ const Container = styled(motion.div)`
   align-items: center;
   border-radius: 10px;
   margin: 1rem;
+  background-color: ${({ theme }) => theme.widgetColor};
 `;
 
 const Name = styled.div`
