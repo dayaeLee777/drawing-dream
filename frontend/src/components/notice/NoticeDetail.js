@@ -14,6 +14,7 @@ const DetailContainer = styled.div`
   padding: 3rem 5rem;
   box-sizing: border-box;
   width: 100%;
+  overflow: auto;
 `;
 
 const BoardContainer = styled.div`
@@ -33,13 +34,13 @@ const TitleContainer = styled.div`
   .code {
     font-size: 1rem;
     font-weight: 300;
-    color: #787878;
+    color: black;
   }
 `;
 const ProfileContainer = styled.div`
   padding-left: 0.5rem;
   margin-top: 1rem;
-  color: #787878;
+  color: black;
   display: flex;
   align-items: center;
 
@@ -71,7 +72,7 @@ const EditContainer = styled.div`
   .delete {
     margin-right: 0.5rem;
     text-decoration: underline;
-    color: #787878;
+    color: black;
     cursor: pointer;
   }
 `;
