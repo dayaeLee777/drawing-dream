@@ -383,9 +383,6 @@ const OnlineClass = () => {
     participants[sender] = participant;
     var video = participant.getVideoElement();
 
-    // if (sender.includes("screens")) {
-
-    // }
     var options = {
       remoteVideo: video,
       onicecandidate: participant.onIceCandidate.bind(participant),
