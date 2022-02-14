@@ -40,7 +40,8 @@ const Back = styled.div`
 const Title = styled.div`
   font-size: 30px;
   font-weight: 600;
-  color: black;
+  color: ${({ theme }) => theme.textColor};
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
