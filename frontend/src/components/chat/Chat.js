@@ -80,6 +80,7 @@ const Chat = () => {
   const chatClose = () => {
     if (isOpenChat) {
       dispatch(closeChat());
+      client.disconnect();
     } else {
       dispatch(openChat());
     }

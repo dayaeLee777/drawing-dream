@@ -27,23 +27,28 @@ const Img = styled.img`
 `;
 
 const Wrapper = styled.div`
-  display: grid;
   width: 100%;
-  grid-template-columns: 4fr 1fr;
-
+  display: flex;
+  justify-content: center;
+  position: relative;
   svg {
     color: #fec25c;
   }
 `;
 
 const Name = styled.div`
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: right;
-  margin-right: 2rem;
+  display: flex;
+  justify-content: center;
 `;
 
 const CreateChat = styled.div`
-cursor: pointer;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-right: 1rem;
 `;
 
 const Member = ({ member }) => {
