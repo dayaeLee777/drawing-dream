@@ -91,6 +91,10 @@ public class CallHandler extends TextWebSocketHandler {
 				user.addCandidate(cand, jsonMessage.get("name").getAsString());
 			}
 			break;
+		case "shareScreen":
+			System.out.println("shareScreen");
+			shareScreen(jsonMessage, session);
+			break;
 		default:
 			System.out.println("default");
 			break;
@@ -120,5 +124,14 @@ public class CallHandler extends TextWebSocketHandler {
 			roomManager.removeRoom(room);
 		}
 	}
+	
+	private void shareScreen (JsonObject params, WebSocketSession session) throws IOException {
+		final String roomName = params.get("room").getAsString();
+		final String name = params.get("name").getAsString();
+		log.info("PARTICIPANT {}: trying to join room {}", name, roomName);
 
+		Room room = roomManager.getRoom(roomName);
+		final UserSession user = room.join("screen"+name, session);
+		registry.register(user);
+	}
 }
