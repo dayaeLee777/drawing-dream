@@ -5,9 +5,9 @@ import commonCode from "config/commonCode";
 import { getCalendar } from "api/calendar";
 
 const Container = styled(motion.div)`
-  /* height: 15rem; */
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  background-color: ${({ theme }) => theme.widgetColor};
+  background-color: ${({ theme }) => theme.ContainerColor};
+  border-radius: 10px;
 `;
 
 const Wrapper = styled.div`
