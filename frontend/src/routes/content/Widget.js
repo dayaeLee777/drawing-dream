@@ -45,6 +45,7 @@ const Widget = () => {
               const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
               getCouresInfo(courseId).then((res) => {
                 if (res.data.onlineClassId) {
+                  console.log(courseId);
                   setIsShow(true);
                 }
               });

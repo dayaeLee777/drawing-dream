@@ -176,8 +176,8 @@ const ChatRoom = ({
   const messageBoxRef = useRef();
   const { userName, userId } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  let sockJS = new SockJS("http://localhost:8080/ws-dd");
-  let client = Stomp.over(sockJS);
+  const sockJS = new SockJS("http://localhost:8080/ws-dd");
+  const client = Stomp.over(sockJS);
 
   const scrollToBottom = () => {
     if (messageBoxRef.current) {
@@ -187,6 +187,7 @@ const ChatRoom = ({
 
   const back = () => {
     dispatch(openChatList());
+    client.disconnect();
   };
 
   const onChange = (event) => {
@@ -203,20 +204,21 @@ const ChatRoom = ({
   useEffect(() => {
     getChatList(roomId).then((res) => {
       setContents(res.data.messages);
-      client.connect(
-        {
-          Authorization: `Bearer ${token}`,
-        },
-        (frame) => {
-          console.log("STOMP Connection");
-          console.log(memberId);
-          client.subscribe(`/topic/one/${memberId}`, (response) => {
-            console.log(response);
-            setContents((prev) => [...prev, JSON.parse(response.body)]);
-          });
-        }
-      );
     });
+    client.connect(
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      (frame) => {
+        console.log("STOMP Connection");
+        console.log(memberId);
+        client.subscribe(`/topic/one/${memberId}`, (response) => {
+          console.log(response);
+          setContents((prev) => [...prev, JSON.parse(response.body)]);
+        });
+      }
+    );
+    return () => client.disconnect();
   }, []);
 
   useEffect(() => {
