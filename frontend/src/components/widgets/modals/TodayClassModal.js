@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import Button from "components/commons/button";
 import { useNavigate } from "react-router-dom";
 import { createOnlineClass } from "api/onlineclass";
-import { createChatRoom } from "api/chat";
 import teacher2 from "assets/img/teacher2.png";
 import { getCouresInfo } from "api/course";
 import { getNowPeriod } from "../todayclass/time";
@@ -43,7 +42,7 @@ const Right = styled.div`
 `;
 
 const TodayClassModal = ({ layoutId }) => {
-  const { userCode } = useSelector((state) => state.user);
+  const { userCode, userName } = useSelector((state) => state.user);
   const { todayData, period } = useSelector((state) => state.timetable);
   const [nowPeriod, setNowPeriod] = useState();
   const [courseInfo, setCourseInfo] = useState();
@@ -57,7 +56,6 @@ const TodayClassModal = ({ layoutId }) => {
   };
 
   const startClass = () => {
-    console.log(courseId);
     let formData = new FormData();
     if (files) {
       for (let i = 0; i < files.length; i++) {
@@ -101,7 +99,7 @@ const TodayClassModal = ({ layoutId }) => {
     if (isLoading && nowPeriod) {
       getCouresInfo(courseId)
         .then((res) => {
-          setCourseInfo(res);
+          setCourseInfo(res.data);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -109,7 +107,6 @@ const TodayClassModal = ({ layoutId }) => {
         });
     }
   }, [isLoading]);
-
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>
       {nowPeriod && courseInfo && (
@@ -126,7 +123,18 @@ const TodayClassModal = ({ layoutId }) => {
       {userCode === "A03" && (
         <Right>
           <img src={teacher2} alt="캐릭터" />
-          <Button onClick={startClass} name="수업 시작하기"></Button>
+          <Button
+            onClick={startClass}
+            disabled={
+              nowPeriod &&
+              courseInfo &&
+              courseInfo.courseGetListResponseDTOs[nowPeriod.slice(2, 3)]
+                .teacherName === userName
+                ? ""
+                : "disabled"
+            }
+            name="수업 시작하기"
+          ></Button>
         </Right>
       )}
       {userCode === "A04" && courseInfo && (

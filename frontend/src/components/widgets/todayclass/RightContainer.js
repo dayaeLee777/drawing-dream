@@ -56,7 +56,7 @@ const RightContainer = ({ courseInfo }) => {
               mt="1.5rem"
               width="14rem"
               height="2.5rem"
-              disabled={courseInfo ? "disabled" : "disabled"}
+              disabled={courseInfo ? "" : "disabled"}
             />
           </>
         ) : (
