@@ -3,6 +3,7 @@ import linkImg from "assets/img/link.png";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
+  cursor: pointer;
   background-color: ${(props) => (props.bc ? "#fec25c" : "#f1f1f1")};
   height: 4rem;
   margin-bottom: 1rem;
