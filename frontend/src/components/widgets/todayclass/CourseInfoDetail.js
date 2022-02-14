@@ -188,10 +188,10 @@ const CourseInfoDetail = ({
           </InfoContainer>
           <InfoContainer>
             <div className="desc">수업 자료</div>
+            {userCode === "A04" && !filesUrl && (
+              <div className="content">등록된 파일이 없습니다.</div>
+            )}
           </InfoContainer>
-          {userCode === "A04" && !filesUrl && (
-            <div className="content">등록된 파일이 없습니다.</div>
-          )}
           {userCode === "A04" && filesUrl && (
             <Files>
               {!isLoading &&
