@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const Container = styled(motion.div)`
   height: 5rem;
-  box-shadow: rgb(50 50 50) 0px 2px 8px 0px;
+  box-shadow: ${({ theme }) => theme.borderShadow};
   display: flex;
   justify-content: center;
   align-items: center;
