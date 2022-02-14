@@ -36,19 +36,19 @@ const Widget = () => {
   useEffect(() => {
     let interval;
     if (isLoading) {
-      console.log(isShow);
       dispatch(readTimeTable()).then(() => {
         if (userCode === "A04") {
           interval = setInterval(() => {
             if (todayData.length > 0) {
               const periodCode = getNowPeriod(period);
-              const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
-              getCouresInfo(courseId).then((res) => {
-                if (res.data.onlineClassId) {
-                  console.log(courseId);
-                  setIsShow(true);
-                }
-              });
+              if (periodCode) {
+                const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
+                getCouresInfo(courseId).then((res) => {
+                  if (res.data.onlineClassId) {
+                    setIsShow(true);
+                  }
+                });
+              }
             }
           }, 2000);
         }
