@@ -21,6 +21,7 @@ const Item = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: default;
 `;
 
 const Logo = styled.img`
@@ -59,6 +60,7 @@ const DropDown = styled.div`
 `;
 
 const DropDownItem = styled.div`
+  cursor: pointer;
   text-align: center;
   margin: 2rem;
 `;
