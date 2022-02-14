@@ -42,7 +42,7 @@ const Icon = styled.img`
 const DropDownContent = styled.div`
   display: none;
   position: absolute;
-  background-color: ${({ theme }) => theme.bgColor};
+  background-color: ${({ theme }) => theme.dropdownColor};
   min-width: 10rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 10px;
