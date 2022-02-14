@@ -66,7 +66,7 @@ const FileContainer = styled.div`
     text-align: center;
     padding: 20px;
     border: 3px dashed #eeeeee;
-    background-color: #fafafa;
+    background-color: ${({ theme }) => theme.widgetColor};
     color: #bdbdbd;
   }
 
