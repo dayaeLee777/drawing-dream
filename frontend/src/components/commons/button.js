@@ -20,10 +20,15 @@ const StyledButton = styled.button`
     background-color: ${(props) =>
       props.hoverColor ? props.hoverColor : "#dca03a"};
   }
+
+  &:disabled {
+    background-color: whitesmoke;
+    cursor: no-drop;
+  }
 `;
 
 const Button = (props) => {
-  return <StyledButton {...props}>{props.name}</StyledButton>;
+  return <StyledButton {...props} disabled={props.disabled}>{props.name}</StyledButton>;
 };
 
 export default Button;

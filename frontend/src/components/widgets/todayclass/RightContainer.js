@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import character from "assets/img/character.png";
 import Button from "components/commons/button";
-import { createOnlineClass } from "api/onlineclass";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -35,7 +34,6 @@ const Notice = styled.div`
 
 const RightContainer = ({ courseInfo }) => {
   const navigate = useNavigate();
-  console.log(courseInfo);
   const startClass = () => {
     navigate(`/onlineclass/${courseInfo.courseId}`);
   };
@@ -58,6 +56,7 @@ const RightContainer = ({ courseInfo }) => {
               mt="1.5rem"
               width="14rem"
               height="2.5rem"
+              disabled={courseInfo ? "disabled" : "disabled"}
             />
           </>
         ) : (

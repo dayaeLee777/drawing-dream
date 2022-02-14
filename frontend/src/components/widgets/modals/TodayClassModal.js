@@ -101,7 +101,7 @@ const TodayClassModal = ({ layoutId }) => {
     if (isLoading && nowPeriod) {
       getCouresInfo(courseId)
         .then((res) => {
-          setCourseInfo(res.data);
+          setCourseInfo(res);
           setIsLoading(false);
         })
         .catch((error) => {

@@ -2,8 +2,6 @@ import commonCode from "config/commonCode";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import Button from "components/commons/button";
-import { getCouresInfo } from "api/course";
 import Dropzone from "react-dropzone";
 import { defaultStyles, FileIcon } from "react-file-icon";
 import { getOnlineClass } from "api/onlineclass";
@@ -44,18 +42,6 @@ const InfoContainer = styled.div`
     /* width: 20rem; */
   }
   margin-bottom: 0.75rem;
-`;
-
-const ClassFile = styled.div`
-  div {
-    display: inline-block;
-    margin-right: 1rem;
-    width: 6rem;
-    /* ... 으로 만들어 주는 코드 */
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
 `;
 
 const FileContainer = styled.div`
@@ -122,6 +108,14 @@ const Files = styled.div`
   }
 `;
 
+const NullSubject = styled.div`
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+`;
+
 const CourseInfoDetail = ({
   periodCode,
   courseInfo,
@@ -160,98 +154,109 @@ const CourseInfoDetail = ({
   const onDownload = (e) => {
     window.open(e.target.value);
   };
-
-  return (
-    <Contanier>
-      <div className="preiod">
-        {commonCode[periodCode.substr(0, 1)][periodCode]}
-      </div>
-      <div className="name">
-        {
-          commonCode[subjectCode.substr(0, 1)][subjectCode.substr(0, 3)][
-            subjectCode
-          ]
-        }
-      </div>
-      {courseInfo && (
-        <>
-          <InfoContainer>
-            <div className="desc">교사명</div>
-            <div className="content">{courseInfo.teacherName}</div>
-          </InfoContainer>
-          <InfoContainer>
-            <div className="desc">수업 시간</div>
-            <div className="content">
-              {period[periodIndex].startTime.slice(0, 5)} ~{" "}
-              {period[periodIndex].endTime.slice(0, 5)}
-            </div>
-          </InfoContainer>
-          <InfoContainer>
-            <div className="desc">수업 자료</div>
-            {userCode === "A04" && !filesUrl && (
-              <div className="content">등록된 파일이 없습니다.</div>
-            )}
-          </InfoContainer>
-          {userCode === "A04" && filesUrl && (
-            <Files>
-              {!isLoading &&
-                filesUrl &&
-                Object.entries(filesUrl).map((item) => (
-                  <div className="fileItem" key={item[1]}>
-                    <div className="icon" value={item[1]}>
-                      <FileIcon
-                        extension={makeExtension(item[0])}
-                        {...defaultStyles[makeExtension(item[0])]}
-                      />
-                    </div>
-                    <button
-                      className="file"
-                      onClick={onDownload}
-                      value={item[1]}
-                    >
-                      {item[0]}
-                    </button>
-                  </div>
-                ))}
-            </Files>
-          )}
-          {userCode === "A03" && (
-            <FileContainer>
-              <Dropzone onDrop={handleDrop} className="dropzone">
-                {({ getRootProps, getInputProps }) => (
-                  <div {...getRootProps({ className: "dropzone" })}>
-                    <input {...getInputProps()} />
-                    <p>첨부할 파일을 클릭 또는 드래그하여 올려주세요.</p>
-                  </div>
-                )}
-              </Dropzone>
-              {files && (
-                <div className="files">
-                  {files.map((file) => (
-                    <div key={file.name}>
-                      <div className="file">
-                        <div className="icon">
-                          <FileIcon
-                            extension={makeExtension(file.name)}
-                            {...defaultStyles[makeExtension(file.name)]}
-                          />
-                        </div>
-                        <div className="desc">{file.name}</div>
+  if (subjectCode) {
+    return (
+      <Contanier>
+        <div className="preiod">
+          {commonCode[periodCode.substr(0, 1)][periodCode]}
+        </div>
+        <div className="name">
+          {
+            commonCode[subjectCode.substr(0, 1)][subjectCode.substr(0, 3)][
+              subjectCode
+            ]
+          }
+        </div>
+        {courseInfo && period[periodIndex] && (
+          <>
+            <InfoContainer>
+              <div className="desc">교사명</div>
+              <div className="content">{courseInfo.teacherName}</div>
+            </InfoContainer>
+            <InfoContainer>
+              <div className="desc">수업 시간</div>
+              <div className="content">
+                {period[periodIndex].startTime.slice(0, 5)} ~{" "}
+                {period[periodIndex].endTime.slice(0, 5)}
+              </div>
+            </InfoContainer>
+            <InfoContainer>
+              <div className="desc">수업 자료</div>
+              {userCode === "A04" && !filesUrl && (
+                <div className="content">등록된 파일이 없습니다.</div>
+              )}
+            </InfoContainer>
+            {userCode === "A04" && filesUrl && (
+              <Files>
+                {!isLoading &&
+                  filesUrl &&
+                  Object.entries(filesUrl).map((item) => (
+                    <div className="fileItem" key={item[1]}>
+                      <div className="icon" value={item[1]}>
+                        <FileIcon
+                          extension={makeExtension(item[0])}
+                          {...defaultStyles[makeExtension(item[0])]}
+                        />
                       </div>
+                      <button
+                        className="file"
+                        onClick={onDownload}
+                        value={item[1]}
+                      >
+                        {item[0]}
+                      </button>
                     </div>
                   ))}
-                </div>
-              )}
-            </FileContainer>
-          )}
-          <InfoContainer>
-            <div className="desc">다시 보기</div>
-            <div className="content">수업 완료 후 확인할 수 있어요</div>
-          </InfoContainer>
-        </>
-      )}
-    </Contanier>
-  );
+              </Files>
+            )}
+            {userCode === "A03" && (
+              <FileContainer>
+                <Dropzone onDrop={handleDrop} className="dropzone">
+                  {({ getRootProps, getInputProps }) => (
+                    <div {...getRootProps({ className: "dropzone" })}>
+                      <input {...getInputProps()} />
+                      <p>첨부할 파일을 클릭 또는 드래그하여 올려주세요.</p>
+                    </div>
+                  )}
+                </Dropzone>
+                {files && (
+                  <div className="files">
+                    {files.map((file) => (
+                      <div key={file.name}>
+                        <div className="file">
+                          <div className="icon">
+                            <FileIcon
+                              extension={makeExtension(file.name)}
+                              {...defaultStyles[makeExtension(file.name)]}
+                            />
+                          </div>
+                          <div className="desc">{file.name}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </FileContainer>
+            )}
+            <InfoContainer>
+              <div className="desc">다시 보기</div>
+              <div className="content">수업 완료 후 확인할 수 있어요</div>
+            </InfoContainer>
+          </>
+        )}
+      </Contanier>
+    );
+  } else {
+    return (
+      <Contanier>
+        <NullSubject>
+          <>
+            {commonCode[periodCode.substr(0, 1)][periodCode]} 수업이 없습니다.
+          </>
+        </NullSubject>
+      </Contanier>
+    );
+  }
 };
 
 export default CourseInfoDetail;
