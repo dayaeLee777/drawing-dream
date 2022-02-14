@@ -26,7 +26,7 @@ const Header = styled.div`
 const Title = styled.div`
   font-size: 30px;
   font-weight: 600;
-  color: black;
+  color: ${({ theme }) => theme.textColor};
   display: flex;
   align-items: end;
   margin-bottom: 20px;
