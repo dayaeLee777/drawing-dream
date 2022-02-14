@@ -34,7 +34,7 @@ const TitleContainer = styled.div`
 const ProfileContainer = styled.div`
   padding-left: 0.5rem;
   margin-top: 1rem;
-  color: black;
+  color: ${({ theme }) => theme.textColor};
   display: flex;
   align-items: center;
 
