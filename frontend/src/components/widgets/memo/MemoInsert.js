@@ -20,7 +20,8 @@ const StyledTextArea = styled.textarea`
 `;
 const ButtonContainer = styled.div`
   text-align: right;
-  color: #555555;
+  color: #A19F9F;
+  margin-top: 0.5rem;
   .complete {
     margin-right: 2rem;
     cursor: pointer;
