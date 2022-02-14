@@ -11,6 +11,7 @@ export const darkTheme = {
   menuColor: "#828282",
   widgetColor: "#605F5F",
   ContainerColor: "#7C7C7C",
+  classColor: "#454545",
 };
 
 export const theme = {
