@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import Chart from "../score/Chart";
 const Wrapper = styled(motion.div)`
-  width: 700px;
-  height: 700px;
+  width: 800px;
+  height: 800px;
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
   background-color: ${({ theme }) => theme.widgetColor};
