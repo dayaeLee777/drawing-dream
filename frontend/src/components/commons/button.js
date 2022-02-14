@@ -14,6 +14,7 @@ const StyledButton = styled.button`
   border-radius: 5px;
   font-family: "Noto Sans KR", sans-serif;
   transition: 0.2s;
+  cursor: pointer;
 
   &:hover {
     background-color: ${(props) =>
