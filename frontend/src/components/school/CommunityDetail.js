@@ -13,6 +13,7 @@ const DetailContainer = styled.div`
   padding: 3rem 5rem;
   box-sizing: border-box;
   width: 100%;
+  overflow: auto;
 `;
 
 const BoardContainer = styled.div`
@@ -33,7 +34,7 @@ const TitleContainer = styled.div`
 const ProfileContainer = styled.div`
   padding-left: 0.5rem;
   margin-top: 1rem;
-  color: #787878;
+  color: ${({ theme }) => theme.textColor};
   display: flex;
   align-items: center;
 
