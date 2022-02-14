@@ -111,7 +111,7 @@ const TodayClassModal = ({ layoutId }) => {
     <Wrapper onClick={onClick} layoutId={layoutId}>
       {/* 현재 교시 정보와 수업 정보가 있을 때 근데 이거 조건없이 넘겨야 하는데
       isLoading이랑 coureInfo로 값 넘기고 nowPeriod로는 뒤에 수업 정보 없다고 띄워야 됨 */}
-      {!isLoading && courseInfo ? (
+      {!isLoading && courseInfo && (
         <LeftContainer
           courseInfo={courseInfo} // 현재 교시 수업 정보
           period={nowPeriod} // 현재 교시
@@ -120,9 +120,8 @@ const TodayClassModal = ({ layoutId }) => {
           files={files}
           courseId={courseId}
         />
-      ) : (
-        <LeftContainer todayData={todayData} />
       )}
+      {!isLoading && !courseInfo && <LeftContainer todayData={todayData} />}
       {userCode === "A03" && (
         <Right>
           <img src={teacher2} alt="캐릭터" />

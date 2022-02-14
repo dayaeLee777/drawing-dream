@@ -33,7 +33,6 @@ const LeftContainer = (props) => {
         periodCode={props.period}
         courseInfo={props.courseInfo}
         courseId={props.courseId}
-        openCourse={props.openCourse}
       />
     </Container>
   );
