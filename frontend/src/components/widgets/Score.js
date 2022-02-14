@@ -4,10 +4,11 @@ import Chart from "./score/Chart";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  background-color: ${({ theme }) => theme.widgetColor};
+  background-color: ${({ theme }) => theme.ContainerColor};
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 10px;
 `;
 
 const Wrapper = styled.div`
