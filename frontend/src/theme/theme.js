@@ -11,6 +11,7 @@ export const lightTheme = {
   memoColor: "#555555",
   noticeHoverColor: "#f2f2f2",
   chatFilter: "drop-shadow(6px 6px 5px #828282)",
+  borderShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
 };
 
 export const darkTheme = {
@@ -28,6 +29,7 @@ export const darkTheme = {
   memoColor: "#A19F9F",
   noticeHoverColor: "#646464",
   chatFilter: "drop-shadow(6px 6px 5px black)",
+  borderShadow: "rgb(50 50 50) 0px 2px 8px 0px",
 };
 
 export const theme = {
