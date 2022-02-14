@@ -5,13 +5,14 @@ import { registerCheckList } from "api/checklist";
 
 const CheckListInsertContainer = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
   input {
     outline: none;
     border: 1px solid #dca03a;
     padding: 0.5rem;
     font-size: 1.125rem;
     line-height: 1.5;
+    background-color: ${({ theme }) => theme.widgetColor};
     &::placeholder {
       color: #dee2e6;
     }
