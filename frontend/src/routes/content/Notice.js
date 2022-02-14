@@ -11,6 +11,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: ${({ theme }) => theme.ContainerColor};
+  margin-bottom: 5rem;
+  padding-bottom: 3rem;
 `;
 
 const Notice = () => {
