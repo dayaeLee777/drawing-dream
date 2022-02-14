@@ -8,6 +8,13 @@ import Chat from "components/onlineclass/Chat";
 import { getCouresInfo } from "api/course";
 import Button from "components/commons/button";
 import { deleteOnlineClass } from "api/onlineclass";
+import {
+  faVideoSlash,
+  faVideo,
+  faMicrophone,
+  faMicrophoneSlash,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 /*
  * (C) Copyright 2014 Kurento (http://kurento.org/)
  *
@@ -42,7 +49,29 @@ const Title = styled.div`
   letter-spacing: -1px;
 `;
 
-const ControlContainer = styled.div``;
+const ControlContainer = styled.div`
+  display: flex;
+  width: 18rem;
+  justify-content: space-between;
+  margin-left: 16rem;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #fec25c;
+  padding: 1rem;
+  border-radius: 20px;
+`;
+
+const ButtonName = styled.div`
+  margin-left: 0.5rem;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+`;
 const TeacherVideoContainer = styled.div`
   width: 60vw;
   height: 70vh;
@@ -81,7 +110,7 @@ const OnlineClass = () => {
   const [teacherVideo, setTecherVideo] = useState(false);
   const [courseInfo, setCourseInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [showVideo, setShowVideo] = useState(true);
+  // const [showVideo, setShowVideo] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -364,13 +393,26 @@ const OnlineClass = () => {
   };
 
   const vidOnOff = () => {
-    let myVideo = document.getElementById("video-" + userName);
-    if (showVideo) {
-      myVideo.pause();
-      setShowVideo(false);
+    if (participants[userName].rtcPeer.videoEnabled) {
+      // 끌때
+      participants[userName].rtcPeer.videoEnabled = false;
+      document.getElementById("vidOn").style.display = "none";
+      document.getElementById("vidOff").style.display = "";
     } else {
-      myVideo.play();
-      setShowVideo(true);
+      participants[userName].rtcPeer.videoEnabled = true;
+      document.getElementById("vidOn").style.display = "";
+      document.getElementById("vidOff").style.display = "none";
+    }
+  };
+  const audOnOff = () => {
+    if (participants[userName].rtcPeer.audioEnabled) {
+      participants[userName].rtcPeer.audioEnabled = false;
+      document.getElementById("audOn").style.display = "none";
+      document.getElementById("audOff").style.display = "";
+    } else {
+      participants[userName].rtcPeer.audioEnabled = true;
+      document.getElementById("audOn").style.display = "";
+      document.getElementById("audOff").style.display = "none";
     }
   };
 
@@ -389,7 +431,30 @@ const OnlineClass = () => {
             </Title>
           )}
           <ControlContainer>
-            <button onClick={vidOnOff}>비디오 중지</button>
+            <ButtonContainer
+              id="vidOff"
+              onClick={vidOnOff}
+              style={{ display: "none" }}
+            >
+              <FontAwesomeIcon icon={faVideoSlash} size="sm" />
+              <ButtonName>비디오 시작</ButtonName>
+            </ButtonContainer>
+            <ButtonContainer onClick={vidOnOff} id="vidOn">
+              <FontAwesomeIcon icon={faVideo} size="sm" />
+              <ButtonName>비디오 중지</ButtonName>
+            </ButtonContainer>
+            <ButtonContainer
+              id="audOff"
+              onClick={audOnOff}
+              style={{ display: "none" }}
+            >
+              <FontAwesomeIcon icon={faMicrophoneSlash} size="sm" />
+              <ButtonName>오디오 시작</ButtonName>
+            </ButtonContainer>
+            <ButtonContainer onClick={audOnOff} id="audOn">
+              <FontAwesomeIcon icon={faMicrophone} size="sm" />
+              <ButtonName>오디오 중지</ButtonName>
+            </ButtonContainer>
           </ControlContainer>
           {userCode === "A03" ? (
             <Button
