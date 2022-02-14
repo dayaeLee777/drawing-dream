@@ -34,13 +34,13 @@ const TitleContainer = styled.div`
   .code {
     font-size: 1rem;
     font-weight: 300;
-    color: black;
+    color: ${({ theme }) => theme.textColor};
   }
 `;
 const ProfileContainer = styled.div`
   padding-left: 0.5rem;
   margin-top: 1rem;
-  color: black;
+  color: ${({ theme }) => theme.textColor};
   display: flex;
   align-items: center;
 
@@ -72,13 +72,12 @@ const EditContainer = styled.div`
   .delete {
     margin-right: 0.5rem;
     text-decoration: underline;
-    color: black;
+    color: ${({ theme }) => theme.textColor};
     cursor: pointer;
   }
 `;
 const FileContainer = styled.div`
   height: 5rem;
-  /* background-color: #facead; */
   margin-top: 2rem;
 
   .desc {
