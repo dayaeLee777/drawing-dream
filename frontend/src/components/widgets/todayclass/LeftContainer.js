@@ -15,8 +15,17 @@ const LeftContainer = (props) => {
   const { userCode } = useSelector((state) => state.user);
   return (
     <Container>
-      {userCode === "A04" && <TodayClassContainer data={props.data} />}
-      <CourseInfo period={props.period} courseInfo={props.courseInfo} />
+      {userCode === "A04" && (
+        <TodayClassContainer data={props.data} files={props.files} />
+      )}
+      <CourseInfo
+        files={props.files}
+        setFiles={props.setFiles}
+        period={props.period}
+        courseInfo={props.courseInfo}
+        setIsLoading={props.setIsLoading}
+        courseId={props.courseId}
+      />
     </Container>
   );
 };
