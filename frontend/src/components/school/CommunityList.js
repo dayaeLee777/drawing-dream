@@ -46,7 +46,7 @@ const StyledTh = styled.td`
   border-radius: 3px;
 
   & + & {
-    border-left: 2px solid white;
+    border-left: 2px solid ${({ theme }) => theme.ContainerColor};
   }
 `;
 
