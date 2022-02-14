@@ -54,8 +54,7 @@ const CreateChat = styled.div`
 const Member = ({ member }) => {
   const { userName, userId } = useSelector((state) => state.user);
   const [profileImg, setProfileImg] = useState("");
-  const [roomId, setRoomId] = useState("");
-  const { isOpenChat } = useSelector((state) => state.chat);
+  // const { isOpenChat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   useEffect(() => {
     getProfileImg(member.userId).then((res) =>
@@ -73,8 +72,7 @@ const Member = ({ member }) => {
       ],
     }).then((res) => {
       console.log(res);
-      setRoomId(res.data.roomId);
-      dispatch(openChat(res.data.roomId));
+      dispatch(openChat(res.data.roomId, res.data.users, member.userId));
     });
   };
   return (

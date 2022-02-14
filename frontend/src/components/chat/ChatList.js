@@ -118,7 +118,7 @@ const Middle = styled.div`
 `;
 
 const Name = styled.div`
-color: black;
+  color: black;
 `;
 
 const Content = styled.div`
@@ -155,9 +155,7 @@ const ChatList = ({
   chatClose,
 }) => {
   const [rooms, setRooms] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [memberId, setMemberId] = useState("");
-  const { userName, userId } = useSelector((state) => state.user);
+  const { userId } = useSelector((state) => state.user);
   const { roomId } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -172,9 +170,6 @@ const ChatList = ({
       {roomId && (
         <ChatRoom
           roomId={roomId}
-          // setRoomId={setRoomId}
-          users={users}
-          memberId={memberId}
           chatClose={chatClose}
           message={message}
           setMessage={setMessage}
@@ -199,11 +194,11 @@ const ChatList = ({
                   <List
                     key={room.roomId}
                     onClick={() => {
-                      dispatch(openChat(room.roomId));
-                      setUsers(room.users);
                       room.users.map((user) => {
                         if (user.userId !== userId) {
-                          setMemberId(user.userId);
+                          dispatch(
+                            openChat(room.roomId, room.users, user.userId)
+                          );
                         }
                       });
                     }}
