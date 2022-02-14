@@ -75,9 +75,10 @@ public class OnlineClassServiceImpl implements OnlineClassService {
 	@Override
 	public int deleteClass(UUID courseId, String accessToken) {
 
-		onlineClassRepository.findByCourseIdAndDelYn(courseId, false).get().update(true);
+		OnlineClass onlineClass = onlineClassRepository.findByCourseIdAndDelYn(courseId, false).get();
+		onlineClass.update(true);
 
-		return onlineClassRepository.findByCourseId(courseId).get().isDelYn() ? 1 : 0;
+		return onlineClassRepository.findById(onlineClass.getId()).get().isDelYn() ? 1 : 0;
 
 	}
 	
