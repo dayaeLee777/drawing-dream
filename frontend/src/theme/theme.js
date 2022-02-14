@@ -5,6 +5,8 @@ export const lightTheme = {
   menuColor: "#828282",
   timetableBorder: "1px solid #ffffff",
   timetableColor: "#f2f2f2",
+  memoBorder: "1px solid #828282",
+  memoColor: "#555555",
 };
 
 export const darkTheme = {
@@ -16,6 +18,8 @@ export const darkTheme = {
   classColor: "#454545",
   timetableBorder: "1px solid #605F5F",
   timetableColor: "#454545",
+  memoBorder: "1px solid #a19f9f",
+  memoColor: "#a19f9f",
 };
 
 export const theme = {
