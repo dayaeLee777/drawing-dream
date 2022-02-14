@@ -6,7 +6,7 @@ import CheckListItems from "../checklist/CheckListItems";
 const Wrapper = styled(motion.div)`
   width: 600px;
   height: 600px;
-
+  background-color: ${({ theme }) => theme.widgetColor};
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
   display: flex;
