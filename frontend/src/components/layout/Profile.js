@@ -50,7 +50,7 @@ const Edit = styled.img`
   position: relative;
   top: -2rem;
   left: 8rem;
-  background-color: white;
+  background-color: ${({ theme }) => theme.widgetColor};
   cursor: pointer;
 `;
 
