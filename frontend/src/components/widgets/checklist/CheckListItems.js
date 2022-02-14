@@ -7,7 +7,7 @@ import CheckListItem from "./CheckListItem";
 
 const CheckListContainer = styled.div`
   height: 25rem;
-  width: 80%;
+  width: 100%;
   align-items: center;
   display: flex;
   flex-direction: column;

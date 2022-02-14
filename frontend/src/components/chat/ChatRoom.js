@@ -104,6 +104,7 @@ const Me = styled.div`
   margin-bottom: 1rem;
   font-size: 1rem;
   line-height: 1.5rem;
+  color: black;
 `;
 
 const You = styled.div`
@@ -114,6 +115,7 @@ const You = styled.div`
   margin-bottom: 1rem;
   font-size: 1rem;
   line-height: 1.5rem;
+  color: black;
 `;
 
 const ChatInput = styled.div`

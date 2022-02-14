@@ -117,7 +117,9 @@ const Middle = styled.div`
   max-width: 12rem;
 `;
 
-const Name = styled.div``;
+const Name = styled.div`
+color: black;
+`;
 
 const Content = styled.div`
   margin: 0.4rem 0;
@@ -142,6 +144,7 @@ const Info = styled.div`
   justify-content: center;
   align-items: center;
   line-height: 1.6;
+  color: black;
 `;
 
 const ChatList = ({

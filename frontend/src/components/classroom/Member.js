@@ -11,8 +11,8 @@ import { getProfileImg } from "api/user";
 import { closeChat, openChat } from "modules/chat";
 
 const Container = styled(motion.div)`
-  /* width: 10rem; */
-  height: 10rem;
+  width: 160px;
+  height: 160px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 10px;
   display: flex;
