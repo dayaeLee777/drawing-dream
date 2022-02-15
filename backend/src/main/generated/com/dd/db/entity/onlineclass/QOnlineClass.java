@@ -26,6 +26,8 @@ public class QOnlineClass extends EntityPathBase<OnlineClass> {
 
     public final QCourse course;
 
+    public final BooleanPath delYn = createBoolean("delYn");
+
     public final DateTimePath<java.time.LocalDateTime> endTime = createDateTime("endTime", java.time.LocalDateTime.class);
 
     //inherited

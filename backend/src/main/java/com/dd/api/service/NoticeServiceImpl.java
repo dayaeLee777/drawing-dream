@@ -93,7 +93,6 @@ public class NoticeServiceImpl implements NoticeService {
 			return null;
 		
 		notice.deleteNotice();
-//		awsS3Service.deleteNoticeFile(notice);
 		return noticeRepository.save(notice);
 	}
 

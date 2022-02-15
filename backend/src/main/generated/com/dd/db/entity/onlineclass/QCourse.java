@@ -29,6 +29,8 @@ public class QCourse extends EntityPathBase<Course> {
     //inherited
     public final ComparablePath<java.util.UUID> id = _super.id;
 
+    public final BooleanPath onlineClassExistsYn = createBoolean("onlineClassExistsYn");
+
     public final EnumPath<com.dd.db.enums.SubCode> subjectCode = createEnum("subjectCode", com.dd.db.enums.SubCode.class);
 
     public final com.dd.db.entity.user.QUser teacher;
