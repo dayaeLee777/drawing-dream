@@ -5,7 +5,7 @@ import { registerCheckList } from "api/checklist";
 
 const CheckListInsertContainer = styled.div`
   display: flex;
-  width: 90%;
+  width: 100%;
   input {
     outline: none;
     border: 1px solid #dca03a;
@@ -43,13 +43,12 @@ const CheckListInsert = ({ setIsListLoading }) => {
     setText(e.target.value);
   };
   const onClick = () => {
-    registerCheckList({ content: text })
-    .then(() => {
+    registerCheckList({ content: text }).then(() => {
       setIsListLoading(true);
       setText("");
     });
   };
-  
+
   return (
     <CheckListInsertContainer>
       <input

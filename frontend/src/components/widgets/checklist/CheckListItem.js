@@ -11,7 +11,8 @@ const CheckListItemContainer = styled.div`
   padding: 1rem;
   display: flex;
   align-items: center;
-  width: 90%;
+  box-sizing: border-box;
+  width: 100%;
   & + & {
     border-top: 1px solid #dee2e6;
   }
@@ -56,14 +57,12 @@ const CheckListItem = ({ item, setIsListLoading, main }) => {
       ...item,
       checklistId: item.cheklistId,
       checked: !item.checked,
-    })
-    .then(() => {
+    }).then(() => {
       setIsListLoading(true);
     });
   };
   const onRemove = () => {
-    deleteCheckList(item.cheklistId)
-    .then(() => {
+    deleteCheckList(item.cheklistId).then(() => {
       setIsListLoading(true);
     });
   };

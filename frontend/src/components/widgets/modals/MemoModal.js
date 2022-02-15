@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { getMemoList } from "api/memo";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import MemoList from "../memo/MemoList";
 import MemoInsert from "../memo/MemoInsert";
 
 const Wrapper = styled(motion.div)`
+  box-sizing: border-box;
   width: 600px;
   height: 600px;
   border-radius: 40px;
@@ -14,6 +14,7 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 3rem;
   letter-spacing: -1px;
 `;
 const Header = styled.div`
@@ -61,9 +62,14 @@ const MemoModal = ({ layoutId }) => {
       {status === "register" && (
         <MemoInsert setStatus={setStatus} setIsListLoading={setIsListLoading} />
       )}
-      {status === "modify" && 
-        <MemoInsert setStatus={setStatus} setIsListLoading={setIsListLoading} memoId={memoId} setMemoId={setMemoId}/>
-      }
+      {status === "modify" && (
+        <MemoInsert
+          setStatus={setStatus}
+          setIsListLoading={setIsListLoading}
+          memoId={memoId}
+          setMemoId={setMemoId}
+        />
+      )}
     </Wrapper>
   );
 };
