@@ -111,9 +111,9 @@ const Meeting = () => {
     const month = today.getMonth() + 1;
     const date = today.getDate();
     setDate(
-      `${year}-${month >= 10 ? month : "0" + month}-${
+      `${year}년 ${month >= 10 ? month : "0" + month}월 ${
         date >= 10 ? date : "0" + date
-      }`
+      }일`
     );
     const params = {
       date: `${year}-${month >= 10 ? month : "0" + month}-${
