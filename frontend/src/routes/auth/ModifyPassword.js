@@ -7,21 +7,31 @@ import { useNavigate } from "react-router-dom";
 import { modifyPassword, passwordCheck } from "api/user";
 
 const FormContainer = styled.div`
-  /* width: 50rem;
-  height: 40rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   box-sizing: border-box;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 5px;
+  background-color: ${({ theme }) => theme.ContainerColor};
+  height: 80vh;
+`;
+
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 3rem;
+  width: 44rem;
+  overflow: auto;
+  
 `;
 
 const Desc = styled.div`
   font-size: 1.8rem;
   font-weight: 600;
+  margin-bottom: 5rem;
 `;
 
 const ModifyContainer = styled.div`
@@ -98,53 +108,55 @@ const ModifyPassword = () => {
   return (
     <>
       <FormContainer>
-        <Desc>비밀번호 변경</Desc>
-        <ModifyContainer>
-          <InputContainer
-            desc="현재 비밀번호"
-            star
-            type="password"
-            onChange={onChange}
-            name="nowPassword"
-          />
+        <Container>
+          <Desc>비밀번호 변경</Desc>
+          <ModifyContainer>
+            <InputContainer
+              desc="현재 비밀번호"
+              star
+              type="password"
+              onChange={onChange}
+              name="nowPassword"
+            />
 
-          <InputContainer
-            desc="새 비밀번호"
-            star
-            type="password"
-            onChange={onChange}
-            name="password"
-            isValid={valids.validPassword}
-            errMsg={errors.passwordErrMsg}
-            mt="2rem"
-          />
-          <InputContainer
-            desc="비밀번호 확인"
-            star
-            type="password"
-            onChange={onChange}
-            name="passwordConfirm"
-            isValid={valids.equalPassword}
-            errMsg={errors.equalPasswordErrMsg}
-          />
-        </ModifyContainer>
-        <InputBlock>
-          <Button
-            name="수정 하기"
-            mt="3rem"
-            mr="1rem"
-            height="3rem"
-            onClick={onSubmit}
-          />
-          <Button
-            name="취소"
-            mt="3rem"
-            bc="#C4C4C4"
-            height="3rem"
-            hoverColor="#a2a2a2"
-            onClick={onCancle}
-          />
-        </InputBlock>
+            <InputContainer
+              desc="새 비밀번호ㅤ"
+              star
+              type="password"
+              onChange={onChange}
+              name="password"
+              isValid={valids.validPassword}
+              errMsg={errors.passwordErrMsg}
+              mt="2rem"
+            />
+            <InputContainer
+              desc="비밀번호 확인"
+              star
+              type="password"
+              onChange={onChange}
+              name="passwordConfirm"
+              isValid={valids.equalPassword}
+              errMsg={errors.equalPasswordErrMsg}
+            />
+          </ModifyContainer>
+          <InputBlock>
+            <Button
+              name="수정 하기"
+              mt="3rem"
+              mr="1rem"
+              height="3rem"
+              onClick={onSubmit}
+            />
+            <Button
+              name="취소"
+              mt="3rem"
+              bc="#C4C4C4"
+              height="3rem"
+              hoverColor="#a2a2a2"
+              onClick={onCancle}
+            />
+          </InputBlock>
+        </Container>
       </FormContainer>
     </>
   );
