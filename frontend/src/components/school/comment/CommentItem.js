@@ -92,30 +92,6 @@ const CommentItem = ({
     }
   }, [isLoading]);
 
-  /* const sampleData = [
-    {
-      id: 1,
-      comment: "좋아요",
-      userName: "박학생",
-      regTime: "2022. 2. 27",
-      communityId: 1,
-    },
-    {
-      id: 2,
-      comment: "좋아요",
-      userName: "박학생",
-      regTime: "2022. 2. 27",
-      communityId: 1,
-    },
-    {
-      id: 3,
-      comment: "좋아요",
-      userName: "박학생",
-      regTime: "2022. 2. 27",
-      communityId: 1,
-    },
-  ]; */
-
   // Click event
   // 대댓글 등록
   const onReCommentRegister = () => {

@@ -5,13 +5,14 @@ import { deleteMemo, getMemo, modifyMemo, registerMemo } from "api/memo";
 const MemoInsertContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 0rem 5rem;
+  padding: 0 2rem;
 `;
 const StyledTextArea = styled.textarea`
   outline: none;
   box-sizing: border-box;
+  border-radius: 5px;
   width: 100%;
-  border: 1px solid #A19F9F;
+  border: 1px solid #a19f9f;
   resize: none;
   height: 25rem;
   padding: 0.5rem;
@@ -21,7 +22,7 @@ const StyledTextArea = styled.textarea`
 `;
 const ButtonContainer = styled.div`
   text-align: right;
-  color: #A19F9F;
+  color: #a19f9f;
   margin-top: 2rem;
   .complete {
     margin-right: 2rem;

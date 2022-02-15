@@ -4,12 +4,10 @@ import styled from "styled-components";
 import LeftContainer from "../todayclass/LeftContainer";
 import RightContainer from "../todayclass/RightContainer";
 import { useSelector } from "react-redux";
-import Button from "components/commons/button";
 import { useNavigate } from "react-router-dom";
 import { createOnlineClass } from "api/onlineclass";
-import teacher2 from "assets/img/teacher2.png";
 import { getCouresInfo } from "api/course";
-import { getNowPeriod } from "../todayclass/time";
+import { getNowPeriod } from "../../../modules/time";
 
 const Wrapper = styled(motion.div)`
   width: 1000px;
@@ -41,7 +39,6 @@ const Right = styled.div`
 `;
 
 const TodayClassModal = ({ layoutId }) => {
-  const { userCode, userName } = useSelector((state) => state.user);
   const { todayData, period } = useSelector((state) => state.timetable); // 오늘 수업 데이터와 현재 교시
   const [nowPeriod, setNowPeriod] = useState(); // 현재 교시 정보
   const [courseInfo, setCourseInfo] = useState(); // 현재 수업 정보(교사이름, 과목 코드)

@@ -43,8 +43,7 @@ const EditButton = styled.div`
     props.name === "apply" ? "rgb(59, 178, 0)" : "rgb(255, 0, 0)"};
   border-radius: 10px;
   cursor: pointer;
-  background-color:  ${({ theme }) => theme.widgetColor};
-
+  background-color: ${({ theme }) => theme.widgetColor};
 `;
 
 const OptionContainer = styled(motion.div)`
@@ -217,11 +216,14 @@ const HomeSetting = () => {
           <EditButton className="apply" onClick={apply} name="apply">
             적용
           </EditButton>
-          <EditButton className="close"
+          <EditButton
+            className="close"
             onClick={() => {
               navigate("/home");
             }}
-          >취소</EditButton>
+          >
+            취소
+          </EditButton>
         </Buttons>
         <WidgetContainer>
           {isShow.map((el) => (

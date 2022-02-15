@@ -14,7 +14,6 @@ const CheckListContainer = styled.div`
 `;
 
 const CheckListItemsContainer = styled.div`
-  margin: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,6 +22,7 @@ const CheckListItemsContainer = styled.div`
   height: 100%;
   ::-webkit-scrollbar {
     width: 10px;
+    display: ${(props) => (props.main ? "none" : "")};
   }
   ::-webkit-scrollbar-thumb {
     background-color: #adb5bd;
@@ -49,9 +49,9 @@ const CheckListItems = ({ isListLoading, setIsListLoading, main }) => {
   }, [isListLoading]);
 
   return (
-    <CheckListContainer>
+    <CheckListContainer main={main}>
       {!main && <CheckListInsert setIsListLoading={setIsListLoading} />}
-      <CheckListItemsContainer>
+      <CheckListItemsContainer main={main}>
         {list &&
           list.map((item) => (
             <CheckListItem

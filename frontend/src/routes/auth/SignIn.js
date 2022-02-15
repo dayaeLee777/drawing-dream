@@ -17,15 +17,9 @@ const Container = styled.div`
 `;
 
 const SideContainer = styled.div`
-  background-color: #fec25c;
   display: flex;
   align-items: center;
-  /* background-color: #fef1db;
-  opacity: 1;
-  background-image: linear-gradient(#fec25c 4px, transparent 4px),
-    linear-gradient(to right, #fec25c 4px, #fef1db 4px);
-  background-size: 80px 80px; */
-  background-color: #fff;
+  background-color: #ffd491;
   background-image: linear-gradient(
       90deg,
       transparent 79px,
@@ -72,7 +66,7 @@ const Logo = styled.img`
 `;
 
 const Welcome = styled.div`
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 3rem;
   margin-top: 3rem;
   font-weight: 600;
@@ -133,8 +127,8 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const { error } = useSelector((state) => state.user);
-  const [cookies, setCookie, removeCookie] = useCookies(["myWidgets"]);
   const dispatch = useDispatch();
+  const [cookies, setCookie] = useCookies(["myWidgets"]);
   useEffect(() => {
     if (!cookies.myWidgets) {
       setCookie("myWidgets", ["M01", "M02", "M03", "M04"], { path: "/" });
@@ -178,7 +172,7 @@ const SignIn = () => {
       </SideContainer>
       <Form onSubmit={onSubmit}>
         <Logo src="././logo.png" />
-        <Welcome>좋은 아침이에요!</Welcome>
+        <Welcome>여러분의 꿈을 그려 보세요</Welcome>
         <InputContainer>
           {/* <Type>아이디</Type> */}
           <Input

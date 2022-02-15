@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
-import profileImg from "assets/img/profile.png";
-import ChatList from "components/chat/ChatList";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import { useDispatch, useSelector } from "react-redux";

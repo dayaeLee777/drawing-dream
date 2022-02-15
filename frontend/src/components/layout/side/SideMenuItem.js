@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import linkImg from "assets/img/link.png";
-import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   cursor: pointer;

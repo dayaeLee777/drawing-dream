@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cookies, useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import CheckList from "components/widgets/CheckList";
 import Dday from "components/widgets/Dday";
 import Memo from "components/widgets/Memo";
@@ -44,7 +44,14 @@ const overlay = {
 };
 
 const Widgets = ({ widgetId, setWidgetId }) => {
-  const [cookies, setCookie, removeCookie] = useCookies(["myWidgets"]);
+  const [cookies, setCookie] = useCookies(["myWidgets"]);
+  const defaultWidgets = ["M01", "M02", "M03", "M04"];
+  useEffect(() => {
+    if (!cookies.myWidgets) {
+      setCookie("myWidgets", ["M01", "M02", "M03", "M04"], { path: "/" });
+    }
+  }, []);
+
   const widgets = ["M01", "M02", "M03", "M04", "M05", "M06", "M07"];
 
   const wid = {
@@ -77,7 +84,11 @@ const Widgets = ({ widgetId, setWidgetId }) => {
 
   return (
     <>
-      <Container>{cookies.myWidgets.map((widget) => wid[widget])}</Container>
+      <Container>
+        {cookies.myWidgets
+          ? cookies.myWidgets.map((widget) => wid[widget])
+          : defaultWidgets.map((widget) => wid[widget])}
+      </Container>
       <AnimatePresence>
         {widgetId && (
           <Overlay

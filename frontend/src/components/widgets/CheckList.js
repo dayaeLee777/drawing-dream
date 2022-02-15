@@ -7,6 +7,7 @@ const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   background-color: ${({ theme }) => theme.ContainerColor};
   border-radius: 10px;
+  max-height: 40rem;
 `;
 
 const Wrapper = styled.div`

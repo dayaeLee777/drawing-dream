@@ -5,7 +5,7 @@ import Button from "components/commons/button";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import teacher2 from "assets/img/teacher2.png";
-import { compareTime } from "./time";
+import { compareTime } from "../../../modules/time";
 
 const Container = styled.div`
   height: 100%;
@@ -13,7 +13,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* margin-bottom: 10rem; */
   img {
     width: 100%;
   }

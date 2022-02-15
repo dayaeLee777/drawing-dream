@@ -10,35 +10,36 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const InputContainer = styled.div`
-  margin-top: 1rem;
-  border: 1px solid #c4c4c4;
+  margin-top: 2rem;
+  /* border: 1px solid #c4c4c4; */
   border-radius: 5px;
-  padding: 1rem 1rem;
   margin-left: ${(props) => (props.ml ? props.ml : "")};
-
   .userName {
     font-weight: 600;
   }
 `;
 
 const StyledTextArea = styled.textarea`
+  border-radius: 5px;
   margin-top: 1rem;
   width: 100%;
   height: 5rem;
   border: none;
   resize: none;
+  padding: 1rem;
+  box-sizing: border-box;
   background-color: ${({ theme }) => theme.ContainerColor};
   border: 1px solid #dadde6;
-  &::placeholder{
-    color: white;
+  &::placeholder {
+    color: ${({ theme }) => theme.textColor};
   }
 `;
 
 const BtnContainer = styled.div`
   display: flex;
-  button{
-    margin-top: 2rem;
-    margin-left: auto;
+  margin-top: 1rem;
+  button {
+    /* margin-left: auto; */
   }
 `;
 

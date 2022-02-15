@@ -2,7 +2,6 @@ import commonCode from "config/commonCode";
 import React from "react";
 
 const DayItem = ({ data }) => {
-  // console.log(data);
   return (
     <div>
       {data.length !== 0 &&

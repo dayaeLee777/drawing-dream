@@ -22,19 +22,22 @@ export const login = (user, isChecked) => async (dispatch) => {
         }
 
         const userId = response.data.userId;
+        let isAttend = false;
         setApiHeaders();
         setFileApiHeaders();
 
         getDept(userId).then((response) => {
-          // checkAttend(userId).then((response) => {
-          //   if (response > 0) {
-
-          //   }
-          // })
-          dispatch({
-            type: LOGIN_SUCCESS,
-            userId: userId,
-            data: response.data,
+          const data = response.data;
+          checkAttend(userId).then((response) => {
+            if (response.data.length > 0) {
+              isAttend = true;
+            }
+            dispatch({
+              type: LOGIN_SUCCESS,
+              userId: userId,
+              data: data,
+              isAttend: isAttend,
+            });
           });
         });
       }
@@ -106,6 +109,7 @@ const user = (state = initialState, action) => {
         classCode: action.data.classCode,
         studentNo: action.data.studentNo,
         userCode: action.data.userCode,
+        isAttend: action.data.isAttend,
       };
     case LOGIN_FAIL:
       return {

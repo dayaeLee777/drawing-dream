@@ -1,4 +1,4 @@
-import { endRecord, startRecord } from "api/studyrecode";
+import { endRecord, startRecord } from "api/studyrecord";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
 import React, { useState } from "react";
@@ -9,7 +9,6 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-around; */
   align-items: center;
 `;
 

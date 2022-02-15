@@ -44,6 +44,7 @@ const StyledTh = styled.td`
   text-align: center;
   font-weight: 600;
   border-radius: 3px;
+  color: black;
 
   & + & {
     border-left: 2px solid ${({ theme }) => theme.ContainerColor};
