@@ -103,15 +103,17 @@ const LinkContainer = styled.div`
   }
 `;
 const placeholderText = [
-  { type: "heading1", text: "세상에서" },
+  { type: "heading1", text: "세상에서", color:"#814a23" },
 
   {
     type: "heading1",
     text: "가장 편한 학교",
+    color: "#814a23",
   },
   {
     type: "heading1",
     text: "Drawing Dream",
+    color: "#562909",
   },
 ];
 
