@@ -13,17 +13,25 @@ import { useNavigate } from "react-router-dom";
 import { updateUserInfo } from "modules/user";
 
 const FormContainer = styled.div`
-  /* width: 50rem;
-  height: 40rem; */
   box-sizing: border-box;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   padding: 3rem;
+  background-color: ${({ theme }) => theme.ContainerColor};
+  height: 80vh;
 `;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: auto;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   margin-bottom: 1rem;
@@ -44,6 +52,7 @@ const Wrapper = styled.div`
 const Desc = styled.div`
   font-size: 1.8rem;
   font-weight: 600;
+  margin-bottom: 3rem;
 `;
 
 const ModifyContainer = styled.div`
@@ -178,141 +187,143 @@ const ModifyProfile = () => {
     <>
       {!isLoading && (
         <FormContainer>
-          <Desc>프로필 수정</Desc>
-          <ModifyContainer>
-            <InputBlock>
-              <Wrapper>
-                <div className="desc">이름</div>
-                <div className="desc">{inputs.userName}</div>
-              </Wrapper>
-            </InputBlock>
-            <InputContainer
-              desc="전화번호"
-              onChange={onChange}
-              name="phoneNumber"
-              value={inputs.phoneNumber}
-            />
-            <InputContainer
-              desc="보호자 전화번호"
-              onChange={onChange}
-              name="parentPhoneNumber"
-              value={inputs.parentPhoneNumber}
-            />
-            <InputContainer
-              desc="이메일"
-              star
-              onChange={onChange}
-              name="email"
-              isValid={validEmail}
-              errMsg={emailErrMsg}
-              value={inputs.email}
-            />
+          <Container>
+            <Desc>프로필 수정</Desc>
+            <ModifyContainer>
+              <InputBlock>
+                <Wrapper>
+                  <div className="desc">이름</div>
+                  <div className="desc">{inputs.userName}</div>
+                </Wrapper>
+              </InputBlock>
+              <InputContainer
+                desc="전화번호"
+                onChange={onChange}
+                name="phoneNumber"
+                value={inputs.phoneNumber}
+              />
+              <InputContainer
+                desc="보호자 전화번호"
+                onChange={onChange}
+                name="parentPhoneNumber"
+                value={inputs.parentPhoneNumber}
+              />
+              <InputContainer
+                desc="이메일"
+                star
+                onChange={onChange}
+                name="email"
+                isValid={validEmail}
+                errMsg={emailErrMsg}
+                value={inputs.email}
+              />
 
-            <InputBlock>
-              <Wrapper>
-                <div className="desc">주소</div>
-                {inputs.address && (
-                  <Input
-                    mr="1rem"
-                    width="25rem"
-                    value={inputs.address}
-                    readOnly
+              <InputBlock>
+                <Wrapper>
+                  <div className="desc">주소</div>
+                  {inputs.address && (
+                    <Input
+                      mr="1rem"
+                      width="25rem"
+                      value={inputs.address}
+                      readOnly
+                    />
+                  )}
+                  <Button
+                    name="도로명 주소 찾기"
+                    width={inputs.address ? "8rem" : "12.75rem"}
+                    height="2.1rem"
+                    onClick={openPostCode}
                   />
-                )}
-                <Button
-                  name="도로명 주소 찾기"
-                  width={inputs.address ? "8rem" : "12.75rem"}
-                  height="2.1rem"
-                  onClick={openPostCode}
-                />
-              </Wrapper>
-            </InputBlock>
-            <InputContainer
-              desc="상세주소"
-              onChange={onChange}
-              name="addressDetail"
-              width="25rem"
-              value={inputs.addressDetail}
-            />
+                </Wrapper>
+              </InputBlock>
+              <InputContainer
+                desc="상세주소"
+                onChange={onChange}
+                name="addressDetail"
+                width="25rem"
+                value={inputs.addressDetail}
+              />
 
+              <InputBlock>
+                <Wrapper>
+                  <div className="desc">
+                    학년<div className="star">*</div>
+                  </div>
+                  <SelectBox
+                    onChange={onGradeCodeSelect}
+                    name="gradeCode"
+                    defaultValue={inputs.gradeCode ? inputs.gradeCode : "default"}
+                  >
+                    <option value="default" disabled hidden>
+                      선택
+                    </option>
+                    {Object.entries(commonCode.E).map(
+                      ([key, value]) =>
+                        key !== "E00" && (
+                          <option key={key} value={key}>
+                            {value}
+                          </option>
+                        )
+                    )}
+                  </SelectBox>
+                </Wrapper>
+
+                <Wrapper small>
+                  <div className="desc">
+                    반<div className="star">*</div>
+                  </div>
+                  <SelectBox
+                    onChange={onGradeCodeSelect}
+                    name="classCode"
+                    defaultValue={inputs.classCode ? inputs.classCode : "default"}
+                  >
+                    <option value="default" disabled hidden>
+                      선택
+                    </option>
+                    {Object.entries(commonCode.F).map(
+                      ([key, value]) =>
+                        key !== "F00" && (
+                          <option key={key} value={key}>
+                            {value}
+                          </option>
+                        )
+                    )}
+                  </SelectBox>
+                </Wrapper>
+
+                <Wrapper small>
+                  <div className="desc">
+                    번호<div className="star">*</div>
+                  </div>
+                  <Input
+                    name="studentNo"
+                    value={inputs.studentNo}
+                    onChange={onChange}
+                    width="3rem"
+                    height="2rem"
+                  />
+                </Wrapper>
+              </InputBlock>
+            </ModifyContainer>
             <InputBlock>
-              <Wrapper>
-                <div className="desc">
-                  학년<div className="star">*</div>
-                </div>
-                <SelectBox
-                  onChange={onGradeCodeSelect}
-                  name="gradeCode"
-                  defaultValue={inputs.gradeCode ? inputs.gradeCode : "default"}
-                >
-                  <option value="default" disabled hidden>
-                    선택
-                  </option>
-                  {Object.entries(commonCode.E).map(
-                    ([key, value]) =>
-                      key !== "E00" && (
-                        <option key={key} value={key}>
-                          {value}
-                        </option>
-                      )
-                  )}
-                </SelectBox>
-              </Wrapper>
-
-              <Wrapper small>
-                <div className="desc">
-                  반<div className="star">*</div>
-                </div>
-                <SelectBox
-                  onChange={onGradeCodeSelect}
-                  name="classCode"
-                  defaultValue={inputs.classCode ? inputs.classCode : "default"}
-                >
-                  <option value="default" disabled hidden>
-                    선택
-                  </option>
-                  {Object.entries(commonCode.F).map(
-                    ([key, value]) =>
-                      key !== "F00" && (
-                        <option key={key} value={key}>
-                          {value}
-                        </option>
-                      )
-                  )}
-                </SelectBox>
-              </Wrapper>
-
-              <Wrapper small>
-                <div className="desc">
-                  번호<div className="star">*</div>
-                </div>
-                <Input
-                  name="studentNo"
-                  value={inputs.studentNo}
-                  onChange={onChange}
-                  width="3rem"
-                  height="2rem"
-                />
-              </Wrapper>
+              <Button
+                name="수정 하기"
+                mt="3rem"
+                mr="1rem"
+                height="3rem"
+                onClick={onSubmit}
+              />
+              <Button
+                name="취소"
+                mt="3rem"
+                bc="#C4C4C4"
+                height="3rem"
+                hoverColor="#a2a2a2"
+                onClick={onCancle}
+              />
             </InputBlock>
-          </ModifyContainer>
-          <InputBlock>
-            <Button
-              name="수정 하기"
-              mt="3rem"
-              mr="1rem"
-              height="3rem"
-              onClick={onSubmit}
-            />
-            <Button
-              name="취소"
-              mt="3rem"
-              bc="#C4C4C4"
-              height="3rem"
-              hoverColor="#a2a2a2"
-              onClick={onCancle}
-            />
-          </InputBlock>
+          </Container>
         </FormContainer>
       )}
       {isPostCodeOpen && (
