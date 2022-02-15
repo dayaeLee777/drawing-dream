@@ -11,7 +11,6 @@ export const readTimeTable = () => async (dispatch) => {
   getPeriod()
     .then((res) => {
       const periodData = res.data;
-      // console.log(res.data);
       getTimeTable()
         .then((res) => {
           dispatch({
