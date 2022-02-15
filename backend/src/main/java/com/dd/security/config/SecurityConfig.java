@@ -75,9 +75,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// authorizeRequests() : HttpServletRequests 를 사용하는 요청들에 대한 접근 제한을 설정
 				.authorizeRequests()
 				// "/auth" 에 대한 요청은 인증 없이 접근을 허용하겠다.
-				.antMatchers("/auth/**").authenticated()
+				.antMatchers("/api/auth/**").permitAll()
 				// 나머지 요청들은 모두 인증되어야 한다.
-				.anyRequest().permitAll()
+				.anyRequest().authenticated()
 				.and()
 				// JWT 필터 추가
 				.addFilterBefore(new JwtAuthenticationFilter(jwtAuthenticationProvider),
