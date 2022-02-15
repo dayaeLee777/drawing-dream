@@ -43,9 +43,13 @@ const Desc = styled(motion.div)`
   font-weight: 600;
   h1 {
     height: 6rem;
+    /* display: flex;
+    align-items: center; */
   }
   span {
-    height: 6rem;
+    /* background-color: #fec25c; */
+    height: 4rem;
+    text-align: center;
   }
 `;
 
