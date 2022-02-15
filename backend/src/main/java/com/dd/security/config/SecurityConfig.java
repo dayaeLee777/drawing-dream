@@ -76,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				// "/auth" 에 대한 요청은 인증 없이 접근을 허용하겠다.
 				.antMatchers("/api/auth/**").permitAll()
+				.antMatchers("/ws-dd/**").permitAll()
 				// 나머지 요청들은 모두 인증되어야 한다.
 				.anyRequest().authenticated()
 				.and()
