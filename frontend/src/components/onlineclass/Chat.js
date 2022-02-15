@@ -16,27 +16,28 @@ const Container = styled.div`
 const ChatContainer = styled.div`
   height: 90%;
   width: 100%;
+  overflow: auto;
 `;
 
 const Content = styled.div`
   width: 80%;
-  height: 3rem;
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin: 1rem 0;
+  line-height: 1.5rem;
 `;
 
 const Name = styled.div`
   font-weight: 600;
-  margin: 0 1rem;
+  margin: 0.3rem 1rem;
   width: 20%;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 const Message = styled.div`
-  width: 80%;
+  width: 65%;
+  word-break:break-all;
 `;
 
 const ChatForm = styled.div`
