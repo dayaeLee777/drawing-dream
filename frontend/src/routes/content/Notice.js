@@ -13,7 +13,9 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.ContainerColor};
   margin-bottom: 5rem;
   padding-bottom: 3rem;
-  height: 80vh;
+  /* height: 80vh; */
+  min-height: 85vh;
+  /* overflow: scroll; */
 `;
 
 const Notice = () => {

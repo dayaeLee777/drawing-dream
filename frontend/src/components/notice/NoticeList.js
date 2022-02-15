@@ -15,10 +15,16 @@ const Container = styled.div`
   height: 80%;
 `;
 
-const Desc = styled.div`
+const Title = styled.div`
   font-size: 1.8rem;
   margin-top: 3rem;
   font-weight: 600;
+`;
+
+const Desc = styled.div`
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: ${({ theme }) => theme.menuColor};
 `;
 
 const StyledTable = styled.table`
@@ -94,7 +100,8 @@ const NoticeList = () => {
 
   return (
     <>
-      <Desc>알림장</Desc>
+      <Title>알림장</Title>
+      <Desc>공지사항과 조례, 종례 내용을 확인하실 수 있습니다.</Desc>
       <Container>
         <ButtonContainer>
           {userCode !== "A04" && (

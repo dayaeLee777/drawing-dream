@@ -13,7 +13,7 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.ContainerColor};
   margin-bottom: 5rem;
   padding-bottom: 3rem;
-  min-height: 80vh;
+  min-height: 85vh;
 `;
 
 const School = () => {

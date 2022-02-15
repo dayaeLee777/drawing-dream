@@ -14,7 +14,7 @@ const Container = styled.div`
   align-items: center;
   margin-bottom: 5rem;
   background-color: ${({ theme }) => theme.ContainerColor};
-  height: 80vh;
+  height: 85vh;
 `;
 
 const Title = styled.div`
@@ -28,13 +28,9 @@ const InnerContainer = styled.div`
   margin-bottom: 3rem;
 `;
 
-const Line = styled.div`
-  margin: auto;
-  width: 80%;
-  border: 0;
-  height: 1px;
-  background: #333;
-  background-image: linear-gradient(to right, #ccc, #ccc, #ccc);
+const Desc = styled.div`
+  margin-bottom: 1rem;
+  color: ${({ theme }) => theme.menuColor};
 `;
 
 const MyClassRoom = () => {
@@ -48,6 +44,10 @@ const MyClassRoom = () => {
   return (
     <Container>
       <Title>우리 반 보기</Title>
+      <Desc>
+        우리 반 선생님과 친구들을 확인할 수 있습니다. 말풍선 아이콘을 클릭하여
+        채팅을 시작해 보세요.
+      </Desc>
       <InnerContainer>
         <MemberList data={data} />
       </InnerContainer>

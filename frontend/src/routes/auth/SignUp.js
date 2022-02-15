@@ -14,6 +14,7 @@ import commonCode from "config/commonCode";
 import { MdOutlineCheckCircleOutline } from "react-icons/md";
 import { motion } from "framer-motion";
 import SignupModal from "components/signup/modal/SignupModal";
+import Modal from "components/commons/modal";
 
 const Container = styled.div`
   display: flex;
@@ -223,6 +224,8 @@ const SignUp = () => {
   // GRADECODE CLASSCODE SET END
 
   // 회원 가입 요청
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const onSubmit = async () => {
     if (!agreement) {
       alert("이용약관에 동의하여 주세요.");
@@ -258,7 +261,8 @@ const SignUp = () => {
           signUp(user).then((res) => {
             if (res.status === 201) {
               alert("회원가입에 성공하였습니다.");
-              Navigate("/signin");
+              setModalMessage("회원가입에 성공했습니다.");
+              setShowModal(true);
             }
           });
         } catch (e) {}
@@ -513,6 +517,14 @@ const SignUp = () => {
             onClick={onCancle}
           />
         </InputBlock>
+        {showModal && (
+          <Modal
+            url={`/signin`}
+            message={modalMessage}
+            left="42%"
+            setShowModal={setShowModal}
+          />
+        )}
       </MainContainer>
     </Container>
   );

@@ -9,7 +9,7 @@ const ModalContainer = styled.div`
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
   position: absolute;
   top: 5%;
-  left: 32%;
+  left: ${(props) => (props.left ? props.left : "32%")};
   background-color: white;
   display: flex;
   justify-content: center;
@@ -33,17 +33,17 @@ const ButtonContainer = styled.div`
   justify-content: space-around;
 `;
 
-const Modal = ({ url, message, setShowModal }) => {
+const Modal = (props) => {
   const navigate = useNavigate();
-  console.log(url);
+  console.log(props.left);
   return (
-    <ModalContainer>
-      <Content>{message}</Content>
+    <ModalContainer {...props}>
+      <Content>{props.message}</Content>
       <ButtonContainer>
         <Button
           width="5rem"
           height="2.5rem"
-          onClick={() => navigate(url)}
+          onClick={() => navigate(props.url)}
           name="확인"
         />
         <Button
@@ -51,7 +51,7 @@ const Modal = ({ url, message, setShowModal }) => {
           hoverColor="#a2a2a2"
           width="5rem"
           height="2.5rem"
-          onClick={() => setShowModal(false)}
+          onClick={() => props.setShowModal(false)}
           name="취소"
         />
       </ButtonContainer>
