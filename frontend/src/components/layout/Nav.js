@@ -13,6 +13,9 @@ const Container = styled.div`
   margin: 2rem 10vw;
   justify-content: space-between;
   width: 80vw;
+  .logout{
+    cursor: pointer;
+  }
 `;
 
 const Item = styled.div`
@@ -114,7 +117,7 @@ const Nav = () => {
           </DropDownContent>
         </DropDown>
 
-        <Item onClick={logoutUser}>
+        <Item className="logout" onClick={logoutUser}>
           <Icon src={signOut} />
           로그아웃
         </Item>
