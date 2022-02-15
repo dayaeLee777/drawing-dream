@@ -128,7 +128,7 @@ const CourseInfoDetail = ({
   const { userCode } = useSelector((state) => state.user);
   const { period } = useSelector((state) => state.timetable);
   const [isLoading, setIsLoading] = useState(true);
-  const [filesUrl, setFilesUrl] = useState();
+  const [filesUrl, setFilesUrl] = useState({});
   // 수업 자료 조회
 
   useEffect(() => {
@@ -140,7 +140,7 @@ const CourseInfoDetail = ({
     ) {
       getOnlineClass(courseId).then((res) => {
         setFilesUrl(res.data.files);
-        // console.log(res.data.files);
+        console.log(Object.keys(res.data.files).length);
         setIsLoading(false);
       });
     }
@@ -191,31 +191,31 @@ const CourseInfoDetail = ({
             </InfoContainer>
             <InfoContainer>
               <div className="desc">수업 자료</div>
-              {userCode === "A04" && !filesUrl && (
-                <div className="content">등록된 파일이 없습니다.</div>
-              )}
+              {userCode === "A04" &&
+                !isLoading &&
+                Object.keys(filesUrl).length === 0 && (
+                  <div className="content">등록된 파일이 없습니다.</div>
+                )}
             </InfoContainer>
-            {!isLoading && userCode === "A04" && filesUrl && (
+            {!isLoading && userCode === "A04" && Object.keys(filesUrl).length && (
               <Files>
-                {!isLoading &&
-                  filesUrl &&
-                  Object.entries(filesUrl).map((item) => (
-                    <div className="fileItem" key={item[1]}>
-                      <div className="icon" value={item[1]}>
-                        <FileIcon
-                          extension={makeExtension(item[0])}
-                          {...defaultStyles[makeExtension(item[0])]}
-                        />
-                      </div>
-                      <button
-                        className="file"
-                        onClick={onDownload}
-                        value={item[1]}
-                      >
-                        {item[0]}
-                      </button>
+                {Object.entries(filesUrl).map((item) => (
+                  <div className="fileItem" key={item[1]}>
+                    <div className="icon" value={item[1]}>
+                      <FileIcon
+                        extension={makeExtension(item[0])}
+                        {...defaultStyles[makeExtension(item[0])]}
+                      />
                     </div>
-                  ))}
+                    <button
+                      className="file"
+                      onClick={onDownload}
+                      value={item[1]}
+                    >
+                      {item[0]}
+                    </button>
+                  </div>
+                ))}
               </Files>
             )}
             {userCode === "A03" && (
@@ -247,10 +247,10 @@ const CourseInfoDetail = ({
                 )}
               </FileContainer>
             )}
-            <InfoContainer>
+            {/* <InfoContainer>
               <div className="desc">다시 보기</div>
               <div className="content">수업 완료 후 확인할 수 있어요</div>
-            </InfoContainer>
+            </InfoContainer> */}
           </>
         )}
       </Contanier>
