@@ -102,7 +102,7 @@ const ModifyPassword = () => {
   };
 
   const onCancle = () => {
-    Navigate("../");
+    Navigate("/home");
   };
 
   return (
