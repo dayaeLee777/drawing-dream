@@ -10,18 +10,17 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const InputContainer = styled.div`
-  margin-top: 1rem;
+  margin-top: 2rem;
   /* border: 1px solid #c4c4c4; */
   border-radius: 5px;
-  padding: 1rem 1rem;
   margin-left: ${(props) => (props.ml ? props.ml : "")};
-
   .userName {
     font-weight: 600;
   }
 `;
 
 const StyledTextArea = styled.textarea`
+  border-radius: 5px;
   margin-top: 1rem;
   width: 100%;
   height: 5rem;
@@ -38,9 +37,9 @@ const StyledTextArea = styled.textarea`
 
 const BtnContainer = styled.div`
   display: flex;
+  margin-top: 1rem;
   button {
-    margin-top: 2rem;
-    margin-left: auto;
+    /* margin-left: auto; */
   }
 `;
 

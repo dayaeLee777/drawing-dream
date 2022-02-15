@@ -13,12 +13,13 @@ const Wrapper = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   letter-spacing: -1px;
+  padding: 0 5rem;
+  box-sizing: border-box;
 `;
 const Header = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60%;
   height: fit-content;
   margin-bottom: 1rem;
   margin-top: 1rem;
@@ -45,7 +46,10 @@ const CheckListModal = ({ layoutId }) => {
       <Header>
         <Title>체크 리스트</Title>
       </Header>
-      <CheckListItems isListLoading={isListLoading} setIsListLoading={setIsListLoading} />
+      <CheckListItems
+        isListLoading={isListLoading}
+        setIsListLoading={setIsListLoading}
+      />
     </Wrapper>
   );
 };

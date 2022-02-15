@@ -13,7 +13,6 @@ const DetailContainer = styled.div`
   padding: 3rem 5rem;
   box-sizing: border-box;
   width: 100%;
-  overflow: auto;
 `;
 
 const BoardContainer = styled.div`

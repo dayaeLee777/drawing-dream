@@ -4,9 +4,10 @@ import styled from "styled-components";
 import MemoItem from "./MemoItem";
 
 const Container = styled.div`
+  margin-top: 0.5rem;
   box-sizing: border-box;
-  padding: ${(props) => (props.main ? "0rem 1rem" : "0rem 5rem")};
-  width: 80%;
+  /* padding: ${(props) => (props.main ? "0rem 1rem" : "0rem 5rem")}; */
+  width: 90%;
   height: 25rem;
   display: flex;
   flex-direction: column;
@@ -17,6 +18,7 @@ const Container = styled.div`
 
   ::-webkit-scrollbar {
     width: 10px;
+    display: ${(props) => (props.main ? "none" : "")};
   }
   ::-webkit-scrollbar-thumb {
     background-color: #adb5bd;
