@@ -35,6 +35,12 @@ dependencies {
 	implementation 'org.kurento:kurento-utils-js:6.15.0'
 }
 
+tasks {
+	bootJar {
+		duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

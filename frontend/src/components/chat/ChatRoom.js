@@ -174,7 +174,7 @@ const ChatRoom = ({
   const { userName, userId } = useSelector((state) => state.user);
   const { users, memberId } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
-  const sockJS = new SockJS("http://localhost:8080/ws-dd");
+  const sockJS = new SockJS("https://i6a607.p.ssafy.io/ws-dd");
   const client = Stomp.over(sockJS);
 
   const scrollToBottom = () => {

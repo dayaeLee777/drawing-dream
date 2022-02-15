@@ -58,7 +58,7 @@ const ChatForm = styled.div`
 `;
 
 const Chat = ({ courseId }) => {
-  let sockJS = new SockJS("http://localhost:8080/ws-dd");
+  let sockJS = new SockJS("https://i6a607.p.ssafy.io/ws-dd");
   let client = Stomp.over(sockJS);
   const token =
     sessionStorage.getItem("access-token") ||

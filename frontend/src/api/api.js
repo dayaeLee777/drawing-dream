@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: "https://i6a607.p.ssafy.io/",
   headers: {
     "Content-Type": `application/json`,
     Authorization: `Bearer ${
@@ -22,7 +22,7 @@ export const setApiHeaders = () => {
 };
 
 export const fileApi = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: "https://i6a607.p.ssafy.io/",
   headers: {
     "Content-Type": `multipart/form-data`,
     Authorization: `Bearer ${
