@@ -26,7 +26,7 @@ import NoticeDetail from "./notice/NoticeDetail";
 import Widget from "routes/content/Widget";
 import HomeOther from "routes/HomeOther";
 import ModifyPassword from "routes/auth/ModifyPassword";
-import Study from "routes/content/study";
+import Study from "routes/content/Study";
 
 const AppRouter = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
