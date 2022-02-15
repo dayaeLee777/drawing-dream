@@ -78,7 +78,6 @@ const ButtonName = styled.div`
 `;
 const TeacherVideoContainer = styled.div`
   width: 60vw;
-  height: 70vh;
   video::-webkit-media-controls-timeline {
     display: none;
   }
@@ -86,6 +85,7 @@ const TeacherVideoContainer = styled.div`
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
+  height: 65vh;
 `;
 
 const ParticipantVideoContainer = styled.div`
