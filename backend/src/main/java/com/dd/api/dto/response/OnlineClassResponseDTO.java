@@ -22,9 +22,9 @@ import lombok.ToString;
 public class OnlineClassResponseDTO extends BaseResponseDto {
 
 	@ApiModelProperty(name = "온라인 수업 정보 - classId")
-	UUID classId;
-	
-	@ApiModelProperty(name="파일", example="orginFile, 파일 URL")
+	private UUID classId;
+
+	@ApiModelProperty(name = "파일", example = "orginFile, 파일 URL")
 	private Map<String, String> files;
 
 	public static OnlineClassResponseDTO of(Integer statusCode, String message,
