@@ -18,7 +18,6 @@ export const darkTheme = {
   bgColor: "#292929",
   textColor: "#FFFFFF",
   menuColor: "#828282",
-  widgetColor: "#7C7C7C",
   dropdownColor: "#4D4C4C",
   widgetColor: "#605F5F",
   ContainerColor: "#7C7C7C",
