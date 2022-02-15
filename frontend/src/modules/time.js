@@ -10,7 +10,6 @@ let seconds = date.getSeconds();
 seconds = seconds < 10 ? "0" + seconds.toString() : seconds.toString();
 const now = hour + ":" + minutes + ":" + seconds;
 export const getNowPeriod = (period) => {
-  //   console.log(time);
   let periodCode;
   if (period) {
     period.map((per, index, arr) => {
@@ -21,7 +20,6 @@ export const getNowPeriod = (period) => {
       }
       if (index >= 1) {
         if (arr[index - 1].endTime < now && per.endTime > now) {
-          // console.log(per.periodCode);
           periodCode = per.periodCode;
         }
       }
@@ -44,13 +42,7 @@ export const compareTime = (time) => {
   console.log(date2);
   const elapsedMSec = date2.getTime() - date.getTime();
   const elapsedMin = Math.floor(elapsedMSec / 1000 / 60);
-  // if (time < now) {
-  //   console.log(date.getMinutes() - time.slice(3, 5));
-  //   return date.getMinutes() - time.slice(3, 5);
-  // } else {
-  //   console.log(date.getMinutes() - time.slice(3, 5));
-  //   return time.slice(3, 5) - date.getMinutes();
-  // }
+
   console.log(elapsedMin);
   return elapsedMin;
 };

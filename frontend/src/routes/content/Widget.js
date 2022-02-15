@@ -1,7 +1,7 @@
 import { getCouresInfo } from "api/course";
 import Widgets from "components/home/Widgets";
 import TodayClassModal from "components/widgets/modals/TodayClassModal";
-import { getNowPeriod } from "components/widgets/todayclass/time";
+import { getNowPeriod } from "modules/time";
 import { motion } from "framer-motion";
 import { readTimeTable } from "modules/timetable";
 import React, { useEffect, useState } from "react";

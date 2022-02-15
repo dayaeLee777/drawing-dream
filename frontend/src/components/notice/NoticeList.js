@@ -23,7 +23,6 @@ const Desc = styled.div`
 
 const StyledTable = styled.table`
   width: 100%;
-  /* border: 1px solid black; */
 `;
 
 const ButtonContainer = styled.div`
@@ -79,14 +78,12 @@ const NoticeList = () => {
 
   // useEffect 데이터 read
   useEffect(() => {
-    // console.log("community 리스트 조회");
     if (isLoading) {
       getNoticeList(page).then((res) => {
         setData(res.data);
         setIsLoading(false);
       });
     }
-    // console.log(data);
   }, [isLoading]);
 
   const handlePageChange = (page) => {

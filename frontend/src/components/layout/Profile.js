@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { profileImage } from "api/user";
 import { getDept } from "api/user";
 import { useEffect, useState } from "react";
+import { checkAttend } from "api/attendance";
 
 const Container = styled.div`
   display: flex;
@@ -38,7 +39,6 @@ const ProfileImage = styled.div`
 `;
 
 const Image = styled.img`
-  display: inline;
   border-radius: 4rem;
   height: 8rem;
   width: 8rem;
@@ -52,6 +52,7 @@ const Edit = styled.img`
   left: 8rem;
   background-color: ${({ theme }) => theme.ContainerColor};
   cursor: pointer;
+  width: 1.5rem;
 `;
 
 const TextContainer = styled.div`
@@ -71,9 +72,15 @@ const Info = styled.div`
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { userName, schoolName, gradeCode, classCode, userCode, isAttend } =
-    useSelector((state) => state.user);
-  const state = useSelector((state) => state);
+  const {
+    userId,
+    userName,
+    schoolName,
+    gradeCode,
+    classCode,
+    userCode,
+    isAttend,
+  } = useSelector((state) => state.user);
   const [image, setImage] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -94,13 +101,6 @@ const Profile = () => {
     profileImage(formData).then(() => {
       setIsLoading(true);
     });
-    // getDept(state.user.userId).then(
-    //   (res) => (
-    //     setImage(res.data.fileName)),
-    //   window.location.reload(),
-    //   setIsLoading(true),
-    // )
-    // setIsLoading(true);
   };
   const onClick = () => {
     navigate("/meeting");
@@ -108,10 +108,9 @@ const Profile = () => {
 
   useEffect(() => {
     if (isLoading) {
-      getDept(state.user.userId).then(
+      getDept(userId).then(
         (res) => setImage(res.data.fileName),
         setIsLoading(false)
-        // window.location.reload()
       );
     }
   }, [isLoading]);

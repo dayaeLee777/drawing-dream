@@ -11,7 +11,7 @@ const Container = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  max-height: 30rem;
+  max-height: 40rem;
 `;
 
 const Wrapper = styled.div`
@@ -20,7 +20,6 @@ const Wrapper = styled.div`
   padding: 1rem 2rem;
   width: 85%;
   margin-bottom: 1rem;
-  /* margin-left: 3rem; */
 `;
 
 const Title = styled.h3`

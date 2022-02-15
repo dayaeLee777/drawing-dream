@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ChatList from "./ChatList";
-import {
-  faCommentDots,
-  faCircle,
-  faBell,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCommentDots, faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
@@ -24,8 +20,6 @@ const Container = styled.div`
   text-align: center;
   line-height: 5rem;
   font-size: 2.3rem;
-  /* box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); */
   .fa-comment-dots {
     filter: ${({ theme }) => theme.chatFilter};
   }
@@ -47,11 +41,10 @@ const Container = styled.div`
 `;
 
 const Chat = () => {
-  // const [chatOpen, setChatOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [contents, setContents] = useState([]);
   const [isNew, setIsNew] = useState(false);
-  const { userName, userId } = useSelector((state) => state.user);
+  const { userId } = useSelector((state) => state.user);
   const { isOpenChat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
 

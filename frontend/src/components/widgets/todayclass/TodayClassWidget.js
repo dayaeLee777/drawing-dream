@@ -2,7 +2,7 @@ import commonCode from "config/commonCode";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { getNowPeriod } from "./time";
+import { getNowPeriod } from "../../../modules/time";
 
 const Container = styled.div`
   margin-bottom: 1rem;
@@ -48,7 +48,7 @@ const TodayClassWidget = (props) => {
       setNowPeriod(periodCode.slice(2, 3));
     }
   }, []);
-  // console.log(data);
+
   return (
     <Container>
       <TodayClassList>

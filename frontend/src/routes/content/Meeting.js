@@ -63,7 +63,6 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin: 6rem;
-  /* margin-bottom: 0; */
 `;
 
 const Overlay = styled(motion.div)`

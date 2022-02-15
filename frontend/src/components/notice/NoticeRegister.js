@@ -26,7 +26,6 @@ const InputContainer = styled.div`
     border: none;
     padding: 1rem 0.5rem;
     font-size: 1rem;
-    /* border-right: 1px solid #dadde6; */
   }
 
   input {
@@ -54,7 +53,6 @@ const Title = styled.div`
 
 const FileContainer = styled.div`
   margin-top: 1rem;
-  /* background-color: yellow; */
 
   .dropzone {
     text-align: center;
@@ -68,7 +66,7 @@ const FileContainer = styled.div`
     margin-top: 0.5rem;
     display: flex;
     padding: 0rem 0.5rem;
-    
+
     .file {
       display: flex;
       border-radius: 5px;
@@ -85,7 +83,6 @@ const FileContainer = styled.div`
       }
     }
   }
-
 `;
 
 const NoticeRegister = ({ modify }) => {
@@ -118,7 +115,6 @@ const NoticeRegister = ({ modify }) => {
           title: res.data.title,
           content: res.data.content,
           noticeCode: res.data.noticeCode,
-          // files: res.data.files
         });
         setIsLoading(false);
       });
@@ -215,9 +211,11 @@ const NoticeRegister = ({ modify }) => {
   const makeExtension = (fileName) => {
     let fileLength = fileName.length;
     let fileDot = fileName.lastIndexOf(".");
-    let fileExtension = fileName.substring(fileDot + 1, fileLength).toLowerCase();
+    let fileExtension = fileName
+      .substring(fileDot + 1, fileLength)
+      .toLowerCase();
     return fileExtension;
-  }
+  };
 
   return (
     <Container>
@@ -266,22 +264,23 @@ const NoticeRegister = ({ modify }) => {
             </div>
           )}
         </Dropzone>
-        {data.files &&
+        {data.files && (
           <div className="files">
             {data.files.map((file) => (
               <div key={file.name}>
                 <div className="file">
                   <div className="icon">
-                    <FileIcon extension={ makeExtension(file.name) } {...defaultStyles[makeExtension(file.name)]} />
+                    <FileIcon
+                      extension={makeExtension(file.name)}
+                      {...defaultStyles[makeExtension(file.name)]}
+                    />
                   </div>
-                  <div className="desc">
-                    {file.name}
-                  </div>
+                  <div className="desc">{file.name}</div>
                 </div>
               </div>
-              ))}
+            ))}
           </div>
-        }
+        )}
       </FileContainer>
       <BtnContainer>
         <Button

@@ -19,7 +19,6 @@ const Wrapper = styled.div`
   padding: 1rem 2rem;
   width: 85%;
   margin-bottom: 1rem;
-  /* margin-left: 3rem; */
 `;
 
 const Title = styled.h3`

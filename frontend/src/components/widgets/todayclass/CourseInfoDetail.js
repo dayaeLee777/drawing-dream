@@ -39,7 +39,6 @@ const InfoContainer = styled.div`
   .content {
     display: flex;
     align-items: center;
-    /* width: 20rem; */
   }
   margin-bottom: 0.75rem;
 `;

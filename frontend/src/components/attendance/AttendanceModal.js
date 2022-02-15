@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "components/commons/button";
 import styled from "styled-components";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const ModalContainer = styled.div`
@@ -48,24 +47,6 @@ const Content = styled.div`
   top: 30%;
   font-size: 1.5rem;
 `;
-const Overlay = styled(motion.div)`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const overlay = {
-  hidden: { backgroundColor: "rgba(0, 0, 0, 0)" },
-  visible: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
-  exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
-};
 
 const Modal = ({ date }) => {
   const navigate = useNavigate();
@@ -73,10 +54,7 @@ const Modal = ({ date }) => {
   return (
     <ModalContainer>
       <Subject>출석 완료!</Subject>
-      <Content>
-        {date.slice(0, 4)}년 {date.slice(5, 7)}월 {date.slice(8, 10)}일
-        출석되었습니다.
-      </Content>
+      <Content>{date} 출석되었습니다.</Content>
       <Button onClick={() => navigate("/home")} name="메인으로 돌아가기" />
     </ModalContainer>
   );

@@ -7,8 +7,7 @@ import { createChatRoom } from "api/chat";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getProfileImg } from "api/user";
-
-import { closeChat, openChat } from "modules/chat";
+import { openChat } from "modules/chat";
 
 const Container = styled(motion.div)`
   width: 160px;
@@ -53,9 +52,8 @@ const CreateChat = styled.div`
 `;
 
 const Member = ({ member }) => {
-  const { userName, userId } = useSelector((state) => state.user);
+  const { userName } = useSelector((state) => state.user);
   const [profileImg, setProfileImg] = useState("");
-  // const { isOpenChat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   useEffect(() => {
     getProfileImg(member.userId).then((res) =>

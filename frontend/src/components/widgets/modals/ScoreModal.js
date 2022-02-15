@@ -11,8 +11,6 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-around; */
-  /* letter-spacing: -1px; */
 `;
 const Header = styled.div`
   display: flex;
