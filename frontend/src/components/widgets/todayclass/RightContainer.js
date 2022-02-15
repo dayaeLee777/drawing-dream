@@ -40,14 +40,16 @@ const RightContainer = ({ courseInfo, nowPeriod, startClass }) => {
   const { period } = useSelector((state) => state.timetable);
   const navigate = useNavigate();
   const [timeDiff, setTimeDiff] = useState();
-  const periodIndex = nowPeriod ? nowPeriod.slice(2, 3) : null;
   const moveClass = () => {
     navigate(`/onlineclass/${courseInfo.courseId}`);
   };
   useEffect(() => {
-    const diff = compareTime(period[periodIndex].startTime);
-    setTimeDiff(diff);
-  }, []);
+    if (nowPeriod) {
+      const periodIndex = nowPeriod ? nowPeriod.slice(2, 3) : null;
+      const diff = compareTime(period[periodIndex].startTime);
+      setTimeDiff(diff);
+    }
+  }, [nowPeriod]);
 
   return (
     <>

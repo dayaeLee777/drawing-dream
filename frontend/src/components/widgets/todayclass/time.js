@@ -31,10 +31,26 @@ export const getNowPeriod = (period) => {
 };
 
 export const compareTime = (time) => {
+  const splitTime = time.split(":");
+
+  const date2 = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    splitTime[0],
+    splitTime[1],
+    splitTime[2]
+  );
+  console.log(date2);
+  const elapsedMSec = date2.getTime() - date.getTime();
+  const elapsedMin = Math.floor(elapsedMSec / 1000 / 60);
   // if (time < now) {
-  //   // console.log(time.slice(3, 5));
   //   console.log(date.getMinutes() - time.slice(3, 5));
-  //   return
+  //   return date.getMinutes() - time.slice(3, 5);
+  // } else {
+  //   console.log(date.getMinutes() - time.slice(3, 5));
+  //   return time.slice(3, 5) - date.getMinutes();
   // }
-  return date.getMinutes() - time.slice(3, 5);
+  console.log(elapsedMin);
+  return elapsedMin;
 };
