@@ -1,6 +1,6 @@
 export const getNowPeriod = (period) => {
   const date = new Date();
-  date.setHours(date.getHours() - 11); // 테스트용
+  date.setHours(date.getHours()); // 테스트용
   let hour = date.getHours();
   hour = hour < 10 ? "0" + hour.toString() : hour.toString();
 

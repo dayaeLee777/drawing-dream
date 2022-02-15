@@ -1,6 +1,7 @@
 import { setApiHeaders, setFileApiHeaders } from "api/api";
 import { checkAttend } from "api/attendance";
 import { loginUser, getDept } from "api/user";
+import { readTimeTable } from "./timetable";
 
 const LOGIN_SUCCESS = "USER/LOGIN_SUCCESS";
 const LOGIN_FAIL = "USER/LOGIN_FAIL";
@@ -37,6 +38,7 @@ export const login = (user, isChecked) => async (dispatch) => {
           });
         });
       }
+      dispatch(readTimeTable());
     })
     .catch((error) => {
       console.log(error);
