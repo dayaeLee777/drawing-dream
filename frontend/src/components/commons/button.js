@@ -9,9 +9,10 @@ const StyledButton = styled.button`
   margin-left: ${(props) => (props.ml ? props.ml : "")};
   margin-bottom: ${(props) => (props.mb ? props.mb : "")};
   margin-right: ${(props) => (props.mr ? props.mr : "")};
+  padding: ${(props) => (props.padding ? props.padding : "")};
   border: none;
   font-weight: 600;
-  border-radius: 5px;
+  border-radius: ${(props) => (props.br ? props.br : "5px")};
   font-family: "Noto Sans KR", sans-serif;
   transition: 0.2s;
   cursor: pointer;
@@ -28,7 +29,11 @@ const StyledButton = styled.button`
 `;
 
 const Button = (props) => {
-  return <StyledButton {...props} disabled={props.disabled}>{props.name}</StyledButton>;
+  return (
+    <StyledButton {...props} disabled={props.disabled}>
+      {props.name}
+    </StyledButton>
+  );
 };
 
 export default Button;
