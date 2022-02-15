@@ -36,7 +36,7 @@ import ScreenHandler from "modules/onlineclass";
  */
 
 const Container = styled.div`
-  margin: 4rem 10vw;
+  margin: 1rem 10vw;
 `;
 
 const Header = styled.div`
@@ -54,9 +54,9 @@ const Title = styled.div`
 
 const ControlContainer = styled.div`
   display: flex;
-  width: 25rem;
-  justify-content: space-between;
-  margin-left: 9rem;
+  width: 40rem;
+  justify-content: center;
+  margin-left: 5rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -66,6 +66,7 @@ const ButtonContainer = styled.div`
   border: 1px solid #fec25c;
   padding: 1rem;
   border-radius: 20px;
+  margin: 1rem;
 `;
 
 const ButtonName = styled.div`
@@ -219,9 +220,10 @@ const OnlineClass = () => {
       Object.defineProperty(this, "rtcPeer", { writable: true });
 
       this.dispose = function () {
-        console.log("Disposing participant " + this.name);
+        console.log("Disposing participant " + name);
         this.rtcPeer.dispose();
-        // container.parentNode.removeChild(container);
+        console.log(video);
+        // video.parentNode.removeChild(video);
       };
     }
   }
@@ -452,9 +454,16 @@ const OnlineClass = () => {
       });
       for (var key in participants) {
         participants[key].dispose();
+        console.log(participants[key]);
+        if (participants[key].name !== name) {
+          var partVideo = document.getElementById(
+            "video-" + participants[key].name
+          );
+          document.getElementById("participants").removeChild(partVideo);
+        }
       }
       document.getElementById("video-" + name).remove();
-
+      delete participants[name];
       const message = {
         id: "shareScreen",
         name: userName,
@@ -470,7 +479,16 @@ const OnlineClass = () => {
       });
       for (var key in participants) {
         participants[key].dispose();
+        if (participants[key].name !== name) {
+          var partVideo = document.getElementById(
+            "video-" + participants[key].name
+          );
+          console.log(participants[key].name);
+          document.getElementById("participants").removeChild(partVideo);
+        }
       }
+      delete participants[name];
+
       document.getElementById("video-" + name).remove();
       const message = {
         id: "joinRoom",
@@ -522,18 +540,24 @@ const OnlineClass = () => {
               <FontAwesomeIcon icon={faMicrophone} size="sm" />
               <ButtonName>오디오 중지</ButtonName>
             </ButtonContainer>
-            <ButtonContainer onClick={shareScreen} id="shareScreenOn">
-              <FontAwesomeIcon icon={faExternalLinkAlt} size="sm" />
-              <ButtonName>화면 공유</ButtonName>
-            </ButtonContainer>
-            <ButtonContainer
-              onClick={shareScreen}
-              id="shareScreenOff"
-              style={{ display: "none" }}
-            >
-              <FontAwesomeIcon icon={faTimes} />
-              <ButtonName>공유 중지</ButtonName>
-            </ButtonContainer>
+            {userCode === "A03" ? (
+              <>
+                <ButtonContainer onClick={shareScreen} id="shareScreenOn">
+                  <FontAwesomeIcon icon={faExternalLinkAlt} size="sm" />
+                  <ButtonName>화면 공유</ButtonName>
+                </ButtonContainer>
+                <ButtonContainer
+                  onClick={shareScreen}
+                  id="shareScreenOff"
+                  style={{ display: "none" }}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                  <ButtonName>공유 중지</ButtonName>
+                </ButtonContainer>
+              </>
+            ) : (
+              <div></div>
+            )}
           </ControlContainer>
           {userCode === "A03" ? (
             <Button
