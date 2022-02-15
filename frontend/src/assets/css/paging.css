@@ -22,7 +22,7 @@ ul.pagination li a {
   font-size: 1rem;
 }
 ul.pagination li.active a {
-  color: white;
+  color: #292929;
 }
 ul.pagination li.active {
   background-color: #fec15c;

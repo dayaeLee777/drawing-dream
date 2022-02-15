@@ -11,16 +11,18 @@ const StyledTextArea = styled.textarea`
   outline: none;
   box-sizing: border-box;
   width: 100%;
-  border: none;
+  border: 1px solid #A19F9F;
   resize: none;
-  height: 28rem;
+  height: 25rem;
   padding: 0.5rem;
   font-size: 1.125rem;
   line-height: 1.5;
+  background-color: ${({ theme }) => theme.widgetColor};
 `;
 const ButtonContainer = styled.div`
   text-align: right;
-  color: #555555;
+  color: #A19F9F;
+  margin-top: 2rem;
   .complete {
     margin-right: 2rem;
     cursor: pointer;

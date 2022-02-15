@@ -49,6 +49,7 @@ INSERT IGNORE INTO `auth` (`id`, `password`, `login_id`, `del_yn`, `user_id`) VA
 (_binary 's6^úsO¸\0%\éõN_', '$2a$10$CccrWrI8rzJjoAwmmd6vDOQi0k8oQyvGKZV.f3aXGaiw2ceGlsQKC','teacherkim',false, _binary 'þvGP*G\âcjò'),
 (_binary 'sô\Ðr\×+Il^¿\æ°','$2a$10$TX.qRwBQxT8L8rmNsjeKTeeGim5quJ.1WILLGlejzGGE5UYA8F4Ly','student01',false,_binary 'p·\ØR ¥L3k{t\r\Þ4K'),
 (_binary '¦e_\\\êPB±ö\ëN','$2a$10$d06erPTym15gQKLvPn.LBeujXcLIhYhKtdbs9xTIYOhfSoo6Wopg.','teacherpark',false,_binary "]H\'H_k:^Ì¯Q}"),
+(_binary 'nºyòGxL«´Ùµ_¥\Ýb','$2a$10$do5bw77ATUHcAkO2NkUQ.uTFkrvLuo3hvt9iN7YlqSrBjarcudVvC','student02',false,_binary '|û<aO\â®¸Ù½\Õü'),
 (_binary '3\Ò\Ñg\ëKý­-Joÿ÷','$2a$10$qh1KBbPQrPkfhxOe8kTACOou9X9LvoI5bB0GK8zfbxwVdS3brh4zS','student03',false,_binary '\\A\×2\Ä@Í¼FóHu*\n'),
 (_binary '\à7lW7A,±_z[I\ë_','$2a$10$F7eNu1uz9kOCOC2ZKIBl8OTdueuEIg7wcQHBQOodrJAeLMkq/ZMn.','teacherdang',false,_binary 'b¢Q>³KF£´dNxÎ');
 

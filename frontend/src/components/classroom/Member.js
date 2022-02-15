@@ -11,14 +11,15 @@ import { getProfileImg } from "api/user";
 import { closeChat, openChat } from "modules/chat";
 
 const Container = styled(motion.div)`
-  /* width: 10rem; */
-  height: 10rem;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  width: 160px;
+  height: 160px;
+  box-shadow: ${({ theme }) => theme.borderShadow};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  background-color: ${({ theme }) => theme.widgetColor};
 `;
 const Img = styled.img`
   border-radius: 45px;
@@ -26,28 +27,34 @@ const Img = styled.img`
 `;
 
 const Wrapper = styled.div`
-  display: grid;
   width: 100%;
-  grid-template-columns: 4fr 1fr;
-
+  display: flex;
+  justify-content: center;
+  position: relative;
   svg {
     color: #fec25c;
   }
 `;
 
 const Name = styled.div`
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: right;
-  margin-right: 2rem;
+  display: flex;
+  justify-content: center;
 `;
 
-const CreateChat = styled.div``;
+const CreateChat = styled.div`
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-right: 1rem;
+`;
 
 const Member = ({ member }) => {
   const { userName, userId } = useSelector((state) => state.user);
   const [profileImg, setProfileImg] = useState("");
-  const [roomId, setRoomId] = useState("");
-  const { isOpenChat } = useSelector((state) => state.chat);
+  // const { isOpenChat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   useEffect(() => {
     getProfileImg(member.userId).then((res) =>
@@ -65,8 +72,7 @@ const Member = ({ member }) => {
       ],
     }).then((res) => {
       console.log(res);
-      setRoomId(res.data.roomId);
-      dispatch(openChat());
+      dispatch(openChat(res.data.roomId, res.data.users, member.userId));
     });
   };
   return (

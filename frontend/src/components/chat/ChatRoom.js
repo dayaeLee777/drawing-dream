@@ -6,8 +6,9 @@ import profileImg from "assets/img/profile.png";
 import ChatList from "components/chat/ChatList";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getChatList } from "api/chat";
+import { openChatList } from "modules/chat";
 
 const ChatBox = styled.div`
   display: block;
@@ -19,7 +20,7 @@ const ChatBox = styled.div`
   max-width: 85vw;
   max-height: 100vh;
   border-radius: 5px;
-  box-shadow: 0px 5px 35px 9px #ccc;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 
 const ChatBoxHeader = styled.div`
@@ -103,6 +104,7 @@ const Me = styled.div`
   margin-bottom: 1rem;
   font-size: 1rem;
   line-height: 1.5rem;
+  color: black;
 `;
 
 const You = styled.div`
@@ -113,6 +115,7 @@ const You = styled.div`
   margin-bottom: 1rem;
   font-size: 1rem;
   line-height: 1.5rem;
+  color: black;
 `;
 
 const ChatInput = styled.div`
@@ -164,16 +167,15 @@ const ChatRoom = ({
   message,
   setMessage,
   roomId,
-  setRoomId,
-  users,
   chatClose,
-  memberId,
 }) => {
   const [chatMove, setChatMove] = useState(false);
   const messageBoxRef = useRef();
   const { userName, userId } = useSelector((state) => state.user);
-  let sockJS = new SockJS("http://localhost:8080/ws-dd");
-  let client = Stomp.over(sockJS);
+  const { users, memberId } = useSelector((state) => state.chat);
+  const dispatch = useDispatch();
+  const sockJS = new SockJS("http://localhost:8080/ws-dd");
+  const client = Stomp.over(sockJS);
 
   const scrollToBottom = () => {
     if (messageBoxRef.current) {
@@ -182,7 +184,8 @@ const ChatRoom = ({
   };
 
   const back = () => {
-    setRoomId();
+    dispatch(openChatList());
+    client.disconnect();
   };
 
   const onChange = (event) => {
@@ -199,20 +202,21 @@ const ChatRoom = ({
   useEffect(() => {
     getChatList(roomId).then((res) => {
       setContents(res.data.messages);
-      client.connect(
-        {
-          Authorization: `Bearer ${token}`,
-        },
-        (frame) => {
-          console.log("STOMP Connection");
-          console.log(memberId);
-          client.subscribe(`/topic/one/${memberId}`, (response) => {
-            console.log(response);
-            setContents((prev) => [...prev, JSON.parse(response.body)]);
-          });
-        }
-      );
     });
+    client.connect(
+      {
+        Authorization: `Bearer ${token}`,
+      },
+      (frame) => {
+        console.log("STOMP Connection");
+        console.log(memberId);
+        client.subscribe(`/topic/one/${memberId}`, (response) => {
+          console.log(response);
+          setContents((prev) => [...prev, JSON.parse(response.body)]);
+        });
+      }
+    );
+    return () => client.disconnect();
   }, []);
 
   useEffect(() => {
@@ -237,8 +241,10 @@ const ChatRoom = ({
         <ChatBoxHeader>
           <Arrow onClick={back}>←</Arrow>
           <Subject>
-            {users.map((user) => (
-              <>{user.userName !== userName && <>{user.userName}</>}</>
+            {users.map((user, index) => (
+              <div key={index}>
+                {user.userName !== userName && <>{user.userName}</>}
+              </div>
             ))}
           </Subject>
           <ChatBoxToggle onClick={chatClose}>
@@ -249,16 +255,15 @@ const ChatRoom = ({
           <ChatBoxOverlay />
           <ChatLogs ref={messageBoxRef}>
             {contents.map((content, index) => (
-              <>
+              <div key={index}>
                 {content.userId === userId ? (
-                  <Me key={index}>{content.content}</Me>
+                  <Me>{content.content}</Me>
                 ) : (
-                  <You key={index}>{content.content}</You>
+                  <You>{content.content}</You>
                 )}
-              </>
+              </div>
             ))}
           </ChatLogs>
-          {/* <div ref={messageRef} /> */}
         </ChatBoxBody>
         <ChatInput>
           <ChatForm>

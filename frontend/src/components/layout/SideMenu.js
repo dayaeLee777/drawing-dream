@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideMenuItem from "./side/SideMenuItem";
 import styled from "styled-components";
 import house from "assets/img/house.png";
@@ -6,18 +6,22 @@ import book from "assets/img/green-book.png";
 import star from "assets/img/star.png";
 import teacher from "assets/img/teacher.png";
 import school from "assets/img/school.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Container = styled.div``;
 
 const SideMenu = () => {
+  const location = useLocation();
   const [isSelected, setIsSelected] = useState("/home");
   const navigate = useNavigate();
   const onClick = (url) => {
-    console.log(url);
     navigate(url);
     setIsSelected(url);
   };
+
+  useEffect(() => {
+    setIsSelected("/" + location.pathname.split("/")[1]);
+  }, [location]);
   return (
     <Container>
       <SideMenuItem

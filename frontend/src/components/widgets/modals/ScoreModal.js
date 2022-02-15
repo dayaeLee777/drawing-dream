@@ -3,12 +3,11 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import Chart from "../score/Chart";
 const Wrapper = styled(motion.div)`
-  width: 700px;
-  height: 700px;
-  background-color: rgba(255, 255, 255, 1);
+  width: 800px;
+  height: 800px;
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
-  background-color: white;
+  background-color: ${({ theme }) => theme.widgetColor};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +26,8 @@ const Header = styled.div`
 const Title = styled.div`
   font-size: 30px;
   font-weight: 600;
-  color: black;
+  color: ${({ theme }) => theme.textColor};
+  margin-top: 2rem;
   display: flex;
   align-items: end;
   margin-bottom: 20px;

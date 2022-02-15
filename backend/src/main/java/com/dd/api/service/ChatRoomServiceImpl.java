@@ -1,6 +1,8 @@
 package com.dd.api.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,6 +67,20 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 			rooms.add(ChatRoomGetListResponseDTO.builder().roomId(room.getId()).roomName(room.getName())
 					.message(chatMessageResponseDTO).users(users).build());
 		});
+
+		if (rooms.size() > 1) {
+			rooms.sort(new Comparator<ChatRoomGetListResponseDTO>() {
+
+				@Override
+				public int compare(ChatRoomGetListResponseDTO o1, ChatRoomGetListResponseDTO o2) {
+					if (o1.getMessage() == null || o2.getMessage() == null)
+						return 0;
+
+					return o2.getMessage().getSendTime().compareTo(o1.getMessage().getSendTime());
+				}
+
+			});
+		}
 
 		return ChatRoomGetListWrapperResponseDTO.builder().rooms(rooms).build();
 

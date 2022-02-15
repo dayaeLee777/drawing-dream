@@ -10,10 +10,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${({ theme }) => theme.widgetColor};
+  background-color: ${({ theme }) => theme.ContainerColor};
+  margin-bottom: 5rem;
+  padding-bottom: 3rem;
+  height: 80vh;
 `;
 
-const School = () => {
+const Notice = () => {
   return (
     <Container>
       <Outlet />
@@ -21,4 +24,4 @@ const School = () => {
   );
 };
 
-export default School;
+export default Notice;

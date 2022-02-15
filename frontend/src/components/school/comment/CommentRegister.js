@@ -14,6 +14,7 @@ const InputContainer = styled.div`
   border: 1px solid #c4c4c4;
   border-radius: 5px;
   padding: 1rem 1rem;
+  margin-left: ${(props) => (props.ml ? props.ml : "")};
 
   .userName {
     font-weight: 600;
@@ -26,10 +27,19 @@ const StyledTextArea = styled.textarea`
   height: 5rem;
   border: none;
   resize: none;
+  background-color: ${({ theme }) => theme.ContainerColor};
+  border: 1px solid #dadde6;
+  &::placeholder{
+    color: white;
+  }
 `;
 
 const BtnContainer = styled.div`
   display: flex;
+  button{
+    margin-top: 2rem;
+    margin-left: auto;
+  }
 `;
 
 const CommentRegister = ({
@@ -41,6 +51,8 @@ const CommentRegister = ({
   setCommentModify,
   setCommentListIsLoading,
   setReCommentListIsLoading,
+  setReCommentRegister,
+  ml,
 }) => {
   const { userName, userId } = useSelector((state) => state.user);
   const [content, setContent] = useState("");
@@ -99,6 +111,10 @@ const CommentRegister = ({
           })
           .then(() => {
             setReCommentListIsLoading(true);
+            setReCommentRegister({
+              commentId: "",
+              isReComment: false,
+            });
           });
       }
     }
@@ -112,7 +128,7 @@ const CommentRegister = ({
   };
 
   return (
-    <InputContainer>
+    <InputContainer ml={ml}>
       <div className="userName">{userName}</div>
       <StyledTextArea
         placeholder="댓글을 입력해주세요."

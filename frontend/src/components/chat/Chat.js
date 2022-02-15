@@ -27,7 +27,7 @@ const Container = styled.div`
   /* box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6),
     0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); */
   .fa-comment-dots {
-    filter: drop-shadow(6px 6px 5px #a8a8a8);
+    filter: ${({ theme }) => theme.chatFilter};
   }
   .fa-bell {
     position: absolute;
@@ -80,6 +80,7 @@ const Chat = () => {
   const chatClose = () => {
     if (isOpenChat) {
       dispatch(closeChat());
+      client.disconnect();
     } else {
       dispatch(openChat());
     }

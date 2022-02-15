@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { login } from "modules/user";
 import { useCookies } from "react-cookie";
+import { readTimeTable } from "modules/timetable";
 
 const Container = styled.div`
   display: grid;

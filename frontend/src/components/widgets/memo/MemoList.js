@@ -25,7 +25,7 @@ padding: ${props=> props.main? "0rem 1rem":"0rem 5rem"};
 `;
 
 const RegisterBtn = styled.div`
-  color: #555555;
+  color: ${({ theme }) => theme.memoColor};
   margin-top: 3rem;
 `;
 const NullList = styled.div`

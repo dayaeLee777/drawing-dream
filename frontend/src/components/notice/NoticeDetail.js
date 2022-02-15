@@ -14,6 +14,7 @@ const DetailContainer = styled.div`
   padding: 3rem 5rem;
   box-sizing: border-box;
   width: 100%;
+  overflow: auto;
 `;
 
 const BoardContainer = styled.div`
@@ -30,11 +31,16 @@ const TitleContainer = styled.div`
     font-size: 2.5rem;
     font-weight: 600;
   }
+  .code {
+    font-size: 1rem;
+    font-weight: 300;
+    color: ${({ theme }) => theme.textColor};
+  }
 `;
 const ProfileContainer = styled.div`
   padding-left: 0.5rem;
   margin-top: 1rem;
-  color: #787878;
+  color: ${({ theme }) => theme.textColor};
   display: flex;
   align-items: center;
 
@@ -66,13 +72,12 @@ const EditContainer = styled.div`
   .delete {
     margin-right: 0.5rem;
     text-decoration: underline;
-    color: #787878;
+    color: ${({ theme }) => theme.textColor};
     cursor: pointer;
   }
 `;
 const FileContainer = styled.div`
   height: 5rem;
-  /* background-color: #facead; */
   margin-top: 2rem;
 
   .desc {
@@ -185,13 +190,15 @@ const NoticeDetail = () => {
       <TitleContainer>
         <div className="title">
           {data.noticeCode === "K01" ? (
-            <>[전체] </>
+            <div className="code">[전체] </div>
           ) : data.noticeCode === "K02" ? (
-            <>[{commonCode.E[gradeCode]}] </>
+            <div className="code">[{commonCode.E[gradeCode]}] </div>
+          ) : ["K02", "K04", "K05"].includes(data.noticeCode) ? (
+            <div className="code">[{commonCode.K[data.noticeCode]}] </div>
           ) : (
-            <>
+            <div className="code">
               [{commonCode.E[gradeCode]} {commonCode.F[classCode]}]
-            </>
+            </div>
           )}
           {data.title}
         </div>
@@ -236,11 +243,7 @@ const NoticeDetail = () => {
                     {...defaultStyles[makeExtension(item[0])]}
                   />
                 </div>
-                <button
-                  className="file"
-                  onClick={onDownload}
-                  value={item[1]}
-                >
+                <button className="file" onClick={onDownload} value={item[1]}>
                   {item[0]}
                 </button>
               </div>

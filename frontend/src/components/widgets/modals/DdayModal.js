@@ -9,10 +9,9 @@ import { getCalendar } from "api/calendar";
 const Wrapper = styled(motion.div)`
   width: 800px;
   height: 800px;
-  background-color: rgba(255, 255, 255, 1);
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
-  background-color: white;
+  background-color: ${({ theme }) => theme.widgetColor};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +29,8 @@ const Header = styled.div`
 const Title = styled.div`
   font-size: 30px;
   font-weight: 600;
-  color: black;
+  color: ${({ theme }) => theme.textColor};
+  margin-top: 2rem;
   display: flex;
   align-items: end;
   margin-bottom: 20px;
@@ -45,8 +45,6 @@ const DdayModal = ({ layoutId }) => {
   const onClick = (event) => {
     event.stopPropagation();
   };
-
-  const date1 = new Date("2022-02-02");
   const testData = [
     {
       calendarId: "3bc288c2-b9c3-92c2-b9c3-8d47c2acc2ae",
@@ -73,8 +71,24 @@ const DdayModal = ({ layoutId }) => {
   ];
 
   useEffect(() => {
-    getCalendar().then((res) => {
-      setData(res.data.calendarGetListResponseDtoList);
+    getCalendar().then((response) => {
+      const res = response.data.calendarGetListResponseDtoList;
+      res.map((cal) => {
+        setData((prev) => [
+          ...prev,
+          {
+            calendarId: cal.calendarId,
+            category: "allday",
+            isVisible: true,
+            isPending: false,
+            title: commonCode.J[cal.calendarCode],
+            id: cal.calendarId,
+            body: "테스트입니다",
+            start: cal.startDate,
+            end: cal.endDate,
+          },
+        ]);
+      });
     });
   }, []);
   return (
@@ -93,7 +107,7 @@ const DdayModal = ({ layoutId }) => {
         ></i>
       </button>
       <Content>
-        <Calendar height="400px" view="month" schedules={testData} />
+        <Calendar height="603px" view="month" schedules={data} />
       </Content>
     </Wrapper>
   );

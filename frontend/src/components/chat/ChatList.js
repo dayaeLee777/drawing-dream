@@ -5,7 +5,8 @@ import Input from "components/commons/input";
 import profileImg from "assets/img/profile.png";
 import ChatRoom from "components/chat/ChatRoom";
 import { getRooms } from "api/chat";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { openChat } from "modules/chat";
 
 const ChatBox = styled.div`
   display: block;
@@ -17,7 +18,7 @@ const ChatBox = styled.div`
   max-width: 85vw;
   max-height: 100vh;
   border-radius: 5px;
-  box-shadow: 0px 5px 35px 9px #ccc;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 
 const ChatBoxHeader = styled.div`
@@ -41,12 +42,18 @@ const Subject = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
 `;
 
 const ChatBoxToggle = styled.span`
   text-align: right;
   margin-right: 2rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 const ChatBoxBody = styled.div`
@@ -95,7 +102,8 @@ const ChatLogs = styled.div`
 const List = styled.div`
   /* cursor: pointer; */
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: 2fr 8fr 1fr;
+  margin-bottom: 1rem;
 `;
 
 const Image = styled.img`
@@ -109,7 +117,9 @@ const Middle = styled.div`
   max-width: 12rem;
 `;
 
-const Name = styled.div``;
+const Name = styled.div`
+  color: black;
+`;
 
 const Content = styled.div`
   margin: 0.4rem 0;
@@ -134,6 +144,7 @@ const Info = styled.div`
   justify-content: center;
   align-items: center;
   line-height: 1.6;
+  color: black;
 `;
 
 const ChatList = ({
@@ -144,11 +155,9 @@ const ChatList = ({
   chatClose,
 }) => {
   const [rooms, setRooms] = useState([]);
-  const [roomId, setRoomId] = useState("");
-  const [users, setUsers] = useState([]);
-  const [memberId, setMemberId] = useState("");
-  const { userName, userId } = useSelector((state) => state.user);
-
+  const { userId } = useSelector((state) => state.user);
+  const { roomId } = useSelector((state) => state.chat);
+  const dispatch = useDispatch();
   useEffect(() => {
     getRooms().then((res) => {
       console.log(res);
@@ -161,9 +170,6 @@ const ChatList = ({
       {roomId && (
         <ChatRoom
           roomId={roomId}
-          setRoomId={setRoomId}
-          users={users}
-          memberId={memberId}
           chatClose={chatClose}
           message={message}
           setMessage={setMessage}
@@ -188,11 +194,11 @@ const ChatList = ({
                   <List
                     key={room.roomId}
                     onClick={() => {
-                      setRoomId(room.roomId);
-                      setUsers(room.users);
                       room.users.map((user) => {
                         if (user.userId !== userId) {
-                          setMemberId(user.userId);
+                          dispatch(
+                            openChat(room.roomId, room.users, user.userId)
+                          );
                         }
                       });
                     }}
@@ -200,13 +206,19 @@ const ChatList = ({
                     <Image src={profileImg}></Image>
                     <Middle>
                       <Name>
-                        {room.users.map((user) => (
-                          <>{user.userId !== userId && <>{user.userName}</>}</>
+                        {room.users.map((user, i) => (
+                          <div key={i}>
+                            {user.userId !== userId && <>{user.userName}</>}
+                          </div>
                         ))}
                       </Name>
-                      <Content>{room.roomName}</Content>
+                      {room.message && (
+                        <Content>{room.message.content}</Content>
+                      )}
                     </Middle>
-                    <Date>오전 10:41</Date>
+                    {room.message && (
+                      <Date>{room.message.sendTime.slice(11, 16)}</Date>
+                    )}
                   </List>
                 ))}
               </>

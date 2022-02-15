@@ -13,7 +13,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 5rem;
-  background-color: ${({ theme }) => theme.widgetColor};
+  background-color: ${({ theme }) => theme.ContainerColor};
+  height: 80vh;
 `;
 
 const Title = styled.div`
@@ -37,8 +38,6 @@ const Line = styled.div`
 `;
 
 const MyClassRoom = () => {
-  // const { gradeCode, classCode } = useSelector((state) => state.user);
-  // useSelector((state) => state.user);
   const [data, setData] = useState([]);
 
   useEffect(() => {

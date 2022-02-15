@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledTr = styled.tr`
+  cursor: pointer;
   &:hover {
-    background-color: #f2f2f2;
+    background-color: ${({ theme }) => theme.noticeHoverColor};
   }
   & + & {
     border-top: 1px solid #dedede;
@@ -20,13 +21,14 @@ const StyledTd = styled.td`
 
 const CommunityItem = ({ data, index }) => {
   const Navigate = useNavigate();
+  let time = data.regTime.split(" ")[0];
   return (
     <StyledTr onClick={() => Navigate(`./${data.communityId}`)}>
       <StyledTd>{index + 1}</StyledTd>
       <StyledTd ta="left">{data.title}</StyledTd>
       <StyledTd>{data.userName}</StyledTd>
       <StyledTd>{data.hit}</StyledTd>
-      <StyledTd>{data.regTime}</StyledTd>
+      <StyledTd>{time}</StyledTd>
     </StyledTr>
   );
 };

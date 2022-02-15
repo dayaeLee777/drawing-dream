@@ -118,20 +118,20 @@ const validationCheck = (
     if (password === value) {
       setValids({
         ...valids,
-        equelPassword: true,
+        equalPassword: true,
       });
       setErrors({
         ...errors,
-        equelPasswordErrMsg: "",
+        equalPasswordErrMsg: "",
       });
     } else {
       setValids({
         ...valids,
-        equelPassword: false,
+        equalPassword: false,
       });
       setErrors({
         ...errors,
-        equelPasswordErrMsg: "비밀번호가 일치하지 않습니다.",
+        equalPasswordErrMsg: "비밀번호가 일치하지 않습니다.",
       });
     }
   } else if (name === "phoneNumber" || name === "parentPhoneNumber") {

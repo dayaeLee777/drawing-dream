@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import commonCode from "config/commonCode";
+import { getCalendar } from "api/calendar";
 
 const Container = styled(motion.div)`
-  /* height: 15rem; */
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  background-color: ${({ theme }) => theme.widgetColor};
+  background-color: ${({ theme }) => theme.ContainerColor};
+  border-radius: 10px;
 `;
 
 const Wrapper = styled.div`
@@ -51,8 +52,10 @@ const Dday = ({
   widgetId,
   setWidgetId,
 }) => {
-  const [recentDday, setRecentDday] = useState("");
+  const [recentDday, setRecentDday] = useState();
   const [DdayName, setDdayName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
   const close = () => {
     const newIsShow = isShow.filter((wid) => {
       return wid !== widgetId;
@@ -78,16 +81,27 @@ const Dday = ({
 
   useEffect(() => {
     const today = new Date();
-    testData.forEach((data) => {
-      const date = new Date(data.start);
-      const dday = date.getTime() - today.getTime();
-      if (dday >= 0) {
-        const result = Math.ceil(dday / (1000 * 60 * 60 * 24));
-        setRecentDday(result);
-        setDdayName(data.title);
-        return;
-      }
-    });
+
+    if (isLoading) {
+      getCalendar().then((res) => {
+        let flag = true;
+        res.data.calendarGetListResponseDtoList.forEach((cal) => {
+          const date = new Date(cal.startDate);
+          const dday = date.getTime() - today.getTime();
+          if (dday >= 0 && flag) {
+            const result = Math.ceil(dday / (1000 * 60 * 60 * 24));
+            setRecentDday(result);
+            if (cal.testCode) {
+              setDdayName(commonCode.J.J10[cal.testCode]);
+            } else {
+              setDdayName(commonCode.J[cal.calendarCode]);
+            }
+            flag = false;
+          }
+        });
+      });
+      setIsLoading(false);
+    }
   }, []);
 
   return (
@@ -106,8 +120,12 @@ const Dday = ({
         {setIsShow && <CloseButton onClick={close}>❌</CloseButton>}
       </Wrapper>
       <ContentContainer>
-        <Content>D-{recentDday}</Content>
-        <Name>{DdayName}</Name>
+        {!isLoading && (
+          <>
+            <Content>D-{recentDday}</Content>
+            <Name>{DdayName}</Name>
+          </>
+        )}
       </ContentContainer>
     </Container>
   );

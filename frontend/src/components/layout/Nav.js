@@ -21,9 +21,11 @@ const Item = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: default;
 `;
 
 const Logo = styled.img`
+  cursor: pointer;
   width: 5rem;
 `;
 
@@ -42,7 +44,7 @@ const Icon = styled.img`
 const DropDownContent = styled.div`
   display: none;
   position: absolute;
-  background-color: ${({ theme }) => theme.bgColor};
+  background-color: ${({ theme }) => theme.dropdownColor};
   min-width: 10rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 10px;
@@ -58,6 +60,7 @@ const DropDown = styled.div`
 `;
 
 const DropDownItem = styled.div`
+  cursor: pointer;
   text-align: center;
   margin: 2rem;
 `;
@@ -75,7 +78,6 @@ const Nav = () => {
       <Item
         onClick={() => {
           navigate("/home");
-          window.location.reload();
         }}
       >
         <Logo src={logo}></Logo>
@@ -90,13 +92,15 @@ const Nav = () => {
             <DropDownItem
               onClick={() => {
                 navigate("/setting/home");
-                window.location.reload();
               }}
             >
               홈 화면 설정
             </DropDownItem>
             <DropDownItem onClick={() => navigate("/modifyprofile")}>
               프로필 수정
+            </DropDownItem>
+            <DropDownItem onClick={() => navigate("/modifypassword")}>
+              비밀번호 변경
             </DropDownItem>
             {isDarkMode ? (
               <DropDownItem onClick={() => dispatch(ligthTheme())}>

@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import Button from "components/commons/button";
 import { useNavigate } from "react-router-dom";
 import { createOnlineClass } from "api/onlineclass";
-import { createChatRoom } from "api/chat";
 import teacher2 from "assets/img/teacher2.png";
 import { getCouresInfo } from "api/course";
 import { getNowPeriod } from "../todayclass/time";
@@ -16,10 +15,9 @@ const Wrapper = styled(motion.div)`
   width: 1000px;
   height: 700px;
   padding: 2rem 3rem;
-  background-color: rgba(255, 255, 255, 1);
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
-  background-color: white;
+  background-color: ${({ theme }) => theme.widgetColor};
   display: grid;
   grid-template-columns: 2fr 1fr;
   align-items: center;
@@ -33,8 +31,8 @@ const Right = styled.div`
   align-items: center;
   img {
     width: 100%;
+    margin: 10px 20px -40px;
   }
-
   button {
     width: 14rem;
     height: 2.5rem;
@@ -43,109 +41,93 @@ const Right = styled.div`
 `;
 
 const TodayClassModal = ({ layoutId }) => {
-  /////////////testdata//////////////
-  const data = [
-    {
-      dayCode: "H01",
-      periodCode: "I01",
-      subjectCode: "G0100",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I02",
-      subjectCode: "G0200",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I03",
-      subjectCode: "G0300",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I04",
-      subjectCode: "G0400",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I05",
-      subjectCode: "G0500",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I06",
-      subjectCode: "G0600",
-    },
-    {
-      dayCode: "H01",
-      periodCode: "I07",
-      subjectCode: "G0700",
-    },
-  ];
-
-  const { userCode } = useSelector((state) => state.user);
-  const { todayData } = useSelector((state) => state.timetable);
-  const { period } = useSelector((state) => state.timetable);
-  const [nowPeriod, setNowPeriod] = useState();
-  const [courseInfo, setCourseInfo] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [courseId, setCourseId] = useState("");
+  const { userCode, userName } = useSelector((state) => state.user);
+  const { todayData, period } = useSelector((state) => state.timetable); // 오늘 수업 데이터와 현재 교시
+  const [nowPeriod, setNowPeriod] = useState(); // 현재 교시 정보
+  const [courseInfo, setCourseInfo] = useState(); // 현재 수업 정보(교사이름, 과목 코드)
+  const [isLoading, setIsLoading] = useState(false); // 수업 정보 받아오는 로딩 state
+  const [courseId, setCourseId] = useState(""); // courseInfo
+  const [files, setFiles] = useState(); // 파일 입력 state
   const navigate = useNavigate();
-
   const onClick = (event) => {
     event.stopPropagation();
   };
 
+  // 수업 개설 및 수업 자료 업로드
   const startClass = () => {
+    let formData = new FormData();
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append("multipartFile", files[i]);
+      }
+    }
+    formData.append(
+      "onlineClassRegisterRequestDTO",
+      new Blob(
+        [
+          JSON.stringify({
+            courseId,
+          }),
+        ],
+        { type: "application/json" }
+      )
+    );
     getCouresInfo(courseId).then((res) => {
       if (res.data.onlineClassId) {
         navigate(`/onlineclass/${courseId}`);
-        window.location.reload();
       } else {
-        createOnlineClass({ courseId }).then((res) => {
+        createOnlineClass(formData).then(() => {
           navigate(`/onlineclass/${courseId}`);
-          window.location.reload();
         });
       }
     });
   };
+  // END
 
-  console.log(todayData);
+  // 오늘 수업 리스트에서 지금현재 수업과 일치하는 항목 뽑아서 courseId 설정
   useEffect(() => {
     if (todayData.length > 0) {
       const periodCode = getNowPeriod(period);
       setNowPeriod(periodCode);
-      setCourseId(todayData[periodCode.slice(2, 3) - 1].courseId);
+      for (let data of todayData) {
+        if (data.periodCode === periodCode) setCourseId(data.courseId);
+      }
+      setIsLoading(true);
     }
-    setIsLoading(false);
-    if (!isLoading && nowPeriod) {
-      getCouresInfo(courseId)
-        .then((res) => {
-          setCourseInfo(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  }, []);
+  // END
+
+  // 위에서 설정한 courseId로 수업 정보 뽑아서 courseInfo 설정
+  useEffect(() => {
+    if (isLoading && nowPeriod) {
+      getCouresInfo(courseId).then((res) => {
+        setCourseInfo(res.data);
+        setIsLoading(false);
+      });
     }
   }, [isLoading]);
-
+  // END
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>
-      {nowPeriod && courseInfo && (
+      {/* 현재 교시 정보와 수업 정보가 있을 때 근데 이거 조건없이 넘겨야 하는데
+      isLoading이랑 coureInfo로 값 넘기고 nowPeriod로는 뒤에 수업 정보 없다고 띄워야 됨 */}
+      {!isLoading && courseInfo && (
         <LeftContainer
-          courseInfo={courseInfo}
-          period={nowPeriod}
-          data={todayData}
+          courseInfo={courseInfo} // 현재 교시 수업 정보
+          period={nowPeriod} // 현재 교시
+          todayData={todayData}
+          setFiles={setFiles}
+          files={files}
+          courseId={courseId}
         />
       )}
-      {userCode === "A03" && (
-        <Right>
-          <img src={teacher2} alt="캐릭터" />
-          <Button onClick={startClass} name="수업 시작하기"></Button>
-        </Right>
-      )}
-      {userCode === "A04" && courseInfo && (
-        <RightContainer courseInfo={courseInfo} />
-      )}
+      {isLoading && !courseInfo && <LeftContainer todayData={todayData} />}
+
+      <RightContainer
+        courseInfo={courseInfo}
+        startClass={startClass}
+        nowPeriod={nowPeriod}
+      />
     </Wrapper>
   );
 };

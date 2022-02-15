@@ -21,6 +21,8 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  padding: 3rem;
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -41,7 +43,6 @@ const Wrapper = styled.div`
 `;
 const Desc = styled.div`
   font-size: 1.8rem;
-  margin: 3rem 0;
   font-weight: 600;
 `;
 
@@ -76,7 +77,6 @@ const ModifyProfile = () => {
     if (isLoading) {
       getUser(state.userId).then(
         (res) => (
-          console.log(res),
           setInputs({
             ...inputs,
             address: res.data.address,
@@ -153,7 +153,6 @@ const ModifyProfile = () => {
           classCode: inputs.classCode,
           studentNo: inputs.studentNo,
         };
-        console.log(user);
         putUser(user)
           .then((res) => {
             if (res.status === 200) {
@@ -233,6 +232,7 @@ const ModifyProfile = () => {
               onChange={onChange}
               name="addressDetail"
               width="25rem"
+              value={inputs.addressDetail}
             />
 
             <InputBlock>

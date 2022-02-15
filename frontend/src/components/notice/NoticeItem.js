@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledTr = styled.tr`
+  cursor: pointer;
   &:hover {
-    background-color: #f2f2f2;
+    background-color: ${({ theme }) => theme.noticeHoverColor};
   }
   & + & {
     border-top: 1px solid #dedede;

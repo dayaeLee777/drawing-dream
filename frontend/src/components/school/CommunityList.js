@@ -46,7 +46,7 @@ const StyledTh = styled.td`
   border-radius: 3px;
 
   & + & {
-    border-left: 2px solid white;
+    border-left: 2px solid ${({ theme }) => theme.ContainerColor};
   }
 `;
 
@@ -122,7 +122,9 @@ const CommunityList = () => {
             </tr>
           </thead>
           <tbody>
-            {!isLoading && data &&
+            {!isTotalItemsCountLoading &&
+              !isLoading &&
+              data &&
               data.map((item, idx) => (
                 <CommunityItem
                   index={totalItemsCount - (page - 1) * 10 - idx - 1}

@@ -19,7 +19,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 5rem;
-  background-color: ${({ theme }) => theme.widgetColor};
+  background-color: ${({ theme }) => theme.ContainerColor};
+  height: 80vh;
 `;
 
 const Desc = styled.div`
@@ -40,11 +41,10 @@ const Overlay = styled(motion.div)`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 `;

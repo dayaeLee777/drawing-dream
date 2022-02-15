@@ -29,11 +29,10 @@ const Overlay = styled(motion.div)`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 `;
@@ -45,7 +44,6 @@ const overlay = {
 };
 
 const Widgets = ({ widgetId, setWidgetId }) => {
-  // const [widgetId, setWidgetId] = useState();
   const [cookies, setCookie, removeCookie] = useCookies(["myWidgets"]);
   const widgets = ["M01", "M02", "M03", "M04", "M05", "M06", "M07"];
 
@@ -76,12 +74,6 @@ const Widgets = ({ widgetId, setWidgetId }) => {
     M06: <StudyRecordModal layoutId={widgetId} />,
     M07: <TimeTableModal layoutId={widgetId} />,
   };
-
-  useEffect(() => {
-    if (cookies.myWidgets) {
-      console.log(cookies.myWidgets);
-    }
-  }, []);
 
   return (
     <>
