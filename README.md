@@ -1,5 +1,4 @@
-# Drawing Dream 
-
+<br>
 ![Component_26__1_](/uploads/bdb07297d9f236ec7c3e45a321e4b95b/Component_26__1_.png)
 
 #### **세상에서 가장 편한 학교, Drawing Dream**
@@ -11,16 +10,62 @@
 > 
 > 모두에게 필요한 맞춤형 학습 도우미, Drawing Dream에서 등교부터 하교까지 함께 하세요! 
 
+<br><br><br>
 
-#### 1. 팀 소개
-    - 인주비: 팀장, Front-end
-    - 이다예: Back-end
-    - 손창현: Back-end
-    - 박기범: Back-end
-    - 장준범: Front-end
-    - 제진명: Front-end  
-  
-#### 2. 기술 스택
+# 👪 멤버 🚀
+<table>
+    <tr>
+        <td height="140px" align="center"> <a href="https://github.com/Jubi-in">
+            <img src="https://avatars.githubusercontent.com/Jubi-in" width="140px" /> <br><br> 👑 인주비 (Front-End) </a> <br></td>
+        <td height="140px" align="center"> <a href="https://github.com/unilion">
+            <img src="https://avatars.githubusercontent.com/unilion" width="140px" /> <br><br> 🙂 장준범 (Front-End) </a> <br></td>
+        <td height="140px" align="center"> <a href="https://github.com/jejinmyeong">
+            <img src="https://avatars.githubusercontent.com/jejinmyeong" width="140px" /> <br><br> 😆 제진명 (Front-End) </a> <br></td>
+        <td height="140px" align="center"> <a href="https://github.com/kibum414">
+            <img src="https://avatars.githubusercontent.com/kibum414" width="140px" /> <br><br> 😁 박기범 (Back-End) </a> <br></td>
+        <td height="140px" align="center"> <a href="https://github.com/changhyuns">
+            <img src="https://avatars.githubusercontent.com/changhyuns" width="140px" /> <br><br> 🙄 손창현 (Back-End) </a> <br></td>
+        <td height="140px" align="center"> <a href="https://github.com/dayaeLee777">
+            <img src="https://avatars.githubusercontent.com/dayaeLee777" width="140px" /> <br><br> 😶 이다예 (Back-End) </a> <br></td>
+    </tr>
+    <tr>
+        <td align="center"><br/></td>
+        <td align="center"><br/></td>
+        <td align="center"><br/></td>
+        <td align="center">REST API<br/>WebRTC<br/>WebSocket</td>
+        <td align="center">REST API<br/>CI/CD<br/>Infra<br/></td>
+        <td align="center">REST API<br/>Database<br/>S3<br/></td>
+    </tr>
+</table>
+
+<br>
+
+## 1. 프로젝트 소개
+
+<br><br>
+ 
+## 2. 기술 스택  (추가할거 알려주세요) (컬러 감각 있으신 분....) (배치 감각 있으신 분...)
+
+<br>
+<img src="https://img.shields.io/badge/Java-F25E51?style=plastic&logo=Java&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/Gradle-02303A?style=plastic&logo=Gradle&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/Spring Boot-2C9E4C?style=plastic&logo=Spring Boot&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/Spring Security-61BD53?style=plastic&logo=Spring Security&logoColor=ECF167" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/JSON Web Tokens-F2F2F2?style=plastic&logo=JSON Web Tokens&logoColor=black" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <br>
+
+
+
+<img src="https://img.shields.io/badge/Nginx-009639?style=plastic&logo=NGINX&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/Docker-2496ED?style=plastic&logo=Docker&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/Jenkins-white?style=plastic&logo=Jenkins&logoColor=D24939" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/Node.js-339939?style=plastic&logo=Node.js&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <br>
+
+<img src="https://img.shields.io/badge/Ubuntu-F2F2F2?style=plastic&logo=Ubuntu&logoColor=E95420" style="height : auto; margin-left : 10px; margin-right : 10px;"/>
+<img src="https://img.shields.io/badge/React-white?style=plastic&logo=React&logoColor=61DAFB" style="height : auto; margin-left : 10px; margin-right : 10px;"/> 
+<img src="https://img.shields.io/badge/Redux-764ABC?style=plastic&logo=Redux&logoColor=white" style="height : auto; margin-left : 10px; margin-right : 10px;"/> <br>
+
+<br><br>
+### 버전 (수정 필요)
     - BackEnd
         - DB : MySQL 5.7.x
         - Java : Zulu 8.33.0.1
@@ -35,4 +80,16 @@
     - 공통
         - 형상관리: Gitlab
         - 이슈관리: Jira
+
+<br><br>
+
+## 3. 프로젝트 구조 (완성되면 최종으로 업데이트할꺼!)
+<br>
+![image](/uploads/53ff1283ba3f2f6a1bc7e436608a5aeb/image.png)
+
+<br><br>
+
+## 4. 
+
+
 
