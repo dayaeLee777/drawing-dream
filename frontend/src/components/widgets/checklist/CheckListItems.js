@@ -1,5 +1,10 @@
 import { getCheckList } from "api/checklist";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import styled from "styled-components";
 import CheckListInsert from "./CheckListInsert";
@@ -39,12 +44,22 @@ const NullList = styled.div`
 
 const CheckListItems = ({ isListLoading, setIsListLoading, main }) => {
   const [list, setList] = useState(null);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (isListLoading) {
-      getCheckList().then((res) => {
-        setList(res.data);
-        setIsListLoading(false);
-      });
+      getCheckList()
+        .then((res) => {
+          setList(res.data);
+          setIsListLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else if (e.response.status === 409) {
+            errorAlert(409, "체크리스트를 불러오지 못했습니다.");
+          }
+        });
     }
   }, [isListLoading]);
 

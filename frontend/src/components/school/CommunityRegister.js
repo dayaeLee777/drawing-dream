@@ -10,7 +10,9 @@ import {
   modifyCommunity,
   registerCommunity,
 } from "api/community";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { errorAlert, successAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Container = styled.div`
   padding: 3rem 2rem;
@@ -46,6 +48,7 @@ const CommunityRegister = ({ modify }) => {
   const contentEmpty = `<p><br class="ProseMirror-trailingBreak"></p>`;
   const params = useParams();
   const { userId } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -59,7 +62,7 @@ const CommunityRegister = ({ modify }) => {
       getCommunityDetail(params.communityId).then((res) => {
         if (userId !== res.data.userId) {
           Navigate("../");
-          alert("수정 권한이 없습니다.");
+          errorAlert("수정 권한이 없습니다.");
           return () => {
             setIsLoading(false);
           };
@@ -90,18 +93,25 @@ const CommunityRegister = ({ modify }) => {
           title: data.title,
           content: editorRef.current.getInstance().getHTML(),
           communityId: params.communityId,
-        }).then(
-          alert("글 수정에 성공하였습니다."),
-          Navigate(`../${params.communityId}`)
-        );
+        })
+          .then(
+            successAlert("글 수정에 성공하였습니다."),
+            Navigate(`../${params.communityId}`)
+          )
+          .catch((e) => {
+            if (e.response.status === 401) {
+              errorAlert(401);
+              dispatch(logout());
+            }
+          });
       } else {
         registerCommunity({
           title: data.title,
           content: editorRef.current.getInstance().getHTML(),
-        }).then(alert("글 등록에 성공하였습니다."), Navigate("../"));
+        }).then(successAlert("글 등록에 성공하였습니다."), Navigate("../"));
       }
     } else {
-      alert("제목과 내용을 모두 작성해주세요.");
+      errorAlert(null, "제목과 내용을 모두 작성해주세요.");
     }
   };
 

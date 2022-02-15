@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { MdAdd } from "react-icons/md";
 import { registerCheckList } from "api/checklist";
+import { errorAlert } from "modules/alert";
+import { useDispatch } from "react-redux";
+import { logout } from "modules/user";
 
 const CheckListInsertContainer = styled.div`
   display: flex;
@@ -39,14 +42,24 @@ const CheckListInsertContainer = styled.div`
 
 const CheckListInsert = ({ setIsListLoading }) => {
   const [text, setText] = useState("");
+  const dispatch = useDispatch();
   const onChange = (e) => {
     setText(e.target.value);
   };
   const onClick = () => {
-    registerCheckList({ content: text }).then(() => {
-      setIsListLoading(true);
-      setText("");
-    });
+    registerCheckList({ content: text })
+      .then(() => {
+        setIsListLoading(true);
+        setText("");
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else if (e.response.status === 409) {
+          errorAlert("체크리스트 작성에 실패하였습니다.");
+        }
+      });
   };
 
   return (
