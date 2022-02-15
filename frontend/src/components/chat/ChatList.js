@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Button from "components/commons/button";
-import Input from "components/commons/input";
-import profileImg from "assets/img/profile.png";
 import ChatRoom from "components/chat/ChatRoom";
 import { getRooms } from "api/chat";
-import { useDispatch, useSelector } from "react-redux";
-import { openChat } from "modules/chat";
+import { useSelector } from "react-redux";
+import ChatItem from "./ChatItem";
 
 const ChatBox = styled.div`
   display: block;
@@ -99,45 +96,6 @@ const ChatLogs = styled.div`
   }
 `;
 
-const List = styled.div`
-  /* cursor: pointer; */
-  display: grid;
-  grid-template-columns: 2fr 8fr 1fr;
-  margin-bottom: 1rem;
-`;
-
-const Image = styled.img`
-  width: 3rem;
-`;
-
-const Middle = styled.div`
-  display: grid;
-  grid-template-rows: 0fr 1fr;
-  font-size: 1rem;
-  max-width: 12rem;
-`;
-
-const Name = styled.div`
-  color: black;
-`;
-
-const Content = styled.div`
-  margin: 0.4rem 0;
-  line-height: 1.5rem;
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.menuColor};
-
-  /* ... 으로 만들어 주는 코드 */
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-`;
-
-const Date = styled.div`
-  color: #c4c4c4;
-  font-size: 0.8rem;
-`;
-
 const Info = styled.div`
   height: 80%;
   display: flex;
@@ -155,9 +113,8 @@ const ChatList = ({
   chatClose,
 }) => {
   const [rooms, setRooms] = useState([]);
-  const { userId } = useSelector((state) => state.user);
   const { roomId } = useSelector((state) => state.chat);
-  const dispatch = useDispatch();
+
   useEffect(() => {
     getRooms().then((res) => {
       console.log(res);
@@ -191,35 +148,7 @@ const ChatList = ({
             {rooms.length > 0 ? (
               <>
                 {rooms.map((room) => (
-                  <List
-                    key={room.roomId}
-                    onClick={() => {
-                      room.users.map((user) => {
-                        if (user.userId !== userId) {
-                          dispatch(
-                            openChat(room.roomId, room.users, user.userId)
-                          );
-                        }
-                      });
-                    }}
-                  >
-                    <Image src={profileImg}></Image>
-                    <Middle>
-                      <Name>
-                        {room.users.map((user, i) => (
-                          <div key={i}>
-                            {user.userId !== userId && <>{user.userName}</>}
-                          </div>
-                        ))}
-                      </Name>
-                      {room.message && (
-                        <Content>{room.message.content}</Content>
-                      )}
-                    </Middle>
-                    {room.message && (
-                      <Date>{room.message.sendTime.slice(11, 16)}</Date>
-                    )}
-                  </List>
+                  <ChatItem room={room} key={room.roomId} />
                 ))}
               </>
             ) : (

@@ -23,7 +23,8 @@ const Container = styled(motion.div)`
 `;
 const Img = styled.img`
   border-radius: 45px;
-  width: 50%;
+  width: 4rem;
+  height: 4rem;
 `;
 
 const Wrapper = styled.div`
