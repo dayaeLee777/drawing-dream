@@ -3,12 +3,14 @@ import styled from "styled-components";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteNotice, getNoticeDetail } from "api/notice";
 import commonCode from "config/commonCode";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import { getProfileImg } from "api/user";
 import blankProfile from "assets/img/blank-profile.png";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const DetailContainer = styled.div`
   padding: 3rem 5rem;
@@ -127,6 +129,7 @@ const NoticeDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { userId, gradeCode, classCode } = useSelector((state) => state.user);
   const [profileUrl, setProfileUrl] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let noticeUserId = "";
@@ -137,12 +140,27 @@ const NoticeDetail = () => {
           setData(res.data);
         })
         .then(() => {
-          getProfileImg(noticeUserId).then((res) => {
-            setProfileUrl(res.data.fileName);
-            setIsLoading(false);
-          });
+          getProfileImg(noticeUserId)
+            .then((res) => {
+              setProfileUrl(res.data.fileName);
+              setIsLoading(false);
+            })
+            .catch((e) => {
+              if (e.response.status === 401) {
+                errorAlert(401);
+                dispatch(logout());
+              } else {
+                errorAlert(e.response.status, "이미지를 불러오지 못했습니다.");
+              }
+            });
         })
-        .catch(() => {
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "알림장을 불러오지 못했습니다.");
+          }
           Navigate("../");
           return () => {
             setIsLoading(false);

@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { deleteMemo, getMemo, modifyMemo, registerMemo } from "api/memo";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
+import { useDispatch } from "react-redux";
 
 const MemoInsertContainer = styled.div`
   width: 100%;
@@ -42,13 +45,23 @@ const ButtonContainer = styled.div`
 const MemoInsert = ({ setStatus, setIsListLoading, memoId, setMemoId }) => {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useState(() => {
     if (isLoading && memoId) {
-      getMemo(memoId).then((res) => {
-        setContent(res.data.content);
-        setIsLoading(false);
-      });
+      getMemo(memoId)
+        .then((res) => {
+          setContent(res.data.content);
+          setIsLoading(false);
+        })
+        .error((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "메모를 불러오지 못했습니다.");
+          }
+        });
     }
   }, [isLoading]);
 
@@ -62,17 +75,35 @@ const MemoInsert = ({ setStatus, setIsListLoading, memoId, setMemoId }) => {
     };
     setContent(contentsReplaceNewline());
     if (!memoId) {
-      registerMemo({ content }).then(() => {
-        setContent("");
-        setIsListLoading(true);
-        setStatus("list");
-      });
+      registerMemo({ content })
+        .then(() => {
+          setContent("");
+          setIsListLoading(true);
+          setStatus("list");
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "메모 등록에 실패했습니다.");
+          }
+        });
     } else {
-      modifyMemo({ content, memoId }).then(() => {
-        setIsListLoading(true);
-        setStatus("list");
-        setMemoId("");
-      });
+      modifyMemo({ content, memoId })
+        .then(() => {
+          setIsListLoading(true);
+          setStatus("list");
+          setMemoId("");
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "메모 수정에 실패했습니다.");
+          }
+        });
     }
   };
   const onCancle = () => {
@@ -83,11 +114,20 @@ const MemoInsert = ({ setStatus, setIsListLoading, memoId, setMemoId }) => {
     setIsListLoading(true);
   };
   const onDelete = () => {
-    deleteMemo(memoId).then(() => {
-      setIsListLoading(true);
-      setStatus("list");
-      setMemoId("");
-    });
+    deleteMemo(memoId)
+      .then(() => {
+        setIsListLoading(true);
+        setStatus("list");
+        setMemoId("");
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "메모 삭제에 실패했습니다.");
+        }
+      });
   };
   return (
     <MemoInsertContainer>

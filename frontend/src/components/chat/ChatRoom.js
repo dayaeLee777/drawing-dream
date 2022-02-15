@@ -7,6 +7,8 @@ import Stomp from "stompjs";
 import { useDispatch, useSelector } from "react-redux";
 import { getChatList } from "api/chat";
 import { openChatList } from "modules/chat";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const ChatBox = styled.div`
   display: block;
@@ -198,9 +200,18 @@ const ChatRoom = ({
     localStorage.getItem("access-token");
 
   useEffect(() => {
-    getChatList(roomId).then((res) => {
-      setContents(res.data.messages);
-    });
+    getChatList(roomId)
+      .then((res) => {
+        setContents(res.data.messages);
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "채팅방 목록을 불러오지 못했습니다.");
+        }
+      });
     client.connect(
       {
         Authorization: `Bearer ${token}`,

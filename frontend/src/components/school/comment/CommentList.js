@@ -1,5 +1,8 @@
 import { getCommentList } from "api/community";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import CommentItem from "./CommentItem";
 import CommentRegister from "./CommentRegister";
@@ -17,13 +20,23 @@ const Container = styled.div`
 const CommentList = ({ communityId }) => {
   const [commentList, setCommentList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isLoading) {
-      getCommentList(communityId).then((res) => {
-        setCommentList(res.data.commentGetListResponseDtoList);
-        setIsLoading(false);
-      });
+      getCommentList(communityId)
+        .then((res) => {
+          setCommentList(res.data.commentGetListResponseDtoList);
+          setIsLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "댓글을 읽어오지 못했습니다.");
+          }
+        });
     }
   }, [isLoading]);
   return (

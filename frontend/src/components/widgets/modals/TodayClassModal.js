@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import LeftContainer from "../todayclass/LeftContainer";
 import RightContainer from "../todayclass/RightContainer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createOnlineClass } from "api/onlineclass";
 import { getCouresInfo } from "api/course";
 import { getNowPeriod } from "../../../modules/time";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Wrapper = styled(motion.div)`
   width: 1000px;
@@ -46,6 +48,7 @@ const TodayClassModal = ({ layoutId }) => {
   const [courseId, setCourseId] = useState(""); // courseInfo
   const [files, setFiles] = useState(); // 파일 입력 state
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onClick = (event) => {
     event.stopPropagation();
   };
@@ -97,10 +100,19 @@ const TodayClassModal = ({ layoutId }) => {
   // 위에서 설정한 courseId로 수업 정보 뽑아서 courseInfo 설정
   useEffect(() => {
     if (isLoading && nowPeriod) {
-      getCouresInfo(courseId).then((res) => {
-        setCourseInfo(res.data);
-        setIsLoading(false);
-      });
+      getCouresInfo(courseId)
+        .then((res) => {
+          setCourseInfo(res.data);
+          setIsLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "수업 정보를 불러오지 못했습니다");
+          }
+        });
     }
   }, [isLoading]);
   // END

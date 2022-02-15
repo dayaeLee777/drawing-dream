@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import commonCode from "config/commonCode";
 import { getCalendar } from "api/calendar";
+import { useDispatch } from "react-redux";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -56,7 +59,7 @@ const Dday = ({
   const [recentDday, setRecentDday] = useState();
   const [DdayName, setDdayName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
+  const dispatch = useDispatch();
   const close = () => {
     const newIsShow = isShow.filter((wid) => {
       return wid !== widgetId;
@@ -69,23 +72,32 @@ const Dday = ({
     const today = new Date();
 
     if (isLoading) {
-      getCalendar().then((res) => {
-        let flag = true;
-        res.data.calendarGetListResponseDtoList.forEach((cal) => {
-          const date = new Date(cal.startDate);
-          const dday = date.getTime() - today.getTime();
-          if (dday >= 0 && flag) {
-            const result = Math.ceil(dday / (1000 * 60 * 60 * 24));
-            setRecentDday(result);
-            if (cal.testCode) {
-              setDdayName(commonCode.J.J10[cal.testCode]);
-            } else {
-              setDdayName(commonCode.J[cal.calendarCode]);
+      getCalendar()
+        .then((res) => {
+          let flag = true;
+          res.data.calendarGetListResponseDtoList.forEach((cal) => {
+            const date = new Date(cal.startDate);
+            const dday = date.getTime() - today.getTime();
+            if (dday >= 0 && flag) {
+              const result = Math.ceil(dday / (1000 * 60 * 60 * 24));
+              setRecentDday(result);
+              if (cal.testCode) {
+                setDdayName(commonCode.J.J10[cal.testCode]);
+              } else {
+                setDdayName(commonCode.J[cal.calendarCode]);
+              }
+              flag = false;
             }
-            flag = false;
+          });
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "캘린더 정보를 읽어오지 못했습니다.");
           }
         });
-      });
       setIsLoading(false);
     }
   }, []);

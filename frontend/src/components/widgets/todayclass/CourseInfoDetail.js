@@ -1,10 +1,12 @@
 import commonCode from "config/commonCode";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Dropzone from "react-dropzone";
 import { defaultStyles, FileIcon } from "react-file-icon";
 import { getOnlineClass } from "api/onlineclass";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Contanier = styled.div`
   border: 4px solid #f5bd5c;
@@ -128,6 +130,7 @@ const CourseInfoDetail = ({
   const { period } = useSelector((state) => state.timetable);
   const [isLoading, setIsLoading] = useState(true);
   const [filesUrl, setFilesUrl] = useState({});
+  const dispatch = useDispatch();
   // 수업 자료 조회
 
   useEffect(() => {
@@ -137,11 +140,20 @@ const CourseInfoDetail = ({
       userCode === "A04" &&
       courseInfo.onlineClassId
     ) {
-      getOnlineClass(courseId).then((res) => {
-        setFilesUrl(res.data.files);
-        console.log(Object.keys(res.data.files).length);
-        setIsLoading(false);
-      });
+      getOnlineClass(courseId)
+        .then((res) => {
+          setFilesUrl(res.data.files);
+          console.log(Object.keys(res.data.files).length);
+          setIsLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "수업을 불러오지 못했습니다.");
+          }
+        });
     }
   }, [isLoading]);
   // 수업 자료 조회 END

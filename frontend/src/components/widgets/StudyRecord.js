@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import Chart from "./studyrecord/Chart";
 import { useEffect, useState } from "react";
 import { getRecordList } from "api/studyrecord";
+import { errorAlert } from "modules/alert";
+import { useDispatch } from "react-redux";
+import { logout } from "modules/user";
 
 const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -52,6 +55,7 @@ const StudyRecord = ({
 
   const [records, setRecords] = useState([]);
   const [isListLoading, setIsListLoading] = useState(true);
+  const dispatch = useDispatch();
 
   const date = new Date();
   let month = date.getMonth() + 1;
@@ -63,10 +67,19 @@ const StudyRecord = ({
 
   useEffect(() => {
     if (isListLoading) {
-      getRecordList(studyDate).then((res) => {
-        setRecords(res.data.studyRecordResponseDtoList);
-        setIsListLoading(false);
-      });
+      getRecordList(studyDate)
+        .then((res) => {
+          setRecords(res.data.studyRecordResponseDtoList);
+          setIsListLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "공부 기록을 불러오지 못했습니다.");
+          }
+        });
     }
   }, [isListLoading]);
   return (

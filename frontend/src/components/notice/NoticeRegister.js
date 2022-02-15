@@ -11,6 +11,7 @@ import commonCode from "config/commonCode";
 import Dropzone from "react-dropzone";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import Modal from "components/commons/modal";
+import { errorAlert } from "modules/alert";
 
 const Container = styled.div`
   padding: 3rem 2rem 0 2rem;
@@ -107,9 +108,8 @@ const NoticeRegister = ({ modify }) => {
     if (modify && isLoading) {
       getNoticeDetail(params.noticeId).then((res) => {
         if (userId !== res.data.userId) {
-          // 토스트로 바꾸기
           Navigate("../");
-          alert("수정 권한이 없습니다.");
+          errorAlert(null, "수정 권한이 없습니다.");
           return () => {
             setIsLoading(false);
           };
@@ -195,8 +195,7 @@ const NoticeRegister = ({ modify }) => {
         });
       }
     } else {
-      // 토스트로 바꾸기
-      alert("제목과 내용, 구분을 모두 작성해주세요.");
+      errorAlert(null, "제목과 내용, 구분을 모두 작성해주세요.");
     }
   };
 

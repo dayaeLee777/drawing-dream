@@ -1,7 +1,10 @@
 import { endRecord, startRecord } from "api/studyrecord";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -70,6 +73,7 @@ const RecordInsert = ({ setIsListLoading, setIsRecord }) => {
   const [showModal, setShowModal] = useState(false);
   const [recordId, setRecordId] = useState("");
   const [timer, setTimer] = useState("");
+  const dispatch = useDispatch();
 
   const onChange = (event) => {
     const {
@@ -81,11 +85,19 @@ const RecordInsert = ({ setIsListLoading, setIsRecord }) => {
   const start = () => {
     startRecord({
       title,
-    }).then((res) => {
-      console.log(res);
-      setIsStart(true);
-      setRecordId(res.data.studyRecordId);
-    });
+    })
+      .then((res) => {
+        setIsStart(true);
+        setRecordId(res.data.studyRecordId);
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "기록을 시작하지 못했습니다.");
+        }
+      });
     let time = 0;
     let min = 0,
       hour = 0,
@@ -124,11 +136,19 @@ const RecordInsert = ({ setIsListLoading, setIsRecord }) => {
   };
 
   const realEnd = () => {
-    endRecord(recordId).then((res) => {
-      setIsListLoading(true);
-      console.log(res);
-      setIsRecord(false);
-    });
+    endRecord(recordId)
+      .then((res) => {
+        setIsListLoading(true);
+        setIsRecord(false);
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "기록을 중지하지 못했습니다.");
+        }
+      });
   };
 
   const cancel = () => {

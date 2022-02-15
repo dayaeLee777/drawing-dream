@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SchoolCodeDetail from "components/signup/school/SchoolCodeDetail";
 import { getSchool } from "api/user";
+import { errorAlert } from "modules/alert";
 
 const SchoolCodeListContainer = styled.div`
   max-height: 70vh;
@@ -37,7 +38,7 @@ const SchoolCodeList = ({ schoolName, onComplate }) => {
           KEY: "2d2bd92546704cdaab894c198821d72b",
         }).then((response) => setData(response.data.schoolInfo[1].row));
       } catch (e) {
-        console.log(e);
+        errorAlert(e.response.status, "학교목록을 불러오지 못했습니다.");
       }
       setLoading(false);
     };

@@ -1,5 +1,8 @@
 import { deleteRecord } from "api/studyrecord";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const Delete = styled.div`
@@ -40,11 +43,20 @@ const Total = styled.div`
   margin-top: 0.5rem;
 `;
 const Record = ({ setIsListLoading, data }) => {
+  const dispatch = useDispatch();
   const del = () => {
-    deleteRecord(data.studyRecordId).then((res) => {
-      setIsListLoading(true);
-      console.log(res);
-    });
+    deleteRecord(data.studyRecordId)
+      .then((res) => {
+        setIsListLoading(true);
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "기록 삭제에 실패하였습니다.");
+        }
+      });
   };
   return (
     <Container>

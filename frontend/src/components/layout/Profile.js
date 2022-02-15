@@ -2,13 +2,15 @@ import Button from "components/commons/button";
 import styled from "styled-components";
 import profileImg from "assets/img/profile.png";
 import edit from "assets/img/pngegg.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import commonCode from "config/commonCode";
 import { useNavigate } from "react-router-dom";
 import { profileImage } from "api/user";
 import { getDept } from "api/user";
 import { useEffect, useState } from "react";
 import { checkAttend } from "api/attendance";
+import { errorAlert, warnAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Container = styled.div`
   display: flex;
@@ -83,6 +85,7 @@ const Profile = () => {
   } = useSelector((state) => state.user);
   const [image, setImage] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
 
   const formData = new FormData();
   const onFileUpload = (e) => {
@@ -93,7 +96,7 @@ const Profile = () => {
     check_file_type = ["jpg", "gif", "png", "jpeg"];
 
     if (check_file_type.indexOf(file_type) == -1) {
-      alert("이미지 파일만 선택할 수 있습니다.");
+      warnAlert("이미지 파일만 선택할 수 있습니다.");
       return false;
     }
 
@@ -108,10 +111,16 @@ const Profile = () => {
 
   useEffect(() => {
     if (isLoading) {
-      getDept(userId).then(
-        (res) => setImage(res.data.fileName),
-        setIsLoading(false)
-      );
+      getDept(userId)
+        .then((res) => setImage(res.data.fileName), setIsLoading(false))
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "프로필 정보를 불러오지 못했습니다.");
+          }
+        });
     }
   }, [isLoading]);
 

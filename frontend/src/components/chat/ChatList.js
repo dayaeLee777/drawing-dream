@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ChatRoom from "components/chat/ChatRoom";
 import { getRooms } from "api/chat";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ChatItem from "./ChatItem";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const ChatBox = styled.div`
   display: block;
@@ -114,12 +116,21 @@ const ChatList = ({
 }) => {
   const [rooms, setRooms] = useState([]);
   const { roomId } = useSelector((state) => state.chat);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getRooms().then((res) => {
-      console.log(res);
-      setRooms(res.data.rooms);
-    });
+    getRooms()
+      .then((res) => {
+        setRooms(res.data.rooms);
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "채팅방을 찾지 못했습니다.");
+        }
+      });
   }, []);
 
   return (

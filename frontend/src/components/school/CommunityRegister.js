@@ -11,7 +11,7 @@ import {
   registerCommunity,
 } from "api/community";
 import { useDispatch, useSelector } from "react-redux";
-import { errorAlert, successAlert } from "modules/alert";
+import { errorAlert } from "modules/alert";
 import { logout } from "modules/user";
 import Modal from "components/commons/modal";
 
@@ -62,21 +62,30 @@ const CommunityRegister = ({ modify }) => {
 
   useEffect(() => {
     if (modify && isLoading) {
-      getCommunityDetail(params.communityId).then((res) => {
-        if (userId !== res.data.userId) {
-          Navigate("../");
-          //토스트로 바꾸기
-          alert("수정 권한이 없습니다.");
-          return () => {
-            setIsLoading(false);
-          };
-        }
-        setData({
-          title: res.data.title,
-          content: res.data.content,
+      getCommunityDetail(params.communityId)
+        .then((res) => {
+          if (userId !== res.data.userId) {
+            Navigate("../");
+            //토스트로 바꾸기
+            errorAlert(null, "수정 권한이 없습니다.");
+            return () => {
+              setIsLoading(false);
+            };
+          }
+          setData({
+            title: res.data.title,
+            content: res.data.content,
+          });
+          setIsLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "게시글을 읽어오지 못했습니다.");
+          }
         });
-        setIsLoading(false);
-      });
     }
   }, [isLoading]);
 
@@ -103,6 +112,8 @@ const CommunityRegister = ({ modify }) => {
             if (e.response.status === 401) {
               errorAlert(401);
               dispatch(logout());
+            } else {
+              errorAlert(e.response.status, "글 수정에 실패했습니다.");
             }
           });
       } else {

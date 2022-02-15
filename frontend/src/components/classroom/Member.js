@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getProfileImg } from "api/user";
 import { openChat } from "modules/chat";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Container = styled(motion.div)`
   width: 160px;
@@ -56,9 +58,11 @@ const Member = ({ member }) => {
   const [profileImg, setProfileImg] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
-    getProfileImg(member.userId).then((res) =>
-      setProfileImg(res.data.fileName)
-    );
+    getProfileImg(member.userId)
+      .then((res) => setProfileImg(res.data.fileName))
+      .catch((e) => {
+        errorAlert(e.response.status, "이미지를 불러오지 못했습니다.");
+      });
   }, [profileImg]);
 
   const createChat = () => {
@@ -69,10 +73,19 @@ const Member = ({ member }) => {
           userId: member.userId,
         },
       ],
-    }).then((res) => {
-      console.log(res);
-      dispatch(openChat(res.data.roomId, res.data.users, member.userId));
-    });
+    })
+      .then((res) => {
+        console.log(res);
+        dispatch(openChat(res.data.roomId, res.data.users, member.userId));
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "채팅방을 찾지 못했습니다.");
+        }
+      });
   };
   return (
     <>

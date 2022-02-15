@@ -4,10 +4,12 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteCommunity, getCommunityDetail } from "api/community";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CommentList from "./comment/CommentList";
 import { getProfileImg } from "api/user";
 import blankProfile from "assets/img/blank-profile.png";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const DetailContainer = styled.div`
   padding: 3rem 5rem;
@@ -83,6 +85,7 @@ const CommunityDetail = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { userId } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let communityUserId = "";
@@ -93,13 +96,22 @@ const CommunityDetail = () => {
           communityUserId = res.data.userId;
         })
         .then(() => {
-          console.log(communityUserId);
-          getProfileImg(communityUserId).then((res) => {
-            setProfileUrl(res.data.fileName);
-            setIsLoading(false);
-          });
+          getProfileImg(communityUserId)
+            .then((res) => {
+              setProfileUrl(res.data.fileName);
+              setIsLoading(false);
+            })
+            .catch((e) => {
+              if (e.response.status === 401) {
+                errorAlert(401);
+                dispatch(logout());
+              } else {
+                errorAlert(e.response.status, "이미지를 불러오지 못했습니다.");
+              }
+            });
         })
-        .catch(() => {
+        .catch((e) => {
+          errorAlert(e.response.status, "게시글을 불러오지 못했습니다.");
           Navigate("../");
           return () => {
             setIsLoading(false);

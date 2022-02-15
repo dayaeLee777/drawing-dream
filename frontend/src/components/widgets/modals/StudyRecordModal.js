@@ -5,6 +5,9 @@ import Chart from "../studyrecord/Chart";
 import RecordList from "../studyrecord/RecordList";
 import RecordInsert from "../studyrecord/RecordInsert";
 import { getRecordList } from "api/studyrecord";
+import { errorAlert } from "modules/alert";
+import { useDispatch } from "react-redux";
+import { logout } from "modules/user";
 
 const Wrapper = styled(motion.div)`
   width: 70rem;
@@ -80,6 +83,7 @@ const StudyRecordModal = ({ layoutId }) => {
   const [records, setRecords] = useState([]);
   const [total, setTotal] = useState("");
   const [isListLoading, setIsListLoading] = useState(true);
+  const dispatch = useDispatch();
 
   const date = new Date();
   let month = date.getMonth() + 1;
@@ -94,14 +98,21 @@ const StudyRecordModal = ({ layoutId }) => {
   };
 
   useEffect(() => {
-    console.log(isListLoading);
     if (isListLoading) {
-      getRecordList(studyDate).then((res) => {
-        console.log(res);
-        setRecords(res.data.studyRecordResponseDtoList);
-        setTotal(res.data.totalStudyRecord);
-        setIsListLoading(false);
-      });
+      getRecordList(studyDate)
+        .then((res) => {
+          setRecords(res.data.studyRecordResponseDtoList);
+          setTotal(res.data.totalStudyRecord);
+          setIsListLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "기록을 불러오지 못했습니다.");
+          }
+        });
     }
   }, [isListLoading]);
 

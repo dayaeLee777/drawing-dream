@@ -14,7 +14,7 @@ const App = () => {
       <ThemeProvider theme={isDarkMode ? theme.darkTheme : theme.lightTheme}>
         <GlobalStyle />
         <AppRouter />
-        <ToastContainer />
+        <ToastContainer style={{ width: "350px" }} />
       </ThemeProvider>
     </>
   );

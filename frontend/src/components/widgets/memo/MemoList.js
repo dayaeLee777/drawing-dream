@@ -1,4 +1,5 @@
 import { getMemoList } from "api/memo";
+import { errorAlert } from "modules/alert";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import MemoItem from "./MemoItem";
@@ -49,10 +50,14 @@ const MemoList = ({
 
   useEffect(() => {
     if (isListLoading) {
-      getMemoList().then((res) => {
-        setData(res.data);
-        setIsListLoading(false);
-      });
+      getMemoList()
+        .then((res) => {
+          setData(res.data);
+          setIsListLoading(false);
+        })
+        .catch((e) => {
+          errorAlert(e.response.status, "메모를 불러오지 못했습니다");
+        });
     }
   }, [isListLoading]);
 

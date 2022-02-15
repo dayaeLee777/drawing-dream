@@ -5,6 +5,9 @@ import Calendar from "@toast-ui/react-calendar";
 import "tui-calendar/dist/tui-calendar.css";
 import commonCode from "config/commonCode";
 import { getCalendar } from "api/calendar";
+import { errorAlert } from "modules/alert";
+import { useDispatch } from "react-redux";
+import { logout } from "modules/user";
 
 const Wrapper = styled(motion.div)`
   width: 800px;
@@ -45,26 +48,36 @@ const DdayModal = ({ layoutId }) => {
   const onClick = (event) => {
     event.stopPropagation();
   };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getCalendar().then((response) => {
-      const res = response.data.calendarGetListResponseDtoList;
-      res.map((cal) => {
-        setData((prev) => [
-          ...prev,
-          {
-            calendarId: cal.calendarId,
-            category: "allday",
-            isVisible: true,
-            isPending: false,
-            title: commonCode.J[cal.calendarCode],
-            id: cal.calendarId,
-            start: cal.startDate,
-            end: cal.endDate,
-          },
-        ]);
+    getCalendar()
+      .then((response) => {
+        const res = response.data.calendarGetListResponseDtoList;
+        res.map((cal) => {
+          setData((prev) => [
+            ...prev,
+            {
+              calendarId: cal.calendarId,
+              category: "allday",
+              isVisible: true,
+              isPending: false,
+              title: commonCode.J[cal.calendarCode],
+              id: cal.calendarId,
+              start: cal.startDate,
+              end: cal.endDate,
+            },
+          ]);
+        });
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "캘린더를 불러오지 못했습니다.");
+        }
       });
-    });
   }, []);
   return (
     <Wrapper onClick={onClick} layoutId={layoutId}>

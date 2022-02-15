@@ -4,6 +4,8 @@ import profileImgDefault from "assets/img/profile.png";
 import { useDispatch, useSelector } from "react-redux";
 import { openChat } from "modules/chat";
 import { getProfileImg } from "api/user";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const List = styled.div`
   /* cursor: pointer; */
@@ -57,11 +59,20 @@ const ChatItem = ({ room }) => {
       for (let user of room.users) {
         if (user.userId !== userId) {
           console.log(user.userId);
-          getProfileImg(user.userId).then((res) => {
-            console.log(res.data.fileName);
-            setProfileImg(res.data.fileName);
-            setIsLoading(false);
-          });
+          getProfileImg(user.userId)
+            .then((res) => {
+              console.log(res.data.fileName);
+              setProfileImg(res.data.fileName);
+              setIsLoading(false);
+            })
+            .catch((e) => {
+              if (e.response.status === 401) {
+                errorAlert(401);
+                dispatch(logout());
+              } else {
+                errorAlert(e.response.status, "이미지를 불러오지 못했습니다.");
+              }
+            });
         }
       }
     }
