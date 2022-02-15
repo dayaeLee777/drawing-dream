@@ -10,6 +10,7 @@ import { getNoticeDetail, modifyNotice, registerNotice } from "api/notice";
 import commonCode from "config/commonCode";
 import Dropzone from "react-dropzone";
 import { FileIcon, defaultStyles } from "react-file-icon";
+import Modal from "components/commons/modal";
 
 const Container = styled.div`
   padding: 3rem 2rem 0 2rem;
@@ -93,7 +94,8 @@ const NoticeRegister = ({ modify }) => {
   const { userId } = useSelector((state) => state.user);
 
   const [isLoading, setIsLoading] = useState(true);
-
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const [data, setData] = useState({
     title: "",
     content: "",
@@ -105,6 +107,7 @@ const NoticeRegister = ({ modify }) => {
     if (modify && isLoading) {
       getNoticeDetail(params.noticeId).then((res) => {
         if (userId !== res.data.userId) {
+          // 토스트로 바꾸기
           Navigate("../");
           alert("수정 권한이 없습니다.");
           return () => {
@@ -163,8 +166,8 @@ const NoticeRegister = ({ modify }) => {
           )
         );
         modifyNotice(formData).then(
-          alert("글 수정에 성공하였습니다."),
-          Navigate(`../${params.noticeId}`)
+          setModalMessage("글을 수정하시겠습니까?."),
+          setShowModal(true)
         );
       } else {
         let formData = new FormData();
@@ -187,11 +190,12 @@ const NoticeRegister = ({ modify }) => {
           )
         );
         registerNotice(formData).then(() => {
-          alert("글 등록에 성공하였습니다.");
-          Navigate("../");
+          setModalMessage("글을 등록하시겠습니까?");
+          setShowModal(true);
         });
       }
     } else {
+      // 토스트로 바꾸기
       alert("제목과 내용, 구분을 모두 작성해주세요.");
     }
   };
@@ -297,6 +301,13 @@ const NoticeRegister = ({ modify }) => {
           onClick={onCancle}
         />
       </BtnContainer>
+      {showModal && (
+        <Modal
+          url={modify ? `../${params.communityId}` : `../`}
+          message={modalMessage}
+          setShowModal={setShowModal}
+        />
+      )}
     </Container>
   );
 };
