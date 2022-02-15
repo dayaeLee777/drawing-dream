@@ -34,7 +34,7 @@ public class MeetingServiceImpl implements MeetingService {
 		
 		UserDepartment userDepartment = userDepartmentRepository.findByUser(user).orElse(null);
 		
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
 		
 		LocalDateTime regStartDate = meetingRequestDto.getDate().atTime(0, 0, 0);
 		LocalDateTime regEndDate = meetingRequestDto.getDate().atTime(23, 59, 59);
