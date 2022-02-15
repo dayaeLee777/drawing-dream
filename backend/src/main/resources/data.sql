@@ -75,7 +75,7 @@ INSERT IGNORE INTO `auth` (`id`, `password`, `login_id`, `del_yn`, `user_id`) VA
 (_binary 'ôð\ÔÒ»\âE÷¼5\î(?f¨`','$2a$10$bEvGUCgA7OEdhHZm7TdwF.7alnH3v/QsVSSg.24XK2cfapbDD07Ny','sdrawingdream06',false,_binary 'tQ\Èq@³(ø\î¬'),
 (_binary 'k\îHgQ)\'ö;LR','$2a$10$/8esZWeFqiaiWv71cfybae1xzajM0oD.VD9xqkcdcGnIpKbJDz1py','sdrawingdream07',false,_binary 'À<ýHc¡4Vùüt'),
 (_binary '\ãµD¤@u¡ð&hG','$2a$10$Wopdb2Lo6rOg2/yE8PnUV.8xROllcUWRaqRYaFhy2l8dVo/YyuXo2','sdrawingdream08',false,_binary '\â\á,	BRõrGòk'),
-(_binary '0jRÁiNP®\×bøS\Òs\è','$2a$10$MnRrp6Wm1sToXiUrmr6HnOIXBPJqjQMOaOOYzZUzYEFhZmWVFjo0u','sdrawingdream07',false,_binary '\0¼A²<\ìC^´\Ï]\Ù¢'),
+(_binary '0jRÁiNP®\×bøS\Òs\è','$2a$10$MnRrp6Wm1sToXiUrmr6HnOIXBPJqjQMOaOOYzZUzYEFhZmWVFjo0u','sdrawingdream09',false,_binary '\0¼A²<\ìC^´\Ï]\Ù¢'),
 (_binary '­~lF¶NG\Ï´','$2a$10$KUOCkcUoSMa5RPqlDb8u3OfO9Z/.o65dPrfCzhwKBv0d8uXFLCgP2','sdrawingdream10',false,_binary ' \ÚÜ£J »Á¼\Ð\ä_\Û');
 
 --
