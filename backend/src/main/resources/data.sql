@@ -19,12 +19,21 @@ INSERT IGNORE INTO `school` (`id`, `school_code`,  `school_name`, `school_serial
 INSERT IGNORE INTO `user` (`id`, `user_name`, `user_email`, `address`, `address_detail`, `phone`, `del_yn`) VALUES 
 (_binary "]H\'H_k:^Ì¯Q}",'이승윤','teacherpark@korea.kr', '서울 강남구 가로수길 9 (신사동) 싸피빌딩', '207호', '01070077777',false),
 (_binary 'þvGP*G\âcjò','안희경', 'teacherkim@korea.kr', '서울 강남구 강남대로 302-2 (역삼동) 드로잉드림', '1004호','01012345678',false),
-(_binary 'b¢Q>³KF£´dNxÎ','당현아','dang@naver.com','서울 강남구 가로수길 5 (신사동)', '201동 706호', '01089512235',false);
+(_binary 'b¢Q>³KF£´dNxÎ','이은택','dang@naver.com','서울 강남구 가로수길 5 (신사동)', '201동 706호', '01089512235',false);
 
 INSERT IGNORE INTO `user` (`id`, `user_name`, `user_email`, `address`, `address_detail`, `parent_phone`, `phone`, `del_yn`) VALUES 
 (_binary 'p·\ØR ¥L3k{t\r\Þ4K','박기범','student@naver.com', '서울 강남구 역삼로2길 5 (역삼동) 드드아파트', '1동 304호', '01099990000','01082828282', false),
 (_binary '|û<aO\â®¸Ù½\Õü','손창현','sonchanghyun@naver.com','서울 마포구 가양대로 1 (상암동)','101동 1006호','01089651852','01034561985', false),
 (_binary '\\A\×2\Ä@Í¼FóHu*\n','이다예','leedaye@naver.com','서울 마포구 마포대로 108 (공덕동)','308동 805호','01085497852','01045782398', false);
+
+INSERT IGNORE INTO `user` (`id`, `user_name`, `user_email`, `del_yn`) VALUES 
+(_binary '\0¼A²<\ìC^´\Ï]\Ù¢','당현아','taek@naver.com', false),
+(_binary '.1\â\Ü\ÄC`§*¾*É r\Ü','인주비','injubi@naver.com', false),
+(_binary 'tQ\Èq@³(ø\î¬','장준범','jangjunbeom@naver.com', false),
+(_binary 'À<ýHc¡4Vùüt','이태희','taehee@naver.com', false),
+(_binary '\â\á,	BRõrGòk','최나현','nahyeon@naver.com', false),
+(_binary '­&Å¹GB®¶T\ê;\Ð;\è:','제진명','jejinmyeong@naver.com', false),
+(_binary ' \ÚÜ£J »Á¼\Ð\ä_\Û','서요셉','joseph@naver.com', false);
 
 --
 -- Dumping data for table `user_department`
@@ -36,9 +45,17 @@ INSERT IGNORE INTO `user_department` (`id`, `grade_code`, `class_code`, `user_co
 (_binary '/»½\ÜH±¬=\Æ9','E02','F05','A03','N01',false,_binary 'b¢Q>³KF£´dNxÎ',_binary 'm®rL®§u,bÚ¶');
 
 INSERT IGNORE INTO `user_department` (`id`, `grade_code`, `class_code`, `student_no`, `user_code`, `approval_code`, `del_yn`, `user_id`, `school_id`) VALUES 
-(_binary '\'\ÑJ7MF°\êHXµ','E03','F07',20,'A04','N01',false,_binary 'p·\ØR ¥L3k{t\r\Þ4K',_binary 'm®rL®§u,bÚ¶'),
+(_binary '\'\ÑJ7MF°\êHXµ','E03','F07',1,'A04','N01',false,_binary 'p·\ØR ¥L3k{t\r\Þ4K',_binary 'm®rL®§u,bÚ¶'),
 (_binary '; 1©rA©¾F\ã\nFÿ','E03','F07',2,'A04','N01',false,_binary '|û<aO\â®¸Ù½\Õü',_binary 'm®rL®§u,bÚ¶'),
-(_binary '\Õmè®!D7|ý]£','E03','F07',1,'A04','N01',false,_binary '\\A\×2\Ä@Í¼FóHu*\n',_binary 'm®rL®§u,bÚ¶');
+(_binary '\Õmè®!D7|ý]£','E03','F07',3,'A04','N01',false,_binary '\\A\×2\Ä@Í¼FóHu*\n',_binary 'm®rL®§u,bÚ¶'),
+
+(_binary '\Å\"fF\"CÙ \ÇY»GV`','E03','F07',4,'A04','N01',false,_binary '.1\â\Ü\ÄC`§*¾*É r\Ü',_binary 'm®rL®§u,bÚ¶'),
+(_binary '.\ÔEo\È\n¬ûÁ\Öm','E03','F07',5,'A04','N01',false,_binary '­&Å¹GB®¶T\ê;\Ð;\è:',_binary 'm®rL®§u,bÚ¶'),
+(_binary 'W/b\Ï\"\ÙOÔ½Mk/2\Ü','E03','F07',6,'A04','N01',false,_binary 'tQ\Èq@³(ø\î¬',_binary 'm®rL®§u,bÚ¶'),
+(_binary 'n\0\ÎaûWJP¬½m**Ò_','E03','F07',7,'A04','N01',false,_binary '\â\á,	BRõrGòk',_binary 'm®rL®§u,bÚ¶'),
+(_binary '%WÍ³|I¶·¥\ìK\Ç\r','E03','F07',8,'A04','N01',false,_binary ' \ÚÜ£J »Á¼\Ð\ä_\Û',_binary 'm®rL®§u,bÚ¶'),
+(_binary 'ø·\Ù\Ý©G»§l´ð','E03','F07',9,'A04','N01',false,_binary 'À<ýHc¡4Vùüt',_binary 'm®rL®§u,bÚ¶'),
+(_binary 'ÿd\í<Gu\\o¨E','E03','F07',10,'A04','N01',false,_binary '\0¼A²<\ìC^´\Ï]\Ù¢',_binary 'm®rL®§u,bÚ¶');
 
 
 --
@@ -46,12 +63,20 @@ INSERT IGNORE INTO `user_department` (`id`, `grade_code`, `class_code`, `student
 --
 
 INSERT IGNORE INTO `auth` (`id`, `password`, `login_id`, `del_yn`, `user_id`) VALUES 
-(_binary 's6^úsO¸\0%\éõN_', '$2a$10$CccrWrI8rzJjoAwmmd6vDOQi0k8oQyvGKZV.f3aXGaiw2ceGlsQKC','teacherkim',false, _binary 'þvGP*G\âcjò'),
-(_binary 'sô\Ðr\×+Il^¿\æ°','$2a$10$TX.qRwBQxT8L8rmNsjeKTeeGim5quJ.1WILLGlejzGGE5UYA8F4Ly','student01',false,_binary 'p·\ØR ¥L3k{t\r\Þ4K'),
-(_binary '¦e_\\\êPB±ö\ëN','$2a$10$d06erPTym15gQKLvPn.LBeujXcLIhYhKtdbs9xTIYOhfSoo6Wopg.','teacherpark',false,_binary "]H\'H_k:^Ì¯Q}"),
-(_binary 'nºyòGxL«´Ùµ_¥\Ýb','$2a$10$do5bw77ATUHcAkO2NkUQ.uTFkrvLuo3hvt9iN7YlqSrBjarcudVvC','student02',false,_binary '|û<aO\â®¸Ù½\Õü'),
-(_binary '3\Ò\Ñg\ëKý­-Joÿ÷','$2a$10$qh1KBbPQrPkfhxOe8kTACOou9X9LvoI5bB0GK8zfbxwVdS3brh4zS','student03',false,_binary '\\A\×2\Ä@Í¼FóHu*\n'),
-(_binary '\à7lW7A,±_z[I\ë_','$2a$10$F7eNu1uz9kOCOC2ZKIBl8OTdueuEIg7wcQHBQOodrJAeLMkq/ZMn.','teacherdang',false,_binary 'b¢Q>³KF£´dNxÎ');
+(_binary 's6^úsO¸\0%\éõN_', '$2a$10$CccrWrI8rzJjoAwmmd6vDOQi0k8oQyvGKZV.f3aXGaiw2ceGlsQKC','tdrawingdream02',false, _binary 'þvGP*G\âcjò'),
+(_binary 'sô\Ðr\×+Il^¿\æ°','$2a$10$TX.qRwBQxT8L8rmNsjeKTeeGim5quJ.1WILLGlejzGGE5UYA8F4Ly','sdrawingdream01',false,_binary 'p·\ØR ¥L3k{t\r\Þ4K'),
+(_binary '¦e_\\\êPB±ö\ëN','$2a$10$d06erPTym15gQKLvPn.LBeujXcLIhYhKtdbs9xTIYOhfSoo6Wopg.','tdrawingdream01',false,_binary "]H\'H_k:^Ì¯Q}"),
+(_binary 'nºyòGxL«´Ùµ_¥\Ýb','$2a$10$do5bw77ATUHcAkO2NkUQ.uTFkrvLuo3hvt9iN7YlqSrBjarcudVvC','sdrawingdream02',false,_binary '|û<aO\â®¸Ù½\Õü'),
+(_binary '3\Ò\Ñg\ëKý­-Joÿ÷','$2a$10$qh1KBbPQrPkfhxOe8kTACOou9X9LvoI5bB0GK8zfbxwVdS3brh4zS','sdrawingdream03',false,_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(_binary '\à7lW7A,±_z[I\ë_','$2a$10$F7eNu1uz9kOCOC2ZKIBl8OTdueuEIg7wcQHBQOodrJAeLMkq/ZMn.','tdrawingdream03',false,_binary 'b¢Q>³KF£´dNxÎ'),
+
+(_binary 'õ7º|MN6DL\Æ[\î\Ö','$2a$10$4nIcekOShq3z19nvpOjPJ.fxN1g8GUmtof/u/ngZTsnTxGtZPuosO','sdrawingdream04',false,_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(_binary '\'1ýz@Sª\ä\ÚH¥{P','$2a$10$bjBAlXOpTL8w9FarNe02VO7/VleUdTWcdehmG9/J/BN.TUNp4w7Je','sdrawingdream05',false,_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(_binary 'ôð\ÔÒ»\âE÷¼5\î(?f¨`','$2a$10$bEvGUCgA7OEdhHZm7TdwF.7alnH3v/QsVSSg.24XK2cfapbDD07Ny','sdrawingdream06',false,_binary 'tQ\Èq@³(ø\î¬'),
+(_binary 'k\îHgQ)\'ö;LR','$2a$10$/8esZWeFqiaiWv71cfybae1xzajM0oD.VD9xqkcdcGnIpKbJDz1py','sdrawingdream07',false,_binary 'À<ýHc¡4Vùüt'),
+(_binary '\ãµD¤@u¡ð&hG','$2a$10$Wopdb2Lo6rOg2/yE8PnUV.8xROllcUWRaqRYaFhy2l8dVo/YyuXo2','sdrawingdream08',false,_binary '\â\á,	BRõrGòk'),
+(_binary '0jRÁiNP®\×bøS\Òs\è','$2a$10$MnRrp6Wm1sToXiUrmr6HnOIXBPJqjQMOaOOYzZUzYEFhZmWVFjo0u','sdrawingdream07',false,_binary '\0¼A²<\ìC^´\Ï]\Ù¢'),
+(_binary '­~lF¶NG\Ï´','$2a$10$KUOCkcUoSMa5RPqlDb8u3OfO9Z/.o65dPrfCzhwKBv0d8uXFLCgP2','sdrawingdream10',false,_binary ' \ÚÜ£J »Á¼\Ð\ä_\Û');
 
 --
 -- Dumping data for table `course`
@@ -88,7 +113,6 @@ INSERT IGNORE INTO `period` VALUES
 (_binary '´w¿zD³»¼§¢mÁ\Û',0,'09:45:00','I01','09:00:00',_binary 'm®rL®§u,bÚ¶'),
 (_binary '¾y´\ß*\îL¶Mo$\åÌ',0,'14:15:00','I05','13:30:00',_binary 'm®rL®§u,bÚ¶'),
 (_binary 'ýo	J@\0þYõ\Ã3',0,'09:00:00','I00','08:30:00',_binary 'm®rL®§u,bÚ¶'),
-(_binary 'n\Û\Îû\éB½¸¹m\Ç9¨×µ',0,'17:55:00','I09','17:10:00',_binary 'm®rL®§u,bÚ¶'),
 (_binary 'I>V!K?\Õñ\0 ³\ï¬',0,'17:00:00','I08','16:15:00',_binary 'm®rL®§u,bÚ¶');
 
 
@@ -97,6 +121,8 @@ INSERT IGNORE INTO `period` VALUES
 --
 
 INSERT IGNORE INTO `time_table` (`id`, `day_code`, `del_yn`, `period_code`, `semester_code`,`course_id`, `user_id`) VALUES 
+
+-- student01
 
 (_binary 'ºc7.EÛ¡\Ñr©z\É','H01',_binary '\0','I01','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary 'p·\ØR ¥L3k{t\r\Þ4K'),
 (_binary '8\Ö}XðDu½»ò#ÿ\ß+\n','H01',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary 'p·\ØR ¥L3k{t\r\Þ4K'),
@@ -138,8 +164,228 @@ INSERT IGNORE INTO `time_table` (`id`, `day_code`, `del_yn`, `period_code`, `sem
 (_binary '§9{PªD\â¸û0\r«','H05',_binary '\0','I06','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary 'p·\ØR ¥L3k{t\r\Þ4K'),
 (_binary 'd}£ûFï´º\n\ãÊ¦>','H05',_binary '\0','I07','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary 'p·\ØR ¥L3k{t\r\Þ4K'),
 (_binary '´fV²ZCe­Ft\ß*ó','H05',_binary '\0','I08','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary 'p·\ØR ¥L3k{t\r\Þ4K'),
-(_binary '/\0^ú6\ÙD½\r\Ëyóp_\É','H05',_binary '\0','I09','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary 'p·\ØR ¥L3k{t\r\Þ4K'),
 
+
+-- student03
+
+(unhex(replace(uuid(),'-','')), 'H01',_binary '\0','I01','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I04','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I06','O01',_binary 'µ)Wy\0HºûTN',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I07','O01',_binary 'ðÕ1w)F j0V×',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I01','O01',_binary 'òeRLrK­\ìV\Éd',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I02','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I03','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I04','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I05','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I06','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I07','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I01','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I02','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I04','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I05','O01',_binary 'ðÕ1w)F j0V×',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I06','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I07','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I01','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I03','O01',_binary 'ðÕ1w)F j0V×',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I04','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I05','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I06','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I07','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I01','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I02','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I03','O01',_binary '¨­KJ¿ª/PJ£\é',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I04','O01',_binary 'ðÕ1w)F j0V×',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I06','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I07','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I08','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary '\\A\×2\Ä@Í¼FóHu*\n'),
+
+
+-- student02
+
+(unhex(replace(uuid(),'-','')), 'H01',_binary '\0','I01','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I04','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I06','O01',_binary 'µ)Wy\0HºûTN',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I07','O01',_binary 'ðÕ1w)F j0V×',_binary '|û<aO\â®¸Ù½\Õü'),
+
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I01','O01',_binary 'òeRLrK­\ìV\Éd',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I02','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I03','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I04','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I05','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I06','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I07','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary '|û<aO\â®¸Ù½\Õü'),
+
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I01','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I02','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I04','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I05','O01',_binary 'ðÕ1w)F j0V×',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I06','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I07','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary '|û<aO\â®¸Ù½\Õü'),
+
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I01','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I03','O01',_binary 'ðÕ1w)F j0V×',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I04','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I05','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I06','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I07','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '|û<aO\â®¸Ù½\Õü'),
+
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I01','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I02','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I03','O01',_binary '¨­KJ¿ª/PJ£\é',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I04','O01',_binary 'ðÕ1w)F j0V×',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I06','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I07','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '|û<aO\â®¸Ù½\Õü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I08','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary '|û<aO\â®¸Ù½\Õü'),
+
+-- student04
+
+(unhex(replace(uuid(),'-','')), 'H01',_binary '\0','I01','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I04','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I06','O01',_binary 'µ)Wy\0HºûTN',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I07','O01',_binary 'ðÕ1w)F j0V×',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I01','O01',_binary 'òeRLrK­\ìV\Éd',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I02','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I03','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I04','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I05','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I06','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I07','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I01','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I02','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I04','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I05','O01',_binary 'ðÕ1w)F j0V×',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I06','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I07','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I01','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I03','O01',_binary 'ðÕ1w)F j0V×',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I04','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I05','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I06','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I07','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I01','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I02','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I03','O01',_binary '¨­KJ¿ª/PJ£\é',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I04','O01',_binary 'ðÕ1w)F j0V×',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I06','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I07','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I08','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary '.1\â\Ü\ÄC`§*¾*É r\Ü'),
+
+
+-- student05
+
+(unhex(replace(uuid(),'-','')), 'H01',_binary '\0','I01','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I04','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I06','O01',_binary 'µ)Wy\0HºûTN',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I07','O01',_binary 'ðÕ1w)F j0V×',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I01','O01',_binary 'òeRLrK­\ìV\Éd',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I02','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I03','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I04','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I05','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I06','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I07','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I01','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I02','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I04','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I05','O01',_binary 'ðÕ1w)F j0V×',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I06','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I07','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I01','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I03','O01',_binary 'ðÕ1w)F j0V×',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I04','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I05','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I06','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I07','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I01','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I02','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I03','O01',_binary '¨­KJ¿ª/PJ£\é',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I04','O01',_binary 'ðÕ1w)F j0V×',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I06','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I07','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I08','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary '­&Å¹GB®¶T\ê;\Ð;\è:'),
+
+
+
+-- student06
+
+(unhex(replace(uuid(),'-','')), 'H01',_binary '\0','I01','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I04','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I06','O01',_binary 'µ)Wy\0HºûTN',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H01',_binary '\0','I07','O01',_binary 'ðÕ1w)F j0V×',_binary 'tQ\Èq@³(ø\î¬'),
+
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I01','O01',_binary 'òeRLrK­\ìV\Éd',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I02','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I03','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I04','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I05','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I06','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H02',_binary '\0','I07','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary 'tQ\Èq@³(ø\î¬'),
+
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I01','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I02','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I03','O01',_binary 'òeRLrK­\ìV\Éd',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I04','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I05','O01',_binary 'ðÕ1w)F j0V×',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I06','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H03',_binary '\0','I07','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary 'tQ\Èq@³(ø\î¬'),
+
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I01','O01',_binary 'YCdñ¾\ÚMmõ& \Ï\Ï',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I03','O01',_binary 'ðÕ1w)F j0V×',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I04','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I05','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I06','O01',_binary '/;U\âD\ãBÒ {C3Ý',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H04',_binary '\0','I07','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary 'tQ\Èq@³(ø\î¬'),
+
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I01','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I02','O01',_binary 'ýdõ\èAº¯\ãk¶Jô]',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I03','O01',_binary '¨­KJ¿ª/PJ£\é',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I04','O01',_binary 'ðÕ1w)F j0V×',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I06','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I07','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary 'tQ\Èq@³(ø\î¬'),
+(unhex(replace(uuid(),'-','')),'H05',_binary '\0','I08','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary 'tQ\Èq@³(ø\î¬'),
+
+-- teacher
 
 (_binary 'E.ðHw&´­[o^','H01',_binary '\0','I01','O01',_binary 'k¢eZMHx\â\î®l\Þ',_binary 'þvGP*G\âcjò'),
 (_binary '%	6E¬¯\noY*\È','H01',_binary '\0','I02','O01',_binary 'K\Ñ5¤\ÊAt	\íK!#',_binary 'þvGP*G\âcjò'),
@@ -180,12 +426,8 @@ INSERT IGNORE INTO `time_table` (`id`, `day_code`, `del_yn`, `period_code`, `sem
 (_binary '\ç\ËøGÀWJÈ­\Õº²(','H05',_binary '\0','I05','O01',_binary 'ö\ë:}~B£\Ê5_¹\Ù]',_binary "]H\'H_k:^Ì¯Q}"),
 (_binary '\èHÕ¡Kµ=eNO','H05',_binary '\0','I06','O01',_binary "BFµ\ÓOÚ²OGCõ6\'_",_binary "]H\'H_k:^Ì¯Q}"),
 (_binary '\é_OôA)¤8\naQ','H05',_binary '\0','I07','O01',_binary '\ÄÆ Î\0L§¼SÁ\Ïñ',_binary "]H\'H_k:^Ì¯Q}"),
-(_binary 'ê«5VFñµ¹}oa½_','H05',_binary '\0','I08','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary "]H\'H_k:^Ì¯Q}"),
-(_binary 'ð-\"öj¥B M:R\Ã@&S','H05',_binary '\0','I09','O01',_binary '\íaò%Er¤  \Ö÷\âÁ.',_binary "]H\'H_k:^Ì¯Q}");
+(_binary 'ê«5VFñµ¹}oa½_','H05',_binary '\0','I08','O01',_binary 'B\â¿Pw^JfÍ]6·\Ü+',_binary "]H\'H_k:^Ì¯Q}");
 
---(_binary 'ôF¹ðq\ÛLÂ\ç\êSÿQ =','H01',_binary '\0','I09','O01',_binary 'YCdÃ±Â¾ÃMmÂÃµ\Â',_binary "]H\'H_k:^Ì¯Q}"),
---(_binary 'õ»Ï¡A/Jz£ý³YtHb','H01',_binary '\0','I09','O01',_binary 'YCdÃ±Â¾ÃMmÂÃµ\Â',_binary "]H\'H_k:^Ì¯Q}"),
---(_binary 'ùô \åJf­8þr\Ã','H01',_binary '\0','I09','O01',_binary 'YCdÃ±Â¾ÃMmÂÃµ\Â',_binary "]H\'H_k:^Ì¯Q}");
 
 
 
