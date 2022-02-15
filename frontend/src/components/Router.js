@@ -26,6 +26,7 @@ import NoticeDetail from "./notice/NoticeDetail";
 import Widget from "routes/content/Widget";
 import HomeOther from "routes/HomeOther";
 import ModifyPassword from "routes/auth/ModifyPassword";
+import Study from "routes/content/Study";
 
 const AppRouter = () => {
   const { isLoggedIn } = useSelector((state) => state.user);
@@ -65,6 +66,7 @@ const AppRouter = () => {
               <Route path="myclassroom" element={<MyClassRoom />} />
               <Route path="widgetlist" element={<WidgetList />} />
               <Route path="meeting" element={<Meeting />} />
+              <Route path="study" element={<Study />} />
             </Route>
             <Route path="/" element={<Navigate replace to="/home" />} />
             <Route path="/signin" element={<Navigate replace to="/home" />} />
