@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import commonCode from "config/commonCode";
+import { useDispatch } from "react-redux";
 import MemberList from "components/classroom/MemberList";
 import { getMyClass } from "api/myclass";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -35,11 +36,21 @@ const Desc = styled.div`
 
 const MyClassRoom = () => {
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getMyClass().then((response) => {
-      setData(response.data.myClassGetListResponseDtoList);
-    });
+    getMyClass()
+      .then((response) => {
+        setData(response.data.myClassGetListResponseDtoList);
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "우리반 정보를 불러오지 못했습니다.");
+        }
+      });
   }, []);
   return (
     <Container>

@@ -61,7 +61,12 @@ const Member = ({ member }) => {
     getProfileImg(member.userId)
       .then((res) => setProfileImg(res.data.fileName))
       .catch((e) => {
-        errorAlert(e.response.status, "이미지를 불러오지 못했습니다.");
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "이미지를 불러오지 못했습니다.");
+        }
       });
   }, [profileImg]);
 
@@ -75,7 +80,6 @@ const Member = ({ member }) => {
       ],
     })
       .then((res) => {
-        console.log(res);
         dispatch(openChat(res.data.roomId, res.data.users, member.userId));
       })
       .catch((e) => {

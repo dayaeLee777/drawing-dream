@@ -39,10 +39,8 @@ export const compareTime = (time) => {
     splitTime[1],
     splitTime[2]
   );
-  console.log(date2);
   const elapsedMSec = date2.getTime() - date.getTime();
   const elapsedMin = Math.floor(elapsedMSec / 1000 / 60);
 
-  console.log(elapsedMin);
   return elapsedMin;
 };

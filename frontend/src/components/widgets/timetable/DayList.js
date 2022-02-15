@@ -4,7 +4,6 @@ import DayItem from "./DayItem";
 import { Class } from "./WeekList";
 
 const DayList = ({ data, widget }) => {
-  // console.log(data);
   return (
     <Class>
       {Object.entries(commonCode.I).map(

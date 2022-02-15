@@ -4,11 +4,13 @@ import {
   getReCommentList,
 } from "api/community";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import CommentRegister from "./CommentRegister";
 import blankProfile from "assets/img/blank-profile.png";
 import { getProfileImg } from "api/user";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Container = styled.div`
   font-size: 1rem;
@@ -60,12 +62,22 @@ const CommentItem = ({
   const { userId } = useSelector((state) => state.user);
   const [profileUrl, setProfileUrl] = useState("");
   const [isProfile, setIsProfile] = useState(true);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (isProfile) {
-      getProfileImg(data.userId).then((res) => {
-        setProfileUrl(res.data.fileName);
-        setIsProfile(false);
-      });
+      getProfileImg(data.userId)
+        .then((res) => {
+          setProfileUrl(res.data.fileName);
+          setIsProfile(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "이미지를 불러오지 못했습니다.");
+          }
+        });
     }
   }, []);
   // 대댓글 관련

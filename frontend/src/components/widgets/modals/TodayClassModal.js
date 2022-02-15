@@ -72,15 +72,33 @@ const TodayClassModal = ({ layoutId }) => {
         { type: "application/json" }
       )
     );
-    getCouresInfo(courseId).then((res) => {
-      if (res.data.onlineClassId) {
-        navigate(`/onlineclass/${courseId}`);
-      } else {
-        createOnlineClass(formData).then(() => {
+    getCouresInfo(courseId)
+      .then((res) => {
+        if (res.data.onlineClassId) {
           navigate(`/onlineclass/${courseId}`);
-        });
-      }
-    });
+        } else {
+          createOnlineClass(formData)
+            .then(() => {
+              navigate(`/onlineclass/${courseId}`);
+            })
+            .catch((e) => {
+              if (e.response.status === 401) {
+                errorAlert(401);
+                dispatch(logout());
+              } else {
+                errorAlert(e.response.status, "수업 생성에 실패했습니다.");
+              }
+            });
+        }
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "수업 정보를 불러오지 못했습니다.");
+        }
+      });
   };
   // END
 

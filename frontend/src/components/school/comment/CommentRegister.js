@@ -5,8 +5,10 @@ import {
   registerSubComment,
 } from "api/community";
 import Button from "components/commons/button";
+import { errorAlert, successAlert } from "modules/alert";
+import { logout } from "modules/user";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 const InputContainer = styled.div`
@@ -57,6 +59,7 @@ const CommentRegister = ({
 }) => {
   const { userName, userId } = useSelector((state) => state.user);
   const [content, setContent] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (modify) {
@@ -79,8 +82,16 @@ const CommentRegister = ({
             });
           })
           .then(() => {
-            alert("댓글이 수정되었습니다.");
+            successAlert("댓글이 수정되었습니다.");
             setCommentListIsLoading(true);
+          })
+          .catch((e) => {
+            if (e.response.status === 401) {
+              errorAlert(401);
+              dispatch(logout());
+            } else {
+              errorAlert(e.response.status, "댓글 수정에 실패하였습니다.");
+            }
           });
       } else {
         modifyReComment({ commentId: data.commentId, content })
@@ -91,23 +102,38 @@ const CommentRegister = ({
             });
           })
           .then(() => {
-            alert("대댓글이 수정되었습니다.");
+            successAlert("대댓글이 수정되었습니다.");
             setReCommentListIsLoading(true);
+          })
+          .catch((e) => {
+            if (e.response.status === 401) {
+              errorAlert(401);
+              dispatch(logout());
+            } else {
+              errorAlert(e.response.status, "대댓글 수정에 실패하였습니다.");
+            }
           });
       }
     } else {
       if (children) {
-        registerComment({ communityId: communityId, content: content }).then(
-          () => {
-            alert("댓글이 등록되었습니다.");
+        registerComment({ communityId: communityId, content: content })
+          .then(() => {
+            successAlert("댓글이 등록되었습니다.");
             setContent("");
             setCommentListIsLoading(true);
-          }
-        );
+          })
+          .catch((e) => {
+            if (e.response.status === 401) {
+              errorAlert(401);
+              dispatch(logout());
+            } else {
+              errorAlert(e.response.status, "댓글 등록에 실패하였습니다.");
+            }
+          });
       } else {
         registerSubComment({ communityId, content, commentId, userId })
           .then(() => {
-            alert("대댓글이 등록되었습니다.");
+            successAlert("대댓글이 등록되었습니다.");
             setContent("");
           })
           .then(() => {
@@ -116,6 +142,14 @@ const CommentRegister = ({
               commentId: "",
               isReComment: false,
             });
+          })
+          .catch((e) => {
+            if (e.response.status === 401) {
+              errorAlert(401);
+              dispatch(logout());
+            } else {
+              errorAlert(e.response.status, "대댓글 등록에 실패하였습니다.");
+            }
           });
       }
     }

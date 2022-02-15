@@ -1,9 +1,6 @@
 import { api, fileApi } from "api/api";
 
 export const createOnlineClass = async (content) => {
-  for (var pair of content.entries()) {
-    console.log(pair[0] + ", " + pair[1]);
-  }
   return await fileApi.post("/api/online", content);
 };
 

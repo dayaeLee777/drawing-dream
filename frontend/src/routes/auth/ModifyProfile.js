@@ -10,7 +10,8 @@ import commonCode from "config/commonCode";
 import InputContainer from "components/commons/inputContainer";
 import { ReactNewWindowStyles } from "react-new-window-styles";
 import { useNavigate } from "react-router-dom";
-import { updateUserInfo } from "modules/user";
+import { logout, updateUserInfo } from "modules/user";
+import { errorAlert, successAlert, warnAlert } from "modules/alert";
 
 const FormContainer = styled.div`
   box-sizing: border-box;
@@ -84,23 +85,32 @@ const ModifyProfile = () => {
 
   useEffect(() => {
     if (isLoading) {
-      getUser(state.userId).then(
-        (res) => (
-          setInputs({
-            ...inputs,
-            address: res.data.address,
-            phoneNumber: res.data.phone,
-            parentPhoneNumber: res.data.parentPhone,
-            email: res.data.userEmail,
-            userName: res.data.userName,
-            gradeCode: state.gradeCode,
-            classCode: state.classCode,
-            studentNo: state.studentNo,
-            addressDetail: res.data.addressDetail,
-          }),
-          setIsLoading(false)
+      getUser(state.userId)
+        .then(
+          (res) => (
+            setInputs({
+              ...inputs,
+              address: res.data.address,
+              phoneNumber: res.data.phone,
+              parentPhoneNumber: res.data.parentPhone,
+              email: res.data.userEmail,
+              userName: res.data.userName,
+              gradeCode: state.gradeCode,
+              classCode: state.classCode,
+              studentNo: state.studentNo,
+              addressDetail: res.data.addressDetail,
+            }),
+            setIsLoading(false)
+          )
         )
-      );
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert("유저 정보를 불러오지 못했습니다.");
+          }
+        });
     }
   }, []);
 
@@ -150,7 +160,6 @@ const ModifyProfile = () => {
       inputs.classCode &&
       inputs.studentNo
     ) {
-      // console.log(inputs);
       try {
         const user = {
           address: inputs.address,
@@ -165,16 +174,24 @@ const ModifyProfile = () => {
         putUser(user)
           .then((res) => {
             if (res.status === 200) {
-              alert("프로필 수정을 성공하였습니다.");
+              successAlert("프로필 수정을 성공하였습니다.");
               Navigate("/home");
             }
           })
           .then(() => {
             dispatch(updateUserInfo(state.userId));
+          })
+          .catch((e) => {
+            if (e.response.status === 401) {
+              errorAlert(401);
+              dispatch(logout());
+            } else {
+              errorAlert("프로필 수정에 실패하였습니다.");
+            }
           });
       } catch (e) {}
     } else {
-      alert("필수 입력 항목을 확인해주세요.");
+      warnAlert("필수 입력 항목을 확인해주세요.");
     }
     // 프로필 수정 요청 END
   };
@@ -253,7 +270,9 @@ const ModifyProfile = () => {
                   <SelectBox
                     onChange={onGradeCodeSelect}
                     name="gradeCode"
-                    defaultValue={inputs.gradeCode ? inputs.gradeCode : "default"}
+                    defaultValue={
+                      inputs.gradeCode ? inputs.gradeCode : "default"
+                    }
                   >
                     <option value="default" disabled hidden>
                       선택
@@ -276,7 +295,9 @@ const ModifyProfile = () => {
                   <SelectBox
                     onChange={onGradeCodeSelect}
                     name="classCode"
-                    defaultValue={inputs.classCode ? inputs.classCode : "default"}
+                    defaultValue={
+                      inputs.classCode ? inputs.classCode : "default"
+                    }
                   >
                     <option value="default" disabled hidden>
                       선택

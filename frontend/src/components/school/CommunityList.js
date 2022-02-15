@@ -6,6 +6,9 @@ import styled from "styled-components";
 import CommunityItem from "./CommunityItem";
 import Pagination from "react-js-pagination";
 import "assets/css/paging.css";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   width: 100%;
@@ -67,13 +70,23 @@ const CommunityList = () => {
   const [isTotalItemsCountLoading, setIsTotalItemsCountLoading] =
     useState(true);
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isTotalItemsCountLoading) {
-      getCommunityTotalCount().then((res) => {
-        setTotalItemsCount(res.data.totalCommunity);
-        setIsTotalItemsCountLoading(false);
-      });
+      getCommunityTotalCount()
+        .then((res) => {
+          setTotalItemsCount(res.data.totalCommunity);
+          setIsTotalItemsCountLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "글 개수를 불러오지 못했습니다.");
+          }
+        });
     } else {
       setIsLoading(true);
     }
@@ -81,14 +94,21 @@ const CommunityList = () => {
 
   // useEffect 데이터 read
   useEffect(() => {
-    // console.log("community 리스트 조회");
     if (isLoading) {
-      getCommunityList(page).then((res) => {
-        setData(res.data.communityGetListResponseDtoList);
-        setIsLoading(false);
-      });
+      getCommunityList(page)
+        .then((res) => {
+          setData(res.data.communityGetListResponseDtoList);
+          setIsLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "글 목록을 불러오지 못했습니다.");
+          }
+        });
     }
-    // console.log(data);
   }, [isLoading]);
 
   const handlePageChange = (page) => {

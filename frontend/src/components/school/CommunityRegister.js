@@ -120,7 +120,16 @@ const CommunityRegister = ({ modify }) => {
         registerCommunity({
           title: data.title,
           content: editorRef.current.getInstance().getHTML(),
-        }).then(setModalMessage("글을 등록하시겠습니까?"), setShowModal(true));
+        })
+          .then(setModalMessage("글을 등록하시겠습니까?"), setShowModal(true))
+          .catch((e) => {
+            if (e.response.status === 401) {
+              errorAlert(401);
+              dispatch(logout());
+            } else {
+              errorAlert(e.response.status, "글 등록에 실패했습니다.");
+            }
+          });
       }
     } else {
       errorAlert(null, "제목과 내용을 모두 작성해주세요.");

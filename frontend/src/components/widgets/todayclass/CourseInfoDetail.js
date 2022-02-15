@@ -143,7 +143,6 @@ const CourseInfoDetail = ({
       getOnlineClass(courseId)
         .then((res) => {
           setFilesUrl(res.data.files);
-          console.log(Object.keys(res.data.files).length);
           setIsLoading(false);
         })
         .catch((e) => {

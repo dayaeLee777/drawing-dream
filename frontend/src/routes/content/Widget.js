@@ -7,6 +7,8 @@ import { readTimeTable } from "modules/timetable";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Overlay = styled(motion.div)`
   width: 100vw;
@@ -43,11 +45,23 @@ const Widget = () => {
               const periodCode = getNowPeriod(period);
               if (periodCode) {
                 const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
-                getCouresInfo(courseId).then((res) => {
-                  if (res.data.onlineClassId) {
-                    setIsShow(true);
-                  }
-                });
+                getCouresInfo(courseId)
+                  .then((res) => {
+                    if (res.data.onlineClassId) {
+                      setIsShow(true);
+                    }
+                  })
+                  .catch((e) => {
+                    if (e.response.status === 401) {
+                      errorAlert(401);
+                      dispatch(logout());
+                    } else {
+                      errorAlert(
+                        e.response.status,
+                        "수업 정보를 불러오지 못했습니다."
+                      );
+                    }
+                  });
               }
             }
           }, 2000);

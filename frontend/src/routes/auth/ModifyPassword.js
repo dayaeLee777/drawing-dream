@@ -5,6 +5,9 @@ import validationCheck from "components/signup/validationCheck";
 import InputContainer from "components/commons/inputContainer";
 import { useNavigate } from "react-router-dom";
 import { modifyPassword, passwordCheck } from "api/user";
+import { errorAlert, successAlert, warnAlert } from "modules/alert";
+import { logout } from "modules/user";
+import { useDispatch } from "react-redux";
 
 const FormContainer = styled.div`
   display: flex;
@@ -25,7 +28,6 @@ const Container = styled.div`
   padding: 3rem;
   width: 44rem;
   overflow: auto;
-  
 `;
 
 const Desc = styled.div`
@@ -46,6 +48,7 @@ const InputBlock = styled.div`
 `;
 
 const ModifyPassword = () => {
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     nowPassword: "",
     password: "",
@@ -56,8 +59,8 @@ const ModifyPassword = () => {
 
   // VALIDATION STATE
   const [valids, setValids] = useState({
-    validPassword: true,
-    equalPassword: true,
+    validPassword: false,
+    equalPassword: false,
   });
   // VALIDATION END
 
@@ -76,27 +79,39 @@ const ModifyPassword = () => {
     if (inputs.nowPassword && valids.validPassword && valids.equalPassword) {
       passwordCheck({ password: inputs.nowPassword })
         .then((res) => {
-          console.log(res);
           if (res.data.statusCode === 200) {
             modifyPassword({ password: inputs.password })
               .then((res) => {
                 if (res.data.statusCode === 200) {
-                  alert("비밀번호를 변경하였습니다.");
+                  successAlert("비밀번호를 변경하였습니다.");
                   Navigate("/home");
                 } else if (res.data.statusCode === 202) {
-                  alert("입력하신 비밀번호가 현재 비밀번호와 일치합니다.");
+                  errorAlert(
+                    null,
+                    "입력하신 비밀번호가 현재 비밀번호와 일치합니다."
+                  );
                 }
               })
-              .catch(() => {
-                alert("비밀번호 변경에 실패하였습니다.");
+              .catch((e) => {
+                if (e.response.status === 401) {
+                  errorAlert(401);
+                  dispatch(logout());
+                } else {
+                  errorAlert("비밀번호 변경에 실패하였습니다.");
+                }
               });
           }
         })
-        .catch(() => {
-          alert("현재 비밀번호가 일치하지 않습니다.");
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "현재 비밀번호가 일치하지 않습니다.");
+          }
         });
     } else {
-      alert("필수 입력 항목을 확인해주세요.");
+      warnAlert("필수 입력 항목을 확인해주세요.");
     }
     // 프로필 수정 요청 END
   };

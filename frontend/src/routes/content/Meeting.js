@@ -6,8 +6,9 @@ import AttendanceModal from "../../components/attendance/AttendanceModal";
 import { motion } from "framer-motion";
 import { attend } from "api/attendance";
 import { useDispatch, useSelector } from "react-redux";
-import { attendance } from "modules/user";
+import { attendance, logout } from "modules/user";
 import { getMeeting } from "api/meeting";
+import { errorAlert } from "modules/alert";
 
 const Board = styled.div`
   background-image: url(${board});
@@ -92,12 +93,10 @@ const Meeting = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { isAttend } = useSelector((state) => state.user);
   const attendToday = () => {
-    console.log(modalOpen);
     attend().then((response) => {
       if (response.status === 200) {
         dispatch(attendance());
         setModalOpen(true);
-        console.log(response);
       }
       // else if (response.status === 401)
       //error
@@ -121,10 +120,19 @@ const Meeting = () => {
       meetingCode: "K04",
     };
     if (isLoading) {
-      getMeeting(params).then((res) => {
-        setData(res.data);
-        setIsLoading(false);
-      });
+      getMeeting(params)
+        .then((res) => {
+          setData(res.data);
+          setIsLoading(false);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            errorAlert(401);
+            dispatch(logout());
+          } else {
+            errorAlert(e.response.status, "글이 존재하지 않습니다.");
+          }
+        });
     }
   }, []);
 

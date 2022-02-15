@@ -58,10 +58,8 @@ const ChatItem = ({ room }) => {
     if (isLoading) {
       for (let user of room.users) {
         if (user.userId !== userId) {
-          console.log(user.userId);
           getProfileImg(user.userId)
             .then((res) => {
-              console.log(res.data.fileName);
               setProfileImg(res.data.fileName);
               setIsLoading(false);
             })

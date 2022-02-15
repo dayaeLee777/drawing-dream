@@ -183,7 +183,6 @@ const HomeSetting = () => {
 
   useEffect(() => {
     if (cookies.myWidgets) {
-      console.log(cookies.myWidgets);
       setIsShow(cookies.myWidgets);
       setIsntShow(
         widgets.filter((w) => {

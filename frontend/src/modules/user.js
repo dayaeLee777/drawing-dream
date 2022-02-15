@@ -13,7 +13,6 @@ const UPDATE_FAIL = "USER/UPDATE_FAIL";
 export const login = (user, isChecked) => async (dispatch) => {
   loginUser(user)
     .then((response) => {
-      console.log(response);
       if (response.data) {
         if (isChecked) {
           localStorage.setItem("access-token", response.data.accessToken);
@@ -43,8 +42,7 @@ export const login = (user, isChecked) => async (dispatch) => {
       }
       dispatch(readTimeTable());
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       dispatch({
         type: LOGIN_FAIL,
         error: true,

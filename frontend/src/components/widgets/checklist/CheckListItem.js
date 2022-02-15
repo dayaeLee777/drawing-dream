@@ -1,10 +1,14 @@
 import { deleteCheckList, modifyCheckList } from "api/checklist";
+import { errorAlert } from "modules/alert";
+import { logout } from "modules/user";
 import React from "react";
+
 import {
   MdCheckBoxOutlineBlank,
   MdCheckBox,
   MdRemoveCircleOutline,
 } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const CheckListItemContainer = styled.div`
@@ -52,19 +56,39 @@ const Remove = styled.div`
 
 const CheckListItem = ({ item, setIsListLoading, main }) => {
   const { content, checked } = item;
+  const dispatch = useDispatch();
+
   const onCheck = () => {
     modifyCheckList({
       ...item,
       checklistId: item.cheklistId,
       checked: !item.checked,
-    }).then(() => {
-      setIsListLoading(true);
-    });
+    })
+      .then(() => {
+        setIsListLoading(true);
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "체크리스트 수정에 실패했습니다.");
+        }
+      });
   };
   const onRemove = () => {
-    deleteCheckList(item.cheklistId).then(() => {
-      setIsListLoading(true);
-    });
+    deleteCheckList(item.cheklistId)
+      .then(() => {
+        setIsListLoading(true);
+      })
+      .catch((e) => {
+        if (e.response.status === 401) {
+          errorAlert(401);
+          dispatch(logout());
+        } else {
+          errorAlert(e.response.status, "체크리스트 삭제에 실패했습니다.");
+        }
+      });
   };
   return (
     <CheckListItemContainer>
