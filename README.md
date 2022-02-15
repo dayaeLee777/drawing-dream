@@ -16,17 +16,17 @@
 <table>
     <tr>
         <td height="140px" align="center"> <a href="https://github.com/Jubi-in">
-            <img src="https://avatars.githubusercontent.com/Jubi-in" width="140px" /> <br><br> 👑 인주비 (Front-End) </a> <br></td>
+            <img src="https://avatars.githubusercontent.com/Jubi-in" width="140px" /> <br><br> 👑 인주비 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/unilion">
-            <img src="https://avatars.githubusercontent.com/unilion" width="140px" /> <br><br> 🙂 장준범 (Front-End) </a> <br></td>
+            <img src="https://avatars.githubusercontent.com/unilion" width="140px" /> <br><br> 🙂 장준범 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/jejinmyeong">
-            <img src="https://avatars.githubusercontent.com/jejinmyeong" width="140px" /> <br><br> 😆 제진명 (Front-End) </a> <br></td>
+            <img src="https://avatars.githubusercontent.com/jejinmyeong" width="140px" /> <br><br> 😆 제진명 <br>(Front-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/kibum414">
-            <img src="https://avatars.githubusercontent.com/kibum414" width="140px" /> <br><br> 😁 박기범 (Back-End) </a> <br></td>
+            <img src="https://avatars.githubusercontent.com/kibum414" width="140px" /> <br><br> 😁 박기범 <br>(Back-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/changhyuns">
-            <img src="https://avatars.githubusercontent.com/changhyuns" width="140px" /> <br><br> 🙄 손창현 (Back-End) </a> <br></td>
+            <img src="https://avatars.githubusercontent.com/changhyuns" width="140px" /> <br><br> 🙄 손창현 <br>(Back-End) </a> <br></td>
         <td height="140px" align="center"> <a href="https://github.com/dayaeLee777">
-            <img src="https://avatars.githubusercontent.com/dayaeLee777" width="140px" /> <br><br> 😶 이다예 (Back-End) </a> <br></td>
+            <img src="https://avatars.githubusercontent.com/dayaeLee777" width="140px" /> <br><br> 😶 이다예 <br>(Back-End) </a> <br></td>
     </tr>
     <tr>
         <td align="center"><br/></td>
