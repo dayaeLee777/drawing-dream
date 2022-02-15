@@ -10,6 +10,7 @@ import { useCookies } from "react-cookie";
 import Score from "components/widgets/Score";
 import StudyRecord from "components/widgets/StudyRecord";
 import TimeTable from "components/widgets/TimeTable";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: grid;
@@ -41,6 +42,9 @@ const EditButton = styled.div`
   color: ${(props) =>
     props.name === "apply" ? "rgb(59, 178, 0)" : "rgb(255, 0, 0)"};
   border-radius: 10px;
+  cursor: pointer;
+  background-color:  ${({ theme }) => theme.widgetColor};
+
 `;
 
 const OptionContainer = styled(motion.div)`
@@ -101,6 +105,8 @@ const HomeSetting = () => {
   const [isShow, setIsShow] = useState([]);
   const [isntShow, setIsntShow] = useState([]);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
   const wid = {
     M01: (
       <TodayClass
@@ -208,10 +214,14 @@ const HomeSetting = () => {
     <Container>
       <Wrapper>
         <Buttons>
-          <EditButton onClick={apply} name="apply">
+          <EditButton className="apply" onClick={apply} name="apply">
             적용
           </EditButton>
-          <EditButton>취소</EditButton>
+          <EditButton className="close"
+            onClick={() => {
+              navigate("/home");
+            }}
+          >취소</EditButton>
         </Buttons>
         <WidgetContainer>
           {isShow.map((el) => (
