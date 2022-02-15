@@ -13,9 +13,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { errorAlert, successAlert } from "modules/alert";
 import { logout } from "modules/user";
+import Modal from "components/commons/modal";
 
 const Container = styled.div`
   padding: 3rem 2rem;
+  position: relative;
 `;
 
 const StyledInput = styled.input`
@@ -51,7 +53,8 @@ const CommunityRegister = ({ modify }) => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
-
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const [data, setData] = useState({
     title: "",
     content: "",
@@ -62,7 +65,8 @@ const CommunityRegister = ({ modify }) => {
       getCommunityDetail(params.communityId).then((res) => {
         if (userId !== res.data.userId) {
           Navigate("../");
-          errorAlert("수정 권한이 없습니다.");
+          //토스트로 바꾸기
+          alert("수정 권한이 없습니다.");
           return () => {
             setIsLoading(false);
           };
@@ -94,10 +98,7 @@ const CommunityRegister = ({ modify }) => {
           content: editorRef.current.getInstance().getHTML(),
           communityId: params.communityId,
         })
-          .then(
-            successAlert("글 수정에 성공하였습니다."),
-            Navigate(`../${params.communityId}`)
-          )
+          .then(setModalMessage("글을 수정하시겠습니까?."), setShowModal(true))
           .catch((e) => {
             if (e.response.status === 401) {
               errorAlert(401);
@@ -108,7 +109,7 @@ const CommunityRegister = ({ modify }) => {
         registerCommunity({
           title: data.title,
           content: editorRef.current.getInstance().getHTML(),
-        }).then(successAlert("글 등록에 성공하였습니다."), Navigate("../"));
+        }).then(setModalMessage("글을 등록하시겠습니까?"), setShowModal(true));
       }
     } else {
       errorAlert(null, "제목과 내용을 모두 작성해주세요.");
@@ -121,41 +122,50 @@ const CommunityRegister = ({ modify }) => {
   };
 
   return (
-    <Container>
-      {modify ? <Title>글 수정하기</Title> : <Title>글쓰기</Title>}
-      <StyledInput
-        onChange={onChange}
-        value={data.title}
-        name="title"
-        placeholder="제목을 입력하세요."
-      />
-      {(!modify || !isLoading) && (
-        <Editor
-          name="content"
-          initialValue={data.content}
-          previewStyle="tab"
-          height="500px"
-          initialEditType="wysiwyg"
-          useCommandShortcut={true}
-          ref={editorRef}
+    <>
+      <Container>
+        {modify ? <Title>글 수정하기</Title> : <Title>글쓰기</Title>}
+        <StyledInput
+          onChange={onChange}
+          value={data.title}
+          name="title"
+          placeholder="제목을 입력하세요."
         />
-      )}
-      <BtnContainer>
-        <Button
-          name={modify ? "수정하기" : "글쓰기"}
-          height="2.5rem"
-          onClick={onRegister}
-        />
-        <Button
-          name="취소"
-          ml="1.5rem"
-          height="2.5rem"
-          bc="#C4C4C4"
-          hoverColor="#a2a2a2"
-          onClick={onCancle}
-        />
-      </BtnContainer>
-    </Container>
+        {(!modify || !isLoading) && (
+          <Editor
+            name="content"
+            initialValue={data.content}
+            previewStyle="tab"
+            height="500px"
+            initialEditType="wysiwyg"
+            useCommandShortcut={true}
+            ref={editorRef}
+          />
+        )}
+        <BtnContainer>
+          <Button
+            name={modify ? "수정하기" : "글쓰기"}
+            height="2.5rem"
+            onClick={onRegister}
+          />
+          <Button
+            name="취소"
+            ml="1.5rem"
+            height="2.5rem"
+            bc="#C4C4C4"
+            hoverColor="#a2a2a2"
+            onClick={onCancle}
+          />
+        </BtnContainer>
+        {showModal && (
+          <Modal
+            url={modify ? `../${params.communityId}` : `../`}
+            message={modalMessage}
+            setShowModal={setShowModal}
+          />
+        )}
+      </Container>
+    </>
   );
 };
 
