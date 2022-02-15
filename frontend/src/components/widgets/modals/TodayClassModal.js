@@ -121,22 +121,13 @@ const TodayClassModal = ({ layoutId }) => {
           courseId={courseId}
         />
       )}
-      {!isLoading && !courseInfo && <LeftContainer todayData={todayData} />}
-      {userCode === "A03" && (
-        <Right>
-          <img src={teacher2} alt="캐릭터" />
-          <Button
-            onClick={startClass}
-            disabled={
-              nowPeriod && courseInfo && courseInfo.teacherName === userName
-                ? ""
-                : "disabled"
-            }
-            name="수업 시작하기"
-          ></Button>
-        </Right>
-      )}
-      {userCode === "A04" && <RightContainer courseInfo={courseInfo} />}
+      {isLoading && !courseInfo && <LeftContainer todayData={todayData} />}
+
+      <RightContainer
+        courseInfo={courseInfo}
+        startClass={startClass}
+        nowPeriod={nowPeriod}
+      />
     </Wrapper>
   );
 };
