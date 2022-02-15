@@ -17,7 +17,7 @@ INSERT  IGNORE INTO `school` VALUES (_binary 'mÂ®rÂLÂ®ÂÂ§u',0,'D02
 --
 
 INSERT  IGNORE INTO `user` VALUES 
-(_binary '\0Â¼AÂ²<Ã¬C^Â´Ã]',NULL,NULL,0,NULL,NULL,'taek@naver.com','ë¹íì'),
+(_binary '\0Â¼AÂ²<Ã¬C^Â´Ã]',NULL,NULL,0,NULL,NULL,'dang@naver.com','당현아'),
 (_binary ']ÂHÂ\'H_Âk:^\Ã', '서울 강남구 가로수길 9 (신사동) 싸피빌딩', '207호' ,0,NULL,'01070077777','teacherpark@korea.kr','이승윤'),
 (_binary '|Ã»<aÂOÃ¢Â®Â¸','서울 마포구 가양대로 1 (상암동)','101동 1006호',0,'01089651852','01034561985','sonchanghyun@naver.com','손창현'),
 (_binary '.1Ã¢ÃÃC`Â§*Â¾',NULL,NULL,0,NULL,NULL,'injubi@naver.com','인주비'),
