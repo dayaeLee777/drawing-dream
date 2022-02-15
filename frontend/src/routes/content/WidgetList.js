@@ -20,13 +20,18 @@ const Container = styled.div`
   align-items: center;
   margin-bottom: 5rem;
   background-color: ${({ theme }) => theme.ContainerColor};
-  height: 80vh;
+  min-height: 85vh;
 `;
 
-const Desc = styled.div`
+const Title = styled.div`
   font-size: 1.8rem;
   margin: 3rem 0;
   font-weight: 600;
+`;
+
+const Desc = styled.div`
+  margin-bottom: 2rem;
+  color: ${({ theme }) => theme.menuColor};
 `;
 
 const Wrapper = styled.div`
@@ -35,6 +40,13 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
+  .more {
+    line-height: 2;
+    text-align: center;
+    padding-top: 1.5rem;
+    color: ${({ theme }) => theme.textColor};
+  }
 `;
 
 const Overlay = styled(motion.div)`
@@ -78,7 +90,8 @@ const WidgetList = () => {
 
   return (
     <Container>
-      <Desc>모아보기</Desc>
+      <Title>모아보기</Title>
+      <Desc>학습에 필요한 다양한 위젯 기능들을 만나 보세요.</Desc>
       <>
         <Wrapper>
           {widgets.map((widget) => (
@@ -90,6 +103,10 @@ const WidgetList = () => {
               loc="list"
             />
           ))}
+          <Desc className="more">
+            더 다양한 위젯들이 <br />
+            업데이트될 예정입니다!
+          </Desc>
         </Wrapper>
         <AnimatePresence>
           {widgetId && (

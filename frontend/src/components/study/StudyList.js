@@ -9,11 +9,7 @@ const Container = styled.div`
   grid-gap: 2rem;
 `;
 const StudyList = () => {
-  return (
-    <Container>
-        <StudyItem/>
-    </Container>
-  );
+  return <Container>{/* <StudyItem/> */}</Container>;
 };
 
 export default StudyList;

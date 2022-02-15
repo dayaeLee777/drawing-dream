@@ -14,10 +14,14 @@ const Container = styled.div`
   height: 80%;
 `;
 
-const Desc = styled.div`
+const Title = styled.div`
   font-size: 1.8rem;
   margin-top: 3rem;
   font-weight: 600;
+`;
+const Desc = styled.div`
+  margin-top: 3rem;
+  color: ${({ theme }) => theme.menuColor};
 `;
 
 const StyledTable = styled.table`
@@ -95,7 +99,8 @@ const CommunityList = () => {
 
   return (
     <>
-      <Desc>우리 학교 커뮤니티</Desc>
+      <Title>우리 학교 커뮤니티</Title>
+      <Desc>우리 학교 친구들과 자유롭게 이야기를 나눌 수 있습니다.</Desc>
       <Container>
         <ButtonContainer>
           <Button
