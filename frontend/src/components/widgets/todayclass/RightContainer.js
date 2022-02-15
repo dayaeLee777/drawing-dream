@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import character from "assets/img/character.png";
 import Button from "components/commons/button";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import teacher2 from "assets/img/teacher2.png";
+import { compareTime } from "./time";
 
 const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  margin-bottom: 10rem;
+  justify-content: center;
+  /* margin-bottom: 10rem; */
   img {
     width: 100%;
   }
@@ -36,10 +37,17 @@ const Notice = styled.div`
 
 const RightContainer = ({ courseInfo, nowPeriod, startClass }) => {
   const { userCode, userName } = useSelector((state) => state.user);
+  const { period } = useSelector((state) => state.timetable);
   const navigate = useNavigate();
+  const [timeDiff, setTimeDiff] = useState();
+  const periodIndex = nowPeriod ? nowPeriod.slice(2, 3) : null;
   const moveClass = () => {
     navigate(`/onlineclass/${courseInfo.courseId}`);
   };
+  useEffect(() => {
+    const diff = compareTime(period[periodIndex].startTime);
+    setTimeDiff(diff);
+  }, []);
 
   return (
     <>
@@ -64,13 +72,24 @@ const RightContainer = ({ courseInfo, nowPeriod, startClass }) => {
           <img src={character} alt="캐릭터" />
           {courseInfo && courseInfo.onlineClassId ? (
             <>
-              <div>
-                <div className="text">
-                  <span className="time">5분 </span>
-                  뒤에 수업 시작이야!
+              {timeDiff > 0 ? (
+                <div>
+                  <div className="text">
+                    <span className="time">{timeDiff}분</span>
+                    뒤에 수업 시작이야!
+                  </div>
+                  <div className="text">같이 들어가자!</div>
                 </div>
-                <div className="text">같이 들어가자!</div>
-              </div>
+              ) : (
+                <div>
+                  <div className="text">
+                    수업 시작한 지{" "}
+                    <span className="time">{Math.abs(timeDiff)}분</span>이
+                    지났어!
+                  </div>
+                  <div className="text">얼른 들어가자!</div>
+                </div>
+              )}
               <Button
                 onClick={moveClass}
                 name="지금 들어가기"
