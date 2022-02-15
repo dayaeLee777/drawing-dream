@@ -195,27 +195,29 @@ const CourseInfoDetail = ({
                 <div className="content">등록된 파일이 없습니다.</div>
               )}
             </InfoContainer>
-            {!isLoading && userCode === "A04" && Object.keys(filesUrl).length && (
-              <Files>
-                {Object.entries(filesUrl).map((item) => (
-                  <div className="fileItem" key={item[1]}>
-                    <div className="icon" value={item[1]}>
-                      <FileIcon
-                        extension={makeExtension(item[0])}
-                        {...defaultStyles[makeExtension(item[0])]}
-                      />
+            {!isLoading &&
+              userCode === "A04" &&
+              Object.keys(filesUrl).length > 0 && (
+                <Files>
+                  {Object.entries(filesUrl).map((item) => (
+                    <div className="fileItem" key={item[1]}>
+                      <div className="icon" value={item[1]}>
+                        <FileIcon
+                          extension={makeExtension(item[0])}
+                          {...defaultStyles[makeExtension(item[0])]}
+                        />
+                      </div>
+                      <button
+                        className="file"
+                        onClick={onDownload}
+                        value={item[1]}
+                      >
+                        {item[0]}
+                      </button>
                     </div>
-                    <button
-                      className="file"
-                      onClick={onDownload}
-                      value={item[1]}
-                    >
-                      {item[0]}
-                    </button>
-                  </div>
-                ))}
-              </Files>
-            )}
+                  ))}
+                </Files>
+              )}
             {userCode === "A03" && (
               <FileContainer>
                 <Dropzone onDrop={handleDrop} className="dropzone">
@@ -261,7 +263,7 @@ const CourseInfoDetail = ({
             {periodCode
               ? commonCode[periodCode.substr(0, 1)][periodCode]
               : "현재는"}
-            수업이 없습니다.
+            에는 수업이 없습니다.
           </>
         </NullSubject>
       </Contanier>
