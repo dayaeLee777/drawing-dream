@@ -45,6 +45,7 @@ const StyledTh = styled.td`
   text-align: center;
   font-weight: 600;
   border-radius: 3px;
+  color: black;
 
   & + & {
     border-left: 2px solid white;
@@ -63,7 +64,7 @@ const NoticeList = () => {
   const [isTotalItemsCountLoading, setIsTotalItemsCountLoading] =
     useState(true);
   const [page, setPage] = useState(0);
-  const {userCode} = useSelector(state => state.user);
+  const { userCode } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (isTotalItemsCountLoading) {
@@ -89,7 +90,7 @@ const NoticeList = () => {
   }, [isLoading]);
 
   const handlePageChange = (page) => {
-    setPage(page-1);
+    setPage(page - 1);
     Navigate(`?page=${page}`);
     setIsLoading(true);
   };
@@ -99,12 +100,14 @@ const NoticeList = () => {
       <Desc>알림장</Desc>
       <Container>
         <ButtonContainer>
-          {userCode !== "A04" && <Button
-            name="글쓰기"
-            width="7rem"
-            height="2rem"
-            onClick={() => Navigate("./register")}
-          />}
+          {userCode !== "A04" && (
+            <Button
+              name="글쓰기"
+              width="7rem"
+              height="2rem"
+              onClick={() => Navigate("./register")}
+            />
+          )}
         </ButtonContainer>
         <StyledTable>
           <colgroup>
@@ -126,10 +129,11 @@ const NoticeList = () => {
             </tr>
           </thead>
           <tbody>
-            {data && !isLoading &&
+            {data &&
+              !isLoading &&
               data.map((item, idx) => (
                 <CommunityItem
-                  index={totalItemsCount - (page) * 10 - idx - 1}
+                  index={totalItemsCount - page * 10 - idx - 1}
                   key={item.noticeId}
                   data={item}
                 />
@@ -139,7 +143,7 @@ const NoticeList = () => {
       </Container>
       <PageContainer>
         <Pagination
-          activePage={page+1}
+          activePage={page + 1}
           itemsCountPerPage={10}
           totalItemsCount={totalItemsCount}
           pageRangeDisplayed={5}

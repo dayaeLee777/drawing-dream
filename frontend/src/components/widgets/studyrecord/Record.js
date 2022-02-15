@@ -1,4 +1,4 @@
-import { deleteRecord } from "api/studyrecode";
+import { deleteRecord } from "api/studyrecord";
 import React from "react";
 import styled from "styled-components";
 

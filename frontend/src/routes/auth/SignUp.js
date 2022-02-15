@@ -17,12 +17,11 @@ import SignupModal from "components/signup/modal/SignupModal";
 
 const Container = styled.div`
   display: flex;
-  background-color: #fec25c;
   width: 100vw;
   height: 100vh;
   justify-content: center;
   overflow: auto;
-  background-color: #fff;
+  background-color: #fffaf2;
   background-image: linear-gradient(
       90deg,
       transparent 79px,

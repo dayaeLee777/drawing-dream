@@ -4,9 +4,9 @@ import styled from "styled-components";
 import MemoItem from "./MemoItem";
 
 const Container = styled.div`
-box-sizing: border-box;
-padding: ${props=> props.main? "0rem 1rem":"0rem 5rem"};
-  width: 100%;
+  box-sizing: border-box;
+  padding: ${(props) => (props.main ? "0rem 1rem" : "0rem 5rem")};
+  width: 80%;
   height: 25rem;
   display: flex;
   flex-direction: column;
@@ -36,8 +36,13 @@ const NullList = styled.div`
   align-items: center;
 `;
 
-
-const MemoList = ({setStatus, isListLoading, setIsListLoading, setMemoId, main}) => {
+const MemoList = ({
+  setStatus,
+  isListLoading,
+  setIsListLoading,
+  setMemoId,
+  main,
+}) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -51,20 +56,29 @@ const MemoList = ({setStatus, isListLoading, setIsListLoading, setMemoId, main})
 
   const onChangeStatus = () => {
     setStatus("register");
-  }
+  };
 
   return (
     <>
-    <Container main={main}>
-      {!isListLoading &&
-        data &&
-        data.map((item) => <MemoItem main={main} setStatus={setStatus} key={item.memoId} setMemoId={setMemoId} data={item} />)}
-      {!isListLoading && data.length===0 &&
-        <NullList>등록된 메모가 없습니다.</NullList>}
-    </Container>
-    {!main &&
-      <RegisterBtn onClick={onChangeStatus}>새 메모 등록하기</RegisterBtn>
-    }
+      <Container main={main}>
+        {!isListLoading &&
+          data &&
+          data.map((item) => (
+            <MemoItem
+              main={main}
+              setStatus={setStatus}
+              key={item.memoId}
+              setMemoId={setMemoId}
+              data={item}
+            />
+          ))}
+        {!isListLoading && data.length === 0 && (
+          <NullList>등록된 메모가 없습니다.</NullList>
+        )}
+      </Container>
+      {!main && (
+        <RegisterBtn onClick={onChangeStatus}>새 메모 등록하기</RegisterBtn>
+      )}
     </>
   );
 };

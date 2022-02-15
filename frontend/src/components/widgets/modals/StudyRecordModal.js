@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Chart from "../studyrecord/Chart";
 import RecordList from "../studyrecord/RecordList";
 import RecordInsert from "../studyrecord/RecordInsert";
-import { getRecordList } from "api/studyrecode";
+import { getRecordList } from "api/studyrecord";
 
 const Wrapper = styled(motion.div)`
   width: 70rem;

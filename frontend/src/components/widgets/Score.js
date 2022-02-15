@@ -9,6 +9,7 @@ const Container = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
+  max-height: 40rem;
 `;
 
 const Wrapper = styled.div`

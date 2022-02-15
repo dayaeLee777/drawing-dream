@@ -11,7 +11,7 @@ import styled from "styled-components";
 
 const InputContainer = styled.div`
   margin-top: 1rem;
-  border: 1px solid #c4c4c4;
+  /* border: 1px solid #c4c4c4; */
   border-radius: 5px;
   padding: 1rem 1rem;
   margin-left: ${(props) => (props.ml ? props.ml : "")};
@@ -27,16 +27,18 @@ const StyledTextArea = styled.textarea`
   height: 5rem;
   border: none;
   resize: none;
+  padding: 1rem;
+  box-sizing: border-box;
   background-color: ${({ theme }) => theme.ContainerColor};
   border: 1px solid #dadde6;
-  &::placeholder{
-    color: white;
+  &::placeholder {
+    color: ${({ theme }) => theme.textColor};
   }
 `;
 
 const BtnContainer = styled.div`
   display: flex;
-  button{
+  button {
     margin-top: 2rem;
     margin-left: auto;
   }

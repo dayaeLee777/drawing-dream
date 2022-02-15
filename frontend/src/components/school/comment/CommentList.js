@@ -8,8 +8,8 @@ const Container = styled.div`
   margin-top: 2rem;
 
   .desc {
-    padding-left: 1rem;
-    color: #333333;
+    /* padding-left: 1rem; */
+    color: ${({ theme }) => theme.textColor};
     font-size: 1.2rem;
   }
 `;
@@ -26,30 +26,6 @@ const CommentList = ({ communityId }) => {
       });
     }
   }, [isLoading]);
-
-  // const sampleData = [
-  //   {
-  //     id: 1,
-  //     comment: "좋아요",
-  //     userName: "박학생",
-  //     regTime: "2022. 2. 27",
-  //     communityId: 1,
-  //   },
-  //   {
-  //     id: 2,
-  //     comment: "좋아요",
-  //     userName: "박학생",
-  //     regTime: "2022. 2. 27",
-  //     communityId: 1,
-  //   },
-  //   {
-  //     id: 3,
-  //     comment: "좋아요",
-  //     userName: "박학생",
-  //     regTime: "2022. 2. 27",
-  //     communityId: 1,
-  //   },
-  // ]
   return (
     <Container>
       <div className="desc">댓글</div>

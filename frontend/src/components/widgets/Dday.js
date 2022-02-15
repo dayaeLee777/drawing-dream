@@ -8,6 +8,7 @@ const Container = styled(motion.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   background-color: ${({ theme }) => theme.ContainerColor};
   border-radius: 10px;
+  max-height: 30rem;
 `;
 
 const Wrapper = styled.div`
@@ -55,7 +56,7 @@ const Dday = ({
   const [recentDday, setRecentDday] = useState();
   const [DdayName, setDdayName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+
   const close = () => {
     const newIsShow = isShow.filter((wid) => {
       return wid !== widgetId;
@@ -63,21 +64,6 @@ const Dday = ({
     setIsShow(newIsShow);
     setIsntShow([...isntShow, widgetId]);
   };
-
-  const testData = [
-    {
-      id: "3bc288c2-b9c3-92c2-b9c3-8d47c2acc2ae",
-      title: commonCode.J.J01,
-      start: "2022-02-02",
-      end: "2022-02-02",
-    },
-    {
-      title: commonCode.J.J07,
-      id: "c3b5c2a2-c3a4-24c2-84c2-86497fc2b539",
-      start: "2022-02-23",
-      end: "2022-02-25",
-    },
-  ];
 
   useEffect(() => {
     const today = new Date();
