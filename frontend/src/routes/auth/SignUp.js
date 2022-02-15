@@ -226,9 +226,11 @@ const SignUp = () => {
   // 회원 가입 요청
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [url, setUrl] = useState();
   const onSubmit = async () => {
     if (!agreement) {
-      alert("이용약관에 동의하여 주세요.");
+      setModalMessage("필수 입력 항목을 확인해 주세요.");
+      setShowModal(true);
     } else {
       if (
         validId &&
@@ -260,14 +262,18 @@ const SignUp = () => {
 
           signUp(user).then((res) => {
             if (res.status === 201) {
-              alert("회원가입에 성공하였습니다.");
               setModalMessage("회원가입에 성공했습니다.");
+              setUrl("/signin");
               setShowModal(true);
             }
           });
-        } catch (e) {}
+        } catch (e) {
+          setModalMessage("회원가입에 실패했습니다.");
+          setShowModal(true);
+        }
       } else {
-        alert("필수 입력 항목을 확인해주세요.");
+        setModalMessage("필수 입력 항목을 확인해 주세요.");
+        setShowModal(true);
       }
     }
   };
@@ -519,7 +525,7 @@ const SignUp = () => {
         </InputBlock>
         {showModal && (
           <Modal
-            url={`/signin`}
+            url={url}
             message={modalMessage}
             left="42%"
             setShowModal={setShowModal}

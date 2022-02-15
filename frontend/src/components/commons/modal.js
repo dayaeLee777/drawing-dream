@@ -42,7 +42,13 @@ const Modal = (props) => {
         <Button
           width="5rem"
           height="2.5rem"
-          onClick={() => navigate(props.url)}
+          onClick={() => {
+            if (props.url) {
+              navigate(props.url);
+            } else {
+              props.setShowModal(false);
+            }
+          }}
           name="확인"
         />
         <Button
