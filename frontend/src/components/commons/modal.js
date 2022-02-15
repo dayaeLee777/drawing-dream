@@ -35,7 +35,6 @@ const ButtonContainer = styled.div`
 
 const Modal = (props) => {
   const navigate = useNavigate();
-  console.log(props.left);
   return (
     <ModalContainer {...props}>
       <Content>{props.message}</Content>

@@ -11,7 +11,7 @@ const Container = styled.div`
   align-items: center;
   margin-bottom: 5rem;
   background-color: ${({ theme }) => theme.ContainerColor};
-  height: 85vh;
+  min-height: 85vh;
 `;
 
 const Title = styled.div`
