@@ -70,6 +70,7 @@ const ButtonContainer = styled.div`
 `;
 
 const ButtonName = styled.div`
+  cursor: pointer;
   margin-left: 0.5rem;
   display: flex;
 
