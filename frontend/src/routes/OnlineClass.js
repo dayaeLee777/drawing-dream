@@ -423,25 +423,32 @@ const OnlineClass = () => {
     leaveRoom();
   };
 
+  let videoTemp = true;
   const vidOnOff = () => {
-    if (participants[userName].rtcPeer.videoEnabled) {
+    if (videoTemp) {
       // 끌때
       participants[userName].rtcPeer.videoEnabled = false;
+      videoTemp = false;
       document.getElementById("vidOn").style.display = "none";
       document.getElementById("vidOff").style.display = "";
     } else {
       participants[userName].rtcPeer.videoEnabled = true;
+      videoTemp = true;
       document.getElementById("vidOn").style.display = "";
       document.getElementById("vidOff").style.display = "none";
     }
   };
+
+  let audioTemp = true;
   const audOnOff = () => {
-    if (participants[userName].rtcPeer.audioEnabled) {
+    if (audioTemp) {
       participants[userName].rtcPeer.audioEnabled = false;
+      audioTemp = false;
       document.getElementById("audOn").style.display = "none";
       document.getElementById("audOff").style.display = "";
     } else {
       participants[userName].rtcPeer.audioEnabled = true;
+      audioTemp = true;
       document.getElementById("audOn").style.display = "";
       document.getElementById("audOff").style.display = "none";
     }
@@ -499,6 +506,15 @@ const OnlineClass = () => {
       name = userName;
       document.getElementById("shareScreenOn").style.display = "";
       document.getElementById("shareScreenOff").style.display = "none";
+      
+      document.getElementById("vidOn").style.display = "";
+      document.getElementById("vidOff").style.display = "none";
+
+      document.getElementById("audOn").style.display = "";
+      document.getElementById("audOff").style.display = "none";
+
+      videoTemp = true;
+      audioTemp = true;
     }
   };
   return (
