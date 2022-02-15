@@ -36,22 +36,24 @@ const Widget = () => {
   useEffect(() => {
     let interval;
     if (isLoading) {
-      if (userCode === "A04") {
-        interval = setInterval(() => {
-          if (todayData && todayData.length > 0) {
-            const periodCode = getNowPeriod(period);
-            if (periodCode) {
-              const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
-              getCouresInfo(courseId).then((res) => {
-                if (res.data.onlineClassId) {
-                  setIsShow(true);
-                }
-              });
+      dispatch(readTimeTable()).then(() => {
+        if (userCode === "A04") {
+          interval = setInterval(() => {
+            if (todayData && todayData.length > 0) {
+              const periodCode = getNowPeriod(period);
+              if (periodCode) {
+                const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
+                getCouresInfo(courseId).then((res) => {
+                  if (res.data.onlineClassId) {
+                    setIsShow(true);
+                  }
+                });
+              }
             }
-          }
-        }, 2000);
-      }
-      setIsLoading(false);
+          }, 2000);
+        }
+        setIsLoading(false);
+      });
     }
     return () => window.clearInterval(interval);
   }, []);
