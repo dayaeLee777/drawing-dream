@@ -39,7 +39,7 @@ const Widget = () => {
       dispatch(readTimeTable()).then(() => {
         if (userCode === "A04") {
           interval = setInterval(() => {
-            if (todayData.length > 0) {
+            if (todayData && todayData.length > 0) {
               const periodCode = getNowPeriod(period);
               if (periodCode) {
                 const courseId = todayData[periodCode.slice(2, 3) - 1].courseId;
