@@ -6,6 +6,7 @@ import book from "assets/img/green-book.png";
 import star from "assets/img/star.png";
 import teacher from "assets/img/teacher.png";
 import school from "assets/img/school.png";
+import study from "assets/img/playground.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Container = styled.div``;
@@ -56,6 +57,13 @@ const SideMenu = () => {
         url="/school"
         path={school}
         name="우리 학교 보기"
+        onClick={onClick}
+        isSelected={isSelected}
+      />
+      <SideMenuItem
+        url="/study"
+        path={study}
+        name="놀이터"
         onClick={onClick}
         isSelected={isSelected}
       />
