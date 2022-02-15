@@ -1,6 +1,8 @@
 package com.dd;
 
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.transaction.Transactional;
@@ -11,8 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
 import com.dd.api.service.AttendanceService;
+import com.dd.db.entity.addon.StudyRecord;
 import com.dd.db.entity.school.Period;
 import com.dd.db.entity.school.School;
+import com.dd.db.entity.user.User;
 import com.dd.db.enums.Code;
 import com.dd.db.repository.AttendanceRepository;
 import com.dd.db.repository.AuthRepository;
@@ -65,26 +69,38 @@ class DrawingdreamBackendApplicationTests {
 //		auth.setLoginId("ssafy");
 //		authRepository.save(auth);
 		
-//		User user = authRepository.findByLoginId("student01").get().getUser();
-		School school = schoolRepository.findBySchoolSerialNo("7091444").get();
+		User user = authRepository.findByLoginId("sdrawingdream01").get().getUser();
 		
-		Period period1 = Period.builder()
-				.startTime(LocalTime.of(16, 15))
-				.endTime(LocalTime.of(17, 0))
-				.school(school)
-				.periodCode(Code.I08)
+		
+		StudyRecord studyrecord = StudyRecord.builder()
+				.studyDate(LocalDate.of(2022, 2, 16))
+				.startTime(LocalDateTime.of(2022, 2, 16, 9, 00))
+				.endTime(LocalDateTime.of(2022, 2, 16, 9, 50))
+				.durationTime(LocalTime.of(0, 50))
+				.title("국어")
+				.user(user)
 				.build();
+		studyRecordRepository.save(studyrecord);
 		
-		periodRepository.save(period1);
-		
-		Period period2 = Period.builder()
-				.startTime(LocalTime.of(17, 10))
-				.endTime(LocalTime.of(17, 55))
-				.school(school)
-				.periodCode(Code.I09)
+		StudyRecord studyrecord1 = StudyRecord.builder()
+				.studyDate(LocalDate.of(2022, 2, 16))
+				.startTime(LocalDateTime.of(2022, 2, 16, 10, 30))
+				.endTime(LocalDateTime.of(2022, 2, 16, 11, 30))
+				.durationTime(LocalTime.of(1, 00))
+				.title("영어")
+				.user(user)
 				.build();
-
-		periodRepository.save(period2);
+		studyRecordRepository.save(studyrecord1);
+		
+		StudyRecord studyrecord2 = StudyRecord.builder()
+				.studyDate(LocalDate.of(2022, 2, 16))
+				.startTime(LocalDateTime.of(2022, 2, 16, 13, 15))
+				.endTime(LocalDateTime.of(2022, 2, 16, 14, 30))
+				.durationTime(LocalTime.of(1, 15))
+				.title("과학")
+				.user(user)
+				.build();
+		studyRecordRepository.save(studyrecord2);
 		
 //		System.out.println(authTest);
 		
