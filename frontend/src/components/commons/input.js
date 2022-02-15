@@ -3,9 +3,9 @@ import styled from "styled-components";
 const StyledInput = styled.input`
   width: ${(props) => (props.width ? props.width : "12rem")};
   height: ${(props) => (props.height ? props.height : "2rem")};
-  border-radius: 5px;
-  border: 1px solid #787878;
-  padding-left: 0.5rem;
+  border-radius: ${(props) => (props.br ? props.br : "5px")};
+  border: 1px solid #a3a3a3;
+  padding-left: 1rem;
   font-size: 1rem;
   margin-top: ${(props) => (props.mt ? props.mt : "")};
   margin-left: ${(props) => (props.ml ? props.ml : "")};

@@ -20,7 +20,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 80%;
+  height: 100%;
 `;
 
 const InnerContainer = styled.div`
@@ -29,7 +29,7 @@ const InnerContainer = styled.div`
   height: 3rem;
   justify-content: center;
   align-items: center;
-  padding: 3rem;
+  padding: 3rem 6rem;
 `;
 
 const Arrow = styled.div`
@@ -62,7 +62,8 @@ const Main = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin: 3rem;
+  margin: 6rem;
+  /* margin-bottom: 0; */
 `;
 
 const Overlay = styled(motion.div)`
