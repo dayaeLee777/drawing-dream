@@ -75,7 +75,7 @@ const FileContainer = styled.div`
       }
       .desc {
         font-size: 0.9rem;
-        color: #666666;
+        color: ${({ theme }) => theme.menuColor};
       }
     }
   }
@@ -99,9 +99,9 @@ const Files = styled.div`
     .file {
       cursor: pointer;
       display: block;
-      background-color: white;
       border: none;
-      color: #555555;
+      color: ${({ theme }) => theme.menuColor};
+      background-color: ${({ theme }) => theme.widgetColor};
       &:hover {
         color: #000000;
       }
