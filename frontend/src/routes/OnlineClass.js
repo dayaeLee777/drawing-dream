@@ -13,11 +13,8 @@ import {
   faVideo,
   faMicrophone,
   faMicrophoneSlash,
-  faExternalLinkAlt,
-  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ScreenHandler from "modules/onlineclass";
 /*
  * (C) Copyright 2014 Kurento (http://kurento.org/)
  *
@@ -54,9 +51,9 @@ const Title = styled.div`
 
 const ControlContainer = styled.div`
   display: flex;
-  width: 25rem;
+  width: 18rem;
   justify-content: space-between;
-  margin-left: 9rem;
+  margin-left: 16rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -104,18 +101,17 @@ const OnlineClass = () => {
   const roomId = useParams().roomid;
   // useEffect(() => {
   let ws = new WebSocket("wss://i6a607.p.ssafy.io:8443/groupcall");
-  // let ws = new WebSocket("wss://localhost:8443/groupcall");
   let participants = {};
   let room = roomId;
   const { userId, userName, userCode } = useSelector((state) => state.user);
   const PARTICIPANT_MAIN_CLASS = "participant main";
   const PARTICIPANT_CLASS = "participant";
 
+  const [teacherVideo, setTecherVideo] = useState(false);
   const [courseInfo, setCourseInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
   // const [showVideo, setShowVideo] = useState(true);
   const navigate = useNavigate();
-  let name = userName;
 
   useEffect(() => {
     if (isLoading) {
@@ -144,9 +140,9 @@ const OnlineClass = () => {
       // container.id = name;
       // var span = document.createElement("span");
       var rtcPeer;
-      let video;
 
-      if (name === courseInfo.teacherName || name.includes("screen")) {
+      let video;
+      if (name === courseInfo.teacherName) {
         // console.log("hi");
         video = document.createElement("video");
         video.id = "video-" + name;
@@ -244,8 +240,7 @@ const OnlineClass = () => {
           receiveVideoResponse(parsedMessage);
           break;
         case "iceCandidate":
-          console.log(name);
-          participants[name].rtcPeer.addIceCandidate(
+          participants[parsedMessage.name].rtcPeer.addIceCandidate(
             parsedMessage.candidate,
             function (error) {
               if (error) {
@@ -268,10 +263,25 @@ const OnlineClass = () => {
       };
       ws.send(JSON.stringify(message));
     };
-  }
+    // async function getConnectedDevices(type) {
+    //   navigator.mediaDevices
+    //     .enumerateDevices()
+    //     .then(function (devices) {
+    //       devices.forEach(function (device) {
+    //         console.log(
+    //           device.kind + ": " + device.label + " id = " + device.deviceId
+    //         );
+    //       });
+    //     })
+    //     .catch(function (err) {
+    //       console.log(err.name + ": " + err.message);
+    //     });
+    // }
 
+    // getConnectedDevices("videoinput");
+    // console.log(videoCamera);
+  }
   function onNewParticipant(request) {
-    console.log(request);
     receiveVideo(request.name);
   }
 
@@ -284,6 +294,17 @@ const OnlineClass = () => {
     );
   }
 
+  // function callResponse(message) {
+  //   if (message.response != "accepted") {
+  //     console.info("Call not accepted by peer. Closing call");
+  //     stop();
+  //   } else {
+  //     webRtcPeer.processAnswer(message.sdpAnswer, function (error) {
+  //       if (error) return console.error(error);
+  //     });
+  //   }
+  // }
+
   function onExistingParticipants(msg) {
     var constraints = {
       audio: true,
@@ -295,73 +316,27 @@ const OnlineClass = () => {
         },
       },
     };
-
-    var options = {};
-    if (name.includes("screen")) {
-      // console.log("#########screen########" + name);
-      // var participant = new Participant(name);
-      // participants[name] = participant;
-      // var video = participant.getVideoElement();
-      // if (navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
-      //   if (navigator.mediaDevices.getDisplayMedia) {
-      //     navigator.mediaDevices
-      //       .getDisplayMedia({ video: true, audio: true })
-      //       .then((stream) => {
-      //         video.srcObject = stream;
-      //         options = {
-      //           videoStream: stream,
-      //           mediaConstraints: constraints,
-      //           sendSource: "screen",
-      //           onicecandidate: participant.onIceCandidate.bind(participant),
-      //         };
-      //         participant.rtcPeer =
-      //           new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
-      //             options,
-      //             function (error) {
-      //               if (error) {
-      //                 return console.error(error);
-      //               }
-      //               this.generateOffer(
-      //                 participant.offerToReceiveVideo.bind(participant)
-      //               );
-      //             }
-      //           );
-      //         msg.data.forEach(receiveVideo);
-      //       });
-      //   }
-      // }
-    } else {
-      console.log("#########cam#######" + name);
-      console.log(msg.data);
-      var participant = new Participant(name);
-      participants[name] = participant;
-      var video = participant.getVideoElement();
-      console.log(video);
-      options = {
-        localVideo: video,
-        mediaConstraints: {
-          audio: true,
-          video: {
-            mandatory: {
-              maxWidth: 1920,
-              maxHeight: 1080,
-              maxFrameRate: 60,
-            },
-          },
-        },
-        onicecandidate: participant.onIceCandidate.bind(participant),
-      };
-      participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
-        options,
-        function (error) {
-          if (error) {
-            return console.error(error);
-          }
-          this.generateOffer(participant.offerToReceiveVideo.bind(participant));
+    console.log(userName + " registered in room " + room);
+    var participant = new Participant(userName);
+    participants[userName] = participant;
+    var video = participant.getVideoElement();
+    console.log(video);
+    var options = {
+      localVideo: video,
+      mediaConstraints: constraints,
+      onicecandidate: participant.onIceCandidate.bind(participant),
+    };
+    participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
+      options,
+      function (error) {
+        if (error) {
+          return console.error(error);
         }
-      );
-      msg.data.forEach(receiveVideo);
-    }
+        this.generateOffer(participant.offerToReceiveVideo.bind(participant));
+      }
+    );
+
+    msg.data.forEach(receiveVideo);
   }
 
   function leaveRoom() {
@@ -375,12 +350,10 @@ const OnlineClass = () => {
     ws.close();
   }
 
-  async function receiveVideo(sender) {
-    console.log("########" + sender);
+  function receiveVideo(sender) {
     var participant = new Participant(sender);
     participants[sender] = participant;
     var video = participant.getVideoElement();
-    console.log(video);
 
     var options = {
       remoteVideo: video,
@@ -402,7 +375,6 @@ const OnlineClass = () => {
     console.log("Participant " + request.name + " left");
     var participant = participants[request.name];
     participant.dispose();
-    document.getElementById("video-" + request.name).remove();
     delete participants[request.name];
   }
 
@@ -444,44 +416,6 @@ const OnlineClass = () => {
     }
   };
 
-  const shareScreen = async () => {
-    if (name === userName) {
-      sendMessage({
-        id: "leaveRoom",
-      });
-      for (var key in participants) {
-        participants[key].dispose();
-      }
-      document.getElementById("video-" + name).remove();
-
-      const message = {
-        id: "shareScreen",
-        name: userName,
-        room: roomId,
-      };
-      ws.send(JSON.stringify(message));
-      name = "screen" + name;
-      document.getElementById("shareScreenOn").style.display = "none";
-      document.getElementById("shareScreenOff").style.display = "";
-    } else {
-      sendMessage({
-        id: "leaveRoom",
-      });
-      for (var key in participants) {
-        participants[key].dispose();
-      }
-      document.getElementById("video-" + name).remove();
-      const message = {
-        id: "joinRoom",
-        name: userName,
-        room: roomId,
-      };
-      ws.send(JSON.stringify(message));
-      name = userName;
-      document.getElementById("shareScreenOn").style.display = "";
-      document.getElementById("shareScreenOff").style.display = "none";
-    }
-  };
   return (
     <>
       <Container>
@@ -520,18 +454,6 @@ const OnlineClass = () => {
             <ButtonContainer onClick={audOnOff} id="audOn">
               <FontAwesomeIcon icon={faMicrophone} size="sm" />
               <ButtonName>오디오 중지</ButtonName>
-            </ButtonContainer>
-            <ButtonContainer onClick={shareScreen} id="shareScreenOn">
-              <FontAwesomeIcon icon={faExternalLinkAlt} size="sm" />
-              <ButtonName>화면 공유</ButtonName>
-            </ButtonContainer>
-            <ButtonContainer
-              onClick={shareScreen}
-              id="shareScreenOff"
-              style={{ display: "none" }}
-            >
-              <FontAwesomeIcon icon={faTimes} />
-              <ButtonName>공유 중지</ButtonName>
             </ButtonContainer>
           </ControlContainer>
           {userCode === "A03" ? (
