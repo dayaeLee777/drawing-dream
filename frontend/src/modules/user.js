@@ -7,6 +7,7 @@ const LOGIN_SUCCESS = "USER/LOGIN_SUCCESS";
 const LOGIN_FAIL = "USER/LOGIN_FAIL";
 const LOGOUT_SUCCESS = "USER/LOGOUT_SUCCESS";
 const ATTEND_SUCCESS = "USER/ATTEND_SUCCESS";
+const FINISH_SUCCESS = "USER/FINISH_SUCCESS";
 const UPDATE_SUCCESS = "USER/UPDATE_SUCCESS";
 const UPDATE_FAIL = "USER/UPDATE_FAIL";
 
@@ -81,6 +82,12 @@ export const attendance = () => {
   };
 };
 
+export const finish = () => {
+  return {
+    type: FINISH_SUCCESS,
+  };
+};
+
 const initialState = {
   isLoggedIn: false,
   userId: "",
@@ -126,6 +133,13 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isAttend: true,
+      };
+    }
+
+    case FINISH_SUCCESS: {
+      return {
+        ...state,
+        isAttend: false,
       };
     }
 
