@@ -4,9 +4,9 @@ import styled from "styled-components";
 import board from "assets/img/board.png";
 import AttendanceModal from "../../components/attendance/AttendanceModal";
 import { motion } from "framer-motion";
-import { attend } from "api/attendance";
+import { attend, checkAttend } from "api/attendance";
 import { useDispatch, useSelector } from "react-redux";
-import { attendance, logout } from "modules/user";
+import { attendance, finish, logout } from "modules/user";
 import { getMeeting } from "api/meeting";
 import { errorAlert } from "modules/alert";
 
@@ -91,18 +91,25 @@ const Meeting = () => {
   const [data, setData] = useState();
   const [date, setDate] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const { isAttend } = useSelector((state) => state.user);
+  const [message, setMessage] = useState();
+  const [disabled, setDisabled] = useState(false);
+  const { userId, isAttend } = useSelector((state) => state.user);
+
   const attendToday = () => {
     attend().then((response) => {
       if (response.status === 200) {
+        setMessage("출석되었습니다.");
         dispatch(attendance());
         setModalOpen(true);
       }
-      // else if (response.status === 401)
-      //error
     });
   };
 
+  const closeToday = () => {
+    setMessage("오늘 하루도 수고 많았어요!");
+    dispatch(finish());
+    setModalOpen(true);
+  };
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
@@ -113,11 +120,13 @@ const Meeting = () => {
         date >= 10 ? date : "0" + date
       }일`
     );
+
+    const meetingCode = isAttend ? "K05" : "K04";
     const params = {
       date: `${year}-${month >= 10 ? month : "0" + month}-${
         date >= 10 ? date : "0" + date
       }`,
-      meetingCode: "K04",
+      meetingCode: meetingCode,
     };
     if (isLoading) {
       getMeeting(params)
@@ -132,6 +141,17 @@ const Meeting = () => {
           } else {
             errorAlert(e.response.status, "글이 존재하지 않습니다.");
           }
+        });
+
+      checkAttend(userId)
+        .then((response) => {
+          console.log(response);
+          if (response.data.length > 0) {
+            setDisabled(true);
+          }
+        })
+        .catch((e) => {
+          errorAlert(e.response.status, "출석 정보를 불러올 수 없습니다.");
         });
     }
   }, []);
@@ -161,7 +181,12 @@ const Meeting = () => {
           )}
           <ButtonContainer>
             {isAttend ? (
-              <Button height="3rem" bc="white" name="하교하기" />
+              <Button
+                height="3rem"
+                bc="white"
+                name="하교하기"
+                onClick={closeToday}
+              />
             ) : (
               <Button
                 height="3rem"
@@ -180,7 +205,13 @@ const Meeting = () => {
             exit="exit"
             onClick={() => setModalOpen(false)}
           >
-            {modalOpen && <AttendanceModal date={date}></AttendanceModal>}
+            {modalOpen && (
+              <AttendanceModal
+                isAttend={isAttend}
+                message={message}
+                date={date}
+              ></AttendanceModal>
+            )}
           </Overlay>
         )}
       </Board>
