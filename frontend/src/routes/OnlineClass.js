@@ -389,6 +389,7 @@ const OnlineClass = () => {
 
   function onParticipantLeft(request) {
     console.log("Participant " + request.name + " left");
+    document.getElementById("video-" + request.name).remove();
     var participant = participants[request.name];
     participant.dispose();
     delete participants[request.name];
@@ -438,8 +439,15 @@ const OnlineClass = () => {
         id: "leaveRoom",
       });
       for (var key in participants) {
-        participants[key].dispose();
+        if (participants[key].name !== name) {
+          var partVideo = document.getElementById(
+            "video-" + participants[key].name
+          );
+          console.log(participants[key].name);
+          document.getElementById("participants").removeChild(partVideo);
+        }
       }
+      delete participants[name];
       document.getElementById("video-" + name).remove();
 
       const message = {
@@ -457,7 +465,15 @@ const OnlineClass = () => {
       });
       for (var key in participants) {
         participants[key].dispose();
+        if (participants[key].name !== name) {
+          var partVideo = document.getElementById(
+            "video-" + participants[key].name
+          );
+          console.log(participants[key].name);
+          document.getElementById("participants").removeChild(partVideo);
+        }
       }
+      delete participants[name];
       document.getElementById("video-" + name).remove();
       const message = {
         id: "joinRoom",
