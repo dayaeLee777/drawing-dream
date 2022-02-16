@@ -68,9 +68,9 @@ const AppRouter = () => {
               <Route path="widgetlist" element={<WidgetList />} />
               <Route path="meeting" element={<Meeting />} />
               <Route path="study" element={<Study />} />
+              <Route path="signin" element={<Navigate replace to="/home" />} />
+              <Route path="signup" element={<Navigate replace to="/home" />} />
             </Route>
-            <Route path="/signin" element={<Navigate replace to="/home" />} />
-            <Route path="/signup" element={<Navigate replace to="/home" />} />
           </Routes>
         </>
       ) : (
