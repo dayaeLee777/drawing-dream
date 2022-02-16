@@ -271,7 +271,7 @@ const CourseInfoDetail = ({
         <NullSubject>
           <>
             {periodCode
-              ? `${commonCode[periodCode.substr(0, 1)][periodCode]}+에는 `
+              ? `${commonCode[periodCode.substr(0, 1)][periodCode]}에는 `
               : "현재는 "}
             수업이 없습니다.
           </>
