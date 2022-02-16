@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CommentRegister from "./CommentRegister";
-import blankProfile from "assets/img/blank-profile.png";
+import blankProfile from "assets/img/profile.png";
 import { getProfileImg } from "api/user";
 
 const Container = styled.div`
