@@ -38,7 +38,7 @@ const Content = styled.div`
 const FeatureContainer = styled.div`
   margin-top: 0.5rem;
   font-size: 0.7rem;
-  color: #787878;
+  color: ${({ theme }) => theme.menuColor};
 
   .regTime,
   .reCommentBtn {
