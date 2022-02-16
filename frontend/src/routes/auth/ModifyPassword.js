@@ -8,6 +8,7 @@ import { modifyPassword, passwordCheck } from "api/user";
 import { errorAlert, successAlert, warnAlert } from "modules/alert";
 import { logout } from "modules/user";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const FormContainer = styled.div`
   display: flex;
@@ -104,10 +105,10 @@ const ModifyPassword = () => {
         })
         .catch((e) => {
           if (e.response.status === 401) {
-            errorAlert(401);
-            dispatch(logout());
-          } else {
-            errorAlert(e.response.status, "현재 비밀번호가 일치하지 않습니다.");
+            toast.error("현재 비밀번호가 일치하지 않습니다.", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1000,
+            });
           }
         });
     } else {
