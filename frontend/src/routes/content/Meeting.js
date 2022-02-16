@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { attendance, finish, logout } from "modules/user";
 import { getMeeting } from "api/meeting";
 import { errorAlert } from "modules/alert";
+import { useNavigate } from "react-router-dom";
 
 const Board = styled.div`
   background-image: url(${board});
@@ -20,14 +21,13 @@ const Board = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  justify-content: flex-start;
+  min-height: 85vh;
 `;
 
 const InnerContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  height: 3rem;
+  grid-template-columns: 1fr 3fr 2fr;
   justify-content: center;
   align-items: center;
   padding: 3rem 6rem;
@@ -36,12 +36,14 @@ const InnerContainer = styled.div`
 const Arrow = styled.div`
   font-size: 3rem;
   color: #ffc25c;
+  cursor: pointer;
 `;
 
 const Desc = styled.div`
   font-size: 2rem;
   color: white;
   text-align: center;
+  word-break: break-all;
 `;
 
 const DateContainer = styled.div`
@@ -55,15 +57,26 @@ const Main = styled.div`
   font-size: 1.5rem;
   color: white;
   margin-left: 5rem;
-  width: 45rem;
-  line-height: 2;
-  height: 60%;
+  width: 80%;
+  line-height: 2rem;
+  height: 35vh;
+  word-break: break-all;
+  overflow: auto;
+
+  -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin: 6rem;
+  margin-top: auto;
+  right: 5rem;
+  bottom: 15rem;
+  position: relative;
 `;
 
 const Overlay = styled(motion.div)`
@@ -94,6 +107,7 @@ const Meeting = () => {
   const [message, setMessage] = useState();
   const [disabled, setDisabled] = useState(false);
   const { userId, isAttend } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const attendToday = () => {
     attend().then((response) => {
@@ -163,7 +177,11 @@ const Meeting = () => {
           {!isLoading && data.noticeId ? (
             <>
               <InnerContainer>
-                <Arrow>←</Arrow>
+                <Arrow
+                  onClick={() => {
+                    navigate("/home");
+                  }}
+                >←</Arrow>
                 <Desc>{data.title}</Desc>
                 <DateContainer>{data.regDate}</DateContainer>
               </InnerContainer>
