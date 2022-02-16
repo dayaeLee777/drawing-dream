@@ -298,38 +298,38 @@ const OnlineClass = () => {
       },
     };
     if (name.includes("screen")) {
-      console.log("#########" + name);
-      var participant = new Participant(name);
-      participants[name] = participant;
-      var video = participant.getVideoElement();
-      if (navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
-        if (navigator.mediaDevices.getDisplayMedia) {
-          navigator.mediaDevices
-            .getDisplayMedia({ video: true, audio: true })
-            .then((stream) => {
-              video.srcObject = stream;
-              options = {
-                videoStream: stream,
-                mediaConstraints: constraints,
-                sendSource: "screen",
-                onicecandidate: participant.onIceCandidate.bind(participant),
-              };
-              participant.rtcPeer =
-                new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
-                  options,
-                  function (error) {
-                    if (error) {
-                      return console.error(error);
-                    }
-                    this.generateOffer(
-                      participant.offerToReceiveVideo.bind(participant)
-                    );
-                  }
-                );
-              msg.data.forEach(receiveVideo);
-            });
-        }
-      }
+      // console.log("#########" + name);
+      // var participant = new Participant(name);
+      // participants[name] = participant;
+      // var video = participant.getVideoElement();
+      // if (navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
+      //   if (navigator.mediaDevices.getDisplayMedia) {
+      //     navigator.mediaDevices
+      //       .getDisplayMedia({ video: true, audio: true })
+      //       .then((stream) => {
+      //         video.srcObject = stream;
+      //         options = {
+      //           videoStream: stream,
+      //           mediaConstraints: constraints,
+      //           sendSource: "screen",
+      //           onicecandidate: participant.onIceCandidate.bind(participant),
+      //         };
+      //         participant.rtcPeer =
+      //           new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
+      //             options,
+      //             function (error) {
+      //               if (error) {
+      //                 return console.error(error);
+      //               }
+      //               this.generateOffer(
+      //                 participant.offerToReceiveVideo.bind(participant)
+      //               );
+      //             }
+      //           );
+      //         msg.data.forEach(receiveVideo);
+      //       });
+      //   }
+      // }
     } else {
       console.log(name + " registered in room " + room);
       var participant = new Participant(name);
