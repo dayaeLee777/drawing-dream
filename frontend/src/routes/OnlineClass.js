@@ -105,7 +105,7 @@ const userName = styled.div`
 const OnlineClass = () => {
   const roomId = useParams().roomid;
   // useEffect(() => {
-  let ws = new WebSocket("wss://localhost:8443/groupcall");
+  let ws = new WebSocket("wss://i6a607.p.ssafy.io:8443/groupcall");
   let participants = {};
   let room = roomId;
   const { userId, userName, userCode } = useSelector((state) => state.user);
