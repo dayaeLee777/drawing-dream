@@ -112,7 +112,7 @@ const OnlineClass = () => {
   const [isLoading, setIsLoading] = useState(true);
   // const [showVideo, setShowVideo] = useState(true);
   const navigate = useNavigate();
-
+  let name = userName;
   useEffect(() => {
     if (isLoading) {
       getCouresInfo(roomId).then((res) => {
@@ -142,7 +142,7 @@ const OnlineClass = () => {
       var rtcPeer;
 
       let video;
-      if (name === courseInfo.teacherName) {
+      if (name === courseInfo.teacherName || name.includes("screen")) {
         // console.log("hi");
         video = document.createElement("video");
         video.id = "video-" + name;
@@ -316,27 +316,30 @@ const OnlineClass = () => {
         },
       },
     };
-    console.log(userName + " registered in room " + room);
-    var participant = new Participant(userName);
-    participants[userName] = participant;
-    var video = participant.getVideoElement();
-    console.log(video);
-    var options = {
-      localVideo: video,
-      mediaConstraints: constraints,
-      onicecandidate: participant.onIceCandidate.bind(participant),
-    };
-    participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
-      options,
-      function (error) {
-        if (error) {
-          return console.error(error);
+    if (name.includes("screen")) {
+    } else {
+      console.log(name + " registered in room " + room);
+      var participant = new Participant(name);
+      participants[name] = participant;
+      var video = participant.getVideoElement();
+      console.log(video);
+      var options = {
+        localVideo: video,
+        mediaConstraints: constraints,
+        onicecandidate: participant.onIceCandidate.bind(participant),
+      };
+      participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
+        options,
+        function (error) {
+          if (error) {
+            return console.error(error);
+          }
+          this.generateOffer(participant.offerToReceiveVideo.bind(participant));
         }
-        this.generateOffer(participant.offerToReceiveVideo.bind(participant));
-      }
-    );
+      );
 
-    msg.data.forEach(receiveVideo);
+      msg.data.forEach(receiveVideo);
+    }
   }
 
   function leaveRoom() {
@@ -354,7 +357,7 @@ const OnlineClass = () => {
     var participant = new Participant(sender);
     participants[sender] = participant;
     var video = participant.getVideoElement();
-
+    console.log(video);
     var options = {
       remoteVideo: video,
       onicecandidate: participant.onIceCandidate.bind(participant),
