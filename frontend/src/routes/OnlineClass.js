@@ -332,6 +332,7 @@ const OnlineClass = () => {
       // }
     } else {
       console.log("#########cam#######" + name);
+      console.log(msg.data);
       var participant = new Participant(name);
       participants[name] = participant;
       var video = participant.getVideoElement();
@@ -359,7 +360,6 @@ const OnlineClass = () => {
           this.generateOffer(participant.offerToReceiveVideo.bind(participant));
         }
       );
-      console.log(msg.data);
       msg.data.forEach(receiveVideo);
     }
   }
