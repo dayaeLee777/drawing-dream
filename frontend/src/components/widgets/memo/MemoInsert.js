@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { deleteMemo, getMemo, modifyMemo, registerMemo } from "api/memo";
 import { errorAlert } from "modules/alert";
@@ -47,14 +47,14 @@ const MemoInsert = ({ setStatus, setIsListLoading, memoId, setMemoId }) => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
-  useState(() => {
+  useEffect(() => {
     if (isLoading && memoId) {
       getMemo(memoId)
         .then((res) => {
           setContent(res.data.content);
           setIsLoading(false);
         })
-        .error((e) => {
+        .catch((e) => {
           if (e.response.status === 401) {
             errorAlert(401);
             dispatch(logout());
