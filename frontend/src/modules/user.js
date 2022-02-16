@@ -127,6 +127,7 @@ const user = (state = initialState, action) => {
         ...state,
         isLoggedIn: false,
         userId: null,
+        error: false,
       };
 
     case ATTEND_SUCCESS: {
