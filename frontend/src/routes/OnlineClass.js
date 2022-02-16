@@ -295,48 +295,43 @@ const OnlineClass = () => {
         },
       },
     };
-    // var participant = new Participant(name);
-    // participants[name] = participant;
-    // var video = participant.getVideoElement();
-    console.log(video);
 
     var options = {};
     if (name.includes("screen")) {
-      console.log("#########" + name);
-      var participant = new Participant(name);
-      participants[name] = participant;
-      var video = participant.getVideoElement();
-      var audio = "";
-      if (navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
-        if (navigator.mediaDevices.getDisplayMedia) {
-          navigator.mediaDevices
-            .getDisplayMedia({ video: true, audio: true })
-            .then((stream) => {
-              video.srcObject = stream;
-              options = {
-                videoStream: stream,
-                mediaConstraints: constraints,
-                sendSource: "screen",
-                onicecandidate: participant.onIceCandidate.bind(participant),
-              };
-              participant.rtcPeer =
-                new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
-                  options,
-                  function (error) {
-                    if (error) {
-                      return console.error(error);
-                    }
-                    this.generateOffer(
-                      participant.offerToReceiveVideo.bind(participant)
-                    );
-                  }
-                );
-              msg.data.forEach(receiveVideo);
-            });
-        }
-      }
+      // console.log("#########screen########" + name);
+      // var participant = new Participant(name);
+      // participants[name] = participant;
+      // var video = participant.getVideoElement();
+      // if (navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
+      //   if (navigator.mediaDevices.getDisplayMedia) {
+      //     navigator.mediaDevices
+      //       .getDisplayMedia({ video: true, audio: true })
+      //       .then((stream) => {
+      //         video.srcObject = stream;
+      //         options = {
+      //           videoStream: stream,
+      //           mediaConstraints: constraints,
+      //           sendSource: "screen",
+      //           onicecandidate: participant.onIceCandidate.bind(participant),
+      //         };
+      //         participant.rtcPeer =
+      //           new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
+      //             options,
+      //             function (error) {
+      //               if (error) {
+      //                 return console.error(error);
+      //               }
+      //               this.generateOffer(
+      //                 participant.offerToReceiveVideo.bind(participant)
+      //               );
+      //             }
+      //           );
+      //         msg.data.forEach(receiveVideo);
+      //       });
+      //   }
+      // }
     } else {
-      console.log("#########" + name);
+      console.log("#########cam#######" + name);
       var participant = new Participant(name);
       participants[name] = participant;
       var video = participant.getVideoElement();
