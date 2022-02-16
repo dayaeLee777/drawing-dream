@@ -1,10 +1,10 @@
 ## 목차
 - [ERD](#erd)
 - [Categorizing](#categorizing)
-    - [User](#😊-user)
-    - [School](#🎓-school)
-    - [Class](#✏️-class)
-    - [Chat](#🗣️-chat)
+    - [User](#😊user)
+    - [School](#🎓school)
+    - [Class](#class)
+    - [Chat](#chat)
     - [Widget](#🗂️-widget)
     - [Code](#🧮-code)
 
@@ -16,18 +16,18 @@
 
 ## Categorizing
 
-### 😊 User
+### 😊User
 ![user_erd](https://user-images.githubusercontent.com/8343301/154201115-656327a9-c7e8-4d27-949b-13967b1953ee.PNG)
 
-### 🎓 School
+### 🎓School
 ![school_erd](https://user-images.githubusercontent.com/8343301/154201157-d47e2fc4-e89e-4840-8fc5-77e36adc3dd0.PNG)
 
 
-### ✏️ Class
+### Class
 ![class_erd](https://user-images.githubusercontent.com/8343301/154201194-7c988f24-7157-41e3-97dc-7cf8fb5f5b07.PNG)
 
 
-### 🗣️ Chat
+### Chat
 ![채팅](https://user-images.githubusercontent.com/8343301/154200981-2219ae0d-a514-4a7e-a189-a1fb70f63ae6.PNG)
 
 
