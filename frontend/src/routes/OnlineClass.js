@@ -332,7 +332,7 @@ const OnlineClass = () => {
     ws.close();
   }
 
-  function receiveVideo(sender) {
+  async function receiveVideo(sender) {
     var participant = new Participant(sender);
     participants[sender] = participant;
     var video = participant.getVideoElement();
