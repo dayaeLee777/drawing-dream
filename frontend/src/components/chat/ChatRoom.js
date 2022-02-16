@@ -170,11 +170,12 @@ const ChatRoom = ({
   chatClose,
 }) => {
   const [chatMove, setChatMove] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
   const messageBoxRef = useRef();
   const { userName, userId } = useSelector((state) => state.user);
   const { users, memberId } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
-  const sockJS = new SockJS("http://localhost/ws-dd");
+  const sockJS = new SockJS("https://localhost:8080/ws-dd");
   const client = Stomp.over(sockJS);
 
   const scrollToBottom = () => {
@@ -216,17 +217,43 @@ const ChatRoom = ({
       {
         Authorization: `Bearer ${token}`,
       },
-      (frame) => {
+      () => {
         console.log("STOMP Connection");
-        console.log(memberId);
         client.subscribe(`/topic/one/${memberId}`, (response) => {
           console.log(response);
           setContents((prev) => [...prev, JSON.parse(response.body)]);
         });
+        client.subscribe(`/topic/one/${userId}`, (response) => {
+          setContents((prev) => [...prev, JSON.parse(response.body)]);
+          console.log(response);
+        });
       }
     );
+    // client.subscribe(`/topic/one/${memberId}`, (response) => {
+    //   console.log(response);
+    //   setContents((prev) => [...prev, JSON.parse(response.body)]);
+    // });
     return () => client.disconnect();
-  }, []);
+  }, [isSubmit]);
+
+  // useEffect(() => {
+  //   client.connect(
+  //     {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     () => {
+  //       console.log("STOMP Connection");
+  //       if (isSubmit) {
+  //         console.log("############" + isSubmit);
+  //         client.subscribe(`/topic/one/${memberId}`, (response) => {
+  //           console.log(response);
+  //           setContents((prev) => [...prev, JSON.parse(response.body)]);
+  //         });
+  //       }
+  //     }
+  //   );
+  //   return () => client.disconnect();
+  // }, [isSubmit]);
 
   useEffect(() => {
     scrollToBottom();
@@ -239,9 +266,12 @@ const ChatRoom = ({
       {
         Authorization: `Bearer ${token}`,
       },
+      console.log(memberId),
       JSON.stringify({ roomId, userId: memberId, content: message })
     );
+    setIsSubmit(true);
     setMessage("");
+    setIsSubmit(false);
   };
 
   return (

@@ -10,7 +10,7 @@ const Container = styled.div`
   width: 23rem;
   border-radius: 10px;
   margin-left: 3vw;
-  box-shadow: ${({theme}) => theme.chatboxShadow};
+  box-shadow: ${({ theme }) => theme.chatboxShadow};
   border: 1px solid #ffffff30;
   padding-bottom: 0.5rem;
 `;
@@ -39,7 +39,7 @@ const Name = styled.div`
 
 const Message = styled.div`
   width: 65%;
-  word-break:break-all;
+  word-break: break-all;
 `;
 
 const ChatForm = styled.div`
@@ -60,7 +60,7 @@ const ChatForm = styled.div`
 `;
 
 const Chat = ({ courseId }) => {
-  let sockJS = new SockJS("http://localhost/ws-dd");
+  let sockJS = new SockJS("http://localhost:8080/ws-dd");
   let client = Stomp.over(sockJS);
   const token =
     sessionStorage.getItem("access-token") ||
