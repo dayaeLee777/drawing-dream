@@ -104,13 +104,13 @@ const OnlineClass = () => {
   const roomId = useParams().roomid;
   // useEffect(() => {
   let ws = new WebSocket("wss://i6a607.p.ssafy.io:8443/groupcall");
+  // let ws = new WebSocket("wss://localhost:8443/groupcall");
   let participants = {};
   let room = roomId;
   const { userId, userName, userCode } = useSelector((state) => state.user);
   const PARTICIPANT_MAIN_CLASS = "participant main";
   const PARTICIPANT_CLASS = "participant";
 
-  const [teacherVideo, setTecherVideo] = useState(false);
   const [courseInfo, setCourseInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
   // const [showVideo, setShowVideo] = useState(true);
@@ -216,7 +216,7 @@ const OnlineClass = () => {
         sendMessage(message);
       };
 
-      Object.defineProperty(this, "rtcPeer", { writable: true });
+      // Object.defineProperty(this, "rtcPeer", { writable: true });
 
       this.dispose = function () {
         console.log("Disposing participant " + this.name);
@@ -335,6 +335,7 @@ const OnlineClass = () => {
       var participant = new Participant(name);
       participants[name] = participant;
       var video = participant.getVideoElement();
+      console.log(video);
       options = {
         localVideo: video,
         mediaConstraints: {
@@ -349,7 +350,7 @@ const OnlineClass = () => {
         },
         onicecandidate: participant.onIceCandidate.bind(participant),
       };
-      participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
+      participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
         options,
         function (error) {
           if (error) {
