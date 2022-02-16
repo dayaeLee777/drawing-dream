@@ -88,6 +88,7 @@ const Alert = styled(motion.div)`
   left: 0;
   right: 0;
   font-weight: 600;
+  background:${({theme}) => theme.alertColor};
 `;
 
 const show = {
