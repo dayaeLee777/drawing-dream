@@ -48,7 +48,7 @@ const Chat = () => {
   const { isOpenChat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
 
-  let sockJS = new SockJS("https://i6a607.p.ssafy.io/ws-dd");
+  let sockJS = new SockJS("http://localhost/ws-dd");
   let client = Stomp.over(sockJS);
   const token =
     sessionStorage.getItem("access-token") ||
