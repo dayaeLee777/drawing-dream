@@ -85,7 +85,7 @@ const ModifyPassword = () => {
               .then((res) => {
                 if (res.data.statusCode === 200) {
                   successAlert("비밀번호를 변경하였습니다.");
-                  Navigate("/home");
+                  Navigate("../");
                 } else if (res.data.statusCode === 202) {
                   errorAlert(
                     null,
@@ -118,7 +118,7 @@ const ModifyPassword = () => {
   };
 
   const onCancle = () => {
-    Navigate("/home");
+    Navigate("../");
   };
 
   return (
