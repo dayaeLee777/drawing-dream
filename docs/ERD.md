@@ -10,8 +10,8 @@
 
 
 ## ERD
+### [ERD Cloud 바로가기](https://www.erdcloud.com/p/f5SsATZEdN6Krk7xM)
 ![DD](https://user-images.githubusercontent.com/8343301/154201266-c1a43425-6f9d-48dc-b2f0-bf8b5f04b940.png)
-
 
 
 ## Categorizing
