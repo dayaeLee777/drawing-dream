@@ -332,7 +332,7 @@ const OnlineClass = () => {
     ws.close();
   }
 
-  async function receiveVideo(sender) {
+  function receiveVideo(sender) {
     var participant = new Participant(sender);
     participants[sender] = participant;
     var video = participant.getVideoElement();
@@ -436,6 +436,18 @@ const OnlineClass = () => {
             <ButtonContainer onClick={audOnOff} id="audOn">
               <FontAwesomeIcon icon={faMicrophone} size="sm" />
               <ButtonName>오디오 중지</ButtonName>
+            </ButtonContainer>
+            <ButtonContainer onClick={shareScreen} id="shareScreenOn">
+              <FontAwesomeIcon icon={faExternalLinkAlt} size="sm" />
+              <ButtonName>화면 공유</ButtonName>
+            </ButtonContainer>
+            <ButtonContainer
+              onClick={shareScreen}
+              id="shareScreenOff"
+              style={{ display: "none" }}
+            >
+              <FontAwesomeIcon icon={faTimes} />
+              <ButtonName>공유 중지</ButtonName>
             </ButtonContainer>
           </ControlContainer>
           {userCode === "A03" ? (
