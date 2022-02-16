@@ -13,6 +13,8 @@ import {
   faVideo,
   faMicrophone,
   faMicrophoneSlash,
+  faExternalLinkAlt,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 /*
@@ -397,7 +399,44 @@ const OnlineClass = () => {
       document.getElementById("audOff").style.display = "none";
     }
   };
+  const shareScreen = () => {
+    if (name === userName) {
+      sendMessage({
+        id: "leaveRoom",
+      });
+      for (var key in participants) {
+        participants[key].dispose();
+      }
+      document.getElementById("video-" + name).remove();
 
+      const message = {
+        id: "shareScreen",
+        name: userName,
+        room: roomId,
+      };
+      ws.send(JSON.stringify(message));
+      name = "screen" + name;
+      document.getElementById("shareScreenOn").style.display = "none";
+      document.getElementById("shareScreenOff").style.display = "";
+    } else {
+      sendMessage({
+        id: "leaveRoom",
+      });
+      for (var key in participants) {
+        participants[key].dispose();
+      }
+      document.getElementById("video-" + name).remove();
+      const message = {
+        id: "joinRoom",
+        name: userName,
+        room: roomId,
+      };
+      ws.send(JSON.stringify(message));
+      name = userName;
+      document.getElementById("shareScreenOn").style.display = "";
+      document.getElementById("shareScreenOff").style.display = "none";
+    }
+  };
   return (
     <>
       <Container>
