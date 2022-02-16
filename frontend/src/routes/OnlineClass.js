@@ -13,8 +13,6 @@ import {
   faVideo,
   faMicrophone,
   faMicrophoneSlash,
-  faExternalLinkAlt,
-  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 /*
@@ -114,7 +112,7 @@ const OnlineClass = () => {
   const [isLoading, setIsLoading] = useState(true);
   // const [showVideo, setShowVideo] = useState(true);
   const navigate = useNavigate();
-  let name = userName;
+
   useEffect(() => {
     if (isLoading) {
       getCouresInfo(roomId).then((res) => {
@@ -144,7 +142,7 @@ const OnlineClass = () => {
       var rtcPeer;
 
       let video;
-      if (name === courseInfo.teacherName || name.includes("screen")) {
+      if (name === courseInfo.teacherName) {
         // console.log("hi");
         video = document.createElement("video");
         video.id = "video-" + name;
@@ -170,6 +168,27 @@ const OnlineClass = () => {
       this.getVideoElement = function () {
         return video;
       };
+
+      // function switchContainerClass() {
+      //   if (container.className === PARTICIPANT_CLASS) {
+      //     var elements = Array.prototype.slice.call(
+      //       document.getElementsByClassName(PARTICIPANT_MAIN_CLASS)
+      //     );
+      //     elements.forEach(function (item) {
+      //       item.className = PARTICIPANT_CLASS;
+      //     });
+
+      //     container.className = PARTICIPANT_MAIN_CLASS;
+      //   } else {
+      //     container.className = PARTICIPANT_CLASS;
+      //   }
+      // }
+
+      // function isPresentMainParticipant() {
+      //   return (
+      //     document.getElementsByClassName(PARTICIPANT_MAIN_CLASS).length != 0
+      //   );
+      // }
 
       this.offerToReceiveVideo = function (error, offerSdp, wp) {
         if (error) return console.error("sdp offer error");
@@ -297,30 +316,27 @@ const OnlineClass = () => {
         },
       },
     };
-    if (name.includes("screen")) {
-    } else {
-      console.log(name + " registered in room " + room);
-      var participant = new Participant(name);
-      participants[name] = participant;
-      var video = participant.getVideoElement();
-      console.log(video);
-      var options = {
-        localVideo: video,
-        mediaConstraints: constraints,
-        onicecandidate: participant.onIceCandidate.bind(participant),
-      };
-      participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
-        options,
-        function (error) {
-          if (error) {
-            return console.error(error);
-          }
-          this.generateOffer(participant.offerToReceiveVideo.bind(participant));
+    console.log(userName + " registered in room " + room);
+    var participant = new Participant(userName);
+    participants[userName] = participant;
+    var video = participant.getVideoElement();
+    console.log(video);
+    var options = {
+      localVideo: video,
+      mediaConstraints: constraints,
+      onicecandidate: participant.onIceCandidate.bind(participant),
+    };
+    participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
+      options,
+      function (error) {
+        if (error) {
+          return console.error(error);
         }
-      );
+        this.generateOffer(participant.offerToReceiveVideo.bind(participant));
+      }
+    );
 
-      msg.data.forEach(receiveVideo);
-    }
+    msg.data.forEach(receiveVideo);
   }
 
   function leaveRoom() {
@@ -338,7 +354,7 @@ const OnlineClass = () => {
     var participant = new Participant(sender);
     participants[sender] = participant;
     var video = participant.getVideoElement();
-    console.log(video);
+
     var options = {
       remoteVideo: video,
       onicecandidate: participant.onIceCandidate.bind(participant),
@@ -399,44 +415,7 @@ const OnlineClass = () => {
       document.getElementById("audOff").style.display = "none";
     }
   };
-  const shareScreen = () => {
-    if (name === userName) {
-      sendMessage({
-        id: "leaveRoom",
-      });
-      for (var key in participants) {
-        participants[key].dispose();
-      }
-      document.getElementById("video-" + name).remove();
 
-      const message = {
-        id: "shareScreen",
-        name: userName,
-        room: roomId,
-      };
-      ws.send(JSON.stringify(message));
-      name = "screen" + name;
-      document.getElementById("shareScreenOn").style.display = "none";
-      document.getElementById("shareScreenOff").style.display = "";
-    } else {
-      sendMessage({
-        id: "leaveRoom",
-      });
-      for (var key in participants) {
-        participants[key].dispose();
-      }
-      document.getElementById("video-" + name).remove();
-      const message = {
-        id: "joinRoom",
-        name: userName,
-        room: roomId,
-      };
-      ws.send(JSON.stringify(message));
-      name = userName;
-      document.getElementById("shareScreenOn").style.display = "";
-      document.getElementById("shareScreenOff").style.display = "none";
-    }
-  };
   return (
     <>
       <Container>
@@ -475,18 +454,6 @@ const OnlineClass = () => {
             <ButtonContainer onClick={audOnOff} id="audOn">
               <FontAwesomeIcon icon={faMicrophone} size="sm" />
               <ButtonName>오디오 중지</ButtonName>
-            </ButtonContainer>
-            <ButtonContainer onClick={shareScreen} id="shareScreenOn">
-              <FontAwesomeIcon icon={faExternalLinkAlt} size="sm" />
-              <ButtonName>화면 공유</ButtonName>
-            </ButtonContainer>
-            <ButtonContainer
-              onClick={shareScreen}
-              id="shareScreenOff"
-              style={{ display: "none" }}
-            >
-              <FontAwesomeIcon icon={faTimes} />
-              <ButtonName>공유 중지</ButtonName>
             </ButtonContainer>
           </ControlContainer>
           {userCode === "A03" ? (
