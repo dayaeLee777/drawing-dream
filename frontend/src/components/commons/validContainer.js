@@ -8,6 +8,7 @@ const ValidBlock = styled.div`
   display: flex;
   color: ${(props) => (props.isValid ? "blue" : "red")};
   font-size: 0.8rem;
+  min-width: 11rem;
 `;
 
 const ValidContainer = (props) => {

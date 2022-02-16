@@ -37,11 +37,11 @@ const Desc = styled.div`
 `;
 
 const ModifyContainer = styled.div`
-  width: 50%;
+  width: 80%;
   display: flex;
   padding-right: 2rem;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: flex-end;
 `;
 const InputBlock = styled.div`
   display: flex;
