@@ -15,6 +15,7 @@ export const lightTheme = {
   chatFilter: "drop-shadow(6px 6px 5px #828282)",
   borderShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
   alertColor: "rgba(255,255,255,0.3)",
+  chatboxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
 };
 
 export const darkTheme = {
@@ -35,6 +36,7 @@ export const darkTheme = {
   chatFilter: "drop-shadow(6px 6px 5px black)",
   borderShadow: "rgb(50 50 50) 0px 2px 8px 0px",
   alertColor: "rgba(0,0,0,0.3)",
+  chatboxShadow: "rgb(255 255 255 / 10%) 0px 4px 12px",
 };
 
 export const theme = {
