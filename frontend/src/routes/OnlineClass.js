@@ -359,6 +359,7 @@ const OnlineClass = () => {
           this.generateOffer(participant.offerToReceiveVideo.bind(participant));
         }
       );
+      console.log(msg.data);
       msg.data.forEach(receiveVideo);
     }
   }
