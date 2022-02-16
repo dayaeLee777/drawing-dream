@@ -53,9 +53,9 @@ const Title = styled.div`
 
 const ControlContainer = styled.div`
   display: flex;
-  width: 25rem;
+  width: 18rem;
   justify-content: space-between;
-  margin-left: 9rem;
+  margin-left: 16rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -101,6 +101,7 @@ const userName = styled.div`
 
 const OnlineClass = () => {
   const roomId = useParams().roomid;
+  // useEffect(() => {
   let ws = new WebSocket("wss://i6a607.p.ssafy.io:8443/groupcall");
   let participants = {};
   let room = roomId;
@@ -114,7 +115,6 @@ const OnlineClass = () => {
   // const [showVideo, setShowVideo] = useState(true);
   const navigate = useNavigate();
   let name = userName;
-
   useEffect(() => {
     if (isLoading) {
       getCouresInfo(roomId).then((res) => {
@@ -298,38 +298,6 @@ const OnlineClass = () => {
       },
     };
     if (name.includes("screen")) {
-      // console.log("#########" + name);
-      // var participant = new Participant(name);
-      // participants[name] = participant;
-      // var video = participant.getVideoElement();
-      // if (navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
-      //   if (navigator.mediaDevices.getDisplayMedia) {
-      //     navigator.mediaDevices
-      //       .getDisplayMedia({ video: true, audio: true })
-      //       .then((stream) => {
-      //         video.srcObject = stream;
-      //         options = {
-      //           videoStream: stream,
-      //           mediaConstraints: constraints,
-      //           sendSource: "screen",
-      //           onicecandidate: participant.onIceCandidate.bind(participant),
-      //         };
-      //         participant.rtcPeer =
-      //           new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
-      //             options,
-      //             function (error) {
-      //               if (error) {
-      //                 return console.error(error);
-      //               }
-      //               this.generateOffer(
-      //                 participant.offerToReceiveVideo.bind(participant)
-      //               );
-      //             }
-      //           );
-      //         msg.data.forEach(receiveVideo);
-      //       });
-      //   }
-      // }
     } else {
       console.log(name + " registered in room " + room);
       var participant = new Participant(name);
@@ -433,7 +401,6 @@ const OnlineClass = () => {
   };
   const shareScreen = () => {
     if (name === userName) {
-      console.log("####shareScreen" + name);
       sendMessage({
         id: "leaveRoom",
       });
