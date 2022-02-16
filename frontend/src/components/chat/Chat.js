@@ -62,7 +62,6 @@ const Chat = () => {
         console.log("STOMP Connection");
         client.subscribe(`/topic/one/${userId}`, (response) => {
           setContents((prev) => [...prev, JSON.parse(response.body)]);
-          console.log(response);
           setIsNew(true);
         });
       }
