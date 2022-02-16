@@ -197,7 +197,7 @@ const ModifyProfile = () => {
   };
 
   const onCancle = () => {
-    Navigate("../");
+    Navigate("/home");
   };
 
   return (
