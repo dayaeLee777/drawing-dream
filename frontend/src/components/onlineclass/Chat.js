@@ -1,6 +1,6 @@
 import Button from "components/commons/button";
 import Input from "components/commons/input";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
@@ -69,6 +69,16 @@ const Chat = ({ courseId }) => {
   const [contents, setContents] = useState([]);
   const [message, setMessage] = useState("");
   const { userName, userId } = useSelector((state) => state.user);
+  const messageBoxRef = useRef();
+  const scrollToBottom = () => {
+    if (messageBoxRef.current) {
+      messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [contents]);
 
   useEffect(() => {
     client.connect(
@@ -107,7 +117,7 @@ const Chat = ({ courseId }) => {
 
   return (
     <Container>
-      <ChatContainer>
+      <ChatContainer ref={messageBoxRef}>
         {contents.map((content, index) => (
           <Content key={index}>
             <Name>{content.userName}</Name>
