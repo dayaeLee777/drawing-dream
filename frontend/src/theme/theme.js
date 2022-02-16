@@ -20,7 +20,7 @@ export const lightTheme = {
 export const darkTheme = {
   bgColor: "#292929",
   textColor: "#FFFFFF",
-  menuColor: "#828282",
+  menuColor: "#C7C7C7",
   dropdownColor: "#4D4C4C",
   widgetColor: "#605F5F",
   ContainerColor: "#7C7C7C",
