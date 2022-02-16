@@ -1,12 +1,12 @@
 ## 목차
 - [ERD](#erd)
 - [Categorizing](#categorizing)
-    - [User](#😊-user)
-    - [School](#🎓-school)
-    - [Class](#✏️-class)
-    - [Chat](#🗣️-chat)
-    - [Widget](#🗂️-widget)
-    - [Code](#🧮-code)
+    - [User](#%F0%9F%98%8A-user)
+    - [School](#%F0%9F%8E%93-school)
+    - [Class](#%E2%9C%8F%EF%B8%8F-class)
+    - [Chat](#%F0%9F%97%A3%EF%B8%8F-chat)
+    - [Widget](#%F0%9F%97%82%EF%B8%8F-widget)
+    - [Code](#%F0%9F%A7%AE-code)
 
 
 ## ERD
