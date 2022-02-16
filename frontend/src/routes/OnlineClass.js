@@ -380,6 +380,7 @@ const OnlineClass = () => {
     var participant = new Participant(sender);
     participants[sender] = participant;
     var video = participant.getVideoElement();
+    console.log(video);
 
     var options = {
       remoteVideo: video,
