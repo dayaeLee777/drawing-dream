@@ -53,9 +53,9 @@ const Title = styled.div`
 
 const ControlContainer = styled.div`
   display: flex;
-  width: 18rem;
+  width: 25rem;
   justify-content: space-between;
-  margin-left: 16rem;
+  margin-left: 9rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -101,7 +101,6 @@ const userName = styled.div`
 
 const OnlineClass = () => {
   const roomId = useParams().roomid;
-  // useEffect(() => {
   let ws = new WebSocket("wss://i6a607.p.ssafy.io:8443/groupcall");
   let participants = {};
   let room = roomId;
@@ -115,6 +114,7 @@ const OnlineClass = () => {
   // const [showVideo, setShowVideo] = useState(true);
   const navigate = useNavigate();
   let name = userName;
+
   useEffect(() => {
     if (isLoading) {
       getCouresInfo(roomId).then((res) => {
@@ -401,6 +401,7 @@ const OnlineClass = () => {
   };
   const shareScreen = () => {
     if (name === userName) {
+      console.log("####shareScreen" + name);
       sendMessage({
         id: "leaveRoom",
       });
