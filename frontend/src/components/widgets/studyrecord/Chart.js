@@ -8,7 +8,6 @@ const Container = styled.div`
 `;
 
 const Chart = ({ records }) => {
-  // const [isListLoading, setIsListLoading] = useState(true);
   const [times, setTimes] = useState([
     { x: "9", y: 0 },
     { x: "10", y: 0 },
@@ -95,9 +94,6 @@ const Chart = ({ records }) => {
           },
           xaxis: {
             categories: [
-              // "6",
-              // "7",
-              // "8",
               "9",
               "10",
               "11",
@@ -112,12 +108,6 @@ const Chart = ({ records }) => {
               "20",
               "21",
               "22",
-              // "23",
-              // "24",
-              // "1",
-              // "2",
-              // "3",
-              // "4",
             ],
           },
           yaxis: {

@@ -125,7 +125,6 @@ const SignudivModal = ({ setIsModalOpen, setAgreement }) => {
         <div
           className="title"
           onClick={() => checkContent("total")}
-          // checked={isChecked.total}
         >
           <MdOutlineCheckCircleOutline
             className={isChecked[0] && isChecked[1] ? "checked" : "unChecked"}

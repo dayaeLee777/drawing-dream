@@ -10,7 +10,6 @@ const persistConfig = {
   key: "root",
   storage: storageSession,
   whitelist: ["theme", "user", "timetable"],
-  //blacklist: ["theme", "user"],
 };
 const rootReducer = combineReducers({
   theme,

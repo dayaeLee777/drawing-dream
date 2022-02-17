@@ -7,7 +7,6 @@ import MemoItem from "./MemoItem";
 const Container = styled.div`
   margin-top: 0.5rem;
   box-sizing: border-box;
-  /* padding: ${(props) => (props.main ? "0rem 1rem" : "0rem 5rem")}; */
   width: 90%;
   height: 25rem;
   display: flex;
@@ -30,6 +29,7 @@ const Container = styled.div`
 const RegisterBtn = styled.div`
   color: ${({ theme }) => theme.memoColor};
   margin-top: 3rem;
+  cursor: pointer;
 `;
 const NullList = styled.div`
   width: 100%;

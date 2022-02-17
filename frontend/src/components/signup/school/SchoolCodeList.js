@@ -26,10 +26,6 @@ const SchoolCodeList = ({ schoolName, onComplate }) => {
       setData(null);
       setLoading(true);
       try {
-        // const response = await axios.get(
-        //   `https://open.neis.go.kr/hub/schoolInfo?Type=json&pIndex=1&pSize=100`
-        // );
-
         getSchool({
           Type: "JSON",
           pIndex: 1,
