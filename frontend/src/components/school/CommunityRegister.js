@@ -109,6 +109,7 @@ const CommunityRegister = ({ modify }) => {
         })
           .then(() => {
             successAlert("글 수정에 성공하였습니다.");
+            Navigate(`../${params.communityId}`);
           })
           .catch((e) => {
             if (e.response.status === 401) {
@@ -143,6 +144,7 @@ const CommunityRegister = ({ modify }) => {
 
   const onCancle = () => {
     const url = modify ? `../${params.communityId}` : "../";
+    console.log(params.communityId);
     Navigate(url);
   };
 

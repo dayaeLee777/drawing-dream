@@ -170,6 +170,7 @@ const NoticeRegister = ({ modify }) => {
         modifyNotice(formData)
           .then(() => {
             successAlert("글 수정에 성공하였습니다.");
+            Navigate("../");
           })
           .catch((e) => {
             if (e.response.status === 401) {

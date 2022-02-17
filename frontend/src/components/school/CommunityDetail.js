@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CommentList from "./comment/CommentList";
 import { getProfileImg } from "api/user";
 import blankProfile from "assets/img/profile.png";
-import { errorAlert } from "modules/alert";
+import { errorAlert, successAlert } from "modules/alert";
 import { logout } from "modules/user";
 
 const DetailContainer = styled.div`
@@ -122,7 +122,7 @@ const CommunityDetail = () => {
 
   const onDelete = () => {
     deleteCommunity(params.communityId).then(() => {
-      alert("글이 삭제되었습니다.");
+      successAlert("글이 삭제되었습니다.");
       Navigate("../");
     });
   };

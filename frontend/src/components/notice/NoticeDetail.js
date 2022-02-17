@@ -9,7 +9,7 @@ import commonCode from "config/commonCode";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import { getProfileImg } from "api/user";
 import blankProfile from "assets/img/blank-profile.png";
-import { errorAlert } from "modules/alert";
+import { errorAlert, successAlert } from "modules/alert";
 import { logout } from "modules/user";
 
 const DetailContainer = styled.div`
@@ -171,7 +171,7 @@ const NoticeDetail = () => {
 
   const onDelete = () => {
     deleteNotice(params.noticeId).then(() => {
-      alert("글이 삭제되었습니다.");
+      successAlert("글이 삭제되었습니다.");
       Navigate("../");
     });
   };
