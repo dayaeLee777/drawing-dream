@@ -54,10 +54,11 @@ const DateContainer = styled.div`
 `;
 
 const Main = styled.div`
+  box-sizing: border-box;
   font-size: 1.5rem;
   color: white;
-  margin-left: 5rem;
-  width: 80%;
+  padding: 0 5rem;
+  width: 100%;
   line-height: 2rem;
   height: 50vh;
   word-break: break-all;
