@@ -144,7 +144,6 @@ const CommunityRegister = ({ modify }) => {
 
   const onCancle = () => {
     const url = modify ? `../${params.communityId}` : "../";
-    console.log(params.communityId);
     Navigate(url);
   };
 

@@ -220,7 +220,7 @@ const NoticeRegister = ({ modify }) => {
   };
 
   const onCancle = () => {
-    const url = modify ? `../${params.communityId}` : "../";
+    const url = modify ? `../${params.noticeId}` : "../";
     Navigate(url);
   };
 
