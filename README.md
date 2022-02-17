@@ -29,9 +29,9 @@
             <img src="https://avatars.githubusercontent.com/dayaeLee777" width="140px" /> <br><br> 😶 이다예 <br>(Back-End) </a> <br></td>
     </tr>
     <tr>
-        <td align="center">UI/UX<br/>WebRTC<br/>WebSocket</td>
-        <td align="center"><br/></td>
-        <td align="center"><br/></td>
+        <td align="center">UI/UX<br/>React<br/>WebRTC<br/>WebSocket</td>
+        <td align="center">UI/UX<br/>React</td>
+        <td align="center">UI/UX<br/>React</td>
         <td align="center">REST API<br/>WebRTC<br/>WebSocket</td>
         <td align="center">REST API<br/>CI/CD<br/>Infra<br/></td>
         <td align="center">REST API<br/>Database<br/>S3<br/></td>
