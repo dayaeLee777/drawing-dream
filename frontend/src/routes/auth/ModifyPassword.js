@@ -8,6 +8,7 @@ import { modifyPassword, passwordCheck } from "api/user";
 import { errorAlert, successAlert, warnAlert } from "modules/alert";
 import { logout } from "modules/user";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const FormContainer = styled.div`
   display: flex;
@@ -37,11 +38,11 @@ const Desc = styled.div`
 `;
 
 const ModifyContainer = styled.div`
-  width: 50%;
+  width: 80%;
   display: flex;
   padding-right: 2rem;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: flex-end;
 `;
 const InputBlock = styled.div`
   display: flex;
@@ -84,7 +85,7 @@ const ModifyPassword = () => {
               .then((res) => {
                 if (res.data.statusCode === 200) {
                   successAlert("비밀번호를 변경하였습니다.");
-                  Navigate("/home");
+                  Navigate("../");
                 } else if (res.data.statusCode === 202) {
                   errorAlert(
                     null,
@@ -104,10 +105,10 @@ const ModifyPassword = () => {
         })
         .catch((e) => {
           if (e.response.status === 401) {
-            errorAlert(401);
-            dispatch(logout());
-          } else {
-            errorAlert(e.response.status, "현재 비밀번호가 일치하지 않습니다.");
+            toast.error("현재 비밀번호가 일치하지 않습니다.", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1000,
+            });
           }
         });
     } else {
@@ -117,7 +118,7 @@ const ModifyPassword = () => {
   };
 
   const onCancle = () => {
-    Navigate("/home");
+    Navigate("../");
   };
 
   return (

@@ -193,16 +193,6 @@ const NoticeDetail = () => {
     return fileExtension;
   };
 
-  // const sampleData = {
-  //   regTime: "2022.02.04",
-  //   userName: "이학생",
-  //   content: `<h1>제목1</h1><h2>제목 2</h2><h3>제목 3</h3><h4>제목 4</h4><h5>제목 5</h5><h6>제목 6</h6><ol><li><p>리스트1</p></li><li><p>리스트2</p></li><li><p>리스트3</p></li><li><p>리스트4</p></li></ol><ul><li><p>점1</p></li><li><p>점2</p></li><li><p>점3</p></li><li><p>점4</p></li></ul><div data-language="java" class="toastui-editor-ww-code-block"><pre><code data-language="java">function(int x) {
-  //     System.out.println("안녕안녕");
-  //   }</code></pre></div><ul><li class="task-list-item" data-task="true"><p>체크리스트1</p></li><li class="task-list-item" data-task="true"><p>체크리스트2</p></li><li class="task-list-item" data-task="true"><p>체크리스트3</p></li><li class="task-list-item" data-task="true"><p>체크리스트4</p></li></ul><blockquote><p>인용</p><p>인용</p><p>인용</p></blockquote><p><strong>굵게</strong></p><p><em>기울게</em></p><p><del>lineThrowgh</del></p>`,
-  //   hit: 23,
-  //   title: "첫번째 글",
-  // };
-
   return (
     <DetailContainer>
       <TitleContainer>
@@ -250,10 +240,9 @@ const NoticeDetail = () => {
       )}
       <FileContainer>
         <div className="desc">첨부파일</div>
-        <div className="fileList">
-          {!isLoading &&
-            data.files &&
-            Object.entries(data.files).map((item) => (
+        {!isLoading && Object.keys(data.files).length > 0 && (
+          <div className="fileList">
+            {Object.entries(data.files).map((item) => (
               <div className="fileItem" key={item[1]}>
                 <div className="icon" value={item[1]}>
                   <FileIcon
@@ -266,7 +255,8 @@ const NoticeDetail = () => {
                 </button>
               </div>
             ))}
-        </div>
+          </div>
+        )}
       </FileContainer>
     </DetailContainer>
   );

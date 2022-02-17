@@ -42,6 +42,7 @@ const AppRouter = () => {
               <Route path="home" element={<HomeSetting />} />
             </Route>
             <Route path="/" element={<Home />}>
+              <Route path="" element={<Navigate replace to="/home" />} />
               <Route path="home" element={<Widget />} />
               <Route path="modifyprofile" element={<ModifyProfile />} />
               <Route path="modifypassword" element={<ModifyPassword />} />
@@ -67,10 +68,9 @@ const AppRouter = () => {
               <Route path="widgetlist" element={<WidgetList />} />
               <Route path="meeting" element={<Meeting />} />
               <Route path="study" element={<Study />} />
+              <Route path="signin" element={<Navigate replace to="/home" />} />
+              <Route path="signup" element={<Navigate replace to="/home" />} />
             </Route>
-            <Route path="/" element={<Navigate replace to="/home" />} />
-            <Route path="/signin" element={<Navigate replace to="/home" />} />
-            <Route path="/signup" element={<Navigate replace to="/home" />} />
           </Routes>
         </>
       ) : (

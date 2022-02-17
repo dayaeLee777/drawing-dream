@@ -134,6 +134,13 @@ const LinkContainer = styled.div`
   }
 `;
 const placeholderText = [
+  { type: "heading1", text: "세상에서", color: "#814a23" },
+
+  {
+    type: "heading1",
+    text: "가장 편한 학교",
+    color: "#814a23",
+  },
   {
     type: "heading1",
     text: "세상에서 가장 편한 학교, Drawing Dream",
@@ -266,7 +273,7 @@ const SignIn = () => {
           <input
             type="checkbox"
             checked={isChecked}
-            onChange={() => setIsChecked(true)}
+            onChange={() => setIsChecked(!isChecked)}
           />
           <Type>로그인 유지</Type>
         </InputContainer>

@@ -14,7 +14,7 @@ import commonCode from "config/commonCode";
 import { MdOutlineCheckCircleOutline } from "react-icons/md";
 import { motion } from "framer-motion";
 import SignupModal from "components/signup/modal/SignupModal";
-import Modal from "components/commons/modal";
+import { errorAlert, successAlert, warnAlert } from "modules/alert";
 
 const Container = styled.div`
   display: flex;
@@ -216,12 +216,9 @@ const SignUp = () => {
 
   // 회원 가입 요청
   const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
-  const [url, setUrl] = useState();
   const onSubmit = async () => {
     if (!agreement) {
-      setModalMessage("필수 입력 항목을 확인해 주세요.");
-      setShowModal(true);
+      warnAlert("이용약관에 동의해주세요.");
     } else {
       if (
         validId &&
@@ -253,18 +250,15 @@ const SignUp = () => {
 
           signUp(user).then((res) => {
             if (res.status === 201) {
-              setModalMessage("회원가입에 성공했습니다.");
-              setUrl("/signin");
-              setShowModal(true);
+              successAlert("회원가입에 성공하였습니다.");
+              Navigate("/signin");
             }
           });
         } catch (e) {
-          setModalMessage("회원가입에 실패했습니다.");
-          setShowModal(true);
+          errorAlert(null, "회원가입에 실패하였습니다.");
         }
       } else {
-        setModalMessage("필수 입력 항목을 확인해 주세요.");
-        setShowModal(true);
+        warnAlert("필수 입력사항을 확인해주세요");
       }
     }
   };
@@ -514,14 +508,6 @@ const SignUp = () => {
             onClick={onCancle}
           />
         </InputBlock>
-        {showModal && (
-          <Modal
-            url={url}
-            message={modalMessage}
-            left="42%"
-            setShowModal={setShowModal}
-          />
-        )}
       </MainContainer>
     </Container>
   );

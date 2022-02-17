@@ -7,7 +7,7 @@ import { deleteCommunity, getCommunityDetail } from "api/community";
 import { useDispatch, useSelector } from "react-redux";
 import CommentList from "./comment/CommentList";
 import { getProfileImg } from "api/user";
-import blankProfile from "assets/img/blank-profile.png";
+import blankProfile from "assets/img/profile.png";
 import { errorAlert } from "modules/alert";
 import { logout } from "modules/user";
 

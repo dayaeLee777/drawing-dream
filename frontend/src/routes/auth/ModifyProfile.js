@@ -175,7 +175,7 @@ const ModifyProfile = () => {
           .then((res) => {
             if (res.status === 200) {
               successAlert("프로필 수정을 성공하였습니다.");
-              Navigate("/home");
+              Navigate("../");
             }
           })
           .then(() => {
@@ -197,7 +197,7 @@ const ModifyProfile = () => {
   };
 
   const onCancle = () => {
-    Navigate("../");
+    Navigate("/home");
   };
 
   return (

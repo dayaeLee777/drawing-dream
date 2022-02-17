@@ -170,13 +170,13 @@ const ChatRoom = ({
   chatClose,
 }) => {
   const [chatMove, setChatMove] = useState(false);
-  const messageBoxRef = useRef();
   const { userName, userId } = useSelector((state) => state.user);
   const { users, memberId } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
-  const sockJS = new SockJS("https://i6a607.p.ssafy.io/ws-dd");
+  const sockJS = new SockJS("http://localhost:8080/ws-dd");
   const client = Stomp.over(sockJS);
 
+  const messageBoxRef = useRef();
   const scrollToBottom = () => {
     if (messageBoxRef.current) {
       messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
