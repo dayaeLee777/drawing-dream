@@ -26,9 +26,8 @@ const ContentContainer = styled.div`
 `;
 
 const InnerContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr 2fr;
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 3rem 6rem;
 `;
@@ -37,6 +36,7 @@ const Arrow = styled.div`
   font-size: 3rem;
   color: #ffc25c;
   cursor: pointer;
+  width: 10rem;
 `;
 
 const Desc = styled.div`
@@ -47,10 +47,10 @@ const Desc = styled.div`
 `;
 
 const DateContainer = styled.div`
-  font-size: 1.3rem;
+  text-align: right;
+  width: 10rem;
+  font-size: 1.1rem;
   color: white;
-  display: flex;
-  justify-content: flex-end;
 `;
 
 const Main = styled.div`
@@ -59,24 +59,23 @@ const Main = styled.div`
   margin-left: 5rem;
   width: 80%;
   line-height: 2rem;
-  height: 35vh;
+  height: 50vh;
   word-break: break-all;
   overflow: auto;
 
   -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
-}
+  }
 `;
 
 const ButtonContainer = styled.div`
+  box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
-  margin-top: auto;
-  right: 5rem;
-  bottom: 15rem;
-  position: relative;
+  margin-right: 5rem;
+  margin-top: 2rem;
 `;
 
 const Overlay = styled(motion.div)`
@@ -180,7 +179,9 @@ const Meeting = () => {
                   onClick={() => {
                     navigate("/home");
                   }}
-                >←</Arrow>
+                >
+                  ←
+                </Arrow>
                 <Desc>{data.title}</Desc>
                 <DateContainer>{data.regDate}</DateContainer>
               </InnerContainer>
@@ -189,7 +190,13 @@ const Meeting = () => {
           ) : (
             <>
               <InnerContainer>
-                <Arrow>←</Arrow>
+                <Arrow
+                  onClick={() => {
+                    navigate("/home");
+                  }}
+                >
+                  ←
+                </Arrow>
                 <Desc></Desc>
                 <DateContainer>{date}</DateContainer>
               </InnerContainer>
