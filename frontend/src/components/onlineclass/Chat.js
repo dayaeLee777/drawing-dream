@@ -35,6 +35,7 @@ const Name = styled.div`
   width: 20%;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const Message = styled.div`
