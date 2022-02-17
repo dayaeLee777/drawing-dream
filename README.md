@@ -83,9 +83,10 @@
     - FrontEnd
         - HTML5, CSS3, JavaScript(ES6)
         - React : 17.0.2
-        - Redux : 7.2.6
+        - Redux : 7.2.6, Redux-thunk: 2.4.1
         - WebSocket : @stomp/stompjs 6.1.2, stompjs 2.3.3, sockjs-client 1.5.2
-        - WebRTC : kurento-utils 6.16.0, webrtc-screen-capturing 1.0.1
+        - WebRTC : kurento-utils 6.16.0
+        - styled-components: 5.3.3, framer-motion: 6.0.0, apexcharts: 3.33.0, toast-ui/react-calendar: 1.0.6, toast-ui/react-editor: 3.1.2,
         - IDE: Visual Studio Code 1.63.2
     - 공통
         - 형상관리: Gitlab
