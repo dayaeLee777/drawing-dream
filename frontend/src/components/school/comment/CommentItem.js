@@ -139,7 +139,12 @@ const CommentItem = ({
     });
   };
   // Click event END
-
+  let time;
+  let timeArr;
+  if (!isLoading) {
+    timeArr = data.regTime.split(" ");
+    time = timeArr[0] + " " + timeArr[1].split(".")[0];
+  }
   return (
     <>
       <Content pl={children}>
@@ -152,7 +157,7 @@ const CommentItem = ({
               <div className="userName">{data.userName}</div>
               <div className="content">{data.content}</div>
               <FeatureContainer>
-                <span className="regTime">{data.regTime}</span>
+                <span className="regTime">{time}</span>
                 {children && (
                   <span className="reCommentBtn" onClick={onReCommentRegister}>
                     답글달기
