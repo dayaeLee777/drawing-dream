@@ -217,10 +217,7 @@ const ChatRoom = ({
         Authorization: `Bearer ${token}`,
       },
       (frame) => {
-        console.log("STOMP Connection");
-        console.log(memberId);
         client.subscribe(`/topic/one/${memberId}`, (response) => {
-          console.log(response);
           setContents((prev) => [...prev, JSON.parse(response.body)]);
         });
       }

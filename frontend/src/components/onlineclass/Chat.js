@@ -88,7 +88,6 @@ const Chat = ({ courseId }) => {
       (frame) => {
         console.log("STOMP Connection");
         client.subscribe(`/topic/video/${courseId}`, (response) => {
-          console.log(response);
           setContents((prev) => [...prev, JSON.parse(response.body)]);
         });
       }

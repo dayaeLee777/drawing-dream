@@ -131,7 +131,6 @@ const OnlineClass = () => {
 
       let video;
       if (name === courseInfo.teacherName || name.includes("screen")) {
-        // console.log("hi");
         video = document.createElement("video");
         video.id = "video-" + name;
         video.autoplay = true;

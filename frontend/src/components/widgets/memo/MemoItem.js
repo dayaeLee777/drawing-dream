@@ -12,7 +12,8 @@ const Container = styled.div`
   padding: 0.5rem 1rem;
   margin-top: 1rem;
   border-radius: 5px;
-  /* background-color: ${({ theme }) => theme.widgetColor}; */
+  cursor: pointer;
+
   .content {
     overflow: hidden;
     text-overflow: ellipsis;
