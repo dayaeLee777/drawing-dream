@@ -11,7 +11,7 @@ import {
   registerCommunity,
 } from "api/community";
 import { useDispatch, useSelector } from "react-redux";
-import { errorAlert } from "modules/alert";
+import { errorAlert, successAlert, warnAlert } from "modules/alert";
 import { logout } from "modules/user";
 import Modal from "components/commons/modal";
 
@@ -107,7 +107,9 @@ const CommunityRegister = ({ modify }) => {
           content: editorRef.current.getInstance().getHTML(),
           communityId: params.communityId,
         })
-          .then(setModalMessage("글을 수정하시겠습니까?."), setShowModal(true))
+          .then(() => {
+            successAlert("글 수정에 성공하였습니다.");
+          })
           .catch((e) => {
             if (e.response.status === 401) {
               errorAlert(401);
@@ -121,7 +123,10 @@ const CommunityRegister = ({ modify }) => {
           title: data.title,
           content: editorRef.current.getInstance().getHTML(),
         })
-          .then(setModalMessage("글을 등록하시겠습니까?"), setShowModal(true))
+          .then(() => {
+            successAlert("글 등록에 성공하였습니다.");
+            Navigate("../");
+          })
           .catch((e) => {
             if (e.response.status === 401) {
               errorAlert(401);
@@ -132,7 +137,7 @@ const CommunityRegister = ({ modify }) => {
           });
       }
     } else {
-      errorAlert(null, "제목과 내용을 모두 작성해주세요.");
+      warnAlert(null, "제목과 내용을 모두 작성해주세요.");
     }
   };
 

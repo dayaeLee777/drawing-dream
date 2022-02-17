@@ -29,7 +29,7 @@
             <img src="https://avatars.githubusercontent.com/dayaeLee777" width="140px" /> <br><br> 😶 이다예 <br>(Back-End) </a> <br></td>
     </tr>
     <tr>
-        <td align="center"><br/></td>
+        <td align="center">UI/UX<br/>WebRTC<br/>WebSocket</td>
         <td align="center"><br/></td>
         <td align="center"><br/></td>
         <td align="center">REST API<br/>WebRTC<br/>WebSocket</td>
@@ -41,6 +41,12 @@
 <br>
 
 ## 1. 프로젝트 소개
+- Drawing Dream 을 캔버스 삼아 여러분의 꿈으로 큰 그림을 그려보세요.
+
+- 일정
+    - Sub PJT 1 : 2022.01.10 ~ 2022.01.14
+    - Sub PJT 2 : 2022.01.17 ~ 2022.01.28
+    - Sub PJT 2 : 2022.01.31 ~ 2022.02.18
 
 <br><br>
  
@@ -70,16 +76,23 @@
         - DB : MySQL 5.7.x
         - Java : Zulu 8.33.0.1
         - Spring Boot : 2.4.5
+        - WebSocket : Stomp
+        - WebRTC : Kurento
         - IDE : Eclipse JEE 2020-06
         - Build : Gradle 7.3.2
     - FrontEnd
         - HTML5, CSS3, JavaScript(ES6)
-        - React: 17.0.2
-        - Redux: 7.2.6
+        - React : 17.0.2
+        - Redux : 7.2.6
+        - WebSocket : @stomp/stompjs 6.1.2, stompjs 2.3.3, sockjs-client 1.5.2
+        - WebRTC : kurento-utils 6.16.0, webrtc-screen-capturing 1.0.1
         - IDE: Visual Studio Code 1.63.2
     - 공통
         - 형상관리: Gitlab
         - 이슈관리: Jira
+    - 서버
+        - Ubuntu : 20.04.3 LTS
+        - Docker : 20.10.12
 
 <br><br>
 

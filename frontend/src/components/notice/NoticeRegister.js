@@ -5,13 +5,14 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import { createRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getNoticeDetail, modifyNotice, registerNotice } from "api/notice";
 import commonCode from "config/commonCode";
 import Dropzone from "react-dropzone";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import Modal from "components/commons/modal";
-import { errorAlert } from "modules/alert";
+import { errorAlert, successAlert, warnAlert } from "modules/alert";
+import { logout } from "modules/user";
 
 const Container = styled.div`
   padding: 3rem 2rem 0 2rem;
@@ -93,6 +94,7 @@ const NoticeRegister = ({ modify }) => {
   const contentEmpty = `<p><br class="ProseMirror-trailingBreak"></p>`;
   const params = useParams();
   const { userId } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -165,10 +167,18 @@ const NoticeRegister = ({ modify }) => {
             { type: "application/json" }
           )
         );
-        modifyNotice(formData).then(
-          setModalMessage("글을 수정하시겠습니까?."),
-          setShowModal(true)
-        );
+        modifyNotice(formData)
+          .then(() => {
+            successAlert("글 수정에 성공하였습니다.");
+          })
+          .catch((e) => {
+            if (e.response.status === 401) {
+              errorAlert(401);
+              dispatch(logout());
+            } else {
+              errorAlert(e.response.status, "글 수정에 실패하였습니다.");
+            }
+          });
       } else {
         let formData = new FormData();
         if (data.files) {
@@ -189,13 +199,22 @@ const NoticeRegister = ({ modify }) => {
             { type: "application/json" }
           )
         );
-        registerNotice(formData).then(() => {
-          setModalMessage("글을 등록하시겠습니까?");
-          setShowModal(true);
-        });
+        registerNotice(formData)
+          .then(() => {
+            successAlert("글 등록에 성공하였습니다.");
+            Navigate("../");
+          })
+          .catch((e) => {
+            if (e.response.status === 401) {
+              errorAlert(401);
+              dispatch(logout());
+            } else {
+              errorAlert(e.response.status, "글 등록에 실패하였습니다.");
+            }
+          });
       }
     } else {
-      errorAlert(null, "제목과 내용, 구분을 모두 작성해주세요.");
+      warnAlert(null, "제목과 내용, 구분을 모두 작성해주세요.");
     }
   };
 

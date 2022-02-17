@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import CommentRegister from "./CommentRegister";
-import blankProfile from "assets/img/blank-profile.png";
+import blankProfile from "assets/img/profile.png";
 import { getProfileImg } from "api/user";
 import { errorAlert } from "modules/alert";
 import { logout } from "modules/user";
@@ -40,7 +40,7 @@ const Content = styled.div`
 const FeatureContainer = styled.div`
   margin-top: 0.5rem;
   font-size: 0.7rem;
-  color: #787878;
+  color: ${({ theme }) => theme.menuColor};
 
   .regTime,
   .reCommentBtn {

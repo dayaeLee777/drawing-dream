@@ -54,9 +54,9 @@ export const Class = styled.section`
   }
 
   section {
-    border: ${({ theme }) => theme.timetableBorder};
+    border: ${({ theme }) => theme.timetableOutBorder};
     border-radius: 2px 22px;
-    background-color: ${({ theme }) => theme.widgetColor};
+    background-color: ${({ theme }) => theme.timetableOutColor};
   }
 `;
 

@@ -266,7 +266,7 @@ const SignIn = () => {
           <input
             type="checkbox"
             checked={isChecked}
-            onChange={() => setIsChecked(true)}
+            onChange={() => setIsChecked(!isChecked)}
           />
           <Type>로그인 유지</Type>
         </InputContainer>

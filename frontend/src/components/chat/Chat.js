@@ -48,7 +48,7 @@ const Chat = () => {
   const { isOpenChat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
 
-  let sockJS = new SockJS("https://i6a607.p.ssafy.io/ws-dd");
+  let sockJS = new SockJS("http://localhost:8080/ws-dd");
   let client = Stomp.over(sockJS);
   const token =
     sessionStorage.getItem("access-token") ||
@@ -62,7 +62,6 @@ const Chat = () => {
         console.log("STOMP Connection");
         client.subscribe(`/topic/one/${userId}`, (response) => {
           setContents((prev) => [...prev, JSON.parse(response.body)]);
-          console.log(response);
           setIsNew(true);
         });
       }

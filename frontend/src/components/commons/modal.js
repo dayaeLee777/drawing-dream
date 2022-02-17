@@ -25,6 +25,7 @@ const Content = styled.div`
   margin-top: 2rem;
   text-align: center;
   font-size: 1.2rem;
+  color: black;
 `;
 
 const ButtonContainer = styled.div`

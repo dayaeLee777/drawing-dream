@@ -26,26 +26,21 @@ import lombok.ToString;
 @Entity
 public class TimeTable extends BaseEntity {
 
-	// 요일 코드
 	@Enumerated(EnumType.STRING)
 	private Code dayCode;
 
-	// 교시 코드
 	@Enumerated(EnumType.STRING)
 	private Code periodCode;
 
-	// 학기 코드
 	@Enumerated(EnumType.STRING)
 	private Code semesterCode;
 
 	private boolean delYn;
 
-	// 학생 정보
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	// 강의 정보
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_id")
 	private Course course;

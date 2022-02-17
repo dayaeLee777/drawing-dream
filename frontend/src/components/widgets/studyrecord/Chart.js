@@ -1,5 +1,4 @@
 import ApexCharts from "react-apexcharts";
-import commonCode from "config/commonCode";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
@@ -28,36 +27,40 @@ const Chart = ({ records }) => {
   ]);
 
   useEffect(() => {
-    let newTimes = [...times];
+    let newTimes = times.concat();
+    let flag = 0
     records.map((record) => {
       if (record.endTime !== null) {
-        let startTime = record.startTime.slice(11, 13);
+        let startTime = parseInt(record.startTime.slice(11, 13));
         let startMin = parseInt(record.startTime.slice(14, 16));
-        let hour = record.durationTime.slice(0, 2);
-        let min = record.durationTime.slice(3, 5);
-        let totalMin = parseInt(hour) * 2 + parseInt(min);
-        for (let i in times) {
-          if (times[i].x === startTime) {
-            if (totalMin + startMin + times[i].y > 60) {
-              newTimes[parseInt(startTime) - 9] = {
-                x: startTime,
-                y: 60 - (times[i].y + startMin),
+        let hour = parseInt(record.durationTime.slice(0, 2));
+        let min = parseInt(record.durationTime.slice(3, 5));
+        let totalMin = hour * 60 + min;
+
+        for (let i in newTimes) {
+          if (parseInt(newTimes[i].x) === startTime) {
+            if (totalMin + startMin > 60) {
+              newTimes[startTime - 9] = {
+                x: String(startTime),
+                y: newTimes[i].y + (60 - startMin),
               };
-              setTimes(newTimes);
-              totalMin -= 60 - (times[i].y + startMin);
+              totalMin -= 60 - startMin;
+              flag = 1;
             } else {
               newTimes[parseInt(startTime) - 9] = {
-                x: startTime,
-                y: parseInt(min) + times[i].y,
+                x: String(startTime),
+                y: totalMin + newTimes[i].y,
               };
-              setTimes(newTimes);
             }
           }
-          if (totalMin >= 61) {
+          
+          if (parseInt((totalMin + (60 - startMin)) / 60) && flag) {
             startTime++;
             startMin = 0;
+            flag = 0
           }
         }
+        setTimes(newTimes);
       }
     });
   }, []);
