@@ -8,7 +8,7 @@ const Wrapper = (props) => {
   return <span className="word-wrapper">{props.children}</span>;
 };
 const tagMap = {
-  heading1: "h1",
+  heading1: "h3",
 };
 
 const AnimatedCharacters = (props) => {

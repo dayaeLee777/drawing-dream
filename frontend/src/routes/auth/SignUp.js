@@ -22,16 +22,7 @@ const Container = styled.div`
   height: 100vh;
   justify-content: center;
   overflow: auto;
-  background-color: #fffaf2;
-  background-image: linear-gradient(
-      90deg,
-      transparent 79px,
-      #fec25c 79px,
-      #fec25c 81px,
-      transparent 81px
-    ),
-    linear-gradient(#eee 0.1em, transparent 0.1em);
-  background-size: 100% 2em;
+  background-color: #fec25c;
 `;
 const MainContainer = styled.div`
   display: flex;

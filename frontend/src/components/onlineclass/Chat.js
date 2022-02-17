@@ -1,6 +1,6 @@
 import Button from "components/commons/button";
 import Input from "components/commons/input";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
@@ -10,7 +10,9 @@ const Container = styled.div`
   width: 23rem;
   border-radius: 10px;
   margin-left: 3vw;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: ${({ theme }) => theme.chatboxShadow};
+  border: 1px solid #ffffff30;
+  padding-bottom: 0.5rem;
 `;
 
 const ChatContainer = styled.div`
@@ -29,7 +31,7 @@ const Content = styled.div`
 
 const Name = styled.div`
   font-weight: 600;
-  margin: 0.3rem 1rem;
+  margin: 0.1rem 1rem;
   width: 20%;
   display: flex;
   justify-content: center;
@@ -37,7 +39,7 @@ const Name = styled.div`
 
 const Message = styled.div`
   width: 65%;
-  word-break:break-all;
+  word-break: break-all;
 `;
 
 const ChatForm = styled.div`
@@ -46,7 +48,7 @@ const ChatForm = styled.div`
     border: 0px solid;
     background-color: #f4f7f9;
     height: 2rem;
-    margin-left: 0.5rem;
+    margin: 0 0.5rem;
     width: 75%;
   }
 
@@ -66,7 +68,17 @@ const Chat = ({ courseId }) => {
 
   const [contents, setContents] = useState([]);
   const [message, setMessage] = useState("");
-  const { userName, userId } = useSelector((state) => state.user);
+  const { userId } = useSelector((state) => state.user);
+  const messageBoxRef = useRef();
+  const scrollToBottom = () => {
+    if (messageBoxRef.current) {
+      messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [contents]);
 
   useEffect(() => {
     client.connect(
@@ -105,7 +117,7 @@ const Chat = ({ courseId }) => {
 
   return (
     <Container>
-      <ChatContainer>
+      <ChatContainer ref={messageBoxRef}>
         {contents.map((content, index) => (
           <Content key={index}>
             <Name>{content.userName}</Name>

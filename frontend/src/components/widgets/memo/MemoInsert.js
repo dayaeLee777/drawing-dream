@@ -47,7 +47,7 @@ const MemoInsert = ({ setStatus, setIsListLoading, memoId, setMemoId }) => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
-  useState(() => {
+  useEffect(() => {
     if (isLoading && memoId) {
       getMemo(memoId)
         .then((res) => {

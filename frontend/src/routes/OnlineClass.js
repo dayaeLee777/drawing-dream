@@ -35,7 +35,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  */
 
 const Container = styled.div`
-  margin: 4rem 10vw;
+  margin: 1rem 10vw;
 `;
 
 const Header = styled.div`
@@ -53,9 +53,9 @@ const Title = styled.div`
 
 const ControlContainer = styled.div`
   display: flex;
-  width: 25rem;
-  justify-content: space-between;
-  margin-left: 9rem;
+  width: 40rem;
+  justify-content: center;
+  margin-left: 5rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -65,9 +65,11 @@ const ButtonContainer = styled.div`
   border: 1px solid #fec25c;
   padding: 1rem;
   border-radius: 20px;
+  margin: 1rem;
 `;
 
 const ButtonName = styled.div`
+  cursor: pointer;
   margin-left: 0.5rem;
   display: flex;
 
@@ -76,7 +78,6 @@ const ButtonName = styled.div`
 `;
 const TeacherVideoContainer = styled.div`
   width: 60vw;
-  height: 70vh;
   video::-webkit-media-controls-timeline {
     display: none;
   }
@@ -84,6 +85,7 @@ const TeacherVideoContainer = styled.div`
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
+  height: 65vh;
 `;
 
 const ParticipantVideoContainer = styled.div`
@@ -93,32 +95,21 @@ const ParticipantVideoContainer = styled.div`
   margin-top: 2rem;
 `;
 
-const userName = styled.div`
-  position: absolute;
-  z-index: 1;
-  width: 5rem;
-`;
-
 const OnlineClass = () => {
   const roomId = useParams().roomid;
   let ws = new WebSocket("wss://i6a607.p.ssafy.io:8443/groupcall");
   let participants = {};
   let room = roomId;
-  const { userId, userName, userCode } = useSelector((state) => state.user);
-  const PARTICIPANT_MAIN_CLASS = "participant main";
-  const PARTICIPANT_CLASS = "participant";
+  const { userName, userCode } = useSelector((state) => state.user);
 
-  const [teacherVideo, setTecherVideo] = useState(false);
   const [courseInfo, setCourseInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  // const [showVideo, setShowVideo] = useState(true);
   const navigate = useNavigate();
   let name = userName;
 
   useEffect(() => {
     if (isLoading) {
       getCouresInfo(roomId).then((res) => {
-        // console.log(res);
         setCourseInfo(res.data);
         setIsLoading(false);
       });
@@ -136,11 +127,6 @@ const OnlineClass = () => {
   class Participant {
     constructor(name) {
       this.name = name;
-      // container.className = isPresentMainParticipant()
-      //   ? PARTICIPANT_CLASS
-      //   : PARTICIPANT_MAIN_CLASS;
-      // container.id = name;
-      // var span = document.createElement("span");
       var rtcPeer;
 
       let video;
@@ -244,23 +230,6 @@ const OnlineClass = () => {
       };
       ws.send(JSON.stringify(message));
     };
-    // async function getConnectedDevices(type) {
-    //   navigator.mediaDevices
-    //     .enumerateDevices()
-    //     .then(function (devices) {
-    //       devices.forEach(function (device) {
-    //         console.log(
-    //           device.kind + ": " + device.label + " id = " + device.deviceId
-    //         );
-    //       });
-    //     })
-    //     .catch(function (err) {
-    //       console.log(err.name + ": " + err.message);
-    //     });
-    // }
-
-    // getConnectedDevices("videoinput");
-    // console.log(videoCamera);
   }
   function onNewParticipant(request) {
     receiveVideo(request.name);
@@ -274,17 +243,6 @@ const OnlineClass = () => {
       }
     );
   }
-
-  // function callResponse(message) {
-  //   if (message.response != "accepted") {
-  //     console.info("Call not accepted by peer. Closing call");
-  //     stop();
-  //   } else {
-  //     webRtcPeer.processAnswer(message.sdpAnswer, function (error) {
-  //       if (error) return console.error(error);
-  //     });
-  //   }
-  // }
 
   function onExistingParticipants(msg) {
     var constraints = {
