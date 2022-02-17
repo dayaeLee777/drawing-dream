@@ -144,7 +144,7 @@ const StudyRecordModal = ({ layoutId }) => {
             <>
               <Content>
                 <ChartContainer>
-                  <Chart records={records} />
+                  <Chart height="600" records={records} />
                 </ChartContainer>
                 <TotalContainer>
                   <Desc>오늘 공부한 시간</Desc>

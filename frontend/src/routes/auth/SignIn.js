@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "components/commons/button";
 import Input from "components/commons/input";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,9 @@ import { login } from "modules/user";
 import { useCookies } from "react-cookie";
 import AnimatedCharacters from "components/signin/AnimatedText";
 import { motion } from "framer-motion";
+import first from "assets/img/first.png";
+import signin from "assets/img/signin.jpg";
+import signin2 from "assets/img/signin2.png";
 
 const Container = styled.div`
   display: grid;
@@ -18,30 +21,58 @@ const Container = styled.div`
 
 const SideContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background-color: #ffd491;
-  background-image: linear-gradient(
-      90deg,
-      transparent 79px,
-      #fec25c 79px,
-      #fec25c 81px,
-      transparent 81px
-    ),
-    linear-gradient(#eee 0.1em, transparent 0.1em);
-  background-size: 100% 2em;
+  background-color: #fec25c;
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
+
+const ImgSlider = styled.div`
+  width: 300%;
+  height: 100%;
+  overflow: hidden;
+`;
+const ImgContainer = styled.div`
+  margin-top: 10%;
+  height: 70%;
+  transition: ease 1000ms;
+  display: flex;
+  width: 300%;
+  white-space: nowrap;
+`;
+const Img = styled.div`
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: inline-block;
+  background-image: url(${(props) => props.url});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.8;
+  /* transform: ${(props) => `translate3d(${props.index * 100}%, 0, 0)`}; */
 `;
 
 const Desc = styled(motion.div)`
-  font-size: 3rem;
-  padding: 10rem;
+  padding: 3rem;
   font-weight: 600;
+  font-size: 2rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
   h1 {
     height: 6rem;
-    /* display: flex;
-    align-items: center; */
   }
   span {
-    /* background-color: #fec25c; */
     height: 4rem;
     text-align: center;
   }
@@ -103,16 +134,9 @@ const LinkContainer = styled.div`
   }
 `;
 const placeholderText = [
-  { type: "heading1", text: "세상에서", color: "#814a23" },
-
   {
     type: "heading1",
-    text: "가장 편한 학교",
-    color: "#814a23",
-  },
-  {
-    type: "heading1",
-    text: "Drawing Dream",
+    text: "세상에서 가장 편한 학교, Drawing Dream",
     color: "#562909",
   },
 ];
@@ -131,11 +155,16 @@ const SignIn = () => {
   const { error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(["myWidgets"]);
+  const images = [signin, first, signin2];
+  const timeoutRef = useRef(null);
+  const [index, setIndex] = useState(0);
+
   useEffect(() => {
     if (!cookies.myWidgets) {
       setCookie("myWidgets", ["M01", "M02", "M03", "M04"], { path: "/" });
     }
   }, []);
+
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -158,19 +187,51 @@ const SignIn = () => {
     } catch (error) {}
   };
 
+  const resetTimeout = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
+  useEffect(() => {
+    resetTimeout();
+    timeoutRef.current = setTimeout(
+      () =>
+        setIndex((prevIndex) =>
+          prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        ),
+      4000
+    );
+
+    return () => {
+      resetTimeout();
+    };
+  }, [index]);
+
   return (
     <Container>
       <SideContainer>
-        <Desc
-          className="App"
-          initial="hidden"
-          animate="visible"
-          variants={container}
-        >
-          {placeholderText.map((item, index) => {
-            return <AnimatedCharacters {...item} key={index} />;
-          })}
-        </Desc>
+        <Wrapper>
+          <ImgSlider>
+            <ImgContainer
+              style={{ transform: `translate3d(${-index * (100 / 3)}%, 0, 0)` }}
+            >
+              {images.map((img, index) => (
+                <Img key={index} url={img} />
+              ))}
+            </ImgContainer>
+          </ImgSlider>
+
+          <Desc
+            className="App"
+            initial="hidden"
+            animate="visible"
+            variants={container}
+          >
+            {placeholderText.map((item, index) => {
+              return <AnimatedCharacters {...item} key={index} />;
+            })}
+          </Desc>
+        </Wrapper>
       </SideContainer>
       <Form onSubmit={onSubmit}>
         <Logo src="././logo.png" />

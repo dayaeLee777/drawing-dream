@@ -17,7 +17,6 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ScreenHandler from "modules/onlineclass";
 /*
  * (C) Copyright 2014 Kurento (http://kurento.org/)
  *
@@ -96,33 +95,21 @@ const ParticipantVideoContainer = styled.div`
   margin-top: 2rem;
 `;
 
-const userName = styled.div`
-  position: absolute;
-  z-index: 1;
-  width: 5rem;
-`;
-
 const OnlineClass = () => {
   const roomId = useParams().roomid;
-  // useEffect(() => {
-  let ws = new WebSocket("wss://localhost:8443/groupcall");
+  let ws = new WebSocket("wss://i6a607.p.ssafy.io:8443/groupcall");
   let participants = {};
   let room = roomId;
-  const { userId, userName, userCode } = useSelector((state) => state.user);
-  const PARTICIPANT_MAIN_CLASS = "participant main";
-  const PARTICIPANT_CLASS = "participant";
+  const { userName, userCode } = useSelector((state) => state.user);
 
-  const [teacherVideo, setTecherVideo] = useState(false);
   const [courseInfo, setCourseInfo] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  // const [showVideo, setShowVideo] = useState(true);
   const navigate = useNavigate();
   let name = userName;
 
   useEffect(() => {
     if (isLoading) {
       getCouresInfo(roomId).then((res) => {
-        // console.log(res);
         setCourseInfo(res.data);
         setIsLoading(false);
       });
@@ -140,14 +127,9 @@ const OnlineClass = () => {
   class Participant {
     constructor(name) {
       this.name = name;
-      // container.className = isPresentMainParticipant()
-      //   ? PARTICIPANT_CLASS
-      //   : PARTICIPANT_MAIN_CLASS;
-      // container.id = name;
-      // var span = document.createElement("span");
       var rtcPeer;
-      let video;
 
+      let video;
       if (name === courseInfo.teacherName || name.includes("screen")) {
         // console.log("hi");
         video = document.createElement("video");
@@ -175,27 +157,6 @@ const OnlineClass = () => {
         return video;
       };
 
-      // function switchContainerClass() {
-      //   if (container.className === PARTICIPANT_CLASS) {
-      //     var elements = Array.prototype.slice.call(
-      //       document.getElementsByClassName(PARTICIPANT_MAIN_CLASS)
-      //     );
-      //     elements.forEach(function (item) {
-      //       item.className = PARTICIPANT_CLASS;
-      //     });
-
-      //     container.className = PARTICIPANT_MAIN_CLASS;
-      //   } else {
-      //     container.className = PARTICIPANT_CLASS;
-      //   }
-      // }
-
-      // function isPresentMainParticipant() {
-      //   return (
-      //     document.getElementsByClassName(PARTICIPANT_MAIN_CLASS).length != 0
-      //   );
-      // }
-
       this.offerToReceiveVideo = function (error, offerSdp, wp) {
         if (error) return console.error("sdp offer error");
         console.log("Invoking SDP offer callback function");
@@ -218,13 +179,12 @@ const OnlineClass = () => {
         sendMessage(message);
       };
 
-      Object.defineProperty(this, "rtcPeer", { writable: true });
+      // Object.defineProperty(this, "rtcPeer", { writable: true });
 
       this.dispose = function () {
-        console.log("Disposing participant " + name);
+        console.log("Disposing participant " + this.name);
         this.rtcPeer.dispose();
-        console.log(video);
-        // video.parentNode.removeChild(video);
+        // container.parentNode.removeChild(container);
       };
     }
   }
@@ -247,8 +207,7 @@ const OnlineClass = () => {
           receiveVideoResponse(parsedMessage);
           break;
         case "iceCandidate":
-          console.log(name);
-          participants[name].rtcPeer.addIceCandidate(
+          participants[parsedMessage.name].rtcPeer.addIceCandidate(
             parsedMessage.candidate,
             function (error) {
               if (error) {
@@ -272,9 +231,7 @@ const OnlineClass = () => {
       ws.send(JSON.stringify(message));
     };
   }
-
   function onNewParticipant(request) {
-    console.log(request);
     receiveVideo(request.name);
   }
 
@@ -298,18 +255,11 @@ const OnlineClass = () => {
         },
       },
     };
-    // var participant = new Participant(name);
-    // participants[name] = participant;
-    // var video = participant.getVideoElement();
-    console.log(video);
-
-    var options = {};
     if (name.includes("screen")) {
       console.log("#########" + name);
       var participant = new Participant(name);
       participants[name] = participant;
       var video = participant.getVideoElement();
-      var audio = "";
       if (navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
         if (navigator.mediaDevices.getDisplayMedia) {
           navigator.mediaDevices
@@ -339,25 +289,17 @@ const OnlineClass = () => {
         }
       }
     } else {
-      console.log("#########" + name);
+      console.log(name + " registered in room " + room);
       var participant = new Participant(name);
       participants[name] = participant;
       var video = participant.getVideoElement();
-      options = {
+      console.log(video);
+      var options = {
         localVideo: video,
-        mediaConstraints: {
-          audio: true,
-          video: {
-            mandatory: {
-              maxWidth: 1920,
-              maxHeight: 1080,
-              maxFrameRate: 60,
-            },
-          },
-        },
+        mediaConstraints: constraints,
         onicecandidate: participant.onIceCandidate.bind(participant),
       };
-      participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(
+      participant.rtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
         options,
         function (error) {
           if (error) {
@@ -366,6 +308,7 @@ const OnlineClass = () => {
           this.generateOffer(participant.offerToReceiveVideo.bind(participant));
         }
       );
+
       msg.data.forEach(receiveVideo);
     }
   }
@@ -381,11 +324,11 @@ const OnlineClass = () => {
     ws.close();
   }
 
-  async function receiveVideo(sender) {
+  function receiveVideo(sender) {
     var participant = new Participant(sender);
     participants[sender] = participant;
     var video = participant.getVideoElement();
-
+    console.log(video);
     var options = {
       remoteVideo: video,
       onicecandidate: participant.onIceCandidate.bind(participant),
@@ -404,9 +347,9 @@ const OnlineClass = () => {
 
   function onParticipantLeft(request) {
     console.log("Participant " + request.name + " left");
+    document.getElementById("video-" + request.name).remove();
     var participant = participants[request.name];
     participant.dispose();
-    document.getElementById("video-" + request.name).remove();
     delete participants[request.name];
   }
 
@@ -424,54 +367,47 @@ const OnlineClass = () => {
     leaveRoom();
   };
 
-  let videoTemp = true;
   const vidOnOff = () => {
-    if (videoTemp) {
+    if (participants[userName].rtcPeer.videoEnabled) {
       // 끌때
       participants[userName].rtcPeer.videoEnabled = false;
-      videoTemp = false;
       document.getElementById("vidOn").style.display = "none";
       document.getElementById("vidOff").style.display = "";
     } else {
       participants[userName].rtcPeer.videoEnabled = true;
-      videoTemp = true;
       document.getElementById("vidOn").style.display = "";
       document.getElementById("vidOff").style.display = "none";
     }
   };
-
-  let audioTemp = true;
   const audOnOff = () => {
-    if (audioTemp) {
+    if (participants[userName].rtcPeer.audioEnabled) {
       participants[userName].rtcPeer.audioEnabled = false;
-      audioTemp = false;
       document.getElementById("audOn").style.display = "none";
       document.getElementById("audOff").style.display = "";
     } else {
       participants[userName].rtcPeer.audioEnabled = true;
-      audioTemp = true;
       document.getElementById("audOn").style.display = "";
       document.getElementById("audOff").style.display = "none";
     }
   };
-
-  const shareScreen = async () => {
+  const shareScreen = () => {
     if (name === userName) {
+      console.log("####shareScreen" + name);
       sendMessage({
         id: "leaveRoom",
       });
       for (var key in participants) {
-        participants[key].dispose();
-        console.log(participants[key]);
         if (participants[key].name !== name) {
           var partVideo = document.getElementById(
             "video-" + participants[key].name
           );
+          console.log(participants[key].name);
           document.getElementById("participants").removeChild(partVideo);
         }
       }
-      document.getElementById("video-" + name).remove();
       delete participants[name];
+      document.getElementById("video-" + name).remove();
+
       const message = {
         id: "shareScreen",
         name: userName,
@@ -496,7 +432,6 @@ const OnlineClass = () => {
         }
       }
       delete participants[name];
-
       document.getElementById("video-" + name).remove();
       const message = {
         id: "joinRoom",
@@ -507,15 +442,6 @@ const OnlineClass = () => {
       name = userName;
       document.getElementById("shareScreenOn").style.display = "";
       document.getElementById("shareScreenOff").style.display = "none";
-      
-      document.getElementById("vidOn").style.display = "";
-      document.getElementById("vidOff").style.display = "none";
-
-      document.getElementById("audOn").style.display = "";
-      document.getElementById("audOff").style.display = "none";
-
-      videoTemp = true;
-      audioTemp = true;
     }
   };
   return (
@@ -557,24 +483,18 @@ const OnlineClass = () => {
               <FontAwesomeIcon icon={faMicrophone} size="sm" />
               <ButtonName>오디오 중지</ButtonName>
             </ButtonContainer>
-            {userCode === "A03" ? (
-              <>
-                <ButtonContainer onClick={shareScreen} id="shareScreenOn">
-                  <FontAwesomeIcon icon={faExternalLinkAlt} size="sm" />
-                  <ButtonName>화면 공유</ButtonName>
-                </ButtonContainer>
-                <ButtonContainer
-                  onClick={shareScreen}
-                  id="shareScreenOff"
-                  style={{ display: "none" }}
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                  <ButtonName>공유 중지</ButtonName>
-                </ButtonContainer>
-              </>
-            ) : (
-              <div></div>
-            )}
+            <ButtonContainer onClick={shareScreen} id="shareScreenOn">
+              <FontAwesomeIcon icon={faExternalLinkAlt} size="sm" />
+              <ButtonName>화면 공유</ButtonName>
+            </ButtonContainer>
+            <ButtonContainer
+              onClick={shareScreen}
+              id="shareScreenOff"
+              style={{ display: "none" }}
+            >
+              <FontAwesomeIcon icon={faTimes} />
+              <ButtonName>공유 중지</ButtonName>
+            </ButtonContainer>
           </ControlContainer>
           {userCode === "A03" ? (
             <Button

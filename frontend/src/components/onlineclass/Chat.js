@@ -68,7 +68,7 @@ const Chat = ({ courseId }) => {
 
   const [contents, setContents] = useState([]);
   const [message, setMessage] = useState("");
-  const { userName, userId } = useSelector((state) => state.user);
+  const { userId } = useSelector((state) => state.user);
   const messageBoxRef = useRef();
   const scrollToBottom = () => {
     if (messageBoxRef.current) {
