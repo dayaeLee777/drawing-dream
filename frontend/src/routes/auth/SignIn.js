@@ -199,7 +199,7 @@ const SignIn = () => {
         setIndex((prevIndex) =>
           prevIndex === images.length - 1 ? 0 : prevIndex + 1
         ),
-      2000
+      4000
     );
 
     return () => {
