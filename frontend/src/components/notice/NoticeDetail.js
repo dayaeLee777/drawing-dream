@@ -8,7 +8,7 @@ import { deleteNotice, getNoticeDetail } from "api/notice";
 import commonCode from "config/commonCode";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import { getProfileImg } from "api/user";
-import blankProfile from "assets/img/blank-profile.png";
+import blankProfile from "assets/img/profile.png";
 import { errorAlert, successAlert } from "modules/alert";
 import { logout } from "modules/user";
 

@@ -18,7 +18,7 @@ const Container = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-    line-height: 1.2;
+    line-height: 1.5;
     word-wrap: break-word;
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -38,7 +38,7 @@ const MemoItem = ({ data, setMemoId, setStatus, main }) => {
   };
 
   return (
-    <Container onClick={main? null:onDetail}>
+    <Container onClick={main ? null : onDetail}>
       <div className="content">{data.content}</div>
       <div className="regTime">{data.regTime}</div>
     </Container>
