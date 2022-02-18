@@ -149,7 +149,7 @@
 
 |                              채팅                       |
 | :---------------------------------------------------------------------------: |
-|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%EC%95%8C%EB%A6%BC%EC%9E%A5_%EC%84%A0%EC%83%9D%EB%8B%98.gif" alt="채팅" />  |
+|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%EC%B1%84%ED%8C%85.gif" alt="채팅" />  |
 
 ### 알림장
 - 교사는 알림장(공지)을 작성할 수 있습니다.
