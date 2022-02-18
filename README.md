@@ -162,7 +162,7 @@
 
 |                              알림장(학생)                  |
 | :---------------------------------------------------------------------------: |
-|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%EC%95%8C%EB%A6%BC%EC%9E%A5_%ED%95%99%EC%83%9D.gif" alt="알림장(선생님) " />  |
+|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%ED%99%88%ED%99%94%EB%A9%B4.gif" alt="알림장(선생님) " />  |
     
 ### 홈 화면(위젯) 설정 
 - 메인 페이지에서 [설정 > 홈 화면 설정] 을 클릭하면 홈 화면에 배치되는 위젯들을 관리할 수 있습니다.
@@ -170,7 +170,7 @@
 
 |                              홈 화면 설정                      |
 | :---------------------------------------------------------------------------: |
-|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%ED%99%88%ED%99%94%EB%A9%B4.gif" alt="홈 화면 설정" />  |
+|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%EC%95%8C%EB%A6%BC%EC%9E%A5_%ED%95%99%EC%83%9D.gif" alt="홈 화면 설정" />  |
 
 <br/>
 
