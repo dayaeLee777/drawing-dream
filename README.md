@@ -141,7 +141,7 @@
 
 |                              온라인 수업 및 수업알림                       |
 | :---------------------------------------------------------------------------: |
-|  <img src="./readme_assets/온라인수업.gif" alt="온라인수업" />  |
+|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%EC%98%A8%EB%9D%BC%EC%9D%B8%EC%88%98%EC%97%85.gif" alt="온라인수업" />  |
 
 ### 채팅
 - 학생, 선생님과 채팅이 가능하며, 지난 채팅 기록도 확인 가능합니다.
@@ -149,7 +149,7 @@
 
 |                              채팅                       |
 | :---------------------------------------------------------------------------: |
-|  <img src="./readme_assets/채팅.gif" alt="채팅" />  |
+|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%EC%95%8C%EB%A6%BC%EC%9E%A5_%EC%84%A0%EC%83%9D%EB%8B%98.gif" alt="채팅" />  |
 
 ### 알림장
 - 교사는 알림장(공지)을 작성할 수 있습니다.
@@ -158,11 +158,11 @@
 
 |                              알림장(선생님)                  |
 | :---------------------------------------------------------------------------: |
-|  <img src="./readme_assets/알림장_선생님.gif" alt="알림장(선생님) " />  |
+|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%EC%95%8C%EB%A6%BC%EC%9E%A5_%EC%84%A0%EC%83%9D%EB%8B%98.gif" alt="알림장(선생님) " />  |
 
 |                              알림장(학생)                  |
 | :---------------------------------------------------------------------------: |
-|  <img src="./readme_assets/알림장_학생.gif" alt="알림장(선생님) " />  |
+|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%EC%95%8C%EB%A6%BC%EC%9E%A5_%ED%95%99%EC%83%9D.gif" alt="알림장(선생님) " />  |
     
 ### 홈 화면(위젯) 설정 
 - 메인 페이지에서 [설정 > 홈 화면 설정] 을 클릭하면 홈 화면에 배치되는 위젯들을 관리할 수 있습니다.
@@ -170,7 +170,7 @@
 
 |                              홈 화면 설정                      |
 | :---------------------------------------------------------------------------: |
-|  <img src="./readme_assets/홈화면설정.gif" alt="홈 화면 설정" />  |
+|  <img src="https://drawingdream-bucket.s3.ap-northeast-2.amazonaws.com/%ED%99%88%ED%99%94%EB%A9%B4.gif" alt="홈 화면 설정" />  |
 
 <br/>
 
