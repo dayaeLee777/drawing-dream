@@ -33,7 +33,8 @@
 >
 #### 모두에게 필요한 맞춤형 학습 도우미, Drawing Dream에서 등교부터 하교까지 함께 하세요! 
 
-[**🔗 'DrawingDream' 바로가기**](https://i6a607.p.ssafy.io/) 👈
+[**🔗 'DrawingDream' 바로가기**](https://i6a607.p.ssafy.io/) 👈 <br/><br/>
+[**🔗 'DrawingDream' UCC 시청하기**](https://youtu.be/Rg4kOlrdI78) 👈
 
 <br/>
 
